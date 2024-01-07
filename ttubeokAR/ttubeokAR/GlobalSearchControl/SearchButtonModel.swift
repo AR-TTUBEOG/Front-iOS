@@ -6,3 +6,8 @@
 //
 
 import Foundation
+
+struct SearchButtonModel {
+    var title: String
+    var action: () -> Void
+}
