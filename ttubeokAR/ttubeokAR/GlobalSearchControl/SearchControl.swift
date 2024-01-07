@@ -10,7 +10,7 @@ import SwiftUI
 
 struct SearchControl: View {
     // MARK: - Property
-    @Binding var text: String // 텍스트 필드 입력 데이터
+    @ObservedObject var viewModel: SearchViewModel
     
     
     // MARK: - View
@@ -29,28 +29,29 @@ struct SearchControl: View {
                             .resizable()
                             .aspectRatio(contentMode: /*@START_MENU_TOKEN@*/.fill/*@END_MENU_TOKEN@*/)
                             .frame(width: 43, height: 31)
-                    }// LogoRectangle
+                    }// 뚜벅 로고
                     
                     HStack{
                         Image("search")
                             .resizable()
                             .frame(width: 24, height: 24)
                             .padding(8)
-                        TextField("길 검색하기", text: $text)
+                        TextField("길 검색하기", text: $viewModel.searchText)
                             .font(.system(size: 14))
                             .foregroundStyle(Color(red: 0.52, green: 0.53,  blue: 0.6))
-                            .frame(width: 239, height: 40)
+                            .frame(minWidth: 0, maxWidth: 239)
                         
-                        if !text.isEmpty {
+                        if !viewModel.searchText.isEmpty {
                             Button(action: {
-                                self.text = ""
+                                self.viewModel.searchText = ""
                             }){
                                 Image(systemName: "xmark.circle.fill")
+                                    .padding(5)
                             }
                         } else {
                             EmptyView()
                         }
-                    } // SearchTextField
+                    } // 검색 필드
                     .background(Color(red: 0.16, green: 0.16, blue: 0.23))
                     .clipShape(.rect(cornerRadius: 12))
                     .padding(8)
@@ -63,21 +64,35 @@ struct SearchControl: View {
                         Image("option")
                             .resizable()
                             .frame(width: 22, height: 22)
-                    }
+                        
+                    } // 검색 옵션 버튼
                 }
                 .padding(.horizontal, 16)
                 .padding(.vertical, 2)
-                .frame(width: 375, height: 44, alignment: .center)
+                
+                //MARK: - TODO
+                /*
+                 - Note: 지도뷰 / 메인 뷰에 따라 하단 간편 검색 기록의 종류가 바뀌어야 한다. 추후 지도를 제작 후 다시 모델을 수정할 예정!!
+                 */
+                GeometryReader { geometry in
+                    HStack(alignment: .center, spacing: 4) {
+                        ForEach(viewModel.buttons.indices, id: \.self) { index in
+                            Button(viewModel.buttons[index].title) {
+                                viewModel.buttonSelection(at: index)
+                                viewModel.buttons[index].action()
+                            }
+                            .font(.system(size: 12))
+                            .frame(width: geometry.size.width > 500 ? 71 : geometry.size.width / 5, height: 32)
+                            .background(viewModel.selectedButtonIndex == index ? Color(red: 0.52, green: 0.54, blue: 0.92) : Color(red: 0.16, green: 0.16, blue: 0.23))
+                            .foregroundStyle(Color(red: 0.92, green: 0.9, blue: 0.97))
+                            .clipShape(.rect(cornerRadius: 16))
+                        }
+                    }
+                    .frame(width: 324, alignment: .topLeading)
+                    .padding(.horizontal, 16)
+                    .padding(.vertical, 0)
+                } // 하단 간편 검색 버튼 생성
             }
-        }
-    }
-    
-    // MARK: - TODO
-    struct SearchControl_Previews: PreviewProvider {
-        @State static var searchText = ""
-        
-        static var previews: some View {
-            SearchControl(text: $searchText)
         }
     }
 }
