@@ -10,12 +10,15 @@ import SwiftUI
 
 class TtuluttuDotViewModel: ObservableObject {
     @Published var angle: Double = 0
+    
     var commands: [TtuluttuDotCommand]
     var sections: [String]
+    var sectionsImage: [String]
     
     init() {
         commands = [AddLocationCommand(), ARCommand(), MyTicketCommand(), SettingsCommand()]
         sections = ["장소 추가", "AR 보기", "내 쿠폰", "환경설정"]
+        sectionsImage = ["AddLocation", "ARBtn", "MyTicket", "OptionBtn"]
     }
     
     public func selectSection(index: Int) {
