@@ -9,6 +9,14 @@
 /* Begin PBXBuildFile section */
 		480448722B4B0D52008A4638 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 480448712B4B0D52008A4638 /* SearchViewModel.swift */; };
 		480448742B4B0E08008A4638 /* SearchControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 480448732B4B0E08008A4638 /* SearchControl.swift */; };
+		483820DD2B4BE5E600C3FB14 /* CircleDotButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483820DC2B4BE5E600C3FB14 /* CircleDotButton.swift */; };
+		483820DF2B4BE61F00C3FB14 /* TtuluttuDotCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483820DE2B4BE61F00C3FB14 /* TtuluttuDotCommand.swift */; };
+		483820E22B4BE7C100C3FB14 /* ARCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483820E12B4BE7C100C3FB14 /* ARCommand.swift */; };
+		483820E42B4BE80700C3FB14 /* SettingsCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483820E32B4BE80700C3FB14 /* SettingsCommand.swift */; };
+		483820E62B4BE86200C3FB14 /* MyTicketCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483820E52B4BE86200C3FB14 /* MyTicketCommand.swift */; };
+		483820E82B4BE8E500C3FB14 /* AddLocationCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483820E72B4BE8E500C3FB14 /* AddLocationCommand.swift */; };
+		483820EC2B4BE97300C3FB14 /* TtuluttuDotViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483820EB2B4BE97300C3FB14 /* TtuluttuDotViewModel.swift */; };
+		483820EE2B4BEAFE00C3FB14 /* TtuluttuDotShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483820ED2B4BEAFE00C3FB14 /* TtuluttuDotShape.swift */; };
 		489BD8F12B4A40EE003382AE /* SearchButtonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489BD8F02B4A40EE003382AE /* SearchButtonModel.swift */; };
 		48FF93932B43BA0600202F45 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FF93922B43BA0600202F45 /* AppDelegate.swift */; };
 		48FF93952B43BA0600202F45 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FF93942B43BA0600202F45 /* ContentView.swift */; };
@@ -19,6 +27,14 @@
 /* Begin PBXFileReference section */
 		480448712B4B0D52008A4638 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		480448732B4B0E08008A4638 /* SearchControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchControl.swift; sourceTree = "<group>"; };
+		483820DC2B4BE5E600C3FB14 /* CircleDotButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleDotButton.swift; sourceTree = "<group>"; };
+		483820DE2B4BE61F00C3FB14 /* TtuluttuDotCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TtuluttuDotCommand.swift; sourceTree = "<group>"; };
+		483820E12B4BE7C100C3FB14 /* ARCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARCommand.swift; sourceTree = "<group>"; };
+		483820E32B4BE80700C3FB14 /* SettingsCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCommand.swift; sourceTree = "<group>"; };
+		483820E52B4BE86200C3FB14 /* MyTicketCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTicketCommand.swift; sourceTree = "<group>"; };
+		483820E72B4BE8E500C3FB14 /* AddLocationCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationCommand.swift; sourceTree = "<group>"; };
+		483820EB2B4BE97300C3FB14 /* TtuluttuDotViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TtuluttuDotViewModel.swift; sourceTree = "<group>"; };
+		483820ED2B4BEAFE00C3FB14 /* TtuluttuDotShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TtuluttuDotShape.swift; sourceTree = "<group>"; };
 		489BD8F02B4A40EE003382AE /* SearchButtonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchButtonModel.swift; sourceTree = "<group>"; };
 		48FF938F2B43BA0600202F45 /* ttubeokAR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ttubeokAR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		48FF93922B43BA0600202F45 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -38,6 +54,38 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		483820DA2B4BE5A900C3FB14 /* Global */ = {
+			isa = PBXGroup;
+			children = (
+				483820DB2B4BE5B400C3FB14 /* GlobalTtuluttuDot */,
+				489BD8EF2B4A40CF003382AE /* GlobalSearchControl */,
+			);
+			path = Global;
+			sourceTree = "<group>";
+		};
+		483820DB2B4BE5B400C3FB14 /* GlobalTtuluttuDot */ = {
+			isa = PBXGroup;
+			children = (
+				483820E02B4BE79600C3FB14 /* TtuttuDotModel */,
+				483820EB2B4BE97300C3FB14 /* TtuluttuDotViewModel.swift */,
+				483820DC2B4BE5E600C3FB14 /* CircleDotButton.swift */,
+				483820ED2B4BEAFE00C3FB14 /* TtuluttuDotShape.swift */,
+			);
+			path = GlobalTtuluttuDot;
+			sourceTree = "<group>";
+		};
+		483820E02B4BE79600C3FB14 /* TtuttuDotModel */ = {
+			isa = PBXGroup;
+			children = (
+				483820DE2B4BE61F00C3FB14 /* TtuluttuDotCommand.swift */,
+				483820E12B4BE7C100C3FB14 /* ARCommand.swift */,
+				483820E32B4BE80700C3FB14 /* SettingsCommand.swift */,
+				483820E52B4BE86200C3FB14 /* MyTicketCommand.swift */,
+				483820E72B4BE8E500C3FB14 /* AddLocationCommand.swift */,
+			);
+			path = TtuttuDotModel;
+			sourceTree = "<group>";
+		};
 		489BD8EF2B4A40CF003382AE /* GlobalSearchControl */ = {
 			isa = PBXGroup;
 			children = (
@@ -67,7 +115,7 @@
 		48FF93912B43BA0600202F45 /* ttubeokAR */ = {
 			isa = PBXGroup;
 			children = (
-				489BD8EF2B4A40CF003382AE /* GlobalSearchControl */,
+				483820DA2B4BE5A900C3FB14 /* Global */,
 				48FF93A02B43BA1400202F45 /* ExploreView */,
 				48FF93A22B43BA4500202F45 /* MapView */,
 				48FF93A12B43BA3800202F45 /* ARView */,
@@ -188,9 +236,17 @@
 			files = (
 				48FF93952B43BA0600202F45 /* ContentView.swift in Sources */,
 				480448722B4B0D52008A4638 /* SearchViewModel.swift in Sources */,
+				483820DF2B4BE61F00C3FB14 /* TtuluttuDotCommand.swift in Sources */,
+				483820E62B4BE86200C3FB14 /* MyTicketCommand.swift in Sources */,
+				483820EE2B4BEAFE00C3FB14 /* TtuluttuDotShape.swift in Sources */,
 				480448742B4B0E08008A4638 /* SearchControl.swift in Sources */,
+				483820E22B4BE7C100C3FB14 /* ARCommand.swift in Sources */,
+				483820EC2B4BE97300C3FB14 /* TtuluttuDotViewModel.swift in Sources */,
+				483820E42B4BE80700C3FB14 /* SettingsCommand.swift in Sources */,
 				48FF93932B43BA0600202F45 /* AppDelegate.swift in Sources */,
 				489BD8F12B4A40EE003382AE /* SearchButtonModel.swift in Sources */,
+				483820E82B4BE8E500C3FB14 /* AddLocationCommand.swift in Sources */,
+				483820DD2B4BE5E600C3FB14 /* CircleDotButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
