@@ -35,7 +35,7 @@ struct TtuDotShape: View {
                 
                 Circle()
                     .strokeBorder(Color.clear, lineWidth: radius)
-                    .background(
+                    .fill(
                         EllipticalGradient(
                             stops: [
                                 Gradient.Stop(color: Color(red: 0.75, green: 0.75, blue: 0.95), location: 0.10),
@@ -51,4 +51,3 @@ struct TtuDotShape: View {
         }
     }
 }
-
