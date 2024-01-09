@@ -42,9 +42,9 @@ struct TtuDotButton: View {
                     .rotationEffect(Angle(degrees: Double(textAngle)))
                     .offset(x:0, y: -offsetRadius)
                     .rotationEffect(Angle(degrees: Double(textRotation)))
-//                    .onTapGesture {
-//                        viewModel.selectSection(at: index)
-//                    }
+                    .onTapGesture {
+                        viewModel.selectSection(at: index)
+                    }
                 }
                 
                 Circle()
@@ -75,6 +75,10 @@ struct TtuDotButton: View {
                         }
                         
                         previousAngle = angle
+                    }
+                    .onEnded{ _ in
+                        previousAngle = .zero
+                        
                     }
             )
         }

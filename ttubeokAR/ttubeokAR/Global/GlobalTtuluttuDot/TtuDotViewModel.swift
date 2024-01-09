@@ -11,7 +11,7 @@ import SwiftUI
 class TtuDotViewModel: ObservableObject {
     @Published var angle: Double = 0
     @Published var sections: [TtuDotSection]
-
+    
     
     init() {
         sections = [
