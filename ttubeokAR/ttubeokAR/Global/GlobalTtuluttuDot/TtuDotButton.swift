@@ -40,7 +40,7 @@ struct TtuDotButton: View {
                             
                             Text(section.title)
                                 .foregroundStyle(Color(red: 0.18, green: 0.16, blue: 0.34))
-                                .font(.system(size: 11))
+                                .font(.sandol(type: .light, size: 11))
                         }
                         .rotationEffect(Angle(degrees: Double(textAngle)))
                         .offset(x:0, y: -offsetRadius)

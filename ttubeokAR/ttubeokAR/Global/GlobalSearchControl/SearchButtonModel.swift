@@ -9,5 +9,11 @@ import Foundation
 
 struct SearchButtonModel {
     var title: String
+    var buttonImage: String
     var action: () -> Void
+}
+
+enum CurrentView {
+    case exploreView
+    case mapView
 }
