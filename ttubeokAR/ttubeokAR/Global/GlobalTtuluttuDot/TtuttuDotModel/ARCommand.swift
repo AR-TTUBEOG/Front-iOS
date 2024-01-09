@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ARCommand: TtuluttuDotCommand {
+class ARCommand: TtuDotModel {
     func execute() {
         print("AR버튼입니다!!")
     }

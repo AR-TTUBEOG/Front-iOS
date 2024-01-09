@@ -7,7 +7,7 @@
 
 import Foundation
 
-class MyTicketCommand: TtuluttuDotCommand {
+class MyTicketCommand: TtuDotModel {
     func execute() {
         print("티켓 보관함 버튼입니다")
     }
