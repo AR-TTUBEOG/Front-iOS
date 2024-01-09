@@ -30,7 +30,7 @@ struct TtuDotButton: View {
                         let rotation = sectionsAngle * CGFloat(index) + (sectionsAngle / 2)
                         let textRotation = viewModel.angle + rotation
                         let textAngle = -textRotation
-                        let offsetRadius = min(geometry.size.width, geometry.size.height) / 2 * 0.45
+                        let offsetRadius = min(geometry.size.width, geometry.size.height) / 2 * 0.4
                         
                         VStack{
                             Image(section.imageName)
@@ -62,7 +62,7 @@ struct TtuDotButton: View {
                             )
                         )
                         .shadow(color: .black.opacity(0.25), radius: 2, x: 0, y: 4)
-                        .frame(width: 79.72922, height: 79.72922)
+                        .frame(width: 60, height: 60)
                         .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
                     
                 }
@@ -85,11 +85,10 @@ struct TtuDotButton: View {
                                 rotationVelocity = 0
                             }
                             previousAngle = .zero
-                            
                         }
                 )
             }
-            .frame(height: 600)
+            .frame(height: 650)
         }
         .onChange(of: viewModel.angle) { oldValue, newAngle in
             let angleDiff = newAngle - oldValue

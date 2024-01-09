@@ -34,7 +34,7 @@ struct TtuDotShape: View {
                 }
                 
                 Circle()
-                    .strokeBorder(Color.clear, lineWidth: radius * 2) // 투명한 테두리를 가진 원
+                    .strokeBorder(Color.clear, lineWidth: radius)
                     .background(
                         EllipticalGradient(
                             stops: [
@@ -42,7 +42,7 @@ struct TtuDotShape: View {
                                 Gradient.Stop(color: Color(red: 0.9, green: 0.89, blue: 0.98), location: 0.38),
                                 Gradient.Stop(color: .white, location: 1.00),
                             ],
-                            center: UnitPoint(x: 0.5, y: 0.58)
+                            center: UnitPoint(x: 0.5, y: 0.5)
                         )
                     )
                     .frame(width: radius * 2, height: radius * 2)
