@@ -7,7 +7,7 @@
 
 import Foundation
 
-class SettingsCommand: TtuluttuDotCommand {
+class SettingsCommand: TtuDotModel {
     func execute() {
         print("환경설정 버튼입니다!")
     }

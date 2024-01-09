@@ -7,7 +7,7 @@
 
 import Foundation
 
-class AddLocationCommand: TtuluttuDotCommand {
+class AddLocationCommand: TtuDotModel {
     func execute() {
         print("장소 추가 버튼입니다!")
     }

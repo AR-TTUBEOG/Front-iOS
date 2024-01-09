@@ -8,21 +8,20 @@
 import Foundation
 import SwiftUI
 
-struct TtuluttuDotShape: View {
-    var sections: [String]
+struct TtuDotShape: View {
+    var sections: [TtuDotSection]
+    let action: (Int) -> Void
     
     var body: some View {
         GeometryReader { geometry in
             
             let center = CGPoint(x: geometry.size.width / 2, y: geometry.size.height / 2)
             let radius = min(geometry.size.width, geometry.size.height) / 2 * 0.7
-            let textOffset = radius * 0.5
             
             ForEach(0..<sections.count, id: \.self) { index in
                 let sectionAngle = 2 * Double.pi / CGFloat(sections.count)
                 let startAngle = sectionAngle * CGFloat(index) - Double.pi / 2
                 let endAngle = startAngle + sectionAngle
-                let textAngle = startAngle + sectionAngle / 2
                 
                 Path { path in
                     path.move(to: center)
@@ -39,6 +38,9 @@ struct TtuluttuDotShape: View {
                         center: UnitPoint(x: 0.5, y: 0.58)
                     )
                 )
+                .onTapGesture {
+                    action(index)
+                }
             }
         }
     }
