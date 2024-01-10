@@ -25,10 +25,9 @@ struct SearchControl: View {
                             .frame(width: 40, height: 40)
                             .foregroundStyle(Color(red: 0.16, green: 0.16, blue: 0.23))
                             .clipShape(.rect(cornerRadius: 12))
-                        Image("logo")
+                        viewModel.logoImage
                             .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 43, height: 31)
+                            .frame(width: viewModel.imageSize.width, height: viewModel.imageSize.height)
                     }// 뚜벅 로고
                     
                     HStack{
@@ -93,8 +92,7 @@ struct SearchControl: View {
                                         HStack {
                                             if !viewModel.buttons[index].buttonImage.isEmpty {
                                                 Image(viewModel.buttons[index].buttonImage)
-                                                    .resizable()
-                                                    .frame(width: 20, height: 20)
+                                                    .fixedSize()
                                             }
                                             Text(viewModel.buttons[index].title)
                                                 .font(.sandol(type: .regular, size: 12))
