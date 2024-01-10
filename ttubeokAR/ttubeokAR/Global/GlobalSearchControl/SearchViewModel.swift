@@ -14,9 +14,29 @@ class SearchViewModel: ObservableObject {
     @Published var selectedButtonIndex: Int? = 0
     @Published var buttons: [SearchButtonModel] = []
     
-    var currentView: CurrentView = .exploreView {
+    
+    //TODO: - 탭바로 뷰 전환시 값 변경 되도록 해야함.
+    var currentView: CurrentView = .mapView {
         didSet {
             setupButton()
+        }
+    }
+    
+    var logoImage: Image {
+        switch currentView {
+        case .mapView:
+            return Image("book")
+        case .exploreView:
+            return Image("logo")
+        }
+    }
+    
+    var imageSize: CGSize {
+        switch currentView {
+        case .exploreView:
+            return CGSize(width: 43, height: 31)
+        case .mapView:
+            return CGSize(width: 26, height: 23.21)
         }
     }
     
@@ -31,9 +51,10 @@ class SearchViewModel: ObservableObject {
             self.buttons = [
                 SearchButtonModel(title: "모든 산책로", buttonImage: "", action: self.selectPromenade),
                 SearchButtonModel(title: "산책로", buttonImage: "trail", action: self.selectPromenade),
-                SearchButtonModel(title: "레스토랑", buttonImage: "restaurant", action: self.selectRestaurant),
+                SearchButtonModel(title: "음식점", buttonImage: "restaurant", action: self.selectRestaurant),
                 SearchButtonModel(title: "카페", buttonImage: "drink", action: self.selectCafe)
             ]
+            
         case .exploreView:
             self.buttons = [
                 SearchButtonModel(title: "전체 선택", buttonImage: "", action: self.selectAll),
@@ -44,6 +65,7 @@ class SearchViewModel: ObservableObject {
             ]
         }
     }
+    
     
     public func buttonSelection(at index: Int) {
         if selectedButtonIndex == index {
