@@ -59,24 +59,24 @@
 		483820DA2B4BE5A900C3FB14 /* Global */ = {
 			isa = PBXGroup;
 			children = (
-				483820DB2B4BE5B400C3FB14 /* GlobalTtuluttuDot */,
+				483820DB2B4BE5B400C3FB14 /* GlobalTtuDot */,
 				489BD8EF2B4A40CF003382AE /* GlobalSearchControl */,
 			);
 			path = Global;
 			sourceTree = "<group>";
 		};
-		483820DB2B4BE5B400C3FB14 /* GlobalTtuluttuDot */ = {
+		483820DB2B4BE5B400C3FB14 /* GlobalTtuDot */ = {
 			isa = PBXGroup;
 			children = (
-				483820E02B4BE79600C3FB14 /* TtuttuDotModel */,
+				483820E02B4BE79600C3FB14 /* TtuDotModel */,
 				483820EB2B4BE97300C3FB14 /* TtuDotViewModel.swift */,
 				483820DC2B4BE5E600C3FB14 /* TtuDotButton.swift */,
 				483820ED2B4BEAFE00C3FB14 /* TtuDotShape.swift */,
 			);
-			path = GlobalTtuluttuDot;
+			path = GlobalTtuDot;
 			sourceTree = "<group>";
 		};
-		483820E02B4BE79600C3FB14 /* TtuttuDotModel */ = {
+		483820E02B4BE79600C3FB14 /* TtuDotModel */ = {
 			isa = PBXGroup;
 			children = (
 				483820DE2B4BE61F00C3FB14 /* TtuDotModel.swift */,
@@ -85,7 +85,7 @@
 				483820E52B4BE86200C3FB14 /* MyTicketCommand.swift */,
 				483820E72B4BE8E500C3FB14 /* AddLocationCommand.swift */,
 			);
-			path = TtuttuDotModel;
+			path = TtuDotModel;
 			sourceTree = "<group>";
 		};
 		489BD8EF2B4A40CF003382AE /* GlobalSearchControl */ = {
@@ -384,7 +384,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ttubeokAR/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 8B8B4462NV;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "";
@@ -415,7 +415,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ttubeokAR/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 8B8B4462NV;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "";

@@ -20,19 +20,6 @@ struct TtuDotShape: View {
             
             ZStack{
                 
-                ForEach(0..<sections.count, id: \.self) { index in
-                    let sectionAngle = 2 * Double.pi / CGFloat(sections.count)
-                    let startAngle = sectionAngle * CGFloat(index) - Double.pi / 2
-                    let endAngle = startAngle + sectionAngle
-                    
-                    Path { path in
-                        path.move(to: center)
-                        path.addArc(center: center, radius: radius, startAngle: Angle(radians: Double(startAngle)), endAngle: Angle(radians: Double(endAngle)), clockwise: false)
-                        path.addLine(to: center)
-                    }
-                    .fill(Color.clear)
-                }
-                
                 Circle()
                     .strokeBorder(Color.clear, lineWidth: radius)
                     .fill(
@@ -47,6 +34,26 @@ struct TtuDotShape: View {
                     )
                     .frame(width: radius * 2, height: radius * 2)
                     .position(center)
+                
+                ForEach(0..<sections.count, id: \.self) { index in
+                    let sectionAngle = 2 * Double.pi / CGFloat(sections.count)
+                    let startAngle = sectionAngle * CGFloat(index) - Double.pi / 2
+                    let endAngle = startAngle + sectionAngle
+                    
+                    Path { path in
+                        path.move(to: center)
+                        path.addArc(center: center, radius: radius, startAngle: Angle(radians: Double(startAngle)), endAngle: Angle(radians: Double(endAngle)), clockwise: false)
+                        path.addLine(to: center)
+                    }
+                    .fill(Color.clear)
+                    .contentShape(Path { path in
+                        path.move(to: center)
+                        path.addArc(center: center, radius: radius, startAngle: Angle(radians: Double(startAngle)), endAngle: Angle(radians: Double(endAngle)), clockwise: false)
+                    })
+                    .onTapGesture {
+                        self.action(index)
+                    }
+                }
             }
         }
     }

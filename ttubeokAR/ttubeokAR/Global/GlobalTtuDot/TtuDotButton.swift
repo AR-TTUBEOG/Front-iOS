@@ -14,6 +14,7 @@ struct TtuDotButton: View {
     
     var body: some View {
         VStack{
+            
             Spacer(minLength: 500)
             GeometryReader { geometry in
                 let center = CGPoint(x: geometry.size.width / 2, y: geometry.size.height / 2)
@@ -30,7 +31,7 @@ struct TtuDotButton: View {
                         let rotation = sectionsAngle * CGFloat(index) + (sectionsAngle / 2)
                         let textRotation = viewModel.angle + rotation
                         let textAngle = -textRotation
-                        let offsetRadius = min(geometry.size.width, geometry.size.height) / 2 * 0.4
+                        let offsetRadius = min(geometry.size.width, geometry.size.height) / 2 * 0.45
                         
                         VStack{
                             Image(section.imageName)
@@ -54,8 +55,8 @@ struct TtuDotButton: View {
                         .fill(
                             LinearGradient(
                                 stops: [
-                                    Gradient.Stop(color: Color(red: 0.16, green: 0.15, blue: 0.27), location: 0.00),
-                                    Gradient.Stop(color: Color(red: 0.35, green: 0.28, blue: 0.63), location: 1.00),
+                                Gradient.Stop(color: Color(red: 0.53, green: 0.55, blue: 0.91), location: 0.00),
+                                Gradient.Stop(color: Color(red: 0.78, green: 0.86, blue: 0.98), location: 1.00),
                                 ],
                                 startPoint: UnitPoint(x: 0.45, y: 1.17),
                                 endPoint: UnitPoint(x: 0.5, y: 0)
@@ -90,6 +91,7 @@ struct TtuDotButton: View {
             }
             .frame(height: 650)
         }
+        .background(Color(red: 0.09, green: 0.08, blue: 0.12))
         .onChange(of: viewModel.angle) { oldValue, newAngle in
             let angleDiff = newAngle - oldValue
             rotationVelocity = angleDiff
