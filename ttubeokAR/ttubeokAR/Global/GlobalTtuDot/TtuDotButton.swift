@@ -55,11 +55,12 @@ struct TtuDotButton: View {
                         .fill(
                             LinearGradient(
                                 stops: [
-                                Gradient.Stop(color: Color(red: 0.53, green: 0.55, blue: 0.91), location: 0.00),
-                                Gradient.Stop(color: Color(red: 0.78, green: 0.86, blue: 0.98), location: 1.00),
+                                    Gradient.Stop(color: Color(red: 0.16, green: 0.15, blue: 0.27), location: 0.00),
+                                    Gradient.Stop(color: Color(red: 0.35, green: 0.28, blue: 0.63), location: 1.00),
                                 ],
                                 startPoint: UnitPoint(x: 0.45, y: 1.17),
                                 endPoint: UnitPoint(x: 0.5, y: 0)
+                                
                             )
                         )
                         .shadow(color: .black.opacity(0.25), radius: 2, x: 0, y: 4)
