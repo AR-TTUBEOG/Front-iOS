@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "TabButton.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

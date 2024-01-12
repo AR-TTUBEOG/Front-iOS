@@ -16,7 +16,7 @@ class SearchViewModel: ObservableObject {
     
     
     //TODO: - 탭바로 뷰 전환시 값 변경 되도록 해야함.
-    var currentView: CurrentView = .mapView {
+    @Published var currentView: TabBarModel = .exploreView {
         didSet {
             setupButton()
         }
@@ -28,6 +28,15 @@ class SearchViewModel: ObservableObject {
             return Image("book")
         case .exploreView:
             return Image("logo")
+        }
+    }
+    
+    var buttonImage: String {
+        switch currentView {
+        case .exploreView:
+            return "MapTabButton"
+        case .mapView:
+            return "ExploreTabButton"
         }
     }
     
