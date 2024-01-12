@@ -23,6 +23,7 @@
 		48FF93952B43BA0600202F45 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FF93942B43BA0600202F45 /* ContentView.swift */; };
 		48FF93972B43BA0700202F45 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 48FF93962B43BA0700202F45 /* Assets.xcassets */; };
 		48FF939A2B43BA0700202F45 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 48FF93992B43BA0700202F45 /* Preview Assets.xcassets */; };
+		6C98C6012B4FBD79008523CC /* Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C98C6002B4FBD79008523CC /* Icon.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +44,7 @@
 		48FF93942B43BA0600202F45 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		48FF93962B43BA0700202F45 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		48FF93992B43BA0700202F45 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		6C98C6002B4FBD79008523CC /* Icon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icon.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +165,7 @@
 				48FF93922B43BA0600202F45 /* AppDelegate.swift */,
 				488E25452B4D4E1C005D8D52 /* FontExtension.swift */,
 				48FF93962B43BA0700202F45 /* Assets.xcassets */,
+				6C98C6002B4FBD79008523CC /* Icon.swift */,
 			);
 			path = SettingGroup;
 			sourceTree = "<group>";
@@ -250,6 +253,7 @@
 				48FF93932B43BA0600202F45 /* AppDelegate.swift in Sources */,
 				489BD8F12B4A40EE003382AE /* SearchButtonModel.swift in Sources */,
 				483820E82B4BE8E500C3FB14 /* AddLocationCommand.swift in Sources */,
+				6C98C6012B4FBD79008523CC /* Icon.swift in Sources */,
 				483820DD2B4BE5E600C3FB14 /* TtuDotButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
