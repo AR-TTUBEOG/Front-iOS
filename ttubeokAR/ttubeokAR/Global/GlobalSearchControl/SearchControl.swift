@@ -16,7 +16,6 @@ struct SearchControl: View {
     // MARK: - View
     var body: some View {
         ZStack{
-            Color(red: 0.09, green: 0.08, blue: 0.12).ignoresSafeArea()
             VStack{
                 HStack(alignment: .center, spacing: 12) {
                     
@@ -114,6 +113,8 @@ struct SearchControl: View {
                 }
                 .frame(maxWidth: .infinity)
             }
+            .frame(minWidth: 0, maxWidth: .infinity)
+            
         }
     }
 }
