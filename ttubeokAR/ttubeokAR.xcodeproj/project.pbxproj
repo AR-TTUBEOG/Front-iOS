@@ -7,9 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		48014CF72B4FDB6B00AB0E7B /* ScreenSizeModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48014CF62B4FDB6B00AB0E7B /* ScreenSizeModifier.swift */; };
-		48014CF92B4FDC2A00AB0E7B /* ExtensionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48014CF82B4FDC2A00AB0E7B /* ExtensionView.swift */; };
-		48014CFB2B4FF72300AB0E7B /* ExtensionSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48014CFA2B4FF72300AB0E7B /* ExtensionSize.swift */; };
 		480448722B4B0D52008A4638 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 480448712B4B0D52008A4638 /* SearchViewModel.swift */; };
 		480448742B4B0E08008A4638 /* SearchControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 480448732B4B0E08008A4638 /* SearchControl.swift */; };
 		483612B12B4ECFD900E0B45A /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483612B02B4ECFD900E0B45A /* MapView.swift */; };
@@ -33,9 +30,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		48014CF62B4FDB6B00AB0E7B /* ScreenSizeModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenSizeModifier.swift; sourceTree = "<group>"; };
-		48014CF82B4FDC2A00AB0E7B /* ExtensionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionView.swift; sourceTree = "<group>"; };
-		48014CFA2B4FF72300AB0E7B /* ExtensionSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionSize.swift; sourceTree = "<group>"; };
 		480448712B4B0D52008A4638 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		480448732B4B0E08008A4638 /* SearchControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchControl.swift; sourceTree = "<group>"; };
 		483612B02B4ECFD900E0B45A /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
@@ -70,15 +64,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		48014CF52B4FDB5700AB0E7B /* ScreenSize */ = {
-			isa = PBXGroup;
-			children = (
-				48014CF62B4FDB6B00AB0E7B /* ScreenSizeModifier.swift */,
-				48014CF82B4FDC2A00AB0E7B /* ExtensionView.swift */,
-			);
-			path = ScreenSize;
-			sourceTree = "<group>";
-		};
 		483612B42B4ED04C00E0B45A /* GlobalTabBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -195,11 +180,9 @@
 		48FF93A32B43BA7B00202F45 /* SettingGroup */ = {
 			isa = PBXGroup;
 			children = (
-				48014CF52B4FDB5700AB0E7B /* ScreenSize */,
 				48FF93922B43BA0600202F45 /* AppDelegate.swift */,
 				488E25452B4D4E1C005D8D52 /* FontExtension.swift */,
 				48FF93962B43BA0700202F45 /* Assets.xcassets */,
-				48014CFA2B4FF72300AB0E7B /* ExtensionSize.swift */,
 			);
 			path = SettingGroup;
 			sourceTree = "<group>";
@@ -279,15 +262,12 @@
 				488E25462B4D4E1C005D8D52 /* FontExtension.swift in Sources */,
 				483820DF2B4BE61F00C3FB14 /* TtuDotModel.swift in Sources */,
 				483612B32B4ED00100E0B45A /* TestView.swift in Sources */,
-				48014CFB2B4FF72300AB0E7B /* ExtensionSize.swift in Sources */,
 				483820E62B4BE86200C3FB14 /* MyTicketCommand.swift in Sources */,
 				483820EE2B4BEAFE00C3FB14 /* TtuDotShape.swift in Sources */,
 				480448742B4B0E08008A4638 /* SearchControl.swift in Sources */,
 				483820E22B4BE7C100C3FB14 /* ARCommand.swift in Sources */,
 				483612B62B4ED09000E0B45A /* TabBarModel.swift in Sources */,
 				483820EC2B4BE97300C3FB14 /* TtuDotViewModel.swift in Sources */,
-				48014CF72B4FDB6B00AB0E7B /* ScreenSizeModifier.swift in Sources */,
-				48014CF92B4FDC2A00AB0E7B /* ExtensionView.swift in Sources */,
 				483820E42B4BE80700C3FB14 /* SettingsCommand.swift in Sources */,
 				48FF93932B43BA0600202F45 /* AppDelegate.swift in Sources */,
 				489BD8F12B4A40EE003382AE /* SearchButtonModel.swift in Sources */,
