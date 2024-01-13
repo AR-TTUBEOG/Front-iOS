@@ -10,22 +10,23 @@ import SwiftUI
 
 
 class SearchViewModel: ObservableObject {
+    
+    //MARK: - Property
     @Published var searchText: String = ""
     @Published var selectedButtonIndex: Int? = 0
     @Published var buttons: [SearchButtonModel] = []
-    
-    
-    //TODO: - 탭바로 뷰 전환시 값 변경 되도록 해야함.
     @Published var currentView: TabBarModel = .exploreView {
         didSet {
             setupButton()
         }
     }
     
+    // MARK: - ChangeMainView
     var logoImage: Image {
         switch currentView {
         case .mapView:
             return Image("book")
+            
         case .exploreView:
             return Image("logo")
         }
@@ -43,9 +44,9 @@ class SearchViewModel: ObservableObject {
     var imageSize: CGSize {
         switch currentView {
         case .exploreView:
-            return CGSize(width: 43, height: 31)
+            return CGSize(width: 44, height: 40)
         case .mapView:
-            return CGSize(width: 26, height: 23.21)
+            return CGSize(width: 26, height: 26)
         }
     }
     
@@ -53,6 +54,7 @@ class SearchViewModel: ObservableObject {
         setupButton()
     }
     
+    // MARK: - Function
     
     private func setupButton() {
         switch currentView {
@@ -84,10 +86,19 @@ class SearchViewModel: ObservableObject {
         }
     }
     
-    // MARK: - TODO
+    public func getTextFieldValue() -> String {
+        return searchText
+    }
+    
+    // TODO: - 구현 코드 작성해야할 부분
     /*
      추후에 하단 함수의 기능을 다시 재작성하여 구현할것!
      */
+    
+    //MARK: - SearchView 버트
+    public func search() {
+        print("검색합니다.")
+    }
     
     public func selectAll(){
         print("전체 선택")

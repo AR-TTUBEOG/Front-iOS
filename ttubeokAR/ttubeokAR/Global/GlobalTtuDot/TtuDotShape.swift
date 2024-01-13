@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 
+/// 뚜닷의 기본 원을 만들고, 그 중심에 회전 각도를 더한다.
 struct TtuDotShape: View {
     var sections: [TtuDotSection]
     let action: (Int) -> Void

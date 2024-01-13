@@ -8,116 +8,130 @@
 import SwiftUI
 
 
+/// 화면의 상단에 사용되는 검색바, 간편 검색 버튼을 갖는다.
 struct SearchControl: View {
     // MARK: - Property
     @ObservedObject var viewModel: SearchViewModel
     
     
-    // MARK: - View
+    // MARK: - Body
     var body: some View {
-        ZStack{
-            VStack{
-                HStack(alignment: .center, spacing: 12) {
-                    
-                    ZStack{
-                        Rectangle()
-                            .frame(width: 40, height: 40)
-                            .foregroundStyle(Color(red: 0.16, green: 0.16, blue: 0.23))
-                            .clipShape(.rect(cornerRadius: 12))
-                        viewModel.logoImage
-                            .resizable()
-                            .frame(width: viewModel.imageSize.width, height: viewModel.imageSize.height)
-                    }// 뚜벅 로고
-                    
-                    HStack{
-                        Image("search")
-                            .resizable()
-                            .frame(width: 24, height: 24)
-                            .padding(8)
-                        //MARK: - TODO
-                        /**
-                         - Note : 텍스트필드 내 기본 텍스트 SWiftUI에서 색상 변경 불가
-                         */
-                        TextField("길 검색하기", text: $viewModel.searchText)
-                            .font(.sandol(type: .regular, size: 14))
-                            .foregroundStyle(Color(red: 0.52, green: 0.53,  blue: 0.6))
-                            .frame(minWidth: 0, maxWidth: 239)
-                        
-                        if !viewModel.searchText.isEmpty {
-                            Button(action: {
-                                self.viewModel.searchText = ""
-                            }){
-                                Image(systemName: "xmark.circle.fill")
-                                    .padding(5)
-                            }
-                        } else {
-                            EmptyView()
-                        }
-                    } // 검색 필드
-                    .background(Color(red: 0.16, green: 0.16, blue: 0.23))
-                    .clipShape(.rect(cornerRadius: 12))
-                    .padding(8)
-                    
-                    ZStack{
-                        Rectangle()
-                            .frame(width: 40, height: 40)
-                            .foregroundStyle(Color(red: 0.16, green: 0.16, blue: 0.23))
-                            .clipShape(.rect(cornerRadius: 12))
-                        Image("option")
-                            .resizable()
-                            .frame(width: 22, height: 22)
-                        
-                    } // 검색 옵션 버튼
-                }
-                .padding(.horizontal, 16)
-                .padding(.vertical, 2)
-                
-                //MARK: - TODO
-                /**
-                 
-                 - Note: 지도뷰 / 메인 뷰에 따라 하단 간편 검색 기록의 종류가 바뀌어야 한다. 추후 지도를 제작 후 다시 모델을 수정할 예정!!
-                 
-                 **/
-                GeometryReader { geometry in
-                    HStack(alignment: .center, spacing: 4) {
-                        ScrollView(.horizontal, showsIndicators: false){
-                            HStack(alignment: .center, spacing: 4){
-                                ForEach(viewModel.buttons.indices, id: \.self) { index in
-                                    Button(action: {
-                                        viewModel.buttonSelection(at: index)
-                                        viewModel.buttons[index].action()
-                                    })
-                                    {
-                                        HStack {
-                                            if !viewModel.buttons[index].buttonImage.isEmpty {
-                                                Image(viewModel.buttons[index].buttonImage)
-                                                    .fixedSize()
-                                            }
-                                            Text(viewModel.buttons[index].title)
-                                                .font(.sandol(type: .regular, size: 12))
-                                                .foregroundStyle(Color.white)
-                                        }
-                                        .frame(width: geometry.size.width > 500 ? 71 : geometry.size.width / 5, height: 32)
-                                        .background(viewModel.selectedButtonIndex == index ? Color(red: 0.52, green: 0.54, blue: 0.92) : Color(red: 0.16, green: 0.16, blue: 0.23))
-                                        .foregroundStyle(Color(red: 0.92, green: 0.9, blue: 0.97))
-                                        .clipShape(.rect(cornerRadius: 16))
-                                    }
-                                }
-                            }
-                            .padding(.horizontal, 16)
-                            .padding(.vertical, 0)// 하단 간편 검색 버튼 생성
-                        }
-                        .frame(width: geometry.size.width)
-                    }
-                    .frame(width: 60, alignment: .topLeading)
-                }
-                .frame(maxWidth: .infinity)
+        ZStack {
+            VStack {
+                searchField
+                bottomButtons
             }
             .frame(minWidth: 0, maxWidth: .infinity)
+        }
+        //TODO: - 구현 필요
+        .onTapGesture {
+            hideKeyBoard()
+        }
+        
+    }
+    
+    // MARK: - Search View
+    
+    /// 검색필드를 생성한다.
+    private var searchField: some View {
+        HStack(alignment: .center, spacing: 4) {
+            logoImage
+            searchTextField
+            searchOptionButton
+        }
+        .padding(.horizontal, 16)
+        .padding(.vertical, 2)
+    }
+    
+    /// 간편검색 버튼으로써 터치를 하여 빠른 검색필터를 갖는다.
+    private var bottomButtons: some View {
+            GeometryReader { geometry in
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(alignment: .center, spacing: 4) {
+                        ForEach(viewModel.buttons.indices, id: \.self) { index in
+                            Button(action: {
+                                viewModel.buttonSelection(at: index)
+                                viewModel.buttons[index].action()
+                            }) {
+                                HStack {
+                                    if !viewModel.buttons[index].buttonImage.isEmpty {
+                                        Image(viewModel.buttons[index].buttonImage)
+                                            .fixedSize()
+                                    }
+                                    Text(viewModel.buttons[index].title)
+                                        .font(.sandol(type: .regular, size: 12))
+                                        .foregroundColor(Color.white)
+                                }
+                                .frame(width: geometry.size.width > 500 ? 71 : geometry.size.width / 5, height: 32)
+                                .background(viewModel.selectedButtonIndex == index ? Color(red: 0.52, green: 0.54, blue: 0.92) : Color(red: 0.16, green: 0.16, blue: 0.23))
+                                .cornerRadius(16)
+                            }
+                        }
+                    }
+                    .padding(.horizontal, 16)
+                }
+                .frame(width: geometry.size.width)
+            }
+            .frame(maxWidth: .infinity)
+        }
+    
+    /// 간편 검색 버튼에 사용하느 로고 이미지(맵뷰에서 사용된다)
+    private var logoImage: some View {
+        ZStack {
+            viewModel.logoImage
+                .resizable()
+                .frame(width: viewModel.imageSize.width, height: viewModel.imageSize.height)
+        }
+    }
+    
+    /// 검색 필드를 생성하여 검색할 수 있도록 한다.
+    private var searchTextField: some View {
+        HStack {
+            Image("search")
+                .resizable()
+                .frame(width: 24, height: 24)
+                .padding(8)
+            TextField("", text: $viewModel.searchText
+                        ,prompt: Text("길 검색하기")
+                                .foregroundStyle(Color(red: 0.52, green: 0.53, blue: 0.6))
+                                .font(.sandol(type: .regular, size: 14)))
+                .font(.sandol(type: .regular, size: 14))
+                .background((Color(red: 0.16, green: 0.16, blue: 0.23)))
+                .foregroundStyle(Color(red: 0.52, green: 0.53, blue: 0.6))
+                .frame(minWidth: 0, maxWidth: 239)
+                .onSubmit {
+                    print(viewModel.getTextFieldValue())
+                }
             
+            if !viewModel.searchText.isEmpty {
+                Button(action: {
+                    viewModel.searchText = ""
+                }) {
+                    Image(systemName: "xmark.circle.fill")
+                        .padding(5)
+                }
+            }
+        }
+        .background(Color(red: 0.16, green: 0.16, blue: 0.23))
+        .clipShape(.rect(cornerRadius: 12))
+        .padding(8)
+    }
+    
+    /// 검색 옵션을 설정하기 위해 검색 옵션을 설정한다.
+    private var searchOptionButton: some View {
+        ZStack {
+            Rectangle()
+                .frame(width: 40, height: 40)
+                .foregroundColor(Color(red: 0.16, green: 0.16, blue: 0.23))
+                .clipShape(.rect(cornerRadius: 12))
+            Image("option")
+                .resizable()
+                .frame(width: 18.33, height: 14.67)
         }
     }
 }
+
+// MARK: - Preview
 
 struct SearchControl_Previews: PreviewProvider {
     static var previews: some View {
@@ -128,3 +142,11 @@ struct SearchControl_Previews: PreviewProvider {
         SearchControl(viewModel: viewModel)
     }
 }
+
+#if canImport(UIKit)
+extension View {
+    func hideKeyBoard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+}
+#endif

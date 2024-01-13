@@ -9,6 +9,7 @@
 
 import SwiftUI
 
+/// 여러 버튼의 기능을 하나의 버튼에 두어 여러 기능을 제공하는 버튼이다.
 struct TtuDotButton: View {
     
     //MARK: - Property
@@ -40,6 +41,12 @@ struct TtuDotButton: View {
     
     //MARK: - TtuDotButton View
     
+    /// 뚜닷의 기본이 되는 원을 생성한다.
+    /// - Parameters:
+    ///   - geometry: 화면의 사이즈에 맞추어 동일한 비율의 원을 생성한다.
+    ///   - radius: 화면의 값에 맞추어 정해진 반지름을 기준으로 뚜닷의 원을 그린다.
+    ///   - center: 뚜닷의 원을 그리고자 하는 중간 center자리를 넘긴다.
+    /// - Returns: 뷰로써 리턴한다.
     private func createTtuDotShape(geometry: GeometryProxy, radius: CGFloat, center: CGPoint) -> some View {
         TtuDotShape(sections: viewModel.sections, action: { index in
             viewModel.selectSection(at: index)
@@ -47,6 +54,9 @@ struct TtuDotButton: View {
         .rotationEffect(.degrees(viewModel.angle), anchor: .init(x: center.x / geometry.size.width, y: center.y / geometry.size.height))
     }
     
+    /// 원위에 그림과 글자를 원에 맞추어 생성하여 회전하면서 사용할 수 있도록 하낟.
+    /// - Parameter gemetry: 화면의 사이즈에 맞추어 동일한 비율의 원을 생성한다
+    /// - Returns: 뷰로써 리턴한다.
     private func createSectionViews(gemetry: GeometryProxy) -> some View {
         ForEach(viewModel.sections.indices, id: \.self) { index in
             let section = viewModel.sections[index]
@@ -76,6 +86,9 @@ struct TtuDotButton: View {
         }
     }
     
+    /// 뚜닷의 회전 중심축에 원을 두어 디자인
+    /// - Parameter geometry: 화면의 사이즈에 맞추어 일정한 비율에 생성되도록 함.
+    /// - Returns: 뷰로써 값 돌려준다.
     private func createCenterCircle(geometry: GeometryProxy) -> some View {
         Circle()
             .fill(
@@ -94,6 +107,9 @@ struct TtuDotButton: View {
             .position(x: geometry.size.width / 2, y: geometry.size.height * ( 1 - 0.075))
     }
     
+    /// 회전을 돌리면 돌릴 때의 값을 측정에 터치를 뗀 후에 원이 돌아가도록 유지한다.
+    /// - Parameter center: 원의 center값을 기준으로 돌아가도록 한다.
+    /// - Returns: 제스쳐값으로 리턴한다.
     private func createDragGesture(center: CGPoint) -> some Gesture {
         DragGesture()
             .onChanged { gesture in
@@ -117,6 +133,7 @@ struct TtuDotButton: View {
     }
 }
 
+//MARK: - Preview
 struct TtuDotButton_Previews: PreviewProvider {
     static var previews: some View {
         TtuDotButton()

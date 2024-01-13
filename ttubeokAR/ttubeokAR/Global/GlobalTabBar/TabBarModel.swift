@@ -7,6 +7,9 @@
 
 import Foundation
 
+/**
+ 버튼으로 탭 전환을 하도록 하기 위해 모델 정의
+ */
 enum TabBarModel {
     case exploreView
     case mapView
