@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		480448722B4B0D52008A4638 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 480448712B4B0D52008A4638 /* SearchViewModel.swift */; };
 		480448742B4B0E08008A4638 /* SearchControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 480448732B4B0E08008A4638 /* SearchControl.swift */; };
+		482DB6B72B5416FF005538DE /* PlaceSettingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482DB6B62B5416FF005538DE /* PlaceSettingModel.swift */; };
+		482DB6B92B541797005538DE /* PlaceSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482DB6B82B541797005538DE /* PlaceSettingsViewModel.swift */; };
+		482DB6BB2B541E7E005538DE /* PlaceSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482DB6BA2B541E7E005538DE /* PlaceSettingView.swift */; };
+		482DB6BD2B542F6F005538DE /* SliderLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482DB6BC2B542F6F005538DE /* SliderLine.swift */; };
 		4835C7F72B53B2CB00E40EAD /* ColorAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4835C7F62B53B2CB00E40EAD /* ColorAssets.xcassets */; };
 		483612B12B4ECFD900E0B45A /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483612B02B4ECFD900E0B45A /* MapView.swift */; };
 		483612B32B4ED00100E0B45A /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483612B22B4ED00100E0B45A /* TestView.swift */; };
@@ -33,6 +37,10 @@
 /* Begin PBXFileReference section */
 		480448712B4B0D52008A4638 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		480448732B4B0E08008A4638 /* SearchControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchControl.swift; sourceTree = "<group>"; };
+		482DB6B62B5416FF005538DE /* PlaceSettingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceSettingModel.swift; sourceTree = "<group>"; };
+		482DB6B82B541797005538DE /* PlaceSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceSettingsViewModel.swift; sourceTree = "<group>"; };
+		482DB6BA2B541E7E005538DE /* PlaceSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceSettingView.swift; sourceTree = "<group>"; };
+		482DB6BC2B542F6F005538DE /* SliderLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderLine.swift; sourceTree = "<group>"; };
 		4835C7F62B53B2CB00E40EAD /* ColorAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ColorAssets.xcassets; sourceTree = "<group>"; };
 		483612B02B4ECFD900E0B45A /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		483612B22B4ED00100E0B45A /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
@@ -66,6 +74,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		482DB6B42B541693005538DE /* SearchOption */ = {
+			isa = PBXGroup;
+			children = (
+				482DB6B62B5416FF005538DE /* PlaceSettingModel.swift */,
+				482DB6B82B541797005538DE /* PlaceSettingsViewModel.swift */,
+				482DB6BA2B541E7E005538DE /* PlaceSettingView.swift */,
+				482DB6BC2B542F6F005538DE /* SliderLine.swift */,
+			);
+			path = SearchOption;
+			sourceTree = "<group>";
+		};
+		482DB6B52B5416B2005538DE /* SearchBar */ = {
+			isa = PBXGroup;
+			children = (
+				489BD8F02B4A40EE003382AE /* SearchButtonModel.swift */,
+				480448712B4B0D52008A4638 /* SearchViewModel.swift */,
+				480448732B4B0E08008A4638 /* SearchControl.swift */,
+			);
+			path = SearchBar;
+			sourceTree = "<group>";
+		};
 		483612B42B4ED04C00E0B45A /* GlobalTabBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -111,9 +140,8 @@
 		489BD8EF2B4A40CF003382AE /* GlobalSearchControl */ = {
 			isa = PBXGroup;
 			children = (
-				489BD8F02B4A40EE003382AE /* SearchButtonModel.swift */,
-				480448712B4B0D52008A4638 /* SearchViewModel.swift */,
-				480448732B4B0E08008A4638 /* SearchControl.swift */,
+				482DB6B52B5416B2005538DE /* SearchBar */,
+				482DB6B42B541693005538DE /* SearchOption */,
 			);
 			path = GlobalSearchControl;
 			sourceTree = "<group>";
@@ -263,6 +291,7 @@
 			files = (
 				48FF93952B43BA0600202F45 /* ContentView.swift in Sources */,
 				480448722B4B0D52008A4638 /* SearchViewModel.swift in Sources */,
+				482DB6BD2B542F6F005538DE /* SliderLine.swift in Sources */,
 				488E25462B4D4E1C005D8D52 /* FontExtension.swift in Sources */,
 				483820DF2B4BE61F00C3FB14 /* TtuDotModel.swift in Sources */,
 				483612B32B4ED00100E0B45A /* TestView.swift in Sources */,
@@ -270,13 +299,16 @@
 				483820EE2B4BEAFE00C3FB14 /* TtuDotShape.swift in Sources */,
 				480448742B4B0E08008A4638 /* SearchControl.swift in Sources */,
 				483820E22B4BE7C100C3FB14 /* ARCommand.swift in Sources */,
+				482DB6B72B5416FF005538DE /* PlaceSettingModel.swift in Sources */,
 				483612B62B4ED09000E0B45A /* TabBarModel.swift in Sources */,
 				483820EC2B4BE97300C3FB14 /* TtuDotViewModel.swift in Sources */,
 				483820E42B4BE80700C3FB14 /* SettingsCommand.swift in Sources */,
+				482DB6B92B541797005538DE /* PlaceSettingsViewModel.swift in Sources */,
 				48FF93932B43BA0600202F45 /* AppDelegate.swift in Sources */,
 				489BD8F12B4A40EE003382AE /* SearchButtonModel.swift in Sources */,
 				483820E82B4BE8E500C3FB14 /* AddLocationCommand.swift in Sources */,
 				483820DD2B4BE5E600C3FB14 /* TtuDotButton.swift in Sources */,
+				482DB6BB2B541E7E005538DE /* PlaceSettingView.swift in Sources */,
 				483612BA2B4ED14500E0B45A /* MainTabBarControl.swift in Sources */,
 				483612B12B4ECFD900E0B45A /* MapView.swift in Sources */,
 			);
