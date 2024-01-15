@@ -38,8 +38,6 @@ struct SearchControl: View {
                         .appearFrom(.bottom)
                         .dragToDismiss(true)
                         .closeOnTap(true)
-                    
-                    
                 }
             }
             //TODO: - 구현 필요
