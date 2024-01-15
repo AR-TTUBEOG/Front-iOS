@@ -38,6 +38,7 @@ struct PlaceSettingView: View {
                     finishSelect
                 }
             }
+            .padding(.horizontal, 30)
         }
     }
 
@@ -76,7 +77,7 @@ struct PlaceSettingView: View {
             Text("장소설정")
                 .font(.sandol(type: .medium, size: 20))
                 .foregroundStyle(Color(red: 0.92, green: 0.9, blue: 0.97))
-                .frame(width: 335, alignment: .topLeading)
+                .frame(maxWidth: 335, alignment: .topLeading)
             
             HStack(alignment: .center, spacing: 7) {
                 ForEach(PlaceType.allCases, id: \.self) { place in
@@ -124,7 +125,6 @@ struct PlaceSettingView: View {
                 
                 CustomSlider(value: $viewModel.settings.distance, range: 0...10)
             }
-            .padding(.horizontal, 29)
             .padding(.vertical, 3)
             .padding(.leading, 0)
             .frame(maxWidth: .infinity)
@@ -132,19 +132,21 @@ struct PlaceSettingView: View {
 
     private var finishSelect: some View {
         ZStack(alignment: .center){
-            Button(action: {
-                print("hello")
-            }) {
-                Text("설정 완료")
-                    .font(.sandol(type: .medium, size: 14))
-                    .foregroundStyle(Color(red: 0.92, green: 0.9, blue: 0.97))
-                    .frame(maxWidth: 343, maxHeight: 39.53)
-                    .contentShape(Rectangle())
-                    .background(Color.primary03)
-                    .clipShape(.rect(cornerRadius: 20))
+            HStack{
+                Button(action: {
+                    print("hello")
+                }) {
+                    Text("설정 완료")
+                        .font(.sandol(type: .medium, size: 14))
+                        .foregroundStyle(Color(red: 0.92, green: 0.9, blue: 0.97))
+                        .frame(maxWidth: 343, maxHeight: 39.53)
+                        .contentShape(Rectangle())
+                        .background(Color.primary03)
+                        .clipShape(.rect(cornerRadius: 20))
+                }
             }
+            .padding(.horizontal, 16)
         }
-        .padding(.horizontal, 24)
         .padding(.vertical, 8)
     }
 }
