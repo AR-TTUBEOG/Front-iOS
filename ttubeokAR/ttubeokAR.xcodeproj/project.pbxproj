@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		480448722B4B0D52008A4638 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 480448712B4B0D52008A4638 /* SearchViewModel.swift */; };
 		480448742B4B0E08008A4638 /* SearchControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 480448732B4B0E08008A4638 /* SearchControl.swift */; };
-		4835C7F72B53B2CB00E40EAD /* ColorAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4835C7F62B53B2CB00E40EAD /* ColorAssets.xcassets */; };
 		483612B12B4ECFD900E0B45A /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483612B02B4ECFD900E0B45A /* MapView.swift */; };
 		483612B32B4ED00100E0B45A /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483612B22B4ED00100E0B45A /* TestView.swift */; };
 		483612B62B4ED09000E0B45A /* TabBarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483612B52B4ED09000E0B45A /* TabBarModel.swift */; };
@@ -28,12 +27,12 @@
 		48FF93952B43BA0600202F45 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FF93942B43BA0600202F45 /* ContentView.swift */; };
 		48FF93972B43BA0700202F45 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 48FF93962B43BA0700202F45 /* Assets.xcassets */; };
 		48FF939A2B43BA0700202F45 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 48FF93992B43BA0700202F45 /* Preview Assets.xcassets */; };
+		6CC4DDB42B54FDE20080E7E8 /* ColorAsset.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6CC4DDB32B54FDE20080E7E8 /* ColorAsset.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		480448712B4B0D52008A4638 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		480448732B4B0E08008A4638 /* SearchControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchControl.swift; sourceTree = "<group>"; };
-		4835C7F62B53B2CB00E40EAD /* ColorAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ColorAssets.xcassets; sourceTree = "<group>"; };
 		483612B02B4ECFD900E0B45A /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		483612B22B4ED00100E0B45A /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		483612B52B4ED09000E0B45A /* TabBarModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarModel.swift; sourceTree = "<group>"; };
@@ -53,6 +52,7 @@
 		48FF93942B43BA0600202F45 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		48FF93962B43BA0700202F45 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		48FF93992B43BA0700202F45 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		6CC4DDB32B54FDE20080E7E8 /* ColorAsset.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ColorAsset.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,7 +185,7 @@
 				48FF93922B43BA0600202F45 /* AppDelegate.swift */,
 				488E25452B4D4E1C005D8D52 /* FontExtension.swift */,
 				48FF93962B43BA0700202F45 /* Assets.xcassets */,
-				4835C7F62B53B2CB00E40EAD /* ColorAssets.xcassets */,
+				6CC4DDB32B54FDE20080E7E8 /* ColorAsset.xcassets */,
 			);
 			path = SettingGroup;
 			sourceTree = "<group>";
@@ -249,7 +249,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				48FF939A2B43BA0700202F45 /* Preview Assets.xcassets in Resources */,
-				4835C7F72B53B2CB00E40EAD /* ColorAssets.xcassets in Resources */,
+				6CC4DDB42B54FDE20080E7E8 /* ColorAsset.xcassets in Resources */,
 				48FF93972B43BA0700202F45 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
