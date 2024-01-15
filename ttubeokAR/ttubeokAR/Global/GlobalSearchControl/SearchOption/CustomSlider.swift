@@ -39,7 +39,7 @@ struct CustomSlider: View {
                 Color.clear.ignoresSafeArea()
             }
         }
-        .frame(height: 10)
+        .frame(maxWidth: 400, maxHeight: 10)
     }
     
     //MARK: - Func

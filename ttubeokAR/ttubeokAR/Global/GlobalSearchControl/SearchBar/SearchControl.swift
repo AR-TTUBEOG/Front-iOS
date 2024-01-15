@@ -33,7 +33,7 @@ struct SearchControl: View {
                 } customize: {
                     $0
                         .type(.toast)
-                        .position(.bottomLeading)
+                        .position(.bottom)
                         .animation(.spring)
                         .appearFrom(.bottom)
                         .dragToDismiss(true)

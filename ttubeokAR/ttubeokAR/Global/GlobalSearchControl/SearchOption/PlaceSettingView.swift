@@ -73,39 +73,40 @@ struct PlaceSettingView: View {
     
     /// 장소 단일선택 버튼
     private var placeSelectButton: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            Text("장소설정")
-                .font(.sandol(type: .medium, size: 20))
-                .foregroundStyle(Color(red: 0.92, green: 0.9, blue: 0.97))
-                .frame(maxWidth: 335, alignment: .topLeading)
-            
-            HStack(alignment: .center, spacing: 7) {
-                ForEach(PlaceType.allCases, id: \.self) { place in
-                    Button(place.rawValue) {
-                        viewModel.updateSelectionPlace(place)
-                    }
-                    .padding(.horizontal, 16)
-                    .padding(.vertical, 8)
-                    .background(viewModel.settings.selectionPlace == place ? Color.primary01 : Color.clear)
+        GeometryReader { geometry in
+            VStack(alignment: .leading, spacing: 12) {
+                Text("장소설정")
+                    .font(.sandol(type: .medium, size: 20))
                     .foregroundStyle(Color(red: 0.92, green: 0.9, blue: 0.97))
-                    .multilineTextAlignment(.center)
-                    .font(.sandol(type: .medium, size: 12))
-                    .clipShape(.rect(cornerRadius: 16))
-                    .overlay {
-                        RoundedRectangle(cornerRadius: 16)
-                            .inset(by: 0.5)
-                            .stroke(Color.primary01, lineWidth: 1)
+                    .frame(maxWidth: 335, alignment: .topLeading)
+                
+                HStack(alignment: .center, spacing: 7) {
+                    ForEach(PlaceType.allCases, id: \.self) { place in
+                        Button(place.rawValue) {
+                            viewModel.updateSelectionPlace(place)
+                        }
+                        .frame(width: 74, height: 32)
+                        .background(viewModel.settings.selectionPlace == place ? Color.primary01 : Color.clear)
+                        .foregroundStyle(Color(red: 0.92, green: 0.9, blue: 0.97))
+                        .multilineTextAlignment(.center)
+                        .font(.sandol(type: .medium, size: 12))
+                        .clipShape(.rect(cornerRadius: 16))
+                        .overlay {
+                            RoundedRectangle(cornerRadius: 16)
+                                .inset(by: 0.5)
+                                .stroke(Color.primary01, lineWidth: 1)
+                        }
                     }
                 }
+                .padding(.vertical, 8)
             }
-            
-            
-            
+            .padding(.horizontal, geometry.size.width / 30)
+            .padding(.leading, 0)
+            .padding(.trailing, 8)
+            .padding(.vertical, 0)
+            .frame(maxWidth: .infinity)
         }
-        .padding(.leading, 0)
-        .padding(.trailing, 8)
-        .padding(.vertical, 0)
-        .frame(maxWidth: .infinity)
+        .frame(height: 50)
     }
     
     private var sliderDistance: some View {
