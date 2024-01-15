@@ -14,22 +14,50 @@ struct PlaceSettingView: View {
         
         ZStack(alignment: .top){
             Color.background.ignoresSafeArea(.all)
-            placeSetting
+            topall
+                .offset(y: 10)
+        }
+        .frame(maxHeight: 400)
+    }
+
+    private var topall: some View {
+        ZStack(alignment: .top) {
+            
+            VStack{
+                
+                VStack(alignment: .center, spacing: 10){
+                    topRectangle
+                    title
+                }
+                
+                Spacer().frame(height: 23)
+                
+                VStack(alignment: .center, spacing: 60) {
+                    placeSelectButton
+                    sliderDistance
+                    finishSelect
+                }
+            }
         }
     }
 
     
-    private var placeSetting: some  View {
-        VStack(alignment: .leading, spacing: 70) {
-            title
+    private var placeSetting: some View {
+        VStack(alignment: .center, spacing: 60) {
             placeSelectButton
             sliderDistance
             finishSelect
-            
         }
         .padding(.horizontal, 0)
         .padding(.top, 12)
-        .padding(.bottom, 174.47)
+    }
+    
+    private var topRectangle: some View {
+        Rectangle()
+            .foregroundStyle(Color.clear)
+            .frame(maxWidth: 72, maxHeight: 6)
+            .background(Color(red: 0.92, green: 0.9, blue: 0.97).opacity(0.3))
+            .clipShape(.rect(cornerRadius: 20))
     }
     
     
@@ -69,6 +97,9 @@ struct PlaceSettingView: View {
                     }
                 }
             }
+            
+            
+            
         }
         .padding(.leading, 0)
         .padding(.trailing, 8)
@@ -77,7 +108,7 @@ struct PlaceSettingView: View {
     }
     
     private var sliderDistance: some View {
-        VStack(spacing: 2) {
+        VStack(alignment: .leading, spacing: 2) {
                 HStack(alignment: .center) {
                     Text("거리")
                         .font(.sandol(type: .medium, size: 20))
@@ -93,21 +124,21 @@ struct PlaceSettingView: View {
                 
                 CustomSlider(value: $viewModel.settings.distance, range: 0...10)
             }
-            .padding(.horizontal, 10)
+            .padding(.horizontal, 29)
             .padding(.vertical, 3)
             .padding(.leading, 0)
             .frame(maxWidth: .infinity)
         }
 
     private var finishSelect: some View {
-        ZStack{
+        ZStack(alignment: .center){
             Button(action: {
                 print("hello")
             }) {
                 Text("설정 완료")
                     .font(.sandol(type: .medium, size: 14))
                     .foregroundStyle(Color(red: 0.92, green: 0.9, blue: 0.97))
-                    .frame(minWidth: 0,maxWidth: .infinity, maxHeight: 39.53)
+                    .frame(maxWidth: 343, maxHeight: 39.53)
                     .contentShape(Rectangle())
                     .background(Color.primary03)
                     .clipShape(.rect(cornerRadius: 20))

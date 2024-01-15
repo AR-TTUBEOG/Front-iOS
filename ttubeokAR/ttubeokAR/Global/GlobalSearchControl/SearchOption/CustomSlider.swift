@@ -45,9 +45,9 @@ struct CustomSlider: View {
     //MARK: - Func
     private func markZip(geometry: GeometryProxy) -> some View {
         ZStack {
-            markPosition(2.5, geometry: geometry)
-            markPosition(5.0, geometry: geometry)
-            markPosition(7.5, geometry: geometry)
+            markPosition(2.5, label: "3km", geometry: geometry)
+            markPosition(5.0, label: "5.5km", geometry: geometry)
+            markPosition(7.5, label: "8km", geometry: geometry)
             sliderHandle(geometry: geometry)
         }
     }
@@ -88,15 +88,20 @@ struct CustomSlider: View {
             })
     }
     
-    private func markPosition(_ position: Double, geometry: GeometryProxy) -> some View {
+    private func markPosition(_ position: Double, label: String, geometry: GeometryProxy) -> some View {
         let totalSliderWidth = geometry.size.width * 0.9
         let normalizedPosition = CGFloat((position - range.lowerBound) / (range.upperBound - range.lowerBound))
         let markPosition = normalizedPosition * totalSliderWidth
         
-        return Rectangle()
+        return VStack {
+            Rectangle()
             .fill(Color.white.opacity(0.5))
             .frame(width: 2, height: 17)
-            .offset(x: markPosition, y: 0)
+            Text(label)
+                .font(.sandol(type: .medium, size: 11))
+                .foregroundStyle(Color(red: 0.92, green: 0.9, blue: 0.97))
+        }
+        .offset(x: markPosition, y: 9)
     }
 }
 
