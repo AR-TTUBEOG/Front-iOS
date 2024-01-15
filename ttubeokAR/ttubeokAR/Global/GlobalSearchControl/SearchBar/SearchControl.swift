@@ -33,13 +33,11 @@ struct SearchControl: View {
                 } customize: {
                     $0
                         .type(.toast)
-                        .position(.bottomLeading)
+                        .position(.bottom)
                         .animation(.spring)
                         .appearFrom(.bottom)
                         .dragToDismiss(true)
                         .closeOnTap(true)
-                    
-                    
                 }
             }
             //TODO: - 구현 필요
