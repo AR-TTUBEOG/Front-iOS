@@ -44,11 +44,12 @@ struct PlaceSettingView: View {
     
     /// 장소 단일선택 버튼
     private var placeSelectButton: some View {
-        VStack(alignment: .leading, spacing: 9) {
+        VStack(alignment: .leading, spacing: 12) {
             Text("장소설정")
                 .font(.sandol(type: .medium, size: 20))
                 .foregroundStyle(Color(red: 0.92, green: 0.9, blue: 0.97))
                 .frame(width: 335, alignment: .topLeading)
+            
             HStack(alignment: .center, spacing: 7) {
                 ForEach(PlaceType.allCases, id: \.self) { place in
                     Button(place.rawValue) {
@@ -76,7 +77,7 @@ struct PlaceSettingView: View {
     }
     
     private var sliderDistance: some View {
-            VStack {
+        VStack(spacing: 2) {
                 HStack(alignment: .center) {
                     Text("거리")
                         .font(.sandol(type: .medium, size: 20))
@@ -87,35 +88,17 @@ struct PlaceSettingView: View {
                         .font(.sandol(type: .medium, size: 12))
                         .multilineTextAlignment(.trailing)
                         .foregroundStyle(Color(red: 0.92, green: 0.9, blue: 0.97).opacity(0.5))
-                }
+                }   
                 .padding(.horizontal, 16)
                 
-                Slider(value: $viewModel.settings.distance, in: 0...10)
-                  //  .background(sliderBackground())
+                CustomSlider(value: $viewModel.settings.distance, range: 0...10)
             }
-            .padding(.horizontal, 16)
+            .padding(.horizontal, 10)
             .padding(.vertical, 3)
             .padding(.leading, 0)
             .frame(maxWidth: .infinity)
         }
-    
-//    private func sliderBackground() -> some View {
-//        GeometryReader { geometry in
-//            ZStack(alignment: .leading) {
-//                Color.yellow
-//                SliderLine()
-//                    .stroke(Color.white, lineWidth: 1)
-//                    .frame(width: geometry.size.width, height: 17)
-//                ForEach([0,25,50,75,100], id: \.self) { value in
-//                        Rectangle()
-//                        .fill(Color.white.opacity(0.5))
-//                        .frame(width: 2, height: 10)
-//                }
-//            }
-//        }
-//        .frame(width: 172, height: 17)
-//    }
-    
+
     private var finishSelect: some View {
         ZStack{
             Button(action: {
@@ -124,10 +107,11 @@ struct PlaceSettingView: View {
                 Text("설정 완료")
                     .font(.sandol(type: .medium, size: 14))
                     .foregroundStyle(Color(red: 0.92, green: 0.9, blue: 0.97))
+                    .frame(minWidth: 0,maxWidth: .infinity, maxHeight: 39.53)
+                    .contentShape(Rectangle())
+                    .background(Color.primary03)
+                    .clipShape(.rect(cornerRadius: 20))
             }
-            .frame(minWidth: 0,maxWidth: .infinity, maxHeight: 39.53)
-            .background(Color.primary03)
-            .clipShape(.rect(cornerRadius: 20))
         }
         .padding(.horizontal, 24)
         .padding(.vertical, 8)
