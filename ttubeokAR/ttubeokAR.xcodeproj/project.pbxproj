@@ -28,6 +28,7 @@
 		4861FF242B54E35C00DC6E2D /* CustomSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4861FF232B54E35C00DC6E2D /* CustomSlider.swift */; };
 		488E25462B4D4E1C005D8D52 /* FontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488E25452B4D4E1C005D8D52 /* FontExtension.swift */; };
 		489BD8F12B4A40EE003382AE /* SearchButtonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489BD8F02B4A40EE003382AE /* SearchButtonModel.swift */; };
+		48C3D9DE2B554D3700E3F905 /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = 48C3D9DD2B554D3700E3F905 /* PopupView */; };
 		48FF93932B43BA0600202F45 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FF93922B43BA0600202F45 /* AppDelegate.swift */; };
 		48FF93952B43BA0600202F45 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FF93942B43BA0600202F45 /* ContentView.swift */; };
 		48FF93972B43BA0700202F45 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 48FF93962B43BA0700202F45 /* Assets.xcassets */; };
@@ -68,6 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48C3D9DE2B554D3700E3F905 /* PopupView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -234,6 +236,9 @@
 			dependencies = (
 			);
 			name = ttubeokAR;
+			packageProductDependencies = (
+				48C3D9DD2B554D3700E3F905 /* PopupView */,
+			);
 			productName = ttubeokAR;
 			productReference = 48FF938F2B43BA0600202F45 /* ttubeokAR.app */;
 			productType = "com.apple.product-type.application";
@@ -262,6 +267,9 @@
 				Base,
 			);
 			mainGroup = 48FF93862B43BA0600202F45;
+			packageReferences = (
+				48C3D9DC2B554D3700E3F905 /* XCRemoteSwiftPackageReference "PopupView" */,
+			);
 			productRefGroup = 48FF93902B43BA0600202F45 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -520,6 +528,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		48C3D9DC2B554D3700E3F905 /* XCRemoteSwiftPackageReference "PopupView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/exyte/PopupView";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.8.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		48C3D9DD2B554D3700E3F905 /* PopupView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 48C3D9DC2B554D3700E3F905 /* XCRemoteSwiftPackageReference "PopupView" */;
+			productName = PopupView;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 48FF93872B43BA0600202F45 /* Project object */;
 }
