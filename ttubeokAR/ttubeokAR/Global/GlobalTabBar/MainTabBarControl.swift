@@ -38,7 +38,7 @@ struct MainViewControl: View {
     private var mainTabView: some View {
         ZStack(alignment: .center) {
             TabView(selection: $selectedTab) {
-                TestView()
+                ExploreViewControl()
                     .tabItem {
                         EmptyView()
                     }
@@ -97,7 +97,7 @@ struct MainViewControl: View {
                         Image(viewModel.buttonImage)
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                            .frame(width: 81, height: 42)
+                            .frame(maxWidth: 81, maxHeight: 42)
                     }
                     .opacity(showTtuDotButton ? 0 : 1)
                     .offset(y: -10)

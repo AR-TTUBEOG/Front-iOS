@@ -18,7 +18,6 @@ struct SearchControl: View {
     
     // MARK: - Body
     var body: some View {
-
         ZStack{
             GeometryReader { geometry in
                 VStack {
