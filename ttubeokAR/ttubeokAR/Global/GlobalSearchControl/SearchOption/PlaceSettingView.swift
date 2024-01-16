@@ -14,22 +14,51 @@ struct PlaceSettingView: View {
         
         ZStack(alignment: .top){
             Color.background.ignoresSafeArea(.all)
-            placeSetting
+            topall
+                .offset(y: 10)
+        }
+        .frame(maxHeight: 400)
+    }
+
+    private var topall: some View {
+        ZStack(alignment: .top) {
+            
+            VStack{
+                
+                VStack(alignment: .center, spacing: 10){
+                    topRectangle
+                    title
+                }
+                
+                Spacer().frame(height: 23)
+                
+                VStack(alignment: .center, spacing: 60) {
+                    placeSelectButton
+                    sliderDistance
+                    finishSelect
+                }
+            }
+            .padding(.horizontal, 30)
         }
     }
 
     
-    private var placeSetting: some  View {
-        VStack(alignment: .leading, spacing: 70) {
-            title
+    private var placeSetting: some View {
+        VStack(alignment: .center, spacing: 60) {
             placeSelectButton
             sliderDistance
             finishSelect
-            
         }
         .padding(.horizontal, 0)
         .padding(.top, 12)
-        .padding(.bottom, 174.47)
+    }
+    
+    private var topRectangle: some View {
+        Rectangle()
+            .foregroundStyle(Color.clear)
+            .frame(maxWidth: 72, maxHeight: 6)
+            .background(Color(red: 0.92, green: 0.9, blue: 0.97).opacity(0.3))
+            .clipShape(.rect(cornerRadius: 20))
     }
     
     
@@ -44,40 +73,44 @@ struct PlaceSettingView: View {
     
     /// 장소 단일선택 버튼
     private var placeSelectButton: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            Text("장소설정")
-                .font(.sandol(type: .medium, size: 20))
-                .foregroundStyle(Color(red: 0.92, green: 0.9, blue: 0.97))
-                .frame(width: 335, alignment: .topLeading)
-            
-            HStack(alignment: .center, spacing: 7) {
-                ForEach(PlaceType.allCases, id: \.self) { place in
-                    Button(place.rawValue) {
-                        viewModel.updateSelectionPlace(place)
-                    }
-                    .padding(.horizontal, 16)
-                    .padding(.vertical, 8)
-                    .background(viewModel.settings.selectionPlace == place ? Color.primary01 : Color.clear)
+        GeometryReader { geometry in
+            VStack(alignment: .leading, spacing: 12) {
+                Text("장소설정")
+                    .font(.sandol(type: .medium, size: 20))
                     .foregroundStyle(Color(red: 0.92, green: 0.9, blue: 0.97))
-                    .multilineTextAlignment(.center)
-                    .font(.sandol(type: .medium, size: 12))
-                    .clipShape(.rect(cornerRadius: 16))
-                    .overlay {
-                        RoundedRectangle(cornerRadius: 16)
-                            .inset(by: 0.5)
-                            .stroke(Color.primary01, lineWidth: 1)
+                    .frame(maxWidth: 335, alignment: .topLeading)
+                
+                HStack(alignment: .center, spacing: 7) {
+                    ForEach(PlaceType.allCases, id: \.self) { place in
+                        Button(place.rawValue) {
+                            viewModel.updateSelectionPlace(place)
+                        }
+                        .frame(width: 74, height: 32)
+                        .background(viewModel.settings.selectionPlace == place ? Color.primary01 : Color.clear)
+                        .foregroundStyle(Color(red: 0.92, green: 0.9, blue: 0.97))
+                        .multilineTextAlignment(.center)
+                        .font(.sandol(type: .medium, size: 12))
+                        .clipShape(.rect(cornerRadius: 16))
+                        .overlay {
+                            RoundedRectangle(cornerRadius: 16)
+                                .inset(by: 0.5)
+                                .stroke(Color.primary01, lineWidth: 1)
+                        }
                     }
                 }
+                .padding(.vertical, 8)
             }
+            .padding(.horizontal, geometry.size.width / 30)
+            .padding(.leading, 0)
+            .padding(.trailing, 8)
+            .padding(.vertical, 0)
+            .frame(maxWidth: .infinity)
         }
-        .padding(.leading, 0)
-        .padding(.trailing, 8)
-        .padding(.vertical, 0)
-        .frame(maxWidth: .infinity)
+        .frame(height: 50)
     }
     
     private var sliderDistance: some View {
-        VStack(spacing: 2) {
+        VStack(alignment: .leading, spacing: 2) {
                 HStack(alignment: .center) {
                     Text("거리")
                         .font(.sandol(type: .medium, size: 20))
@@ -93,27 +126,28 @@ struct PlaceSettingView: View {
                 
                 CustomSlider(value: $viewModel.settings.distance, range: 0...10)
             }
-            .padding(.horizontal, 10)
             .padding(.vertical, 3)
             .padding(.leading, 0)
             .frame(maxWidth: .infinity)
         }
 
     private var finishSelect: some View {
-        ZStack{
-            Button(action: {
-                print("hello")
-            }) {
-                Text("설정 완료")
-                    .font(.sandol(type: .medium, size: 14))
-                    .foregroundStyle(Color(red: 0.92, green: 0.9, blue: 0.97))
-                    .frame(minWidth: 0,maxWidth: .infinity, maxHeight: 39.53)
-                    .contentShape(Rectangle())
-                    .background(Color.primary03)
-                    .clipShape(.rect(cornerRadius: 20))
+        ZStack(alignment: .center){
+            HStack{
+                Button(action: {
+                    print("hello")
+                }) {
+                    Text("설정 완료")
+                        .font(.sandol(type: .medium, size: 14))
+                        .foregroundStyle(Color(red: 0.92, green: 0.9, blue: 0.97))
+                        .frame(maxWidth: 343, maxHeight: 39.53)
+                        .contentShape(Rectangle())
+                        .background(Color.primary03)
+                        .clipShape(.rect(cornerRadius: 20))
+                }
             }
+            .padding(.horizontal, 16)
         }
-        .padding(.horizontal, 24)
         .padding(.vertical, 8)
     }
 }

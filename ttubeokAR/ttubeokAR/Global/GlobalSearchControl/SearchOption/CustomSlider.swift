@@ -39,15 +39,15 @@ struct CustomSlider: View {
                 Color.clear.ignoresSafeArea()
             }
         }
-        .frame(height: 10)
+        .frame(maxWidth: 400, maxHeight: 10)
     }
     
     //MARK: - Func
     private func markZip(geometry: GeometryProxy) -> some View {
         ZStack {
-            markPosition(2.5, geometry: geometry)
-            markPosition(5.0, geometry: geometry)
-            markPosition(7.5, geometry: geometry)
+            markPosition(2.5, label: "3km", geometry: geometry)
+            markPosition(5.0, label: "5.5km", geometry: geometry)
+            markPosition(7.5, label: "8km", geometry: geometry)
             sliderHandle(geometry: geometry)
         }
     }
@@ -55,12 +55,12 @@ struct CustomSlider: View {
     private func backgroundSlider(geometry: GeometryProxy) -> some View {
         Rectangle()
             .fill(backgroundFill)
-            .frame(width: geometry.size.width * 0.9, height: 17)
+            .frame(width: geometry.size.width * 0.85, height: 17)
             .clipShape(.rect(cornerRadius: 10))
     }
     
     private func backgroundHandleSlider(geometry: GeometryProxy) -> some View {
-        let sliderWidth = geometry.size.width * 0.9
+        let sliderWidth = geometry.size.width * 0.85
         let normalizedValue = CGFloat((value - range.lowerBound) / (range.upperBound - range.lowerBound))
         let backgroundWidth = normalizedValue * sliderWidth + CGFloat(5)
         
@@ -71,7 +71,7 @@ struct CustomSlider: View {
     }
     
     private func sliderHandle(geometry: GeometryProxy) -> some View {
-        let totalSliderWidth = geometry.size.width * 0.9
+        let totalSliderWidth = geometry.size.width * 0.85
         let handleWidthHalf = CGFloat(12)
         let sliderWidth = totalSliderWidth
         let normalizedValue = CGFloat((value - range.lowerBound) / (range.upperBound - range.lowerBound))
@@ -88,15 +88,20 @@ struct CustomSlider: View {
             })
     }
     
-    private func markPosition(_ position: Double, geometry: GeometryProxy) -> some View {
-        let totalSliderWidth = geometry.size.width * 0.9
+    private func markPosition(_ position: Double, label: String, geometry: GeometryProxy) -> some View {
+        let totalSliderWidth = geometry.size.width * 0.85
         let normalizedPosition = CGFloat((position - range.lowerBound) / (range.upperBound - range.lowerBound))
         let markPosition = normalizedPosition * totalSliderWidth
         
-        return Rectangle()
+        return VStack {
+            Rectangle()
             .fill(Color.white.opacity(0.5))
             .frame(width: 2, height: 17)
-            .offset(x: markPosition, y: 0)
+            Text(label)
+                .font(.sandol(type: .medium, size: 11))
+                .foregroundStyle(Color(red: 0.92, green: 0.9, blue: 0.97))
+        }
+        .offset(x: markPosition, y: 9)
     }
 }
 

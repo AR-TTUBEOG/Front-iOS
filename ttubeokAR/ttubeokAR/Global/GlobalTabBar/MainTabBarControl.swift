@@ -26,7 +26,7 @@ struct MainViewControl: View {
     //MARK: Body
     var body: some View {
         ZStack {
-            mainTabVieew
+            mainTabView
             searchControl
             tabBarButton
         }
@@ -35,7 +35,7 @@ struct MainViewControl: View {
     //MARK: - Tab View
     
     /// 메인뷰의 변화를 위함 :: ExploreView, MainView의 전환
-    private var mainTabVieew: some View {
+    private var mainTabView: some View {
         ZStack(alignment: .center) {
             TabView(selection: $selectedTab) {
                 ExploreViewControl()
