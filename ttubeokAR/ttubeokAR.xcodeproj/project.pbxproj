@@ -28,12 +28,18 @@
 		4861FF242B54E35C00DC6E2D /* CustomSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4861FF232B54E35C00DC6E2D /* CustomSlider.swift */; };
 		488E25462B4D4E1C005D8D52 /* FontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488E25452B4D4E1C005D8D52 /* FontExtension.swift */; };
 		489BD8F12B4A40EE003382AE /* SearchButtonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489BD8F02B4A40EE003382AE /* SearchButtonModel.swift */; };
+		48C3D9DE2B554D3700E3F905 /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = 48C3D9DD2B554D3700E3F905 /* PopupView */; };
 		48FF93932B43BA0600202F45 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FF93922B43BA0600202F45 /* AppDelegate.swift */; };
 		48FF93952B43BA0600202F45 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FF93942B43BA0600202F45 /* ContentView.swift */; };
 		48FF93972B43BA0700202F45 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 48FF93962B43BA0700202F45 /* Assets.xcassets */; };
 		48FF939A2B43BA0700202F45 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 48FF93992B43BA0700202F45 /* Preview Assets.xcassets */; };
 		6CC4DDB72B55512F0080E7E8 /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC4DDB62B55512F0080E7E8 /* NavigationBar.swift */; };
 		6CC4DDB92B55519F0080E7E8 /* Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC4DDB82B55519F0080E7E8 /* Icon.swift */; };
+		CA3A391A2B55753800BEB7DE /* RecommendedSpaceCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3A39192B55753800BEB7DE /* RecommendedSpaceCard.swift */; };
+		CAB9FA1C2B551B1500F0046A /* ExploreViewControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB9FA1B2B551B1500F0046A /* ExploreViewControl.swift */; };
+		CAB9FA1E2B551B3E00F0046A /* ExploreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB9FA1D2B551B3E00F0046A /* ExploreViewModel.swift */; };
+		CAB9FA202B55443700F0046A /* RecommendSpaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB9FA1F2B55443700F0046A /* RecommendSpaceModel.swift */; };
+
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,6 +71,11 @@
 		48FF93992B43BA0700202F45 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		6CC4DDB62B55512F0080E7E8 /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
 		6CC4DDB82B55519F0080E7E8 /* Icon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icon.swift; sourceTree = "<group>"; };
+		CA3A39192B55753800BEB7DE /* RecommendedSpaceCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedSpaceCard.swift; sourceTree = "<group>"; };
+		CAB9FA1B2B551B1500F0046A /* ExploreViewControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewControl.swift; sourceTree = "<group>"; };
+		CAB9FA1D2B551B3E00F0046A /* ExploreViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewModel.swift; sourceTree = "<group>"; };
+		CAB9FA1F2B55443700F0046A /* RecommendSpaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendSpaceModel.swift; sourceTree = "<group>"; };
+
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +83,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48C3D9DE2B554D3700E3F905 /* PopupView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -92,8 +104,8 @@
 		482DB6B52B5416B2005538DE /* SearchBar */ = {
 			isa = PBXGroup;
 			children = (
-				489BD8F02B4A40EE003382AE /* SearchButtonModel.swift */,
 				480448712B4B0D52008A4638 /* SearchViewModel.swift */,
+				489BD8F02B4A40EE003382AE /* SearchButtonModel.swift */,
 				480448732B4B0E08008A4638 /* SearchControl.swift */,
 			);
 			path = SearchBar;
@@ -191,6 +203,10 @@
 		48FF93A02B43BA1400202F45 /* ExploreView */ = {
 			isa = PBXGroup;
 			children = (
+				CAB9FA1B2B551B1500F0046A /* ExploreViewControl.swift */,
+				CA3A39192B55753800BEB7DE /* RecommendedSpaceCard.swift */,
+				CAB9FA1F2B55443700F0046A /* RecommendSpaceModel.swift */,
+				CAB9FA1D2B551B3E00F0046A /* ExploreViewModel.swift */,
 			);
 			path = ExploreView;
 			sourceTree = "<group>";
@@ -248,6 +264,9 @@
 			dependencies = (
 			);
 			name = ttubeokAR;
+			packageProductDependencies = (
+				48C3D9DD2B554D3700E3F905 /* PopupView */,
+			);
 			productName = ttubeokAR;
 			productReference = 48FF938F2B43BA0600202F45 /* ttubeokAR.app */;
 			productType = "com.apple.product-type.application";
@@ -276,6 +295,9 @@
 				Base,
 			);
 			mainGroup = 48FF93862B43BA0600202F45;
+			packageReferences = (
+				48C3D9DC2B554D3700E3F905 /* XCRemoteSwiftPackageReference "PopupView" */,
+			);
 			productRefGroup = 48FF93902B43BA0600202F45 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -311,12 +333,15 @@
 				483820E62B4BE86200C3FB14 /* MyTicketCommand.swift in Sources */,
 				6CC4DDB92B55519F0080E7E8 /* Icon.swift in Sources */,
 				6CC4DDB72B55512F0080E7E8 /* NavigationBar.swift in Sources */,
+				CAB9FA202B55443700F0046A /* RecommendSpaceModel.swift in Sources */,
 				483820EE2B4BEAFE00C3FB14 /* TtuDotShape.swift in Sources */,
 				480448742B4B0E08008A4638 /* SearchControl.swift in Sources */,
 				483820E22B4BE7C100C3FB14 /* ARCommand.swift in Sources */,
+				CA3A391A2B55753800BEB7DE /* RecommendedSpaceCard.swift in Sources */,
 				482DB6B72B5416FF005538DE /* PlaceSettingModel.swift in Sources */,
 				483612B62B4ED09000E0B45A /* TabBarModel.swift in Sources */,
 				483820EC2B4BE97300C3FB14 /* TtuDotViewModel.swift in Sources */,
+				CAB9FA1E2B551B3E00F0046A /* ExploreViewModel.swift in Sources */,
 				483820E42B4BE80700C3FB14 /* SettingsCommand.swift in Sources */,
 				4861FF242B54E35C00DC6E2D /* CustomSlider.swift in Sources */,
 				482DB6B92B541797005538DE /* PlaceSettingsViewModel.swift in Sources */,
@@ -326,6 +351,7 @@
 				483820DD2B4BE5E600C3FB14 /* TtuDotButton.swift in Sources */,
 				482DB6BB2B541E7E005538DE /* PlaceSettingView.swift in Sources */,
 				483612BA2B4ED14500E0B45A /* MainTabBarControl.swift in Sources */,
+				CAB9FA1C2B551B1500F0046A /* ExploreViewControl.swift in Sources */,
 				483612B12B4ECFD900E0B45A /* MapView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -536,6 +562,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		48C3D9DC2B554D3700E3F905 /* XCRemoteSwiftPackageReference "PopupView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/exyte/PopupView";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.8.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		48C3D9DD2B554D3700E3F905 /* PopupView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 48C3D9DC2B554D3700E3F905 /* XCRemoteSwiftPackageReference "PopupView" */;
+			productName = PopupView;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 48FF93872B43BA0600202F45 /* Project object */;
 }
