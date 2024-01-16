@@ -24,6 +24,7 @@ struct SearchControl: View {
                     searchField
                     bottomButtons
                 }
+                .offset(y: -10)
                 .frame(minWidth: 0, maxWidth: .infinity)
                 
                 .popup(isPresented: $isShowingPopup) {
