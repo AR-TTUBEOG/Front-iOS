@@ -46,22 +46,21 @@ struct ExploreViewControl: View {
             .resizable()
             .frame(minWidth: 0, maxWidth: .infinity)
             .aspectRatio(contentMode: .fit)
-        
     }
     
     // 추천 장소
     private func recommendedSpacesGrid(geometry: GeometryProxy) -> some View {
-        ScrollView(.vertical) {
+        ScrollView(.vertical, showsIndicators: false) {
             LazyVGrid(columns: [GridItem(.flexible(minimum: 150)), GridItem(.flexible(minimum: 150))], spacing: 25) {
                 ForEach(spaces, id: \.placeName) { space in
                     RecommendedSpaceCard(space: space)
                         .frame(minWidth: 0, maxWidth: .infinity)
                 }
             }
-            .padding()
-            //.frame(maxWidth: .infinity)
+            .padding(5)
+            .frame(maxWidth: .infinity)
         }
-        .frame(height: geometry.size.height)
+       // .frame(height: geometry.size.height)
     }
 }
 

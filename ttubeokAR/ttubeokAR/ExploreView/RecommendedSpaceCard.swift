@@ -11,7 +11,7 @@ struct RecommendedSpaceCard: View {
     // MARK: - Property
     @State var space: RecommendedSpaceModel
     @State private var isFavorited = false
-
+    
     // MARK: - Body
     
     var body: some View {
@@ -34,7 +34,7 @@ struct RecommendedSpaceCard: View {
             }
             
             Spacer()
-    
+            
             Spacer()
         }
         .padding(.top, 0)
@@ -68,15 +68,15 @@ struct RecommendedSpaceCard: View {
     
     //장소 북마크
     private var spaceBookmarked: some View {
-           Button(action: {
-               // 찜 버튼을 눌렀을 때 동작
-               isFavorited.toggle()
-           }) {
-               Image(uiImage: UIImage(named: isFavorited ? "Vector" : "Vector2")!)
-                   .resizable()
-                   .aspectRatio(contentMode: .fit)
-                   .frame(width: 20, height: 20)
-           }
+        Button(action: {
+            // 찜 버튼을 눌렀을 때 동작
+            isFavorited.toggle()
+        }) {
+            Image(uiImage: UIImage(named: isFavorited ? "Vector" : "Vector2")!)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 20, height: 20)
+        }
     }
     
     
@@ -87,7 +87,7 @@ struct RecommendedSpaceCard: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 13, height: 13)
-
+            
             Text(String(space.starRating))
                 .font(.system(size: 14, weight: .light))
                 .foregroundColor(.chart)
@@ -103,7 +103,7 @@ struct RecommendedSpaceCard: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 12, height: 12)
-
+            
             Text("\(String(format: "%.1f", space.distance)) km")
                 .font(.system(size: 14, weight: .light))
                 .foregroundColor(.chart)
@@ -120,7 +120,7 @@ struct RecommendedSpaceCard: View {
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 11, height: 11)
             
-
+            
             Text("약 \(space.time)분")
                 .font(.system(size: 14, weight: .light))
                 .foregroundColor(.chart)
@@ -137,7 +137,7 @@ struct RecommendedSpaceCard: View {
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 7, height: 9)
             
-
+            
             Text("\(space.reviewCount) 개")
                 .font(.system(size: 14, weight: .light))
                 .foregroundColor(.textPink)
