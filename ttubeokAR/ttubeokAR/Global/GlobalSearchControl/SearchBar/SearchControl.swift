@@ -16,13 +16,14 @@ struct SearchControl: View {
     
     // MARK: - Body
     var body: some View {
-        ZStack {
+        ZStack(alignment: .top){
             VStack {
                 searchField
                 bottomButtons
             }
             .frame(minWidth: 0, maxWidth: .infinity)
         }
+        .offset(y: -10)
         //TODO: - 구현 필요
         .onTapGesture {
             hideKeyBoard()
