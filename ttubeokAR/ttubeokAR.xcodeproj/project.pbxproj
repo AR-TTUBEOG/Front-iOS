@@ -32,6 +32,8 @@
 		48FF93952B43BA0600202F45 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FF93942B43BA0600202F45 /* ContentView.swift */; };
 		48FF93972B43BA0700202F45 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 48FF93962B43BA0700202F45 /* Assets.xcassets */; };
 		48FF939A2B43BA0700202F45 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 48FF93992B43BA0700202F45 /* Preview Assets.xcassets */; };
+		6CC4DDB72B55512F0080E7E8 /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC4DDB62B55512F0080E7E8 /* NavigationBar.swift */; };
+		6CC4DDB92B55519F0080E7E8 /* Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC4DDB82B55519F0080E7E8 /* Icon.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,6 +63,8 @@
 		48FF93942B43BA0600202F45 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		48FF93962B43BA0700202F45 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		48FF93992B43BA0700202F45 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		6CC4DDB62B55512F0080E7E8 /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
+		6CC4DDB82B55519F0080E7E8 /* Icon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icon.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +111,7 @@
 		483820DA2B4BE5A900C3FB14 /* Global */ = {
 			isa = PBXGroup;
 			children = (
+				6CC4DDB52B5551120080E7E8 /* GlobalNavigationBar */,
 				483612B42B4ED04C00E0B45A /* GlobalTabBar */,
 				483820DB2B4BE5B400C3FB14 /* GlobalTtuDot */,
 				489BD8EF2B4A40CF003382AE /* GlobalSearchControl */,
@@ -214,8 +219,17 @@
 				488E25452B4D4E1C005D8D52 /* FontExtension.swift */,
 				48FF93962B43BA0700202F45 /* Assets.xcassets */,
 				4835C7F62B53B2CB00E40EAD /* ColorAssets.xcassets */,
+				6CC4DDB82B55519F0080E7E8 /* Icon.swift */,
 			);
 			path = SettingGroup;
+			sourceTree = "<group>";
+		};
+		6CC4DDB52B5551120080E7E8 /* GlobalNavigationBar */ = {
+			isa = PBXGroup;
+			children = (
+				6CC4DDB62B55512F0080E7E8 /* NavigationBar.swift */,
+			);
+			path = GlobalNavigationBar;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -295,6 +309,8 @@
 				483820DF2B4BE61F00C3FB14 /* TtuDotModel.swift in Sources */,
 				483612B32B4ED00100E0B45A /* TestView.swift in Sources */,
 				483820E62B4BE86200C3FB14 /* MyTicketCommand.swift in Sources */,
+				6CC4DDB92B55519F0080E7E8 /* Icon.swift in Sources */,
+				6CC4DDB72B55512F0080E7E8 /* NavigationBar.swift in Sources */,
 				483820EE2B4BEAFE00C3FB14 /* TtuDotShape.swift in Sources */,
 				480448742B4B0E08008A4638 /* SearchControl.swift in Sources */,
 				483820E22B4BE7C100C3FB14 /* ARCommand.swift in Sources */,
