@@ -30,6 +30,8 @@
 		488F5ED32B578C5700175938 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488F5ED22B578C5700175938 /* LoginView.swift */; };
 		489BD8F12B4A40EE003382AE /* SearchButtonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489BD8F02B4A40EE003382AE /* SearchButtonModel.swift */; };
 		48C3D9DE2B554D3700E3F905 /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = 48C3D9DD2B554D3700E3F905 /* PopupView */; };
+		48DDE11D2B580CD70064A15A /* KakaoLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DDE11C2B580CD70064A15A /* KakaoLogin.swift */; };
+		48DDE11F2B580CE10064A15A /* AppleLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DDE11E2B580CE10064A15A /* AppleLogin.swift */; };
 		48FF93932B43BA0600202F45 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FF93922B43BA0600202F45 /* AppDelegate.swift */; };
 		48FF93952B43BA0600202F45 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FF93942B43BA0600202F45 /* ContentView.swift */; };
 		48FF93972B43BA0700202F45 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 48FF93962B43BA0700202F45 /* Assets.xcassets */; };
@@ -65,6 +67,8 @@
 		488E25452B4D4E1C005D8D52 /* FontExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontExtension.swift; sourceTree = "<group>"; };
 		488F5ED22B578C5700175938 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		489BD8F02B4A40EE003382AE /* SearchButtonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchButtonModel.swift; sourceTree = "<group>"; };
+		48DDE11C2B580CD70064A15A /* KakaoLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoLogin.swift; sourceTree = "<group>"; };
+		48DDE11E2B580CE10064A15A /* AppleLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLogin.swift; sourceTree = "<group>"; };
 		48FF938F2B43BA0600202F45 /* ttubeokAR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ttubeokAR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		48FF93922B43BA0600202F45 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		48FF93942B43BA0600202F45 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -158,6 +162,8 @@
 			isa = PBXGroup;
 			children = (
 				488F5ED22B578C5700175938 /* LoginView.swift */,
+				48DDE11C2B580CD70064A15A /* KakaoLogin.swift */,
+				48DDE11E2B580CE10064A15A /* AppleLogin.swift */,
 			);
 			path = SocialLogin;
 			sourceTree = "<group>";
@@ -359,10 +365,12 @@
 				489BD8F12B4A40EE003382AE /* SearchButtonModel.swift in Sources */,
 				483820E82B4BE8E500C3FB14 /* AddLocationCommand.swift in Sources */,
 				483820DD2B4BE5E600C3FB14 /* TtuDotButton.swift in Sources */,
+				48DDE11D2B580CD70064A15A /* KakaoLogin.swift in Sources */,
 				482DB6BB2B541E7E005538DE /* PlaceSettingView.swift in Sources */,
 				483612BA2B4ED14500E0B45A /* MainTabBarControl.swift in Sources */,
 				CAB9FA1C2B551B1500F0046A /* ExploreViewControl.swift in Sources */,
 				483612B12B4ECFD900E0B45A /* MapView.swift in Sources */,
+				48DDE11F2B580CE10064A15A /* AppleLogin.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
