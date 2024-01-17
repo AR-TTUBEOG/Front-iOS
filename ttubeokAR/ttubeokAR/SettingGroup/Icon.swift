@@ -55,6 +55,7 @@ enum Icon: String {
     case waste = "waste"
     
     // MARK: - Login
+    case loginBackground = "loginViewImage"
     case checkbox_filled = "checkbox_filled"
     case checkbox = "checkbox"
     
