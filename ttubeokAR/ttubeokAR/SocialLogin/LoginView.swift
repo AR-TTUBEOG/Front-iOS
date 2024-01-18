@@ -24,6 +24,7 @@ struct LoginView: View {
                     .padding(.top, 80)
                 KakaoLogin()
                 AppleLogin()
+                
             }
         }
     }
