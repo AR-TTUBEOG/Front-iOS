@@ -40,6 +40,9 @@
 		48FF939A2B43BA0700202F45 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 48FF93992B43BA0700202F45 /* Preview Assets.xcassets */; };
 		6CC4DDB72B55512F0080E7E8 /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC4DDB62B55512F0080E7E8 /* NavigationBar.swift */; };
 		6CC4DDB92B55519F0080E7E8 /* Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC4DDB82B55519F0080E7E8 /* Icon.swift */; };
+		6CC4DDFF2B5687E80080E7E8 /* CouponView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC4DDFE2B5687E80080E7E8 /* CouponView.swift */; };
+		6CC4DE012B5687FB0080E7E8 /* CouponViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC4DE002B5687FB0080E7E8 /* CouponViewModel.swift */; };
+		6CC4DE032B5688080080E7E8 /* CouponModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC4DE022B5688080080E7E8 /* CouponModel.swift */; };
 		CA3A391A2B55753800BEB7DE /* RecommendedSpaceCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3A39192B55753800BEB7DE /* RecommendedSpaceCard.swift */; };
 		CAB9FA1C2B551B1500F0046A /* ExploreViewControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB9FA1B2B551B1500F0046A /* ExploreViewControl.swift */; };
 		CAB9FA1E2B551B3E00F0046A /* ExploreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB9FA1D2B551B3E00F0046A /* ExploreViewModel.swift */; };
@@ -80,6 +83,9 @@
 		48FF93992B43BA0700202F45 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		6CC4DDB62B55512F0080E7E8 /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
 		6CC4DDB82B55519F0080E7E8 /* Icon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icon.swift; sourceTree = "<group>"; };
+		6CC4DDFE2B5687E80080E7E8 /* CouponView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponView.swift; sourceTree = "<group>"; };
+		6CC4DE002B5687FB0080E7E8 /* CouponViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponViewModel.swift; sourceTree = "<group>"; };
+		6CC4DE022B5688080080E7E8 /* CouponModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponModel.swift; sourceTree = "<group>"; };
 		CA3A39192B55753800BEB7DE /* RecommendedSpaceCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedSpaceCard.swift; sourceTree = "<group>"; };
 		CAB9FA1B2B551B1500F0046A /* ExploreViewControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewControl.swift; sourceTree = "<group>"; };
 		CAB9FA1D2B551B3E00F0046A /* ExploreViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewModel.swift; sourceTree = "<group>"; };
@@ -223,6 +229,7 @@
 				48FF93A02B43BA1400202F45 /* ExploreView */,
 				48FF93A22B43BA4500202F45 /* MapView */,
 				48FF93A12B43BA3800202F45 /* ARView */,
+				6CC4DDFC2B5687C00080E7E8 /* CouponView */,
 				48FF93A32B43BA7B00202F45 /* SettingGroup */,
 				48FF93982B43BA0700202F45 /* Preview Content */,
 			);
@@ -283,6 +290,24 @@
 				6CC4DDB62B55512F0080E7E8 /* NavigationBar.swift */,
 			);
 			path = GlobalNavigationBar;
+			sourceTree = "<group>";
+		};
+		6CC4DDFC2B5687C00080E7E8 /* CouponView */ = {
+			isa = PBXGroup;
+			children = (
+				6CC4DDFD2B5687DB0080E7E8 /* CouponModel */,
+				6CC4DDFE2B5687E80080E7E8 /* CouponView.swift */,
+				6CC4DE002B5687FB0080E7E8 /* CouponViewModel.swift */,
+			);
+			path = CouponView;
+			sourceTree = "<group>";
+		};
+		6CC4DDFD2B5687DB0080E7E8 /* CouponModel */ = {
+			isa = PBXGroup;
+			children = (
+				6CC4DE022B5688080080E7E8 /* CouponModel.swift */,
+			);
+			path = CouponModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -384,15 +409,18 @@
 				483820E42B4BE80700C3FB14 /* SettingsCommand.swift in Sources */,
 				4861FF242B54E35C00DC6E2D /* CustomSlider.swift in Sources */,
 				482DB6B92B541797005538DE /* PlaceSettingsViewModel.swift in Sources */,
+				6CC4DE012B5687FB0080E7E8 /* CouponViewModel.swift in Sources */,
 				48FF93932B43BA0600202F45 /* AppDelegate.swift in Sources */,
 				489BD8F12B4A40EE003382AE /* SearchButtonModel.swift in Sources */,
 				483820E82B4BE8E500C3FB14 /* AddLocationCommand.swift in Sources */,
 				483BD63E2B59170600CF1015 /* AppleLogin.swift in Sources */,
 				483BD6402B59181800CF1015 /* AppleUserData.swift in Sources */,
+				6CC4DDFF2B5687E80080E7E8 /* CouponView.swift in Sources */,
 				483820DD2B4BE5E600C3FB14 /* TtuDotButton.swift in Sources */,
 				48DDE11D2B580CD70064A15A /* KakaoLogin.swift in Sources */,
 				482DB6BB2B541E7E005538DE /* PlaceSettingView.swift in Sources */,
 				483612BA2B4ED14500E0B45A /* MainTabBarControl.swift in Sources */,
+				6CC4DE032B5688080080E7E8 /* CouponModel.swift in Sources */,
 				CAB9FA1C2B551B1500F0046A /* ExploreViewControl.swift in Sources */,
 				483612B12B4ECFD900E0B45A /* MapView.swift in Sources */,
 			);
