@@ -22,6 +22,9 @@ struct LoginView: View {
                     .padding(.top, 200)
                 centerLine
                     .padding(.top, 80)
+                KakaoLogin()
+                AppleLogin()
+                
             }
         }
     }
@@ -69,6 +72,8 @@ struct LoginView: View {
                 .background(Color.white)
         }
     }
+    
+    
 }
 
 
