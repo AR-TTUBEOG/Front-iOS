@@ -148,4 +148,4 @@ xcuserdata
 # End of https://www.toptal.com/developers/gitignore/api/cocoapods,xcode,macos,swiftpackagemanager,swift
 
 # xcconfig (Naver Map Client Id)
-*.xcconfig
+# *.xcconfig
