@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct NicknameSettingLogin: View {
-    @EnvironmentObject var viewModel: NicknameSettingViewModel
+    @ObservedObject var viewModel: NicknameSettingViewModel
+    @Binding var showMainView: Bool
     @State private var showNextView = false
     
     var body: some View {
@@ -22,11 +23,14 @@ struct NicknameSettingLogin: View {
         ZStack(alignment: .bottom) {
             backgroundImageView
             blackOpacity
-            VStack(spacing: 299) {
+            VStack(alignment: .center, spacing: 5) {
                 nicknameInput
+                checkingNickname
+                Spacer()
+                    .frame(maxHeight: 350)
                 checkButton
-                    .padding(.bottom, 50)
             }
+            .padding(.bottom, 20)
         }
     }
     
@@ -74,9 +78,41 @@ struct NicknameSettingLogin: View {
         }
     }
     
+    private var checkingNickname: some View {
+        VStack(spacing: 5) {
+            if !viewModel.isNicknameValid {
+                HStack(spacing: 3) {
+                    Icon.warning.image
+                        .resizable()
+                        .frame(maxWidth: 20, maxHeight: 20)
+                        .aspectRatio(contentMode: .fit)
+                        .padding(.bottom, 2)
+                    Text("2자 이상 ~ 10자 이하로 입력해주세요.")
+                        .font(.sandol(type: .regular, size: 15))
+                        .foregroundColor(Color(red: 0.95, green: 0.62, blue: 0.62))
+                        .frame(maxWidth: 285, maxHeight: 30, alignment: .leading)
+                }
+            }
+            if let isAvailable = viewModel.isNicknameAvailable, !isAvailable {
+                HStack(spacing: 3) {
+                    Icon.warning.image
+                        .resizable()
+                        .frame(maxWidth: 20, maxHeight: 20)
+                        .aspectRatio(contentMode: .fit)
+                        .padding(.bottom, 2)
+                    Text("이미 사용중인 닉네임입니다..")
+                        .font(.sandol(type: .regular, size: 15))
+                        .foregroundColor(Color(red: 0.95, green: 0.62, blue: 0.62))
+                        .frame(maxWidth: 285, maxHeight: 30, alignment: .leading)
+                }
+            }
+        }
+    }
+    
     private var checkButton: some View {
         Button(action: {
-            print("hello")
+            viewModel.submitNickname()
+            showMainView = true
         }) {
             Text("시작하기")
                 .frame(maxWidth: 305, maxHeight: 55)
@@ -90,9 +126,8 @@ struct NicknameSettingLogin: View {
     }
 }
     
-    struct NicknameSettingLogin_Previews: PreviewProvider {
-        static var previews: some View {
-            NicknameSettingLogin()
-                .environmentObject(NicknameSettingViewModel())
-        }
-    }
+//    struct NicknameSettingLogin_Previews: PreviewProvider {
+//        static var previews: some View {
+//            NicknameSettingLogin(viewModel: NicknameSettingViewModel(), showMainView: f)
+//        }
+//    }

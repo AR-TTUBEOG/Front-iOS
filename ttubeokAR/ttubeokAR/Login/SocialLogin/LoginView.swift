@@ -48,10 +48,10 @@ struct LoginView: View {
     
     private var loginTitle: some View {
         Text("뚜벅과 함께 \n 걸어 볼까요?")
-            .font(.sandol(type: .bold, size: 30))
+            .font(.sandol(type: .bold, size: 28))
             .multilineTextAlignment(.center)
             .foregroundStyle(Color.white)
-            .frame(maxWidth: 350, maxHeight: 90, alignment: .top)
+            .frame(maxWidth: 350, maxHeight: 80, alignment: .center)
     }
     
     private var centerLine: some View {

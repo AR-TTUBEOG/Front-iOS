@@ -22,12 +22,10 @@ struct AppleLogin: View {
                 Text("AppleLogin 성공")
             } else {
                 Button(action: viewModel.signInWithApple) {
-                    Text(" Sign in with Apple")
-                        .frame(maxWidth: 300, maxHeight: 45)
-                        .background(Color.white)
-                        .foregroundColor(.black)
-                        .font(.sandol(type: .light, size: 20))
-                        .clipShape(.rect(cornerRadius: 10))
+                    Icon.apple.image
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(maxWidth: 300, maxHeight: 43)
                 }
             }
         }
