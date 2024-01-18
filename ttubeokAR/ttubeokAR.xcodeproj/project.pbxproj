@@ -39,7 +39,6 @@
 		CAB9FA1C2B551B1500F0046A /* ExploreViewControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB9FA1B2B551B1500F0046A /* ExploreViewControl.swift */; };
 		CAB9FA1E2B551B3E00F0046A /* ExploreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB9FA1D2B551B3E00F0046A /* ExploreViewModel.swift */; };
 		CAB9FA202B55443700F0046A /* RecommendSpaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB9FA1F2B55443700F0046A /* RecommendSpaceModel.swift */; };
-
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -75,7 +74,6 @@
 		CAB9FA1B2B551B1500F0046A /* ExploreViewControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewControl.swift; sourceTree = "<group>"; };
 		CAB9FA1D2B551B3E00F0046A /* ExploreViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewModel.swift; sourceTree = "<group>"; };
 		CAB9FA1F2B55443700F0046A /* RecommendSpaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendSpaceModel.swift; sourceTree = "<group>"; };
-
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -203,10 +201,7 @@
 		48FF93A02B43BA1400202F45 /* ExploreView */ = {
 			isa = PBXGroup;
 			children = (
-				CAB9FA1B2B551B1500F0046A /* ExploreViewControl.swift */,
-				CA3A39192B55753800BEB7DE /* RecommendedSpaceCard.swift */,
-				CAB9FA1F2B55443700F0046A /* RecommendSpaceModel.swift */,
-				CAB9FA1D2B551B3E00F0046A /* ExploreViewModel.swift */,
+				CA31EAA82B581ADD007668EE /* ExploreMainView */,
 			);
 			path = ExploreView;
 			sourceTree = "<group>";
@@ -246,6 +241,17 @@
 				6CC4DDB62B55512F0080E7E8 /* NavigationBar.swift */,
 			);
 			path = GlobalNavigationBar;
+			sourceTree = "<group>";
+		};
+		CA31EAA82B581ADD007668EE /* ExploreMainView */ = {
+			isa = PBXGroup;
+			children = (
+				CAB9FA1B2B551B1500F0046A /* ExploreViewControl.swift */,
+				CAB9FA1F2B55443700F0046A /* RecommendSpaceModel.swift */,
+				CA3A39192B55753800BEB7DE /* RecommendedSpaceCard.swift */,
+				CAB9FA1D2B551B3E00F0046A /* ExploreViewModel.swift */,
+			);
+			name = ExploreMainView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
