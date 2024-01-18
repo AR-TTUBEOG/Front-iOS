@@ -22,7 +22,7 @@ struct KakaoLogin: View {
             Icon.kakao.image
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(maxWidth: 300, maxHeight: 45)
+                .frame(maxWidth: 300, maxHeight: 43)
         }
     }
 }
