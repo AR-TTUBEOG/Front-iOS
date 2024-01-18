@@ -51,7 +51,7 @@ struct LoginView: View {
             .font(.sandol(type: .bold, size: 30))
             .multilineTextAlignment(.center)
             .foregroundStyle(Color.white)
-            .frame(maxWidth: 350, maxHeight: 75, alignment: .top)
+            .frame(maxWidth: 350, maxHeight: 90, alignment: .top)
     }
     
     private var centerLine: some View {

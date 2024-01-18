@@ -56,6 +56,7 @@ enum Icon: String {
     
     // MARK: - Login
     case kakao = "kakao"
+    case nickname = "nicknameView"
     case loginBackground = "loginViewImage"
     case checkbox_filled = "checkbox_filled"
     case checkbox = "checkbox"
