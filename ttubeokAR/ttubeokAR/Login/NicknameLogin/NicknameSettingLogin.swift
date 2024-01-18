@@ -9,7 +9,7 @@ import SwiftUI
 
 struct NicknameSettingLogin: View {
     @ObservedObject var viewModel: NicknameSettingViewModel
-    @Binding var showMainView: Bool
+ //   @Binding var showMainView: Bool
     @State private var showNextView = false
     
     var body: some View {
@@ -100,7 +100,7 @@ struct NicknameSettingLogin: View {
                         .frame(maxWidth: 20, maxHeight: 20)
                         .aspectRatio(contentMode: .fit)
                         .padding(.bottom, 2)
-                    Text("이미 사용중인 닉네임입니다..")
+                    Text("이미 사용중인 닉네임입니다.")
                         .font(.sandol(type: .regular, size: 15))
                         .foregroundColor(Color(red: 0.95, green: 0.62, blue: 0.62))
                         .frame(maxWidth: 285, maxHeight: 30, alignment: .leading)
@@ -111,8 +111,10 @@ struct NicknameSettingLogin: View {
     
     private var checkButton: some View {
         Button(action: {
-            viewModel.submitNickname()
-            showMainView = true
+            if viewModel.isNicknameValid, viewModel.isNicknameAvailable == true {
+                viewModel.submitNickname()
+                //  showMainView = true
+            }
         }) {
             Text("시작하기")
                 .frame(maxWidth: 305, maxHeight: 55)
@@ -126,8 +128,28 @@ struct NicknameSettingLogin: View {
     }
 }
     
-//    struct NicknameSettingLogin_Previews: PreviewProvider {
-//        static var previews: some View {
-//            NicknameSettingLogin(viewModel: NicknameSettingViewModel(), showMainView: f)
-//        }
-//    }
+struct NicknameSettingLogin_Previews: PreviewProvider {
+    static var previews: some View {
+        // 닉네임이 유효하지 않은 경우
+        NicknameSettingLogin(viewModel: NicknameSettingViewModel.previewInvalid)
+        // 닉네임이 이미 사용 중인 경우
+        NicknameSettingLogin(viewModel: NicknameSettingViewModel.previewUnavailable)
+    }
+}
+
+// 미리보기를 위한 ViewModel 확장
+extension NicknameSettingViewModel {
+    static var previewInvalid: NicknameSettingViewModel {
+        let viewModel = NicknameSettingViewModel()
+        viewModel.nickname = "A" // 유효하지 않은 닉네임 (너무 짧음)
+        viewModel.isNicknameValid = false
+        return viewModel
+    }
+
+    static var previewUnavailable: NicknameSettingViewModel {
+        let viewModel = NicknameSettingViewModel()
+        viewModel.nickname = "AlreadyTaken" // 이미 사용 중인 닉네임
+        viewModel.isNicknameAvailable = false
+        return viewModel
+    }
+}
