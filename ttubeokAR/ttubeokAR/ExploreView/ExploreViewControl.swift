@@ -39,7 +39,6 @@ struct ExploreViewControl: View {
             .frame(minWidth: 0, maxWidth: .infinity)
             .aspectRatio(contentMode: .fit)
             .padding(.horizontal, 20)
-        
     }
     
     // 추천 장소

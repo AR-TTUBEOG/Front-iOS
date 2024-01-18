@@ -37,26 +37,11 @@ struct MainViewControl: View {
     /// 메인뷰의 변화를 위함 :: ExploreView, MainView의 전환
     private var mainTabView: some View {
         ZStack(alignment: .center) {
-            TabView(selection: $selectedTab) {
-                ExploreViewControl()
-                    .tabItem {
-                        EmptyView()
-                    }
-                    .tag(1)
-                    .onAppear {
-                        updateCurrentView(tag: 1)
-                    }
-                
-                MapView()
-                    .tabItem {
-                        EmptyView()
-                    }
-                    .tag(2)
-                    .onAppear {
-                        updateCurrentView(tag: 2)
-                    }
-            }
-            .ignoresSafeArea(.all)
+                if selectedTab == 1 {
+                    ExploreViewControl()
+                } else if selectedTab == 2 {
+                    MapView()
+                }
         }
     }
     
@@ -88,7 +73,6 @@ struct MainViewControl: View {
             
             VStack {
                 Spacer()
-                ZStack {
                     Button(action: {
                         if self.changeTabView == true {
                             self.handleTap()
@@ -100,9 +84,7 @@ struct MainViewControl: View {
                             .frame(maxWidth: 81, maxHeight: 42)
                     }
                     .opacity(showTtuDotButton ? 0 : 1)
-                    .offset(y: -10)
                     .simultaneousGesture(longPressGesture)
-                }
             }
         }
     }

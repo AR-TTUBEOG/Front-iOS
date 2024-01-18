@@ -96,7 +96,7 @@ struct RecommendedSpaceCard: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 13, height: 13)
-
+            
             Text(String(space.starRating))
                 .font(.system(size: 13, weight: .light))
                 .foregroundColor(.white)
@@ -112,7 +112,7 @@ struct RecommendedSpaceCard: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 12, height: 12)
-
+            
             Text("\(String(format: "%.1f", space.distance)) km")
                 .font(.system(size: 13, weight: .light))
                 .foregroundColor(.white)
@@ -129,7 +129,7 @@ struct RecommendedSpaceCard: View {
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 11, height: 11)
             
-
+            
             Text("약 \(space.time)분")
                 .font(.system(size: 13, weight: .light))
                 .foregroundColor(.white)
@@ -147,10 +147,12 @@ struct RecommendedSpaceCard: View {
                 .frame(width: 36, height: 14)
             
 
+
             Text("\(space.reviewCount)")
                 .font(.system(size: 7, weight: .bold))
                 .foregroundColor(Color(red: 36 / 255, green: 88 / 255, blue: 139 / 255))  
                 .offset(x: 15)
+
         }
         .padding(.leading, -30)
         .padding(.top, 0)
