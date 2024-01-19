@@ -53,6 +53,18 @@ enum Icon: String {
     case top = "top"
     case trailMap = "trailMap"
     case waste = "waste"
+    // MARK: - ExploreView
+    
+    case banner = "banner"
+    case distance = "distance"
+    case reviewCount = "reviewCount"
+    case spaceTest = "spaceTest"
+    case starRating = "starRating"
+    case time = "time"
+    case Vector = "Vector"
+    case Vector2 = "Vector2"
+    case store = "store"
+    case tree = "tree"
     
     // MARK: - Login
     case warning = "nameWarning"
