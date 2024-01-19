@@ -100,7 +100,7 @@ struct NicknameSettingLogin: View {
                         .frame(maxWidth: 20, maxHeight: 20)
                         .aspectRatio(contentMode: .fit)
                         .padding(.bottom, 2)
-                    Text("이미 사용중인 닉네임입니다.")
+                    Text("이미 사용중인 닉네임입니다..")
                         .font(.sandol(type: .regular, size: 15))
                         .foregroundColor(Color(red: 0.95, green: 0.62, blue: 0.62))
                         .frame(maxWidth: 285, maxHeight: 30, alignment: .leading)

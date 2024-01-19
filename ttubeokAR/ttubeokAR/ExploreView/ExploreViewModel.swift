@@ -8,8 +8,32 @@
 import Foundation
 
 class ExploreViewModel: ObservableObject {
-    //MARK: - Property
     
-    // 별점이나 거리등 ,변하는 값들의 대한 코드를 적어주기
+    //MARK: - Property
+    @Published var isFavorited: Bool = false
+    
+    
+    // MARK: - ChangeExploreView
+    
+    var favoriteImageName: String {
+          return isFavorited ? "Vector2" : "Vector"
+      }
+    
+    
+    
+    
+    // MARK: - Function
+    public func toggleFavorite() {
+            isFavorited.toggle()
+            if isFavorited {
+                print("북마크 버튼이 눌렸습니다.")
+            } else {
+                print("북마크 취소 버튼이 눌렸습니다.")
+            }
+        }
+    
+    
+
+
   
 }
