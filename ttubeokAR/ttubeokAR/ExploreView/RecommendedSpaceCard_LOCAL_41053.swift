@@ -161,6 +161,7 @@ struct RecommendedSpaceCard: View {
     }
     
     
+    
     private var spaceSpotType: some View {
         VStack {
             Rectangle()

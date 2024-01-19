@@ -28,6 +28,7 @@
 		483BD63E2B59170600CF1015 /* AppleLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483BD63D2B59170600CF1015 /* AppleLogin.swift */; };
 		483BD6402B59181800CF1015 /* AppleUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483BD63F2B59181800CF1015 /* AppleUserData.swift */; };
 		483BD6422B59186800CF1015 /* AppleLoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483BD6412B59186800CF1015 /* AppleLoginViewModel.swift */; };
+		4844E13F2B5A243700E6619C /* Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4844E13E2B5A243700E6619C /* Icon.swift */; };
 		4852CE432B597CD800A9A60E /* MainContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4852CE422B597CD800A9A60E /* MainContentView.swift */; };
 		4861FF242B54E35C00DC6E2D /* CustomSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4861FF232B54E35C00DC6E2D /* CustomSlider.swift */; };
 		486C2FEB2B592A4B00C88B04 /* NicknameSettingLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486C2FEA2B592A4B00C88B04 /* NicknameSettingLogin.swift */; };
@@ -42,7 +43,6 @@
 		48FF93972B43BA0700202F45 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 48FF93962B43BA0700202F45 /* Assets.xcassets */; };
 		48FF939A2B43BA0700202F45 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 48FF93992B43BA0700202F45 /* Preview Assets.xcassets */; };
 		6CC4DDB72B55512F0080E7E8 /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC4DDB62B55512F0080E7E8 /* NavigationBar.swift */; };
-		6CC4DDB92B55519F0080E7E8 /* Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC4DDB82B55519F0080E7E8 /* Icon.swift */; };
 		6CC4DDFF2B5687E80080E7E8 /* CouponView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC4DDFE2B5687E80080E7E8 /* CouponView.swift */; };
 		6CC4DE012B5687FB0080E7E8 /* CouponViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC4DE002B5687FB0080E7E8 /* CouponViewModel.swift */; };
 		6CC4DE032B5688080080E7E8 /* CouponModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC4DE022B5688080080E7E8 /* CouponModel.swift */; };
@@ -74,6 +74,7 @@
 		483BD63D2B59170600CF1015 /* AppleLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLogin.swift; sourceTree = "<group>"; };
 		483BD63F2B59181800CF1015 /* AppleUserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleUserData.swift; sourceTree = "<group>"; };
 		483BD6412B59186800CF1015 /* AppleLoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginViewModel.swift; sourceTree = "<group>"; };
+		4844E13E2B5A243700E6619C /* Icon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icon.swift; sourceTree = "<group>"; };
 		4852CE422B597CD800A9A60E /* MainContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainContentView.swift; sourceTree = "<group>"; };
 		4861FF232B54E35C00DC6E2D /* CustomSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSlider.swift; sourceTree = "<group>"; };
 		486C2FEA2B592A4B00C88B04 /* NicknameSettingLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameSettingLogin.swift; sourceTree = "<group>"; };
@@ -88,7 +89,6 @@
 		48FF93962B43BA0700202F45 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		48FF93992B43BA0700202F45 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		6CC4DDB62B55512F0080E7E8 /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
-		6CC4DDB82B55519F0080E7E8 /* Icon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icon.swift; sourceTree = "<group>"; };
 		6CC4DDFE2B5687E80080E7E8 /* CouponView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponView.swift; sourceTree = "<group>"; };
 		6CC4DE002B5687FB0080E7E8 /* CouponViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponViewModel.swift; sourceTree = "<group>"; };
 		6CC4DE022B5688080080E7E8 /* CouponModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponModel.swift; sourceTree = "<group>"; };
@@ -304,7 +304,7 @@
 				488E25452B4D4E1C005D8D52 /* FontExtension.swift */,
 				48FF93962B43BA0700202F45 /* Assets.xcassets */,
 				4835C7F62B53B2CB00E40EAD /* ColorAssets.xcassets */,
-				6CC4DDB82B55519F0080E7E8 /* Icon.swift */,
+				4844E13E2B5A243700E6619C /* Icon.swift */,
 			);
 			path = SettingGroup;
 			sourceTree = "<group>";
@@ -420,8 +420,8 @@
 				483820DF2B4BE61F00C3FB14 /* TtuDotModel.swift in Sources */,
 				483612B32B4ED00100E0B45A /* TestView.swift in Sources */,
 				483820E62B4BE86200C3FB14 /* MyTicketCommand.swift in Sources */,
-				6CC4DDB92B55519F0080E7E8 /* Icon.swift in Sources */,
 				6CC4DDB72B55512F0080E7E8 /* NavigationBar.swift in Sources */,
+				4844E13F2B5A243700E6619C /* Icon.swift in Sources */,
 				CAB9FA202B55443700F0046A /* RecommendSpaceModel.swift in Sources */,
 				483820EE2B4BEAFE00C3FB14 /* TtuDotShape.swift in Sources */,
 				480448742B4B0E08008A4638 /* SearchControl.swift in Sources */,

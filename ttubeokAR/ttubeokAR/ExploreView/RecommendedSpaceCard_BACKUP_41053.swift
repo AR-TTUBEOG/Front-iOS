@@ -12,7 +12,10 @@ struct RecommendedSpaceCard: View {
     @State var space: RecommendedSpaceModel
     @State private var isFavorited = false
     @StateObject var viewModel = ExploreViewModel()
+<<<<<<< HEAD
     @State var placeTypeColor = Color.lightGreen2
+=======
+>>>>>>> main
 
     // MARK: - Body
     
@@ -38,7 +41,11 @@ struct RecommendedSpaceCard: View {
                     spaceSpotType
                         .offset(x: 41, y: -15)
                 }
+<<<<<<< HEAD
                 .offset(x: 3 , y: 20)
+=======
+                .offset(x: 3 , y: 10)
+>>>>>>> main
             }
             .padding(.horizontal, 30)
             
@@ -142,6 +149,7 @@ struct RecommendedSpaceCard: View {
     //리뷰 개수
     private var spaceReviewCount: some View {
         ZStack(alignment: .leading) {
+<<<<<<< HEAD
             Rectangle()
                        .frame(width: 36, height: 14)
                        .foregroundColor(Color.textBlue)
@@ -151,6 +159,14 @@ struct RecommendedSpaceCard: View {
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 9, height: 9)
                 .offset(x: 4, y: 0)
+=======
+            Icon.reviewCount.image
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 36, height: 14)
+            
+
+>>>>>>> main
             Text("\(space.reviewCount)")
                 .font(.system(size: 7, weight: .bold))
                 .foregroundColor(Color(red: 36 / 255, green: 88 / 255, blue: 139 / 255))
@@ -160,6 +176,30 @@ struct RecommendedSpaceCard: View {
         .padding(.top, 0)
     }
     
+    private var spaceSpotType: some View {
+        VStack {
+            getImage(for: space.placeType.first)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 37.5, height: 13)
+        }
+    }
+
+    func getImage(for placeType: place?) -> Image {
+        guard let placeType = placeType else {
+            // placeType이 nil일 경우 처리
+            return Image("default")
+        }
+
+        if placeType.walkingSpot {
+            return Icon.tree.image
+        } else if placeType.storeSpot {
+            return Icon.store.image
+        } else {
+            // 둘 다 아닐 시
+            return Image("default")
+        }
+    }
     
     private var spaceSpotType: some View {
         VStack {

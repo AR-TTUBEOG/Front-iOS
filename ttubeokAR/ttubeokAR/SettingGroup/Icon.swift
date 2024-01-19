@@ -64,6 +64,7 @@ enum Icon: String {
     case Vector = "Vector"
     case Vector2 = "Vector2"
     case store = "store"
+    case tree = "tree"
     
     
     // MARK: - Login
