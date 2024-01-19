@@ -12,6 +12,7 @@ struct RecommendedSpaceCard: View {
     @State var space: RecommendedSpaceModel
     @State private var isFavorited = false
     @StateObject var viewModel = ExploreViewModel()
+    @State var placeTypeColor = Color.lightGreen2
 
     // MARK: - Body
     
@@ -37,7 +38,7 @@ struct RecommendedSpaceCard: View {
                     spaceSpotType
                         .offset(x: 41, y: -15)
                 }
-                .offset(x: 3 , y: 10)
+                .offset(x: 3 , y: 20)
             }
             .padding(.horizontal, 30)
             
@@ -141,12 +142,15 @@ struct RecommendedSpaceCard: View {
     //리뷰 개수
     private var spaceReviewCount: some View {
         ZStack(alignment: .leading) {
+            Rectangle()
+                       .frame(width: 36, height: 14)
+                       .foregroundColor(Color.textBlue)
+                       .cornerRadius(19)
             Icon.reviewCount.image
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(width: 36, height: 14)
-            
-
+                .frame(width: 9, height: 9)
+                .offset(x: 4, y: 0)
             Text("\(space.reviewCount)")
                 .font(.system(size: 7, weight: .bold))
                 .foregroundColor(Color(red: 36 / 255, green: 88 / 255, blue: 139 / 255))
@@ -156,12 +160,20 @@ struct RecommendedSpaceCard: View {
         .padding(.top, 0)
     }
     
+    
+    
     private var spaceSpotType: some View {
         VStack {
+            Rectangle()
+                       .frame(width: 36, height: 14)
+                       .foregroundColor(placeTypeColor)
+                       .cornerRadius(19)
             getImage(for: space.placeType.first)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(width: 37.5, height: 13)
+                .frame(width: 9, height: 9)
+                .offset(x: -9, y: -19)
+            
         }
     }
 
@@ -174,6 +186,7 @@ struct RecommendedSpaceCard: View {
         if placeType.walkingSpot {
             return Icon.tree.image
         } else if placeType.storeSpot {
+            placeTypeColor = Color.lightOrange
             return Icon.store.image
         } else {
             // 둘 다 아닐 시
