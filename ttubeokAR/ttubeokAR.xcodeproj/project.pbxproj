@@ -16,7 +16,7 @@
 		483612B12B4ECFD900E0B45A /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483612B02B4ECFD900E0B45A /* MapView.swift */; };
 		483612B32B4ED00100E0B45A /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483612B22B4ED00100E0B45A /* TestView.swift */; };
 		483612B62B4ED09000E0B45A /* TabBarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483612B52B4ED09000E0B45A /* TabBarModel.swift */; };
-		483612BA2B4ED14500E0B45A /* MainTabBarControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483612B92B4ED14500E0B45A /* MainTabBarControl.swift */; };
+		483612BA2B4ED14500E0B45A /* MainViewControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483612B92B4ED14500E0B45A /* MainViewControl.swift */; };
 		483820DD2B4BE5E600C3FB14 /* TtuDotButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483820DC2B4BE5E600C3FB14 /* TtuDotButton.swift */; };
 		483820DF2B4BE61F00C3FB14 /* TtuDotModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483820DE2B4BE61F00C3FB14 /* TtuDotModel.swift */; };
 		483820E22B4BE7C100C3FB14 /* ARCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483820E12B4BE7C100C3FB14 /* ARCommand.swift */; };
@@ -25,11 +25,19 @@
 		483820E82B4BE8E500C3FB14 /* AddLocationCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483820E72B4BE8E500C3FB14 /* AddLocationCommand.swift */; };
 		483820EC2B4BE97300C3FB14 /* TtuDotViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483820EB2B4BE97300C3FB14 /* TtuDotViewModel.swift */; };
 		483820EE2B4BEAFE00C3FB14 /* TtuDotShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483820ED2B4BEAFE00C3FB14 /* TtuDotShape.swift */; };
+		483BD63E2B59170600CF1015 /* AppleLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483BD63D2B59170600CF1015 /* AppleLogin.swift */; };
+		483BD6402B59181800CF1015 /* AppleUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483BD63F2B59181800CF1015 /* AppleUserData.swift */; };
+		483BD6422B59186800CF1015 /* AppleLoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483BD6412B59186800CF1015 /* AppleLoginViewModel.swift */; };
+		4844E13F2B5A243700E6619C /* Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4844E13E2B5A243700E6619C /* Icon.swift */; };
+		4852CE432B597CD800A9A60E /* MainContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4852CE422B597CD800A9A60E /* MainContentView.swift */; };
 		4861FF242B54E35C00DC6E2D /* CustomSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4861FF232B54E35C00DC6E2D /* CustomSlider.swift */; };
+		486C2FEB2B592A4B00C88B04 /* NicknameSettingLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486C2FEA2B592A4B00C88B04 /* NicknameSettingLogin.swift */; };
+		486C2FED2B592A8D00C88B04 /* NicknameSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486C2FEC2B592A8D00C88B04 /* NicknameSettingViewModel.swift */; };
 		488E25462B4D4E1C005D8D52 /* FontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488E25452B4D4E1C005D8D52 /* FontExtension.swift */; };
 		488F5ED32B578C5700175938 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488F5ED22B578C5700175938 /* LoginView.swift */; };
 		489BD8F12B4A40EE003382AE /* SearchButtonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489BD8F02B4A40EE003382AE /* SearchButtonModel.swift */; };
 		48C3D9DE2B554D3700E3F905 /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = 48C3D9DD2B554D3700E3F905 /* PopupView */; };
+		48DDE11D2B580CD70064A15A /* KakaoLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DDE11C2B580CD70064A15A /* KakaoLogin.swift */; };
 		48FF93932B43BA0600202F45 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FF93922B43BA0600202F45 /* AppDelegate.swift */; };
 		48FF93952B43BA0600202F45 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FF93942B43BA0600202F45 /* ContentView.swift */; };
 		48FF93972B43BA0700202F45 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 48FF93962B43BA0700202F45 /* Assets.xcassets */; };
@@ -37,7 +45,6 @@
 		6C6395242B590BBE00A20B1B /* TestMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C6395232B590BBE00A20B1B /* TestMapView.swift */; };
 		6CAF06D32B5903B300526BC8 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CAF06D22B5903B300526BC8 /* Coordinator.swift */; };
 		6CC4DDB72B55512F0080E7E8 /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC4DDB62B55512F0080E7E8 /* NavigationBar.swift */; };
-		6CC4DDB92B55519F0080E7E8 /* Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC4DDB82B55519F0080E7E8 /* Icon.swift */; };
 		6CC4DDFF2B5687E80080E7E8 /* CouponView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC4DDFE2B5687E80080E7E8 /* CouponView.swift */; };
 		6CC4DE012B5687FB0080E7E8 /* CouponViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC4DE002B5687FB0080E7E8 /* CouponViewModel.swift */; };
 		6CC4DE032B5688080080E7E8 /* CouponModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC4DE022B5688080080E7E8 /* CouponModel.swift */; };
@@ -58,7 +65,7 @@
 		483612B02B4ECFD900E0B45A /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		483612B22B4ED00100E0B45A /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		483612B52B4ED09000E0B45A /* TabBarModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarModel.swift; sourceTree = "<group>"; };
-		483612B92B4ED14500E0B45A /* MainTabBarControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarControl.swift; sourceTree = "<group>"; };
+		483612B92B4ED14500E0B45A /* MainViewControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewControl.swift; sourceTree = "<group>"; };
 		483820DC2B4BE5E600C3FB14 /* TtuDotButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TtuDotButton.swift; sourceTree = "<group>"; };
 		483820DE2B4BE61F00C3FB14 /* TtuDotModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TtuDotModel.swift; sourceTree = "<group>"; };
 		483820E12B4BE7C100C3FB14 /* ARCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARCommand.swift; sourceTree = "<group>"; };
@@ -67,10 +74,18 @@
 		483820E72B4BE8E500C3FB14 /* AddLocationCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationCommand.swift; sourceTree = "<group>"; };
 		483820EB2B4BE97300C3FB14 /* TtuDotViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TtuDotViewModel.swift; sourceTree = "<group>"; };
 		483820ED2B4BEAFE00C3FB14 /* TtuDotShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TtuDotShape.swift; sourceTree = "<group>"; };
+		483BD63D2B59170600CF1015 /* AppleLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLogin.swift; sourceTree = "<group>"; };
+		483BD63F2B59181800CF1015 /* AppleUserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleUserData.swift; sourceTree = "<group>"; };
+		483BD6412B59186800CF1015 /* AppleLoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginViewModel.swift; sourceTree = "<group>"; };
+		4844E13E2B5A243700E6619C /* Icon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icon.swift; sourceTree = "<group>"; };
+		4852CE422B597CD800A9A60E /* MainContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainContentView.swift; sourceTree = "<group>"; };
 		4861FF232B54E35C00DC6E2D /* CustomSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSlider.swift; sourceTree = "<group>"; };
+		486C2FEA2B592A4B00C88B04 /* NicknameSettingLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameSettingLogin.swift; sourceTree = "<group>"; };
+		486C2FEC2B592A8D00C88B04 /* NicknameSettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameSettingViewModel.swift; sourceTree = "<group>"; };
 		488E25452B4D4E1C005D8D52 /* FontExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontExtension.swift; sourceTree = "<group>"; };
 		488F5ED22B578C5700175938 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		489BD8F02B4A40EE003382AE /* SearchButtonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchButtonModel.swift; sourceTree = "<group>"; };
+		48DDE11C2B580CD70064A15A /* KakaoLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoLogin.swift; sourceTree = "<group>"; };
 		48FF938F2B43BA0600202F45 /* ttubeokAR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ttubeokAR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		48FF93922B43BA0600202F45 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		48FF93942B43BA0600202F45 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -81,7 +96,6 @@
 		6CAF06D12B58FCD200526BC8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		6CAF06D22B5903B300526BC8 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		6CC4DDB62B55512F0080E7E8 /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
-		6CC4DDB82B55519F0080E7E8 /* Icon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icon.swift; sourceTree = "<group>"; };
 		6CC4DDFE2B5687E80080E7E8 /* CouponView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponView.swift; sourceTree = "<group>"; };
 		6CC4DE002B5687FB0080E7E8 /* CouponViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponViewModel.swift; sourceTree = "<group>"; };
 		6CC4DE022B5688080080E7E8 /* CouponModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponModel.swift; sourceTree = "<group>"; };
@@ -141,7 +155,7 @@
 			isa = PBXGroup;
 			children = (
 				483612B52B4ED09000E0B45A /* TabBarModel.swift */,
-				483612B92B4ED14500E0B45A /* MainTabBarControl.swift */,
+				483612B92B4ED14500E0B45A /* MainViewControl.swift */,
 			);
 			path = GlobalTabBar;
 			sourceTree = "<group>";
@@ -180,10 +194,30 @@
 			path = TtuDotModel;
 			sourceTree = "<group>";
 		};
+		486C2FE82B592A3100C88B04 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				486C2FE92B592A3800C88B04 /* NicknameLogin */,
+				488F5ED12B578C4100175938 /* SocialLogin */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		486C2FE92B592A3800C88B04 /* NicknameLogin */ = {
+			isa = PBXGroup;
+			children = (
+				486C2FEA2B592A4B00C88B04 /* NicknameSettingLogin.swift */,
+				486C2FEC2B592A8D00C88B04 /* NicknameSettingViewModel.swift */,
+			);
+			path = NicknameLogin;
+			sourceTree = "<group>";
+		};
 		488F5ED12B578C4100175938 /* SocialLogin */ = {
 			isa = PBXGroup;
 			children = (
 				488F5ED22B578C5700175938 /* LoginView.swift */,
+				48DDE1212B58187C0064A15A /* Kakao */,
+				48DDE1202B58186F0064A15A /* Apple */,
 			);
 			path = SocialLogin;
 			sourceTree = "<group>";
@@ -195,6 +229,24 @@
 				482DB6B42B541693005538DE /* SearchOption */,
 			);
 			path = GlobalSearchControl;
+			sourceTree = "<group>";
+		};
+		48DDE1202B58186F0064A15A /* Apple */ = {
+			isa = PBXGroup;
+			children = (
+				483BD63D2B59170600CF1015 /* AppleLogin.swift */,
+				483BD63F2B59181800CF1015 /* AppleUserData.swift */,
+				483BD6412B59186800CF1015 /* AppleLoginViewModel.swift */,
+			);
+			path = Apple;
+			sourceTree = "<group>";
+		};
+		48DDE1212B58187C0064A15A /* Kakao */ = {
+			isa = PBXGroup;
+			children = (
+				48DDE11C2B580CD70064A15A /* KakaoLogin.swift */,
+			);
+			path = Kakao;
 			sourceTree = "<group>";
 		};
 		48FF93862B43BA0600202F45 = {
@@ -221,6 +273,7 @@
 			children = (
 				6CAF06D12B58FCD200526BC8 /* Info.plist */,
 				488F5ED12B578C4100175938 /* SocialLogin */,
+				486C2FE82B592A3100C88B04 /* Login */,
 				483820DA2B4BE5A900C3FB14 /* Global */,
 				48FF93A02B43BA1400202F45 /* ExploreView */,
 				48FF93A22B43BA4500202F45 /* MapView */,
@@ -228,6 +281,7 @@
 				6CC4DDFC2B5687C00080E7E8 /* CouponView */,
 				48FF93A32B43BA7B00202F45 /* SettingGroup */,
 				48FF93982B43BA0700202F45 /* Preview Content */,
+				4852CE422B597CD800A9A60E /* MainContentView.swift */,
 			);
 			path = ttubeokAR;
 			sourceTree = "<group>";
@@ -277,7 +331,7 @@
 				488E25452B4D4E1C005D8D52 /* FontExtension.swift */,
 				48FF93962B43BA0700202F45 /* Assets.xcassets */,
 				4835C7F62B53B2CB00E40EAD /* ColorAssets.xcassets */,
-				6CC4DDB82B55519F0080E7E8 /* Icon.swift */,
+				4844E13E2B5A243700E6619C /* Icon.swift */,
 			);
 			path = SettingGroup;
 			sourceTree = "<group>";
@@ -448,22 +502,26 @@
 				48FF93952B43BA0600202F45 /* ContentView.swift in Sources */,
 				488F5ED32B578C5700175938 /* LoginView.swift in Sources */,
 				6CAF06D32B5903B300526BC8 /* Coordinator.swift in Sources */,
+				4852CE432B597CD800A9A60E /* MainContentView.swift in Sources */,
 				480448722B4B0D52008A4638 /* SearchViewModel.swift in Sources */,
 				488E25462B4D4E1C005D8D52 /* FontExtension.swift in Sources */,
 				483820DF2B4BE61F00C3FB14 /* TtuDotModel.swift in Sources */,
 				483612B32B4ED00100E0B45A /* TestView.swift in Sources */,
 				483820E62B4BE86200C3FB14 /* MyTicketCommand.swift in Sources */,
-				6CC4DDB92B55519F0080E7E8 /* Icon.swift in Sources */,
 				6CC4DDB72B55512F0080E7E8 /* NavigationBar.swift in Sources */,
+				4844E13F2B5A243700E6619C /* Icon.swift in Sources */,
 				CAB9FA202B55443700F0046A /* RecommendSpaceModel.swift in Sources */,
 				483820EE2B4BEAFE00C3FB14 /* TtuDotShape.swift in Sources */,
 				480448742B4B0E08008A4638 /* SearchControl.swift in Sources */,
 				483820E22B4BE7C100C3FB14 /* ARCommand.swift in Sources */,
 				CA3A391A2B55753800BEB7DE /* RecommendedSpaceCard.swift in Sources */,
 				6C6395242B590BBE00A20B1B /* TestMapView.swift in Sources */,
+				486C2FEB2B592A4B00C88B04 /* NicknameSettingLogin.swift in Sources */,
 				482DB6B72B5416FF005538DE /* PlaceSettingModel.swift in Sources */,
+				483BD6422B59186800CF1015 /* AppleLoginViewModel.swift in Sources */,
 				483612B62B4ED09000E0B45A /* TabBarModel.swift in Sources */,
 				483820EC2B4BE97300C3FB14 /* TtuDotViewModel.swift in Sources */,
+				486C2FED2B592A8D00C88B04 /* NicknameSettingViewModel.swift in Sources */,
 				CAB9FA1E2B551B3E00F0046A /* ExploreViewModel.swift in Sources */,
 				483820E42B4BE80700C3FB14 /* SettingsCommand.swift in Sources */,
 				4861FF242B54E35C00DC6E2D /* CustomSlider.swift in Sources */,
@@ -472,10 +530,13 @@
 				48FF93932B43BA0600202F45 /* AppDelegate.swift in Sources */,
 				489BD8F12B4A40EE003382AE /* SearchButtonModel.swift in Sources */,
 				483820E82B4BE8E500C3FB14 /* AddLocationCommand.swift in Sources */,
+				483BD63E2B59170600CF1015 /* AppleLogin.swift in Sources */,
+				483BD6402B59181800CF1015 /* AppleUserData.swift in Sources */,
 				6CC4DDFF2B5687E80080E7E8 /* CouponView.swift in Sources */,
 				483820DD2B4BE5E600C3FB14 /* TtuDotButton.swift in Sources */,
+				48DDE11D2B580CD70064A15A /* KakaoLogin.swift in Sources */,
 				482DB6BB2B541E7E005538DE /* PlaceSettingView.swift in Sources */,
-				483612BA2B4ED14500E0B45A /* MainTabBarControl.swift in Sources */,
+				483612BA2B4ED14500E0B45A /* MainViewControl.swift in Sources */,
 				6CC4DE032B5688080080E7E8 /* CouponModel.swift in Sources */,
 				CAB9FA1C2B551B1500F0046A /* ExploreViewControl.swift in Sources */,
 				483612B12B4ECFD900E0B45A /* MapView.swift in Sources */,
