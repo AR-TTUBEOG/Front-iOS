@@ -11,25 +11,16 @@ import SwiftUI
 struct ExploreViewControl: View {
     
     // MARK: - Property
-    @StateObject private var viewModel = SearchViewModel()
-    
     //테스트 데이터들
-    @State var spaces: [RecommendedSpaceModel] = [
-        RecommendedSpaceModel(placeName: "낙산공원 한양도성길", placePhoto: "spaceTest", starRating: 4.5, distance: 2.3, time: "15", reviewCount: 15 ,isFavorited: false),
-        RecommendedSpaceModel(placeName: "Place 2", placePhoto: "photo2", starRating: 3.8, distance: 1.5, time: "15", reviewCount: 10,isFavorited: false),
-        RecommendedSpaceModel(placeName: "Place 3", placePhoto: "photo2", starRating: 3.8, distance: 1.5, time: "15", reviewCount: 10,isFavorited: false),
-        RecommendedSpaceModel(placeName: "Place 4", placePhoto: "photo2", starRating: 3.8, distance: 1.5, time: "15", reviewCount: 10,isFavorited: false),
-        RecommendedSpaceModel(placeName: "Place 5", placePhoto: "photo2", starRating: 3.8, distance: 1.5, time: "15", reviewCount: 10,isFavorited: false),
-    ]
-    
-    //그리드는 모델 파일을 따로 만들었으니, 그 모델에 대한 값을 넘겨받아서 레이지 그리드에 나오도록 구현
+    private let infoInstance = Info()
+   
     
     // MARK: - Body
     var body: some View {
         GeometryReader { geometry in
             ZStack(alignment:.top){
                 Color.background.ignoresSafeArea()
-                VStack(spacing:30){
+                VStack(spacing:20){
                     mainImage
                     recommendedSpacesGrid(geometry: geometry)
                 }
@@ -46,23 +37,25 @@ struct ExploreViewControl: View {
             .resizable()
             .frame(minWidth: 0, maxWidth: .infinity)
             .aspectRatio(contentMode: .fit)
+            .padding(.horizontal, 20)
+        
     }
     
     // 추천 장소
     private func recommendedSpacesGrid(geometry: GeometryProxy) -> some View {
-        ScrollView(.vertical, showsIndicators: false) {
-            LazyVGrid(columns: [GridItem(.flexible(minimum: 150)), GridItem(.flexible(minimum: 150))], spacing: 25) {
-                ForEach(spaces, id: \.placeName) { space in
+        ScrollView(.vertical) {
+            LazyVGrid(columns: [GridItem(.flexible(minimum: 150), spacing: -8), GridItem(.flexible(minimum: 150), spacing: 15)], spacing: 25) {
+                ForEach(infoInstance.spaces, id: \.placeName) { space in
                     RecommendedSpaceCard(space: space)
                         .frame(minWidth: 0, maxWidth: .infinity)
                 }
             }
-            .padding(5)
+            .padding()
             .frame(maxWidth: .infinity)
         }
-       // .frame(height: geometry.size.height)
     }
 }
+
 
 
 // MARK: - Preview
