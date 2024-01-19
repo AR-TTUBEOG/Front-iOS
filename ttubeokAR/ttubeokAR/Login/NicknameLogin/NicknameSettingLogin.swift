@@ -128,14 +128,14 @@ struct NicknameSettingLogin: View {
     }
 }
     
-struct NicknameSettingLogin_Previews: PreviewProvider {
-    static var previews: some View {
-        // 닉네임이 유효하지 않은 경우
-        NicknameSettingLogin(viewModel: NicknameSettingViewModel.previewInvalid)
-        // 닉네임이 이미 사용 중인 경우
-        NicknameSettingLogin(viewModel: NicknameSettingViewModel.previewUnavailable)
-    }
-}
+//struct NicknameSettingLogin_Previews: PreviewProvider {
+//    static var previews: some View {
+//        // 닉네임이 유효하지 않은 경우
+//        NicknameSettingLogin(viewModel: NicknameSettingViewModel.previewInvalid)
+//        // 닉네임이 이미 사용 중인 경우
+//        NicknameSettingLogin(viewModel: NicknameSettingViewModel.previewUnavailable)
+//    }
+//}
 //
 //// 미리보기를 위한 ViewModel 확장
 //extension NicknameSettingViewModel {

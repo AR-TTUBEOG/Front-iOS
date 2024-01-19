@@ -150,23 +150,23 @@ struct NicknameSettingLogin_Previews: PreviewProvider {
         NicknameSettingLogin(viewModel: NicknameSettingViewModel.previewUnavailable)
     }
 }
-
-// 미리보기를 위한 ViewModel 확장
-extension NicknameSettingViewModel {
-    static var previewInvalid: NicknameSettingViewModel {
-        let viewModel = NicknameSettingViewModel()
-        viewModel.nickname = "A" // 유효하지 않은 닉네임 (너무 짧음)
-        viewModel.isNicknameValid = false
-        return viewModel
-    }
-
-    static var previewUnavailable: NicknameSettingViewModel {
-        let viewModel = NicknameSettingViewModel()
-        viewModel.nickname = "AlreadyTaken" // 이미 사용 중인 닉네임
-        viewModel.isNicknameAvailable = false
-        return viewModel
-    }
-}
+//
+//// 미리보기를 위한 ViewModel 확장
+//extension NicknameSettingViewModel {
+//    static var previewInvalid: NicknameSettingViewModel {
+//        let viewModel = NicknameSettingViewModel()
+//        viewModel.nickname = "A" // 유효하지 않은 닉네임 (너무 짧음)
+//        viewModel.isNicknameValid = false
+//        return viewModel
+//    }
+//
+//    static var previewUnavailable: NicknameSettingViewModel {
+//        let viewModel = NicknameSettingViewModel()
+//        viewModel.nickname = "AlreadyTaken" // 이미 사용 중인 닉네임
+//        viewModel.isNicknameAvailable = false
+//        return viewModel
+//    }
+//}
 =======
 //    struct NicknameSettingLogin_Previews: PreviewProvider {
 //        static var previews: some View {
