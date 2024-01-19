@@ -8,12 +8,23 @@
 import SwiftUI
 
 struct MapView: View {
+    
+    // Coordinator 클래스
+        @StateObject var coordinator: Coordinator = Coordinator.shared
+    
     var body: some View {
         ZStack{
-            Color.blue.ignoresSafeArea()
+            NaverMap()
+                .ignoresSafeArea(.all, edges: .top)
+            
         }
+        .onAppear {
+                    Coordinator.shared.checkIfLocationServiceIsEnabled()
+                }
     }
 }
+
+
 
 #Preview {
     MapView()
