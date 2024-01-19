@@ -9,7 +9,11 @@ import SwiftUI
 
 struct NicknameSettingLogin: View {
     @ObservedObject var viewModel: NicknameSettingViewModel
+<<<<<<< HEAD
  //   @Binding var showMainView: Bool
+=======
+    @Binding var showMainView: Bool
+>>>>>>> main
     @State private var showNextView = false
     
     var body: some View {
@@ -100,7 +104,11 @@ struct NicknameSettingLogin: View {
                         .frame(maxWidth: 20, maxHeight: 20)
                         .aspectRatio(contentMode: .fit)
                         .padding(.bottom, 2)
+<<<<<<< HEAD
                     Text("이미 사용중인 닉네임입니다.")
+=======
+                    Text("이미 사용중인 닉네임입니다..")
+>>>>>>> main
                         .font(.sandol(type: .regular, size: 15))
                         .foregroundColor(Color(red: 0.95, green: 0.62, blue: 0.62))
                         .frame(maxWidth: 285, maxHeight: 30, alignment: .leading)
@@ -111,10 +119,15 @@ struct NicknameSettingLogin: View {
     
     private var checkButton: some View {
         Button(action: {
+<<<<<<< HEAD
             if viewModel.isNicknameValid, viewModel.isNicknameAvailable == true {
                 viewModel.submitNickname()
                 //  showMainView = true
             }
+=======
+            viewModel.submitNickname()
+            showMainView = true
+>>>>>>> main
         }) {
             Text("시작하기")
                 .frame(maxWidth: 305, maxHeight: 55)
@@ -128,14 +141,15 @@ struct NicknameSettingLogin: View {
     }
 }
     
-//struct NicknameSettingLogin_Previews: PreviewProvider {
-//    static var previews: some View {
-//        // 닉네임이 유효하지 않은 경우
-//        NicknameSettingLogin(viewModel: NicknameSettingViewModel.previewInvalid)
-//        // 닉네임이 이미 사용 중인 경우
-//        NicknameSettingLogin(viewModel: NicknameSettingViewModel.previewUnavailable)
-//    }
-//}
+<<<<<<< HEAD
+struct NicknameSettingLogin_Previews: PreviewProvider {
+    static var previews: some View {
+        // 닉네임이 유효하지 않은 경우
+        NicknameSettingLogin(viewModel: NicknameSettingViewModel.previewInvalid)
+        // 닉네임이 이미 사용 중인 경우
+        NicknameSettingLogin(viewModel: NicknameSettingViewModel.previewUnavailable)
+    }
+}
 //
 //// 미리보기를 위한 ViewModel 확장
 //extension NicknameSettingViewModel {
@@ -153,3 +167,10 @@ struct NicknameSettingLogin: View {
 //        return viewModel
 //    }
 //}
+=======
+//    struct NicknameSettingLogin_Previews: PreviewProvider {
+//        static var previews: some View {
+//            NicknameSettingLogin(viewModel: NicknameSettingViewModel(), showMainView: f)
+//        }
+//    }
+>>>>>>> main
