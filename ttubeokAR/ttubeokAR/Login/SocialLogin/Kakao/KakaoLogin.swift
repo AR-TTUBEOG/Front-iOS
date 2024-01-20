@@ -25,7 +25,7 @@ struct KakaoLogin: View {
                 .aspectRatio(contentMode: .fit)
                 .frame(maxWidth: 300, maxHeight: 43)
         }
-        .sheet(isPresented: $viewModel.isLoggedIn) {
+        .fullScreenCover(isPresented: $viewModel.isLoggedIn) {
             NextContentView()
         }
     }
