@@ -4,12 +4,9 @@
 //
 //  Created by 정의찬 on 1/19/24.
 //
-
 import SwiftUI
 
-import SwiftUI
-
-struct MainContentView: View {
+struct NextContentView: View {
     @State private var isShowingMainView = false
 
     var body: some View {
@@ -18,7 +15,7 @@ struct MainContentView: View {
                 MainViewControl()
                     .transition(.opacity)
             } else {
-                LoginView()
+                NicknameSettingLogin(viewModel: NicknameSettingViewModel(), showMainView: $isShowingMainView)
                     .transition(.opacity)
             }
         }
@@ -29,5 +26,5 @@ struct MainContentView: View {
 
 
 #Preview {
-    MainContentView()
+    NextContentView()
 }
