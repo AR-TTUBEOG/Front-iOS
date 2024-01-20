@@ -372,8 +372,8 @@
 		6C7239EB2B5BA8F40082F12D /* SettingModel */ = {
 			isa = PBXGroup;
 			children = (
-				6C7239E72B5BA7BA0082F12D /* NotiOption.swift */,
-				6C7239EC2B5BA9090082F12D /* SettingViewModel.swift */,
+				6C7239F62B5C2AB20082F12D /* Manage */,
+				6C7239F52B5C2A930082F12D /* Noti */,
 			);
 			path = SettingModel;
 			sourceTree = "<group>";
@@ -384,6 +384,15 @@
 				6C7239EE2B5BB7D00082F12D /* CustomToggle.swift */,
 			);
 			path = GlobalToggle;
+			sourceTree = "<group>";
+		};
+		6C7239F52B5C2A930082F12D /* Noti */ = {
+			isa = PBXGroup;
+			children = (
+				6C7239E72B5BA7BA0082F12D /* NotiOption.swift */,
+				6C7239EC2B5BA9090082F12D /* SettingViewModel.swift */,
+			);
+			path = Noti;
 			sourceTree = "<group>";
 		};
 		6C7239F62B5C2AB20082F12D /* Manage */ = {
