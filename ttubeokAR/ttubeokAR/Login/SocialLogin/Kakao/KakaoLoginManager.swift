@@ -11,7 +11,7 @@ import KakaoSDKUser
 
 class KakaoLoginManager {
     
-    func login(completion: @escaping (Result<User, Error>) -> Void) {
+    func login(completion: @escaping (Result<OAuthToken, Error>) -> Void) {
         if UserApi.isKakaoTalkLoginAvailable() {
             UserApi.shared.loginWithKakaoTalk { [weak self] (oauthToken, error) in
                 self?.handleLoginResponse(oauthToken: oauthToken, error: error, completion: completion)
@@ -22,19 +22,13 @@ class KakaoLoginManager {
             }
         }
     }
-
     
-    private func handleLoginResponse(oauthToken: OAuthToken?, error: Error?, completion: @escaping (Result<User, Error>) -> Void) {
+    
+    private func handleLoginResponse(oauthToken: OAuthToken?, error: Error?, completion: @escaping (Result<OAuthToken, Error>) -> Void) {
         if let error = error {
             completion(.failure(error))
         } else if let oauthToken = oauthToken {
-            UserApi.shared.me { (user, error) in
-                if let error = error {
-                    completion(.failure(error))
-                } else if let user = user {
-                    completion(.success(user))
-                }
-            }
+            completion(.success(oauthToken))
         }
     }
 }

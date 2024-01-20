@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 
 struct KakaoLogin: View {
+    @ObservedObject var viewModel = LoginViewModel()
     
     var body: some View {
         kakaoBtn
@@ -17,12 +18,19 @@ struct KakaoLogin: View {
     
     private var kakaoBtn: some View {
         Button(action: {
-            print("hello")
+            viewModel.loginAndSendToken()
         }) {
             Icon.kakao.image
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(maxWidth: 300, maxHeight: 43)
         }
+        .sheet(isPresented: $viewModel.isLoggedIn) {
+            NextContentView()
+        }
     }
+}
+
+#Preview {
+    KakaoLogin(viewModel: LoginViewModel())
 }

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct NicknameSettingLogin: View {
     @ObservedObject var viewModel: NicknameSettingViewModel
- //   @Binding var showMainView: Bool
+    @Binding var showMainView: Bool
     @State private var showNextView = false
     
     var body: some View {
@@ -113,7 +113,7 @@ struct NicknameSettingLogin: View {
         Button(action: {
             if viewModel.isNicknameValid, viewModel.isNicknameAvailable == true {
                 viewModel.submitNickname()
-                //  showMainView = true
+                showMainView = true
             }
         }) {
             Text("시작하기")
