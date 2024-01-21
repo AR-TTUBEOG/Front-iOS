@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Moya
 
 class NicknameSettingViewModel: ObservableObject {
     @Published var nickname: String = "" {
@@ -15,8 +16,7 @@ class NicknameSettingViewModel: ObservableObject {
     }
     @Published var isNicknameValid: Bool = true
     @Published var isNicknameAvailable: Bool? = nil
-    @Published var isCheckingNickname: Bool = false
-    @Published var changeMainRoot: Bool = false
+    private let provider = MoyaProvider<NicknameRedundancyService>()
     
     public func checkNicknameAvailability() {
         guard !nickname.isEmpty else {
@@ -24,15 +24,22 @@ class NicknameSettingViewModel: ObservableObject {
             return
         }
         
-        isCheckingNickname = true
+        provider.request(.checkNicname(nickname)) { [weak self] result in
+            switch result {
+            case .success(let response):
+                do {
+                    let nicknameRedundancy = try response.map(NicknameRedundancyModel.self)
+                    self?.isNicknameAvailable = nicknameRedundancy.availability
+                } catch {
+                    print("중복성 검사 반응 error : \(error.localizedDescription)")
+                }
+            case .failure(let error):
+                print("요청 error : \(error.localizedDescription)")
+            }
+        }
     }
     
     private func checkNicknameLength() {
         isNicknameValid = nickname.count >= 2 && nickname.count <= 10
-    }
-    
-    public func submitNickname() {
-        print("서버 전송: \(nickname)")
-        self.changeMainRoot = true
     }
 }

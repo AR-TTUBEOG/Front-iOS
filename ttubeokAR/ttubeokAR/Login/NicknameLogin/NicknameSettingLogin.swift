@@ -10,7 +10,6 @@ import SwiftUI
 struct NicknameSettingLogin: View {
     var transitionToNext: () -> Void
     @ObservedObject var viewModel: NicknameSettingViewModel
-    @State private var showNextView = false
     
     var body: some View {
             ZStack(alignment: .center) {
@@ -20,22 +19,24 @@ struct NicknameSettingLogin: View {
     
     private var allView: some View {
         
-        ZStack(alignment: .bottom) {
+        ZStack(alignment: .center) {
             backgroundImageView
             blackOpacity
-            VStack(alignment: .center, spacing: 5) {
+            VStack(alignment: .center) {
                 nicknameInput
+                    .padding(.top, 0)
                 checkingNickname
                 Spacer()
-                    .frame(maxHeight: 350)
+                    .frame(maxHeight: 270)
                 checkButton
             }
-            .padding(.bottom, 20)
+            .frame(maxHeight: 500)
+            .offset(y: 100)
         }
     }
     
     private var backgroundImageView: some View {
-        Icon.nickname.image
+        Icon.loginBackground.image
             .resizable()
             .aspectRatio(contentMode: .fill)
             .ignoresSafeArea(.all)
@@ -51,7 +52,7 @@ struct NicknameSettingLogin: View {
     }
     
     private var nicknameInput: some View {
-        VStack(alignment: .center, spacing: 10) {
+        VStack(alignment: .leading, spacing: 10) {
             Text("Name")
                 .font(.sandol(type: .semiBold, size: 15))
                 .foregroundStyle(Color.white)
@@ -62,19 +63,38 @@ struct NicknameSettingLogin: View {
     }
     
     private var inputNickname: some View {
-        VStack(alignment: .center, spacing: 15) {
-            TextField("", text: $viewModel.nickname
-                      ,prompt: Text("닉네임을 적어주세요")
+        VStack(alignment: .leading, spacing: 15) {
+            HStack(alignment: .center){
+                TextField("", text: $viewModel.nickname
+                          ,prompt: Text("닉네임을 적어주세요")
+                    .foregroundStyle(Color.white)
+                    .font(.sandol(type: .light, size: 15)))
                 .foregroundStyle(Color.white)
-                .font(.sandol(type: .light, size: 15)))
-            .foregroundStyle(Color.white)
-            .font(.sandol(type: .light, size: 15))
-            .background(Color.clear)
-            .frame(maxWidth: 303, alignment: .center)
-            
+                .font(.sandol(type: .light, size: 15))
+                .background(Color.clear)
+                .frame(maxWidth: 230, alignment: .center)
+                
+                Button(action: {
+                    if viewModel.isNicknameValid{
+                        viewModel.checkNicknameAvailability()
+                    }
+                })
+                {
+                    Text("중복확인")
+                        .font(.sandol(type: .light, size: 14))
+                        .frame(maxWidth: 70, maxHeight: 24)
+                        .foregroundStyle(Color.white)
+                        .background((RoundedRectangle(cornerRadius: 19).fill(Color.clear)))
+                        .overlay(
+                        RoundedRectangle(cornerRadius: 19)
+                            .stroke(Color.white, lineWidth: 1)
+                        )
+                }
+                
+            }
             Rectangle()
-                .background(Color.white)
-                .frame(maxWidth: 303, maxHeight: 1)
+                .fill(Color.white)
+                .frame(maxWidth: 310, maxHeight: 1)
         }
     }
     
@@ -112,7 +132,6 @@ struct NicknameSettingLogin: View {
     private var checkButton: some View {
         Button(action: {
             if viewModel.isNicknameValid, viewModel.isNicknameAvailable == true {
-                viewModel.submitNickname()
                 transitionToNext()
             }
         }) {
@@ -127,29 +146,9 @@ struct NicknameSettingLogin: View {
         }
     }
 }
-    
-//struct NicknameSettingLogin_Previews: PreviewProvider {
-//    static var previews: some View {
-//        // 닉네임이 유효하지 않은 경우
-//        NicknameSettingLogin(viewModel: NicknameSettingViewModel.previewInvalid)
-//        // 닉네임이 이미 사용 중인 경우
-//        NicknameSettingLogin(viewModel: NicknameSettingViewModel.previewUnavailable)
-//    }
-//}
-//
-//// 미리보기를 위한 ViewModel 확장
-//extension NicknameSettingViewModel {
-//    static var previewInvalid: NicknameSettingViewModel {
-//        let viewModel = NicknameSettingViewModel()
-//        viewModel.nickname = "A" // 유효하지 않은 닉네임 (너무 짧음)
-//        viewModel.isNicknameValid = false
-//        return viewModel
-//    }
-//
-//    static var previewUnavailable: NicknameSettingViewModel {
-//        let viewModel = NicknameSettingViewModel()
-//        viewModel.nickname = "AlreadyTaken" // 이미 사용 중인 닉네임
-//        viewModel.isNicknameAvailable = false
-//        return viewModel
-//    }
-//}
+
+struct NicknameSettingLogin_Previews: PreviewProvider {
+    static var previews: some View {
+        NicknameSettingLogin(transitionToNext: {print("hello")}, viewModel: NicknameSettingViewModel())
+    }
+}

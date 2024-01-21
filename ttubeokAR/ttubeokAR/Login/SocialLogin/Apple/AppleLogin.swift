@@ -13,7 +13,7 @@ struct AppleLogin: View {
     
     var body: some View {
         appleLoginBtn
-            .padding(.top, 18.81)
+            .padding(.top, 19)
     }
     
     private var appleLoginBtn: some View {
