@@ -7,6 +7,10 @@
 
 import Foundation
 
+/**
+ 로그인 리퀘스를 통해 전달받을 데이터 모델
+ */
+
 struct LoginServerResponse: Codable {
     var check: Bool
     var information: Information?

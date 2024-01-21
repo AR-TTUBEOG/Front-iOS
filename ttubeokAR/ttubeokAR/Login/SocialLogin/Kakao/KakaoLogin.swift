@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 
+/// 카카오 로그인 버튼 구현
 struct KakaoLogin: View {
     var transitionToNext: () -> Void
     @ObservedObject var kakaoLoginManager = KakaoLoginManager()
