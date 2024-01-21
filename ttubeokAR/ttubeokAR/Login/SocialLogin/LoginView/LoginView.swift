@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct LoginView: View {
-    
+    var transitionToNext: () -> Void
     var body: some View {
             allView
     }
@@ -22,7 +22,7 @@ struct LoginView: View {
                     .padding(.top, 200)
                 centerLine
                     .padding(.top, 80)
-                KakaoLogin()
+                KakaoLogin(transitionToNext: transitionToNext)
                 AppleLogin()
                 
             }
@@ -72,12 +72,4 @@ struct LoginView: View {
                 .background(Color.white)
         }
     }
-    
-    
-}
-
-
-
-#Preview {
-    LoginView()
 }

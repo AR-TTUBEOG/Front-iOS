@@ -28,6 +28,7 @@ class KakaoLoginManager {
         if let error = error {
             completion(.failure(error))
         } else if let oauthToken = oauthToken {
+            print("액세스 토큰값 : \(oauthToken.accessToken)")
             completion(.success(oauthToken))
         }
     }
