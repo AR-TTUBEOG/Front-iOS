@@ -23,7 +23,7 @@ struct LoginView: View {
                     .frame(maxHeight: 154)
                 centerLine
                 KakaoLogin(transitionToNext: transitionToNext)
-                AppleLogin()
+                AppleLogin(transitionToNext: transitionToNext)
             }
             .offset(y: 60)
         }

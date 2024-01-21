@@ -10,12 +10,12 @@ import SwiftUI
 
 struct KakaoLogin: View {
     var transitionToNext: () -> Void
-    @ObservedObject var viewModel = LoginViewModel()
+    @ObservedObject var kakaoLoginManager = KakaoLoginManager()
     
     var body: some View {
         kakaoBtn
             .padding(.top, 20)
-            .onChange(of: viewModel.isLoggedIn) { oldValue, newValue in
+            .onChange(of: kakaoLoginManager.isLoggedIn) { oldValue, newValue in
                 if newValue {
                     transitionToNext()
                 }
@@ -24,7 +24,7 @@ struct KakaoLogin: View {
     
     private var kakaoBtn: some View {
         Button(action: {
-            viewModel.loginAndSendToken()
+            kakaoLoginManager.loginAndSendToken()
         }) {
             Icon.kakao.image
                 .resizable()
