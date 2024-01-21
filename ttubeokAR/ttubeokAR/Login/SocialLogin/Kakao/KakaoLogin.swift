@@ -14,7 +14,7 @@ struct KakaoLogin: View {
     
     var body: some View {
         kakaoBtn
-            .padding(.top, 38.91)
+            .padding(.top, 20)
             .onChange(of: viewModel.isLoggedIn) { oldValue, newValue in
                 if newValue {
                     transitionToNext()
@@ -28,7 +28,7 @@ struct KakaoLogin: View {
         }) {
             Icon.kakao.image
                 .resizable()
-                .aspectRatio(contentMode: .fit)
+                .aspectRatio(contentMode: .fill)
                 .frame(maxWidth: 300, maxHeight: 43)
         }
     }
