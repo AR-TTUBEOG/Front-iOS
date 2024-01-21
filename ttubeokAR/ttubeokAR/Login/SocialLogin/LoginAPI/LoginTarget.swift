@@ -10,6 +10,7 @@ import Foundation
 
 enum ServerAPI {
     case sendToken(token: String)
+    case sendAppleLoginInfo(userData: AppleUserData)
 }
 
 extension ServerAPI: TargetType {
@@ -19,12 +20,16 @@ extension ServerAPI: TargetType {
         switch self {
         case .sendToken:
             return "/auth/login/kakao"
+        case.sendAppleLoginInfo:
+            return "/auth/login/apple"
         }
     }
     
     var method: Moya.Method {
         switch self {
         case .sendToken:
+            return .post
+        case.sendAppleLoginInfo:
             return .post
         }
     }
@@ -33,6 +38,13 @@ extension ServerAPI: TargetType {
         switch self {
         case .sendToken(let token):
             return .requestParameters(parameters: ["accessToken": token], encoding: JSONEncoding.default)
+        case.sendAppleLoginInfo(let userData):
+            let parameters: [String: Any] = [
+                "userIdentifier": userData.userIdentifier ?? "",
+                "fullName": userData.fullName ?? "",
+                "email": userData.email ?? ""
+            ]
+            return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
         }
     }
     

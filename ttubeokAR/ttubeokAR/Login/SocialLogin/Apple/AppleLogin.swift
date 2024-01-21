@@ -9,30 +9,27 @@ import SwiftUI
 import AuthenticationServices
 
 struct AppleLogin: View {
-    @ObservedObject var viewModel = AppleLoginViewModel()
+    var transitionToNext: () -> Void
+    @ObservedObject var appleLogionManager = AppleLoginManager()
     
     var body: some View {
         appleLoginBtn
             .padding(.top, 19)
+            .onChange(of: appleLogionManager.isLoggedIn) { oldValue, newValue in
+                if newValue {
+                    transitionToNext()
+                }
+            }
     }
     
     private var appleLoginBtn: some View {
-        ZStack {
-            if viewModel.isSignIn {
-                Text("AppleLogin 성공")
-            } else {
-                Button(action: viewModel.signInWithApple) {
-                    Icon.apple.image
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(maxWidth: 300, maxHeight: 43)
-                }
-            }
+        Button(action: {
+            appleLogionManager.signInWithApple()
+        }) {
+            Icon.apple.image
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .frame(maxWidth: 300, maxHeight: 43)
         }
     }
 }
-
-#Preview {
-    AppleLogin(viewModel: AppleLoginViewModel())
-}
-

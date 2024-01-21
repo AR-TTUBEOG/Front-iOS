@@ -15,7 +15,7 @@
 		483513842B5A60150072ADFE /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483513832B5A60150072ADFE /* LoginView.swift */; };
 		483513862B5A602C0072ADFE /* KakaoLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483513852B5A602C0072ADFE /* KakaoLogin.swift */; };
 		483513882B5A603D0072ADFE /* AppleLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483513872B5A603D0072ADFE /* AppleLogin.swift */; };
-		4835138A2B5A605F0072ADFE /* AppleLoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483513892B5A605F0072ADFE /* AppleLoginViewModel.swift */; };
+		4835138A2B5A605F0072ADFE /* AppleLoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483513892B5A605F0072ADFE /* AppleLoginManager.swift */; };
 		4835138D2B5A60D00072ADFE /* AppleUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4835138C2B5A60D00072ADFE /* AppleUserData.swift */; };
 		4835C7F72B53B2CB00E40EAD /* ColorAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4835C7F62B53B2CB00E40EAD /* ColorAssets.xcassets */; };
 		483612B12B4ECFD900E0B45A /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483612B02B4ECFD900E0B45A /* MapView.swift */; };
@@ -86,7 +86,7 @@
 		483513832B5A60150072ADFE /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		483513852B5A602C0072ADFE /* KakaoLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoLogin.swift; sourceTree = "<group>"; };
 		483513872B5A603D0072ADFE /* AppleLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLogin.swift; sourceTree = "<group>"; };
-		483513892B5A605F0072ADFE /* AppleLoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginViewModel.swift; sourceTree = "<group>"; };
+		483513892B5A605F0072ADFE /* AppleLoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginManager.swift; sourceTree = "<group>"; };
 		4835138C2B5A60D00072ADFE /* AppleUserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleUserData.swift; sourceTree = "<group>"; };
 		4835C7F62B53B2CB00E40EAD /* ColorAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ColorAssets.xcassets; sourceTree = "<group>"; };
 		483612B02B4ECFD900E0B45A /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
@@ -210,7 +210,7 @@
 			isa = PBXGroup;
 			children = (
 				483513872B5A603D0072ADFE /* AppleLogin.swift */,
-				483513892B5A605F0072ADFE /* AppleLoginViewModel.swift */,
+				483513892B5A605F0072ADFE /* AppleLoginManager.swift */,
 				4835138C2B5A60D00072ADFE /* AppleUserData.swift */,
 			);
 			path = Apple;
@@ -657,7 +657,7 @@
 				6C6395242B590BBE00A20B1B /* TestMapView.swift in Sources */,
 				6C7239F42B5C2A720082F12D /* ManagePlaceViewModel.swift in Sources */,
 				48D88C332B5C396000A1B09E /* LoginViewCycle.swift in Sources */,
-				4835138A2B5A605F0072ADFE /* AppleLoginViewModel.swift in Sources */,
+				4835138A2B5A605F0072ADFE /* AppleLoginManager.swift in Sources */,
 				482DB6B72B5416FF005538DE /* PlaceSettingModel.swift in Sources */,
 				483612B62B4ED09000E0B45A /* TabBarModel.swift in Sources */,
 				483820EC2B4BE97300C3FB14 /* TtuDotViewModel.swift in Sources */,
@@ -815,6 +815,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = ttubeokAR/ttubeokAR.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ttubeokAR/Preview Content\"";
@@ -841,6 +843,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = app.ttubeokAR;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -853,6 +856,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = ttubeokAR/ttubeokAR.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ttubeokAR/Preview Content\"";
@@ -879,6 +884,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = app.ttubeokAR;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
