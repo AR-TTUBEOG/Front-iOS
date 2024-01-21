@@ -9,11 +9,17 @@ import Foundation
 import SwiftUI
 
 struct KakaoLogin: View {
+    var transitionToNext: () -> Void
     @ObservedObject var viewModel = LoginViewModel()
     
     var body: some View {
         kakaoBtn
             .padding(.top, 38.91)
+            .onChange(of: viewModel.isLoggedIn) { oldValue, newValue in
+                if newValue {
+                    transitionToNext()
+                }
+            }
     }
     
     private var kakaoBtn: some View {
@@ -25,12 +31,6 @@ struct KakaoLogin: View {
                 .aspectRatio(contentMode: .fit)
                 .frame(maxWidth: 300, maxHeight: 43)
         }
-        .fullScreenCover(isPresented: $viewModel.isLoggedIn) {
-            NextContentView()
-        }
     }
 }
 
-#Preview {
-    KakaoLogin(viewModel: LoginViewModel())
-}

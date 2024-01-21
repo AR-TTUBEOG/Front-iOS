@@ -9,7 +9,7 @@ import Moya
 import Foundation
 
 enum ServerAPI {
-    case sendToken(token: String, authorizationToken: String)
+    case sendToken(token: String)
 }
 
 extension ServerAPI: TargetType {
@@ -31,18 +31,14 @@ extension ServerAPI: TargetType {
     
     var task: Task {
         switch self {
-        case .sendToken(let token, _):
-            return .requestParameters(parameters: ["token": token], encoding: JSONEncoding.default)
+        case .sendToken(let token):
+            return .requestParameters(parameters: ["accessToken": token], encoding: JSONEncoding.default)
         }
     }
     
     var headers: [String : String]? {
-        switch self {
-        case .sendToken(_, let authorizationToken):
-            return [
-                "Authorization": authorizationToken,
-                "Content-Type": "application/json"
-            ]
-        }
+        return [
+            "Content-Type": "application/json"
+        ]
     }
 }

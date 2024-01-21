@@ -29,7 +29,7 @@ class LoginViewModel: ObservableObject {
     }
     
     private func sendToken(token: String) {
-        provider.request(.sendToken(token: token, authorizationToken: authorizationToken)) { result in
+        provider.request(.sendToken(token: token)) { result in
             switch result {
             case .success(let response):
                 do {
