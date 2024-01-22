@@ -105,7 +105,6 @@
 		CAB9FA1B2B551B1500F0046A /* ExploreViewControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewControl.swift; sourceTree = "<group>"; };
 		CAB9FA1D2B551B3E00F0046A /* ExploreViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewModel.swift; sourceTree = "<group>"; };
 		CAB9FA1F2B55443700F0046A /* RecommendSpaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendSpaceModel.swift; sourceTree = "<group>"; };
-		CAFB0F5D2B5A7BA5005DFFA8 /* ttubeokAR.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ttubeokAR.entitlements; sourceTree = "<group>"; };
 		D1C0D12416FF09B1C416874C /* Pods-ttubeokAR.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ttubeokAR.debug.xcconfig"; path = "Target Support Files/Pods-ttubeokAR/Pods-ttubeokAR.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -272,7 +271,6 @@
 		48FF93912B43BA0600202F45 /* ttubeokAR */ = {
 			isa = PBXGroup;
 			children = (
-				CAFB0F5D2B5A7BA5005DFFA8 /* ttubeokAR.entitlements */,
 				486C2FE82B592A3100C88B04 /* Login */,
 				6CAF06D12B58FCD200526BC8 /* Info.plist */,
 				483820DA2B4BE5A900C3FB14 /* Global */,
