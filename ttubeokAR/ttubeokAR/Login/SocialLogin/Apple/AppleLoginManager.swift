@@ -9,7 +9,7 @@ import AuthenticationServices
 import SwiftUI
 
 class AppleLoginManager: NSObject, ObservableObject {
-    @Published var userData = AppleUserData()
+    @Published var userData: AppleUserData?
     @Published var isLoggedIn = false
     private var loginViewModel = LoginViewModel()
     
@@ -33,9 +33,12 @@ extension AppleLoginManager: ASAuthorizationControllerDelegate {
            if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
                DispatchQueue.main.async {
                    let userData = AppleUserData(
-                       userIdentifier: appleIDCredential.user,
-                       fullName: "\(appleIDCredential.fullName?.givenName ?? "") \(appleIDCredential.fullName?.familyName ?? "")",
-                       email: appleIDCredential.email
+                    userIdentifier: appleIDCredential.user,
+                    firstName: appleIDCredential.fullName?.givenName ?? "",
+                    lastName: appleIDCredential.fullName?.familyName ?? "",
+                    email: appleIDCredential.email ?? "",
+                    authorizationCode: String(data: appleIDCredential.authorizationCode ?? Data(), encoding: .utf8),
+                    identityToken: String(data: appleIDCredential.identityToken ?? Data(), encoding: .utf8)
                    )
                    self.loginViewModel.sendAppleToken(userData: userData)
                    self.isLoggedIn = true
