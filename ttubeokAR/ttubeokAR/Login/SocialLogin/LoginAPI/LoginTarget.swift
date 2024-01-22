@@ -16,7 +16,7 @@ import Foundation
 
 //TODO: - 애플 로그인 시 유저데이터 토큰 전환하도록 바꾸기
 enum ServerAPI {
-    case sendToken(token: String)
+    case sendKakaoToken(token: String)
     case sendAppleLoginInfo(userData: AppleUserData)
 }
 
@@ -25,7 +25,7 @@ extension ServerAPI: TargetType {
     
     var path: String {
         switch self {
-        case .sendToken:
+        case .sendKakaoToken:
             return "/auth/login/kakao"
         case.sendAppleLoginInfo:
             return "/auth/login/apple"
@@ -34,22 +34,23 @@ extension ServerAPI: TargetType {
     
     var method: Moya.Method {
         switch self {
-        case .sendToken:
+        case .sendKakaoToken:
             return .post
         case.sendAppleLoginInfo:
             return .post
         }
     }
     
+    //TODO: - 애플 로그인 RequestBody 추후에 참고할 것!!
     var task: Task {
         switch self {
-        case .sendToken(let token):
+        case .sendKakaoToken(let token):
             return .requestParameters(parameters: ["accessToken": token], encoding: JSONEncoding.default)
         case.sendAppleLoginInfo(let userData):
             let parameters: [String: Any] = [
-                "userIdentifier": userData.userIdentifier ?? "",
-                "fullName": userData.fullName ?? "",
-                "email": userData.email ?? ""
+                "userIdentifier": userData.userIdentifier,
+                "authorizationCode": userData.authorizationCode ?? "",
+                "identityToken": userData.identityToken ?? ""
             ]
             return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
         }

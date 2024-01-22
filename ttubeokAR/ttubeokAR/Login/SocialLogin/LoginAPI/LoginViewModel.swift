@@ -15,7 +15,7 @@ class LoginViewModel: ObservableObject {
     /// 카카오 로그인 성공 후, 뚜벅 서버로 토큰 전달 후 refresh 토큰 받기
     /// - Parameter token: 카카오톡 로그인 성공해서 받은 토큰
     public func KakaoSendToken(token: String) {
-        provider.request(.sendToken(token: token)) { result in
+        provider.request(.sendKakaoToken(token: token)) { result in
             switch result {
             case .success(let response):
                 do {
