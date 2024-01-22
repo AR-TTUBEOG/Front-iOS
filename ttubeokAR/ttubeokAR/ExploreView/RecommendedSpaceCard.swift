@@ -12,8 +12,10 @@ struct RecommendedSpaceCard: View {
     @State var space: RecommendedSpaceModel
     @State private var isFavorited = false
     @StateObject var viewModel = ExploreViewModel()
-    @State var placeTypeColor = Color.lightGreen2
-
+    @State var placeTypeColor: Color?
+    @State var baseImage: Image?
+    @State var placeTypeText: Text?
+    
     // MARK: - Body
     
     var body: some View {
@@ -34,7 +36,7 @@ struct RecommendedSpaceCard: View {
                 VStack(spacing:1.3) {
                     spaceReviewCount
                         .offset(x: 56, y: -17)
-                
+                    
                     spaceSpotType
                         .offset(x: 41, y: -15)
                 }
@@ -78,15 +80,15 @@ struct RecommendedSpaceCard: View {
     
     //장소 북마크
     private var spaceBookmarked: some View {
-           Button(action: {
-               // 찜 버튼을 눌렀을 때 동작
-               viewModel.toggleFavorite()
-           }) {
-               Image(viewModel.favoriteImageName)
-                   .resizable()
-                   .aspectRatio(contentMode: .fit)
-                   .frame(width: 20, height: 20)
-           }
+        Button(action: {
+            // 찜 버튼을 눌렀을 때 동작
+            viewModel.toggleFavorite()
+        }) {
+            Image(viewModel.favoriteImageName)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 20, height: 20)
+        }
     }
     
     
@@ -143,9 +145,9 @@ struct RecommendedSpaceCard: View {
     private var spaceReviewCount: some View {
         ZStack(alignment: .leading) {
             Rectangle()
-                       .frame(width: 36, height: 14)
-                       .foregroundColor(Color.textBlue)
-                       .cornerRadius(19)
+                .frame(width: calculateWidth(for: space.reviewCount), height: 14)
+                .foregroundColor(Color.textBlue)
+                .cornerRadius(19)
             Icon.reviewCount.image
                 .resizable()
                 .aspectRatio(contentMode: .fit)
@@ -154,48 +156,115 @@ struct RecommendedSpaceCard: View {
             Text("\(space.reviewCount)")
                 .font(.system(size: 7, weight: .bold))
                 .foregroundColor(Color(red: 36 / 255, green: 88 / 255, blue: 139 / 255))
-                .offset(x: 15)
+                .offset(x: calculateTextOffsetX(for: space.reviewCount), y: 0)
+                .multilineTextAlignment(.center)
         }
         .padding(.leading, -30)
         .padding(.top, 0)
     }
     
     
+    // 장소 유형
     private var spaceSpotType: some View {
         VStack {
             Rectangle()
-                       .frame(width: 36, height: 14)
-                       .foregroundColor(placeTypeColor)
-                       .cornerRadius(19)
+                .frame(width: calculateWidth(for: space.reviewCount), height: 14)
+                .foregroundColor(getColor(for: space.placeType.first))
+                .cornerRadius(19)
+            Text(getPlaceTypeText(for: space.placeType.first))
+                .font(.system(size: 7, weight: .bold))
+                .foregroundColor(getPlaceTypeTextColor(for: space.placeType.first))
+                .offset(x: calculateTextOffsetX(for: space.reviewCount), y: -13)
+            
             getImage(for: space.placeType.first)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 9, height: 9)
-                .offset(x: -9, y: -19)
-            
+                .offset(x: -10, y: -27)
         }
     }
-
+    
     func getImage(for placeType: place?) -> Image {
         guard let placeType = placeType else {
             // placeType이 nil일 경우 처리
+            placeTypeColor = Color.lightGreen2
             return Image("default")
         }
-
         if placeType.walkingSpot {
             return Icon.tree.image
         } else if placeType.storeSpot {
-            placeTypeColor = Color.lightOrange
             return Icon.store.image
-        } else {
-            // 둘 다 아닐 시
-            return Image("default")
         }
+        // 둘 다 아닐 시
+        placeTypeColor = Color.lightGreen2
+        return Image("default")
     }
     
+    func getColor(for placeType: place?) -> Color {
+        guard let placeType = placeType else {
+            // placeType이 nil일 경우 처리
+            return Color.lightGreen2
+        }
+        
+        if placeType.walkingSpot {
+            return Color.lightGreen2
+        } else if placeType.storeSpot {
+            return Color.lightOrange
+        }
+        return Color.lightGreen2
+    }
+    
+    func getPlaceTypeText(for placeType: place?) -> String {
+            guard let placeType = placeType else {
+                // placeType이 nil
+                return "산책"
+            }
+            if placeType.walkingSpot {
+                return "산책"
+            } else if placeType.storeSpot {
+                return "가게"
+            }
+            // 둘 다 아닐 시
+            return "산책"
+        }
+    
+func getPlaceTypeTextColor(for placeType: place?) -> Color {
+        guard let placeType = placeType else {
+            // placeType이 nil일 경우 처리
+            return Color.green
+        }
+        if placeType.walkingSpot {
+            return Color(red: 49 / 255, green: 97 / 255, blue: 0 / 255)
+        } else if placeType.storeSpot {
+            return Color(red: 222 / 255, green: 98 / 255, blue: 8 / 255)
+        }
+        return Color.green
+    }
+    
+    func calculateTextOffsetX(for reviewCount: Int?) -> CGFloat {
+        guard let reviewCount = reviewCount else {
+            return (UIScreen.main.bounds.width - calculateWidth(for: reviewCount)) / 2
+        }
+
+        let textWidth = CGFloat(String(reviewCount).count) * 5 // 근사치 계산
+        let minOffsetX = (calculateWidth(for: reviewCount) - textWidth) / 2
+        return max(minOffsetX, 5)
+    }
+
+    func calculateWidth(for reviewCount: Int?) -> CGFloat {
+         guard let reviewCount = reviewCount else {
+             return 38
+         }
+
+         // 리뷰 개수에 따라 동적으로 폭 조절
+         let textWidth = CGFloat(String(reviewCount).count) * 5 // 근사치
+         let dynamicWidth = max(textWidth + 10, 38) // 최소값은 38, 양쪽 떨어진 범위가 각각 1이 되도록
+
+         return max(dynamicWidth, textWidth + 20)
+     }
+
 }
-    
-    
+
 
 
 // MARK: - Preview
@@ -208,7 +277,7 @@ struct RecommendedSpaceCard_reviews: PreviewProvider {
                    starRating: 4.5,
                    distance: 2.3,
                    time: "15",
-                   reviewCount: 134,
+                   reviewCount: 148,
                    isFavorited: false,
                    placeType:[place(walkingSpot: true, storeSpot: false)]
                )
