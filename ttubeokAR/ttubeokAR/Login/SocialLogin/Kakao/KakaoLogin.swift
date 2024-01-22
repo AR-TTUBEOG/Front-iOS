@@ -9,20 +9,28 @@ import Foundation
 import SwiftUI
 
 struct KakaoLogin: View {
+    var transitionToNext: () -> Void
+    @ObservedObject var kakaoLoginManager = KakaoLoginManager()
     
     var body: some View {
         kakaoBtn
-            .padding(.top, 38.91)
+            .padding(.top, 20)
+            .onChange(of: kakaoLoginManager.isLoggedIn) { oldValue, newValue in
+                if newValue {
+                    transitionToNext()
+                }
+            }
     }
     
     private var kakaoBtn: some View {
         Button(action: {
-            print("hello")
+            kakaoLoginManager.loginAndSendToken()
         }) {
             Icon.kakao.image
                 .resizable()
-                .aspectRatio(contentMode: .fit)
+                .aspectRatio(contentMode: .fill)
                 .frame(maxWidth: 300, maxHeight: 43)
         }
     }
 }
+

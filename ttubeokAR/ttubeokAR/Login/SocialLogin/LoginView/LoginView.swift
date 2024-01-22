@@ -8,24 +8,24 @@
 import SwiftUI
 
 struct LoginView: View {
-    
+    var transitionToNext: () -> Void
     var body: some View {
-            allView
+        allView
     }
     
     private var allView: some View {
-        ZStack(alignment: .top) {
+        ZStack(alignment: .center) {
             loginBackground
             blackOpacityView
             VStack(alignment: .center) {
                 loginTitle
-                    .padding(.top, 200)
+                Spacer()
+                    .frame(maxHeight: 154)
                 centerLine
-                    .padding(.top, 80)
-                KakaoLogin()
-                AppleLogin()
-                
+                KakaoLogin(transitionToNext: transitionToNext)
+                AppleLogin(transitionToNext: transitionToNext)
             }
+            .offset(y: 60)
         }
     }
     
@@ -42,15 +42,17 @@ struct LoginView: View {
             .foregroundStyle(.clear)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .ignoresSafeArea(.all)
-            .background(Color(red: 0.09, green: 0.08, blue: 0.12).opacity(0.7))
+            .background(Color(red: 0.09, green: 0.08, blue: 0.12).opacity(0.6))
             .shadow(color: .white.opacity(0.25), radius: 100, x: 0, y: 4)
     }
     
     private var loginTitle: some View {
         Text("뚜벅과 함께 \n 걸어 볼까요?")
             .font(.sandol(type: .bold, size: 28))
+            .shadow(color: .black.opacity(0.7), radius: 4, x: 0, y: 4)
             .multilineTextAlignment(.center)
             .foregroundStyle(Color.white)
+            .kerning(3.36)
             .frame(maxWidth: 350, maxHeight: 80, alignment: .center)
     }
     
@@ -72,12 +74,8 @@ struct LoginView: View {
                 .background(Color.white)
         }
     }
-    
-    
 }
 
-
-
 #Preview {
-    LoginView()
+    LoginView(transitionToNext: {print("Hello")})
 }
