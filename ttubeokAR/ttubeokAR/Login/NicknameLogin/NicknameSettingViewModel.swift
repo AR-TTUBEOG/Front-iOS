@@ -8,6 +8,7 @@
 import Foundation
 import Moya
 
+/// 닉네임 중복검사 뷰에서 활용하는 뷰모델
 class NicknameSettingViewModel: ObservableObject {
     @Published var nickname: String = "" {
         didSet {
@@ -18,6 +19,8 @@ class NicknameSettingViewModel: ObservableObject {
     @Published var isNicknameAvailable: Bool? = nil
     private let provider = MoyaProvider<NicknameRedundancyService>()
     
+    /// 닉네임 중복검사 API 요청
+    //TODO: - API 호출 시 토큰을 필요로 하는지 확인하기
     public func checkNicknameAvailability() {
         guard !nickname.isEmpty else {
             isNicknameAvailable = nil
@@ -28,7 +31,7 @@ class NicknameSettingViewModel: ObservableObject {
             switch result {
             case .success(let response):
                 do {
-                    let nicknameRedundancy = try response.map(NicknameRedundancyModel.self)
+                    let nicknameRedundancy = try JSONDecoder().decode(NicknameRedundancyModel.self, from: response.data)
                     self?.isNicknameAvailable = nicknameRedundancy.availability
                 } catch {
                     print("중복성 검사 반응 error : \(error.localizedDescription)")
@@ -39,6 +42,7 @@ class NicknameSettingViewModel: ObservableObject {
         }
     }
     
+    /// 닉네임 길이 검사
     private func checkNicknameLength() {
         isNicknameValid = nickname.count >= 2 && nickname.count <= 10
     }

@@ -7,16 +7,20 @@
 
 import SwiftUI
 
+/// 닉네임 중복 검사 뷰
 struct NicknameSettingLogin: View {
+    //MARK: - Body
     var transitionToNext: () -> Void
     @ObservedObject var viewModel: NicknameSettingViewModel
     
     var body: some View {
-            ZStack(alignment: .center) {
-                allView
-            }
+        ZStack(alignment: .center) {
+            allView
+        }
     }
     
+    //MARK: - Nickname View
+    /// 설정된 모든 뷰 보기
     private var allView: some View {
         
         ZStack(alignment: .center) {
@@ -35,6 +39,7 @@ struct NicknameSettingLogin: View {
         }
     }
     
+    /// 닉네임 배경 사진
     private var backgroundImageView: some View {
         Icon.loginBackground.image
             .resizable()
@@ -51,6 +56,7 @@ struct NicknameSettingLogin: View {
             .shadow(color: .white.opacity(0.25), radius: 100, x: 0, y: 4)
     }
     
+    /// 닉넨임 입력 스택
     private var nicknameInput: some View {
         VStack(alignment: .leading, spacing: 10) {
             Text("Name")
@@ -62,6 +68,7 @@ struct NicknameSettingLogin: View {
         }
     }
     
+    /// 닉네임 입렵 텍스트 필드
     private var inputNickname: some View {
         VStack(alignment: .leading, spacing: 15) {
             HStack(alignment: .center){
@@ -86,8 +93,8 @@ struct NicknameSettingLogin: View {
                         .foregroundStyle(Color.white)
                         .background((RoundedRectangle(cornerRadius: 19).fill(Color.clear)))
                         .overlay(
-                        RoundedRectangle(cornerRadius: 19)
-                            .stroke(Color.white, lineWidth: 1)
+                            RoundedRectangle(cornerRadius: 19)
+                                .stroke(Color.white, lineWidth: 1)
                         )
                 }
                 
@@ -98,6 +105,7 @@ struct NicknameSettingLogin: View {
         }
     }
     
+    /// 닉네임 유효성 탈락 시 반한되는 텍스트
     private var checkingNickname: some View {
         VStack(spacing: 5) {
             if !viewModel.isNicknameValid {
@@ -129,6 +137,7 @@ struct NicknameSettingLogin: View {
         }
     }
     
+    /// 닉네임 중복성 검사 버튼
     private var checkButton: some View {
         Button(action: {
             if viewModel.isNicknameValid, viewModel.isNicknameAvailable == true {
@@ -146,6 +155,7 @@ struct NicknameSettingLogin: View {
         }
     }
 }
+
 
 struct NicknameSettingLogin_Previews: PreviewProvider {
     static var previews: some View {
