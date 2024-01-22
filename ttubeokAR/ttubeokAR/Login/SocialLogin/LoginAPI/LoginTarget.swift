@@ -13,6 +13,8 @@ import Foundation
  sendToken : 카카오로 토큰 전달
  sendAppleLoginInfo : 애플 로그인 정보 전달
  */
+
+//TODO: - 애플 로그인 시 유저데이터 토큰 전환하도록 바꾸기
 enum ServerAPI {
     case sendToken(token: String)
     case sendAppleLoginInfo(userData: AppleUserData)

@@ -8,6 +8,7 @@
 import SwiftUI
 import AuthenticationServices
 
+/// 애플 로그인 기능 버튼
 struct AppleLogin: View {
     var transitionToNext: () -> Void
     @ObservedObject var appleLogionManager = AppleLoginManager()

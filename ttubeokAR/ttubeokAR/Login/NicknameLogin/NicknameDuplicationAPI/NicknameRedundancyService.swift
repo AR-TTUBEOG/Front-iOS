@@ -12,6 +12,7 @@ enum NicknameRedundancyService {
     case checkNicname(String)
 }
 
+//TODO: - API 설정하기
 extension NicknameRedundancyService: TargetType {
     var baseURL: URL {
         return URL(string: "http://api.com")!
