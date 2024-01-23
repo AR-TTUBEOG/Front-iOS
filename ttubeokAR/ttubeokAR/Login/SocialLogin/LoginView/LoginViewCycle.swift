@@ -14,7 +14,7 @@ struct LoginViewCycle: View {
     
     //MARK: - Property
     @State private var currentState: AppState = .login
-    @State private var isShowingMainView = false
+    @StateObject private var loginViewModel = LoginViewModel()
     
     //MARK: - Body
     var body: some View {
@@ -28,7 +28,10 @@ struct LoginViewCycle: View {
                 MainViewControl()
             }
         }
-        .animation(.easeInOut(duration: 0.5), value: isShowingMainView)
+        .onAppear {
+            loginViewModel.checkLoginStatus()
+            currentState = loginViewModel.savedLoginToken ? .mainView : .login
+        }
     }
 }
     //MARK: - rootViewCase
