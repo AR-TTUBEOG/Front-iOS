@@ -8,6 +8,10 @@
 import Foundation
 import Moya
 
+/**
+ 닉네임 중복 검사 요청 API
+ */
+
 enum NicknameRedundancyService {
     case checkNicname(String)
 }
@@ -29,6 +33,7 @@ extension NicknameRedundancyService: TargetType {
         return .post
     }
     
+    //TODO: - 추후 파라미터로 닉네임과 토큰 같이 전달해야할 수 있음!
     var task: Task {
         switch self {
         case .checkNicname(let nickname):

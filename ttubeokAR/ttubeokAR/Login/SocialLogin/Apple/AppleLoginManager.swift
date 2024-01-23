@@ -28,7 +28,6 @@ extension AppleLoginManager: ASAuthorizationControllerDelegate {
     
     /// 애플 로그인 성공 시 유저 데이터 받아오기
     /// 유저 데이터 받아 온 후 서버로 유저 데이터 보내기
-    //TODO: - 토큰 전송 같이 보내기
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
            if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
                DispatchQueue.main.async {
