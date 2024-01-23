@@ -8,13 +8,12 @@
 import Moya
 import Foundation
 
-/// 카카오톡, 애플 API를 나눠 사
 /**
+ 카카오, 애플 사용자 정보 전달 API 주소 분리해서 작성
+ 
  sendToken : 카카오로 토큰 전달
  sendAppleLoginInfo : 애플 로그인 정보 전달
  */
-
-//TODO: - 애플 로그인 시 유저데이터 토큰 전환하도록 바꾸기
 enum ServerAPI {
     case sendKakaoToken(token: String)
     case sendAppleLoginInfo(userData: AppleUserData)
