@@ -11,7 +11,7 @@ class ExploreViewModel: ObservableObject {
     
     //MARK: - Property
     @Published var isFavorited: Bool = false
-    
+    static var ExploreViweModel = ExploreViewModel()
     
     // MARK: - ChangeExploreView
     
@@ -32,7 +32,16 @@ class ExploreViewModel: ObservableObject {
             }
         }
     
+    public func formattedReviewCount(_ count: Int) -> String {
+        return count > 999 ? "999+" : "\(count)"
+    }
     
+    func getPlaceTypeText(for place: Place?) -> String {
+        guard let place = place else {
+            return "Unknown"
+        }
+        return "SomeString"
+    }
 
 
   

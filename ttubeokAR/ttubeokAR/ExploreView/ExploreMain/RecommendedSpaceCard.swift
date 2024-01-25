@@ -15,6 +15,7 @@ struct RecommendedSpaceCard: View {
     @State var placeTypeColor: Color?
     @State var baseImage: Image?
     @State var placeTypeText: Text?
+    @ObservedObject var reviewViewModel = ExploreViewModel()
     
     // MARK: - Body
     
@@ -108,44 +109,43 @@ struct RecommendedSpaceCard: View {
         .padding(.top, 0)
     }
     
-    // 거리
+    //거리
     private var spaceDistance: some View {
-        HStack {
-            Icon.distance.image
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 12, height: 12)
-            
-            Text("\(String(format: "%.1f", space.distance)) km")
-                .font(.system(size: 13, weight: .light))
-                .foregroundColor(.white)
-        }
-        .padding(.leading, -62)
-        .padding(.top, 0)
-    }
-    
-    //시간
-    private var spaceTime: some View {
-        HStack {
-            Icon.time.image
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 11, height: 11)
-            
-            
-            Text("약 \(space.time)분")
-                .font(.system(size: 13, weight: .light))
-                .foregroundColor(.white)
-        }
-        .padding(.leading, -62)
-        .padding(.top, 0)
-    }
-    
+           HStack {
+               Icon.distance.image
+                   .resizable()
+                   .aspectRatio(contentMode: .fit)
+                   .frame(width: 12, height: 12)
+               
+               Text("\(String(format: "%.1f", space.distance)) km")
+                   .font(.system(size: 13, weight: .light))
+                   .foregroundColor(.white)
+           }
+           .padding(.leading, -62)
+           .padding(.top, 0)
+       }
+
+       // 시간
+       private var spaceTime: some View {
+           HStack {
+               Icon.time.image
+                   .resizable()
+                   .aspectRatio(contentMode: .fit)
+                   .frame(width: 11, height: 11)
+               
+               Text("약 \(space.time)분")
+                        .font(.system(size: 13, weight: .light))
+                        .foregroundColor(.white)
+               }
+           .padding(.leading, -62)
+           .padding(.top, 0)
+       }
+
     //리뷰 개수
     private var spaceReviewCount: some View {
         ZStack(alignment: .leading) {
             Rectangle()
-                .frame(width: calculateWidth(for: space.reviewCount), height: 14)
+                .frame(width: 36, height: 13)
                 .foregroundColor(Color.textBlue)
                 .cornerRadius(19)
             Icon.reviewCount.image
@@ -153,11 +153,10 @@ struct RecommendedSpaceCard: View {
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 9, height: 9)
                 .offset(x: 4, y: 0)
-            Text("\(space.reviewCount)")
+            Text(reviewViewModel.formattedReviewCount(space.reviewCount))
                 .font(.system(size: 7, weight: .bold))
                 .foregroundColor(Color(red: 36 / 255, green: 88 / 255, blue: 139 / 255))
-                .offset(x: calculateTextOffsetX(for: space.reviewCount), y: 0)
-                .multilineTextAlignment(.center)
+                .offset(x:13, y:0)
         }
         .padding(.leading, -30)
         .padding(.top, 0)
@@ -168,14 +167,13 @@ struct RecommendedSpaceCard: View {
     private var spaceSpotType: some View {
         VStack {
             Rectangle()
-                .frame(width: calculateWidth(for: space.reviewCount), height: 14)
+                .frame(width: 36, height: 13)
                 .foregroundColor(getColor(for: space.placeType.first))
                 .cornerRadius(19)
             Text(getPlaceTypeText(for: space.placeType.first))
                 .font(.system(size: 7, weight: .bold))
                 .foregroundColor(getPlaceTypeTextColor(for: space.placeType.first))
-                .offset(x: calculateTextOffsetX(for: space.reviewCount), y: -13)
-            
+                .offset(x: 4, y: -13)
             getImage(for: space.placeType.first)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
@@ -241,28 +239,7 @@ func getPlaceTypeTextColor(for placeType: place?) -> Color {
         return Color.green
     }
     
-    func calculateTextOffsetX(for reviewCount: Int?) -> CGFloat {
-        guard let reviewCount = reviewCount else {
-            return (UIScreen.main.bounds.width - calculateWidth(for: reviewCount)) / 2
-        }
-
-        let textWidth = CGFloat(String(reviewCount).count) * 5 // 근사치 계산
-        let minOffsetX = (calculateWidth(for: reviewCount) - textWidth) / 2
-        return max(minOffsetX, 5)
-    }
-
-    func calculateWidth(for reviewCount: Int?) -> CGFloat {
-         guard let reviewCount = reviewCount else {
-             return 38
-         }
-
-         // 리뷰 개수에 따라 동적으로 폭 조절
-         let textWidth = CGFloat(String(reviewCount).count) * 5 // 근사치
-         let dynamicWidth = max(textWidth + 10, 38) // 최소값은 38, 양쪽 떨어진 범위가 각각 1이 되도록
-
-         return max(dynamicWidth, textWidth + 20)
-     }
-
+    
 }
 
 
@@ -277,7 +254,7 @@ struct RecommendedSpaceCard_reviews: PreviewProvider {
                    starRating: 4.5,
                    distance: 2.3,
                    time: "15",
-                   reviewCount: 148,
+                   reviewCount: 123,
                    isFavorited: false,
                    placeType:[place(walkingSpot: true, storeSpot: false)]
                )
