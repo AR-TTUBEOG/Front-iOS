@@ -94,6 +94,10 @@ enum Icon: String {
     case MyTicket = "MyTicket"
     case OptionBtn = "OptionBtn"
     
+    //MARK: - PlaceSetting
+    case PlaceBackground = "RegisterBackground"
+    
+    
     var image: Image {
         return Image(self.rawValue)
     }

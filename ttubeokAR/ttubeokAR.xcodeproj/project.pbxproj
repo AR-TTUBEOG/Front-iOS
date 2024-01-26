@@ -46,6 +46,7 @@
 		48A12C222B5CF84100E51200 /* NicknameRedundancyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A12C212B5CF84100E51200 /* NicknameRedundancyService.swift */; };
 		48A6C6B62B5F800900CFF763 /* KeyChainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A6C6B52B5F800900CFF763 /* KeyChainManager.swift */; };
 		48C3D9DE2B554D3700E3F905 /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = 48C3D9DD2B554D3700E3F905 /* PopupView */; };
+		48D1CFF22B63FB5900CCD9E5 /* PlaceRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D1CFF12B63FB5900CCD9E5 /* PlaceRegistration.swift */; };
 		48D88C232B5C1F7600A1B09E /* CombineMoya in Frameworks */ = {isa = PBXBuildFile; productRef = 48D88C222B5C1F7600A1B09E /* CombineMoya */; };
 		48D88C252B5C1F7600A1B09E /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 48D88C242B5C1F7600A1B09E /* Moya */; };
 		48D88C272B5C1F7600A1B09E /* ReactiveMoya in Frameworks */ = {isa = PBXBuildFile; productRef = 48D88C262B5C1F7600A1B09E /* ReactiveMoya */; };
@@ -112,6 +113,7 @@
 		48A12C1F2B5CF78E00E51200 /* NicknameRedundancyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameRedundancyModel.swift; sourceTree = "<group>"; };
 		48A12C212B5CF84100E51200 /* NicknameRedundancyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameRedundancyService.swift; sourceTree = "<group>"; };
 		48A6C6B52B5F800900CFF763 /* KeyChainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainManager.swift; sourceTree = "<group>"; };
+		48D1CFF12B63FB5900CCD9E5 /* PlaceRegistration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceRegistration.swift; sourceTree = "<group>"; };
 		48D88C2B2B5C24A400A1B09E /* LoginServerResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginServerResponse.swift; sourceTree = "<group>"; };
 		48D88C2E2B5C259300A1B09E /* LoginTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTarget.swift; sourceTree = "<group>"; };
 		48D88C302B5C288600A1B09E /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -317,6 +319,14 @@
 			path = KeyChain;
 			sourceTree = "<group>";
 		};
+		48D1CFF02B63FB1C00CCD9E5 /* PlaceSetting */ = {
+			isa = PBXGroup;
+			children = (
+				48D1CFF12B63FB5900CCD9E5 /* PlaceRegistration.swift */,
+			);
+			path = PlaceSetting;
+			sourceTree = "<group>";
+		};
 		48D61C6F2B5CC934009EF2BF /* LoginView */ = {
 			isa = PBXGroup;
 			children = (
@@ -365,6 +375,7 @@
 				48FF93A22B43BA4500202F45 /* MapView */,
 				48FF93A12B43BA3800202F45 /* ARView */,
 				6CC4DDFC2B5687C00080E7E8 /* CouponView */,
+				48D1CFF02B63FB1C00CCD9E5 /* PlaceSetting */,
 				6C7239E52B5BA7930082F12D /* SettingView */,
 				48FF93A32B43BA7B00202F45 /* SettingGroup */,
 				48FF93982B43BA0700202F45 /* Preview Content */,
@@ -683,6 +694,7 @@
 				482DB6B92B541797005538DE /* PlaceSettingsViewModel.swift in Sources */,
 				6C7239EF2B5BB7D00082F12D /* CustomToggle.swift in Sources */,
 				6CC4DE012B5687FB0080E7E8 /* CouponViewModel.swift in Sources */,
+				48D1CFF22B63FB5900CCD9E5 /* PlaceRegistration.swift in Sources */,
 				48FF93932B43BA0600202F45 /* AppDelegate.swift in Sources */,
 				489BD8F12B4A40EE003382AE /* SearchButtonModel.swift in Sources */,
 				483820E82B4BE8E500C3FB14 /* AddLocationCommand.swift in Sources */,
