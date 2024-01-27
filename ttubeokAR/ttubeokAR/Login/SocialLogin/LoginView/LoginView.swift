@@ -24,7 +24,6 @@ struct LoginView: View {
     }
     
     //MARK: - LoginViewComponent
-    
     /// 화면 구성에 필요한 요소를 정리
     private var allView: some View {
         ZStack(alignment: .center) {
