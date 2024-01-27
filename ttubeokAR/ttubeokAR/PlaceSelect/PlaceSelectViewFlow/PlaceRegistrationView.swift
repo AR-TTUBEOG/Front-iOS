@@ -9,9 +9,18 @@ import SwiftUI
 
 struct PlaceRegistrationView: View {
     
+    //MARK: - Property
+    @State private var showSelectPlaceView = false
+    
     //MARK: - Body
     var body: some View {
-        allView
+        NavigationStack {
+            allView
+                .navigationDestination(isPresented: $showSelectPlaceView) {
+                    WhichSelectPlaceView()
+                }
+        }
+        
     }
     
     //MARK: - PlaceRegistrationView
@@ -55,7 +64,7 @@ struct PlaceRegistrationView: View {
     /// 다음 뷰로 넘어가는 버튼
     private var nextButton: some View {
         Button(action: {
-            print("hello")
+            showSelectPlaceView = true
         }, label: {
             Text("장소 등록하기")
                 .font(.sandol(type: .medium, size: 20))

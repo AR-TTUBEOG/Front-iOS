@@ -99,7 +99,6 @@ struct WhichSelectPlaceView: View {
             .shadow(color: .black.opacity(0.15), radius: 2.5, x: 0, y: 1)
             
             Button(action: {
-                print("hello")
                 nextView = true
             }) {
                 Text("다음")
