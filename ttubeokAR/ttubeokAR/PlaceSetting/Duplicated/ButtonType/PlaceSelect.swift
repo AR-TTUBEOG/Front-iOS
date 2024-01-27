@@ -11,6 +11,7 @@ struct PlaceSelect: View {
     
     //MARK: - Property
     let type: PlaceSelectType
+    @Binding var isChecked: Bool
     
     //MARK: - Body
     var body: some View {
@@ -38,9 +39,9 @@ struct PlaceSelect: View {
     private var selectButton: some View {
         switch type {
         case .walk:
-            WalkSelectButton()
+            WalkSelectButton(isChecked: $isChecked)
         case .market:
-            MarketSelectButton()
+            MarketSelectButton(isChecked: $isChecked)
         }
     }
     

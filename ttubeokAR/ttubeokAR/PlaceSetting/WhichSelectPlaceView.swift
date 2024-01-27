@@ -9,22 +9,23 @@ import SwiftUI
 
 struct WhichSelectPlaceView: View {
     //MARK: - Property
-    @State var path: [PlaceSelectType] = []
+    @State private var nextView = false
+    @State private var isWalkChecked = false
+    @State private var isMarketChecked = false
     
     //MARK: - Body
     var body: some View {
-        NavigationStack(path: $path){
-            ZStack {
-                allView
-            }
-            .navigationDestination(for: PlaceSelectType.self) { type in
-                switch type {
-                case .walk:
-                    WalkPlaceRegister()
-                case .market:
-                    MarketPlaceRegister()
+        NavigationStack {
+            allView
+                .navigationDestination(isPresented: $nextView) {
+                    if isWalkChecked {
+                        WalkPlaceRegister()
+                    } else if isMarketChecked {
+                        MarketPlaceRegister()
+                    } else {
+                        EmptyView().hidden()
+                    }
                 }
-            }
         }
     }
     
@@ -43,8 +44,18 @@ struct WhichSelectPlaceView: View {
                         spacing: 0)
                     .padding(.top, 94)
                     HStack(alignment: .center) {
-                        PlaceSelect(type: .walk)
-                        PlaceSelect(type: .market)
+                        PlaceSelect(type: .walk, isChecked: $isWalkChecked)
+                        PlaceSelect(type: .market, isChecked: $isMarketChecked)
+                    }
+                    .onChange(of: isWalkChecked) { oldValue, newValue in
+                        if newValue {
+                            isMarketChecked = false
+                        }
+                    }
+                    .onChange(of: isMarketChecked) { oldValue, newValue in
+                        if newValue {
+                            isWalkChecked = false
+                        }
                     }
                 }
                 changeViewButton
@@ -89,7 +100,7 @@ struct WhichSelectPlaceView: View {
             
             Button(action: {
                 print("hello")
-                path.append(.walk)
+                nextView = true
             }) {
                 Text("다음")
                     .font(.sandol(type: .medium, size: 20))

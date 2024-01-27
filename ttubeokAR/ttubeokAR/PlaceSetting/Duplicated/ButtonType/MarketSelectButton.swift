@@ -12,7 +12,7 @@ struct MarketSelectButton: View {
     private let frameSize: CGFloat = 157
     private let iconSize: CGFloat = 94
     private let cornerSize: CGFloat = 19
-    @State private var isSelected: Bool = false
+    @Binding var isChecked: Bool
     
     //MARK: - Body
     var body: some View {
@@ -24,12 +24,12 @@ struct MarketSelectButton: View {
         ZStack(alignment: .center) {
             marketBackground
             Button(action: {
-                isSelected.toggle()
+                isChecking.toggle()
             }) {
                 marketIcon
-                    .offset(y: isSelected ? -10 : 0)
+                    .offset(y: isChecking ? -10 : 0)
             }
-            .animation(.easeOut(duration: 0.5), value: isSelected)
+            .animation(.easeOut(duration: 0.5), value: isChecking)
         }
         .frame(maxWidth: frameSize, maxHeight: frameSize)
         .clipShape(.rect(cornerRadius: cornerSize))
@@ -105,8 +105,4 @@ struct MarketSelectButton: View {
         }
         .frame(maxWidth: frameSize, maxHeight: frameSize)
     }
-}
-
-#Preview {
-    MarketSelectButton()
 }
