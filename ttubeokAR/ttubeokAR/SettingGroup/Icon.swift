@@ -96,7 +96,10 @@ enum Icon: String {
     
     //MARK: - PlaceSetting
     case PlaceBackground = "RegisterBackground"
-    
+    case marketGroup = "marketGroup"
+    case marketIcon = "marketIcon"
+    case walkGroup = "walkGroup"
+    case walkIcon = "walkIcon"
     
     var image: Image {
         return Image(self.rawValue)
