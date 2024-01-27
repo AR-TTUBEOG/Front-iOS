@@ -329,6 +329,17 @@
 			path = ButtonType;
 			sourceTree = "<group>";
 		};
+		4899CA522B655AC100D136BD /* PlaceSelectViewFlow */ = {
+			isa = PBXGroup;
+			children = (
+				483BFD162B64996400C2AD5B /* WhichSelectPlaceView.swift */,
+				48D1CFF12B63FB5900CCD9E5 /* PlaceRegistrationView.swift */,
+				48CC6BC62B6524DA0032A5E2 /* MarketRegister */,
+				48CC6BC72B6524EC0032A5E2 /* WalkRegister */,
+			);
+			path = PlaceSelectViewFlow;
+			sourceTree = "<group>";
+		};
 		489BD8EF2B4A40CF003382AE /* GlobalSearchControl */ = {
 			isa = PBXGroup;
 			children = (
@@ -379,16 +390,13 @@
 			path = Title;
 			sourceTree = "<group>";
 		};
-		48D1CFF02B63FB1C00CCD9E5 /* PlaceSetting */ = {
+		48D1CFF02B63FB1C00CCD9E5 /* PlaceSelect */ = {
 			isa = PBXGroup;
 			children = (
-				48CC6BC72B6524EC0032A5E2 /* WalkRegister */,
-				48CC6BC62B6524DA0032A5E2 /* MarketRegister */,
+				4899CA522B655AC100D136BD /* PlaceSelectViewFlow */,
 				483BFD182B649C7700C2AD5B /* Duplicated */,
-				48D1CFF12B63FB5900CCD9E5 /* PlaceRegistrationView.swift */,
-				483BFD162B64996400C2AD5B /* WhichSelectPlaceView.swift */,
 			);
-			path = PlaceSetting;
+			path = PlaceSelect;
 			sourceTree = "<group>";
 		};
 		48D61C6F2B5CC934009EF2BF /* LoginView */ = {
@@ -439,7 +447,7 @@
 				48FF93A22B43BA4500202F45 /* MapView */,
 				48FF93A12B43BA3800202F45 /* ARView */,
 				6CC4DDFC2B5687C00080E7E8 /* CouponView */,
-				48D1CFF02B63FB1C00CCD9E5 /* PlaceSetting */,
+				48D1CFF02B63FB1C00CCD9E5 /* PlaceSelect */,
 				6C7239E52B5BA7930082F12D /* SettingView */,
 				48FF93A32B43BA7B00202F45 /* SettingGroup */,
 				48FF93982B43BA0700202F45 /* Preview Content */,

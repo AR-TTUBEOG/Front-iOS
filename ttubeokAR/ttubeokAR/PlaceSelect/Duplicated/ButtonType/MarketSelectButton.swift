@@ -1,5 +1,5 @@
 //
-//  marketSelect.swift
+//  marketSelectButton.swift
 //  ttubeokAR
 //
 //  Created by 정의찬 on 1/27/24.
@@ -7,8 +7,7 @@
 
 import SwiftUI
 
-struct WalkSelectButton: View {
-    
+struct MarketSelectButton: View {
     //MARK: - Property
     private let frameSize: CGFloat = 157
     private let iconSize: CGFloat = 94
@@ -17,43 +16,43 @@ struct WalkSelectButton: View {
     
     //MARK: - Body
     var body: some View {
-        walkIconGroup
+        marketGroup
     }
     
-    //MARK: - WalkSelectButtonView
-    private var walkIconGroup: some View {
+    //MARK: - MarketSelectButtonView
+    private var marketGroup: some View {
         ZStack(alignment: .center) {
-            walkIconBackground
+            marketBackground
             Button(action: {
-                isChecking.toggle()
+                isChecked.toggle()
             }) {
-                walkIcon
-                    .offset(y: isChecking ? -10 : 0)
+                marketIcon
+                    .offset(y: isChecked ? -10 : 0)
             }
-            .animation(.easeOut(duration: 0.5), value: isChecking)
+            .animation(.easeOut(duration: 0.5), value: isChecked)
         }
         .frame(maxWidth: frameSize, maxHeight: frameSize)
         .clipShape(.rect(cornerRadius: cornerSize))
     }
     
-    private var walkIconBackground: some View {
+    private var marketBackground: some View {
         ZStack(alignment: .bottomLeading){
-            Icon.walkGroup.image
+            Icon.marketGroup.image
                 .resizable()
                 .frame(maxWidth: frameSize, maxHeight: frameSize)
-                .offset(x: -2, y: 20)
+                .offset(x: -12, y: 20)
             RoundedRectangle(cornerRadius: cornerSize)
                 .foregroundStyle(.clear)
                 .frame(maxWidth: frameSize, maxHeight: frameSize)
                 .background(Color.white.opacity(0.5))
             Rectangle()
-                .foregroundStyle(.clear)
-                .frame(minWidth: frameSize, maxWidth: frameSize)
+                .foregroundColor(.clear)
+                .frame(width: frameSize, height: frameSize)
                 .background(
                     LinearGradient(
                         stops: [
-                            Gradient.Stop(color: Color(red: 0.92, green: 1, blue: 0.58).opacity(0.5), location: 0.00),
-                            Gradient.Stop(color: Color(red: 0.14, green: 1, blue: 0).opacity(0.5), location: 1.00),
+                            Gradient.Stop(color: Color(red: 1, green: 0.94, blue: 0.62).opacity(0.5), location: 0.00),
+                            Gradient.Stop(color: Color(red: 1, green: 0.61, blue: 0.01).opacity(0.5), location: 1.00),
                         ],
                         startPoint: UnitPoint(x: 0.08, y: 0.03),
                         endPoint: UnitPoint(x: 1, y: 1)
@@ -63,13 +62,14 @@ struct WalkSelectButton: View {
                 .overlay(
                     RoundedRectangle(cornerRadius: cornerSize)
                         .inset(by: 0.5)
-                        .stroke(Color(red: 0.68, green: 1, blue: 0.66), lineWidth: 1)
+                        .stroke(Color(red: 1, green: 0.54, blue: 0), lineWidth: 1)
+                    
                 )
         }
         .frame(maxWidth: frameSize, maxHeight: frameSize)
     }
     
-    private var walkIcon: some View {
+    private var marketIcon: some View {
         ZStack(alignment: .center){
             Rectangle()
                 .foregroundStyle(.clear)
@@ -99,11 +99,10 @@ struct WalkSelectButton: View {
                     )
                 )
                 .clipShape(.rect(cornerRadius: cornerSize))
-            Icon.walkIcon.image
+            Icon.marketIcon.image
                 .resizable()
                 .frame(maxWidth: iconSize, maxHeight: iconSize)
         }
         .frame(maxWidth: frameSize, maxHeight: frameSize)
     }
 }
-
