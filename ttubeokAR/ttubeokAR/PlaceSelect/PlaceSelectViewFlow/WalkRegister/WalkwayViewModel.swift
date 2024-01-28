@@ -16,6 +16,7 @@ class WalkwayViewModel: ObservableObject {
     @Published var walwayModel = WalkwayModel()
     @Published var currentPageIndex: Int = 0
     @Published var isImagePickerPresented = false
+    @Published var inputText: String = ""
     
     //MARK: - Function
     /// 앨범 또는 카메라에서 사진을 가져와 추가하는 로직

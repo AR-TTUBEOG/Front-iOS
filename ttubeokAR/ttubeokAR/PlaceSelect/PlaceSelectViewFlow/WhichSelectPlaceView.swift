@@ -67,6 +67,11 @@ struct WhichSelectPlaceView: View {
                 titleText: "어떤 장소를 \n 등록하시겠어요 ?",
                 highlightText: "등록",
                 subtitleText: nil,
+                subtitleSize: nil,
+                titleWidth: 339,
+                titleHeight: 79,
+                subtitleWidth: nil,
+                subtitleHeight: nil,
                 spacing: 0)
             .padding(.top, 94)
             HStack(alignment: .center) {
