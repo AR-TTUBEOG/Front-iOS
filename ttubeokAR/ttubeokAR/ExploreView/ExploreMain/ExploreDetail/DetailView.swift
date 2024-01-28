@@ -21,21 +21,6 @@ class DetailView: ObservableObject {
         print("방명록을 작성합니다.")
     }
     
-    func performButton1Action() {
-           // 버튼 1이 눌렸을 때의 동작을 여기에 추가
-           print("Button 1 Clicked in DetailView!")
-       }
-
-    func performButton2Action() {
-           // 버튼 2가 눌렸을 때의 동작을 여기에 추가
-           print("Button 2 Clicked in DetailView!")
-       }
-
-    func performButton3Action() {
-           // 버튼 3이 눌렸을 때의 동작을 여기에 추가
-           print("Button 3 Clicked in DetailView!")
-       }
-  
     
     
 }
