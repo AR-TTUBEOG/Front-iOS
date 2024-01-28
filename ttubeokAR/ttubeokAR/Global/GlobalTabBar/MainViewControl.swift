@@ -9,7 +9,7 @@ import SwiftUI
 
 /// 온보드 화면이 끝난 후 rootView가 될 메인탭 컨트롤
 struct MainViewControl: View {
-    
+    //MARK: - Property
     /**
      viewModel : 뷰 모델 사용하기 위한 변수
      selectedTab : 현재 선택된 탭 버튼을 알기 위함 -> 나중에 현재 뷰를 추적하기 위해 필요
@@ -23,6 +23,8 @@ struct MainViewControl: View {
     @State private var ttuDotButtonAngle: Double = -90
     @EnvironmentObject var sharedTabInfo: SharedTabInfo
     
+    /// selectedTab 초기화
+    /// - Parameter selectedTab: 현재 선택된 탭 추적하여 값 전달 -> 뚜닷에 활용하기 위함
     init(selectedTab: Int = 1) {
         _selectedTab = State(initialValue:  selectedTab)
     }
@@ -132,6 +134,6 @@ struct MainViewControl: View {
 // MARK: - Preview
 struct MainViewControl_Previews: PreviewProvider {
     static var previews: some View {
-        MainViewControl()
+        MainViewControl(selectedTab: 1)
     }
 }

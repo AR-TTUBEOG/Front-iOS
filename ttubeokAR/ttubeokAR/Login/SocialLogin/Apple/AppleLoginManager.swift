@@ -9,10 +9,13 @@ import AuthenticationServices
 import SwiftUI
 
 class AppleLoginManager: NSObject, ObservableObject {
+    
+    //MARK: - Property
     @Published var userData: AppleUserData?
     @Published var isLoggedIn = false
     private var loginViewModel = LoginViewModel()
     
+    //MARK: - AppleLoginManagerFunction
     /// 애플로 로그인 시도 응답 데이터 : 풀네임, 이메일
     public func signInWithApple() {
         let request = ASAuthorizationAppleIDProvider().createRequest()
@@ -24,6 +27,7 @@ class AppleLoginManager: NSObject, ObservableObject {
     }
 }
 
+//MARK: - AppleLoginExtension
 extension AppleLoginManager: ASAuthorizationControllerDelegate {
     
     /// 애플 로그인 성공 시 유저 데이터 받아오기

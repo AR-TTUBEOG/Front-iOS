@@ -13,9 +13,10 @@ class TtuDotViewModel: ObservableObject {
     @Published var angle: Double = 0
     @Published var sections: [TtuDotSection]
     @Published var selectedSection: String?
-    @Published var showPlaceRegistrationView = false
 
     //MARK: - Init
+    /// 뚜닷에 사용되는 모델 초기화 및 정의
+    /// - Parameter sharedTabInfo: 선택된 탭을 추적하고 전달하기 위한 파라미터
     init(sharedTabInfo: SharedTabInfo) {
         sections = [
             TtuDotSection(command: AddLocationCommand(sharedTabInfo: sharedTabInfo), title: "장소 추가", imageName: "AddLocation"),

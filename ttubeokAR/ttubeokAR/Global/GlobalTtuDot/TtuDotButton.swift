@@ -18,6 +18,8 @@ struct TtuDotButton: View {
     @State private var previousAngle: Angle = .zero
     @State private var rotationVelocity: Double = 0
     
+    /// viewModel과 sharedTabInfo 초기화
+    /// - Parameter sharedTabInfo: 선택된 탭 번호 앱 사이클에 공유하기 위한 클래스
     init(sharedTabInfo : SharedTabInfo) {
         self.sharedTabInfo = sharedTabInfo
         self.viewModel = TtuDotViewModel(sharedTabInfo: sharedTabInfo)
