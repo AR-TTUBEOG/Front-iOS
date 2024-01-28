@@ -9,13 +9,17 @@ import Foundation
 import SwiftUI
 
 class TtuDotViewModel: ObservableObject {
+    //MARK: - Property
     @Published var angle: Double = 0
     @Published var sections: [TtuDotSection]
-    
-    
-    init() {
+    @Published var selectedSection: String?
+
+    //MARK: - Init
+    /// 뚜닷에 사용되는 모델 초기화 및 정의
+    /// - Parameter sharedTabInfo: 선택된 탭을 추적하고 전달하기 위한 파라미터
+    init(sharedTabInfo: SharedTabInfo) {
         sections = [
-            TtuDotSection(command: AddLocationCommand(), title: "장소 추가", imageName: "AddLocation"),
+            TtuDotSection(command: AddLocationCommand(sharedTabInfo: sharedTabInfo), title: "장소 추가", imageName: "AddLocation"),
             TtuDotSection(command: ARCommand(), title: "AR 보기", imageName: "ARBtn"),
             TtuDotSection(command: MyTicketCommand(), title: "내 쿠폰", imageName: "MyTicket"),
             TtuDotSection(command: SettingsCommand(), title: "마이 페이지", imageName: "myPage"),

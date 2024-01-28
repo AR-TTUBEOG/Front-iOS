@@ -10,11 +10,14 @@ import SwiftUI
 
 /// 뚜닷의 기본 원을 만들고, 그 중심에 회전 각도를 더한다.
 struct TtuDotShape: View {
+    
+    //MARK: - Property
     var sections: [TtuDotSection]
     let action: (Int) -> Void
     var radius: CGFloat
     var center: CGPoint
     
+    //MARK: - Body
     var body: some View {
         ZStack{
             Circle()

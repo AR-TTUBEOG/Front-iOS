@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		480448722B4B0D52008A4638 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 480448712B4B0D52008A4638 /* SearchViewModel.swift */; };
 		480448742B4B0E08008A4638 /* SearchControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 480448732B4B0E08008A4638 /* SearchControl.swift */; };
+		481B909E2B6677F300D366A7 /* CloseCancelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481B909D2B6677F300D366A7 /* CloseCancelButton.swift */; };
 		482DB6B72B5416FF005538DE /* PlaceSettingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482DB6B62B5416FF005538DE /* PlaceSettingModel.swift */; };
 		482DB6B92B541797005538DE /* PlaceSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482DB6B82B541797005538DE /* PlaceSettingsViewModel.swift */; };
 		482DB6BB2B541E7E005538DE /* PlaceSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482DB6BA2B541E7E005538DE /* PlaceSettingView.swift */; };
@@ -50,6 +51,7 @@
 		48A12C202B5CF78E00E51200 /* NicknameRedundancyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A12C1F2B5CF78E00E51200 /* NicknameRedundancyModel.swift */; };
 		48A12C222B5CF84100E51200 /* NicknameRedundancyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A12C212B5CF84100E51200 /* NicknameRedundancyService.swift */; };
 		48A6C6B62B5F800900CFF763 /* KeyChainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A6C6B52B5F800900CFF763 /* KeyChainManager.swift */; };
+		48ADCAA52B6645BD00765EDB /* SharedTabInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48ADCAA42B6645BD00765EDB /* SharedTabInfo.swift */; };
 		48C3D9DE2B554D3700E3F905 /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = 48C3D9DD2B554D3700E3F905 /* PopupView */; };
 		48CC6BCB2B6526420032A5E2 /* WalkPlaceRegister.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48CC6BCA2B6526420032A5E2 /* WalkPlaceRegister.swift */; };
 		48CC6BCD2B6526560032A5E2 /* MarketPlaceRegister.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48CC6BCC2B6526560032A5E2 /* MarketPlaceRegister.swift */; };
@@ -90,6 +92,7 @@
 /* Begin PBXFileReference section */
 		480448712B4B0D52008A4638 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		480448732B4B0E08008A4638 /* SearchControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchControl.swift; sourceTree = "<group>"; };
+		481B909D2B6677F300D366A7 /* CloseCancelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseCancelButton.swift; sourceTree = "<group>"; };
 		482DB6B62B5416FF005538DE /* PlaceSettingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceSettingModel.swift; sourceTree = "<group>"; };
 		482DB6B82B541797005538DE /* PlaceSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceSettingsViewModel.swift; sourceTree = "<group>"; };
 		482DB6BA2B541E7E005538DE /* PlaceSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceSettingView.swift; sourceTree = "<group>"; };
@@ -126,6 +129,7 @@
 		48A12C1F2B5CF78E00E51200 /* NicknameRedundancyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameRedundancyModel.swift; sourceTree = "<group>"; };
 		48A12C212B5CF84100E51200 /* NicknameRedundancyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameRedundancyService.swift; sourceTree = "<group>"; };
 		48A6C6B52B5F800900CFF763 /* KeyChainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainManager.swift; sourceTree = "<group>"; };
+		48ADCAA42B6645BD00765EDB /* SharedTabInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedTabInfo.swift; sourceTree = "<group>"; };
 		48CC6BCA2B6526420032A5E2 /* WalkPlaceRegister.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkPlaceRegister.swift; sourceTree = "<group>"; };
 		48CC6BCC2B6526560032A5E2 /* MarketPlaceRegister.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketPlaceRegister.swift; sourceTree = "<group>"; };
 		48CC6BCF2B652B940032A5E2 /* PlaceselectType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceselectType.swift; sourceTree = "<group>"; };
@@ -148,7 +152,7 @@
 		6C7239F32B5C2A720082F12D /* ManagePlaceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagePlaceViewModel.swift; sourceTree = "<group>"; };
 		6C7239F72B5C2AE10082F12D /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
 		6C77ECBB2B5A486700C56890 /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
-		6CAF06D12B58FCD200526BC8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		6CAF06D12B58FCD200526BC8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6CAF06D22B5903B300526BC8 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		6CC4DDB62B55512F0080E7E8 /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
 		6CC4DDFE2B5687E80080E7E8 /* CouponView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponView.swift; sourceTree = "<group>"; };
@@ -249,6 +253,7 @@
 		483612B42B4ED04C00E0B45A /* GlobalTabBar */ = {
 			isa = PBXGroup;
 			children = (
+				48ADCAA42B6645BD00765EDB /* SharedTabInfo.swift */,
 				483612B52B4ED09000E0B45A /* TabBarModel.swift */,
 				483612B92B4ED14500E0B45A /* MainViewControl.swift */,
 			);
@@ -295,6 +300,7 @@
 			children = (
 				48CC6BCE2B652B720032A5E2 /* Title */,
 				488FA70E2B650F900030CE66 /* ButtonType */,
+				481B909D2B6677F300D366A7 /* CloseCancelButton.swift */,
 			);
 			path = Duplicated;
 			sourceTree = "<group>";
@@ -440,8 +446,8 @@
 		48FF93912B43BA0600202F45 /* ttubeokAR */ = {
 			isa = PBXGroup;
 			children = (
-				486C2FE82B592A3100C88B04 /* Login */,
 				6CAF06D12B58FCD200526BC8 /* Info.plist */,
+				486C2FE82B592A3100C88B04 /* Login */,
 				483820DA2B4BE5A900C3FB14 /* Global */,
 				48FF93A02B43BA1400202F45 /* ExploreView */,
 				48FF93A22B43BA4500202F45 /* MapView */,
@@ -729,6 +735,7 @@
 				48CC6BCD2B6526560032A5E2 /* MarketPlaceRegister.swift in Sources */,
 				6CAF06D32B5903B300526BC8 /* Coordinator.swift in Sources */,
 				480448722B4B0D52008A4638 /* SearchViewModel.swift in Sources */,
+				481B909E2B6677F300D366A7 /* CloseCancelButton.swift in Sources */,
 				488E25462B4D4E1C005D8D52 /* FontExtension.swift in Sources */,
 				6C7239F22B5C12E30082F12D /* ManagePlaceSettingView.swift in Sources */,
 				483820DF2B4BE61F00C3FB14 /* TtuDotModel.swift in Sources */,
@@ -749,6 +756,7 @@
 				483820E22B4BE7C100C3FB14 /* ARCommand.swift in Sources */,
 				CA3A391A2B55753800BEB7DE /* RecommendedSpaceCard.swift in Sources */,
 				486C2FEB2B592A4B00C88B04 /* NicknameSettingLogin.swift in Sources */,
+				48ADCAA52B6645BD00765EDB /* SharedTabInfo.swift in Sources */,
 				6C7239ED2B5BA9090082F12D /* SettingViewModel.swift in Sources */,
 				6C6395242B590BBE00A20B1B /* TestMapView.swift in Sources */,
 				6C7239F42B5C2A720082F12D /* ManagePlaceViewModel.swift in Sources */,
@@ -924,7 +932,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ttubeokAR/Preview Content\"";
-				DEVELOPMENT_TEAM = 8B8B4462NV;
+				DEVELOPMENT_TEAM = 9Q2737497T;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				ENABLE_USER_SELECTED_FILES = readwrite;
@@ -945,7 +953,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = app.ttubeokAR;
+				PRODUCT_BUNDLE_IDENTIFIER = com.app.ttubeog;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -965,7 +973,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ttubeokAR/Preview Content\"";
-				DEVELOPMENT_TEAM = 8B8B4462NV;
+				DEVELOPMENT_TEAM = 9Q2737497T;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				ENABLE_USER_SELECTED_FILES = readwrite;
@@ -986,7 +994,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = app.ttubeokAR;
+				PRODUCT_BUNDLE_IDENTIFIER = com.app.ttubeog;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;

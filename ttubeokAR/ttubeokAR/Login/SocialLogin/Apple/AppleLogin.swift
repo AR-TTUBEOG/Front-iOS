@@ -10,9 +10,11 @@ import AuthenticationServices
 
 /// 애플 로그인 기능 버튼
 struct AppleLogin: View {
+    //MARK: - Property
     var transitionToNext: () -> Void
     @ObservedObject var appleLogionManager = AppleLoginManager()
     
+    //MARK: - Body
     var body: some View {
         appleLoginBtn
             .padding(.top, 19)
@@ -23,6 +25,7 @@ struct AppleLogin: View {
             }
     }
     
+    //MARK: - AppleLoginView
     private var appleLoginBtn: some View {
         Button(action: {
             appleLogionManager.signInWithApple()

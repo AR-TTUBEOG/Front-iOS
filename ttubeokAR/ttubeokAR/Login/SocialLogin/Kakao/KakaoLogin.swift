@@ -10,9 +10,12 @@ import SwiftUI
 
 /// 카카오 로그인 버튼 구현
 struct KakaoLogin: View {
+    
+    //MARK: - Property
     var transitionToNext: () -> Void
     @ObservedObject var kakaoLoginManager = KakaoLoginManager()
     
+    //MARK: - Body
     var body: some View {
         kakaoBtn
             .padding(.top, 20)
@@ -22,7 +25,7 @@ struct KakaoLogin: View {
                 }
             }
     }
-    
+    //MARK: - KakaoLoginView
     private var kakaoBtn: some View {
         Button(action: {
             kakaoLoginManager.loginAndSendToken()

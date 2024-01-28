@@ -13,30 +13,38 @@ import SwiftUI
 struct TtuDotButton: View {
     
     //MARK: - Property
-    @ObservedObject var viewModel = TtuDotViewModel()
+    var sharedTabInfo: SharedTabInfo
+    @ObservedObject var viewModel: TtuDotViewModel
     @State private var previousAngle: Angle = .zero
     @State private var rotationVelocity: Double = 0
     
+    /// viewModel과 sharedTabInfo 초기화
+    /// - Parameter sharedTabInfo: 선택된 탭 번호 앱 사이클에 공유하기 위한 클래스
+    init(sharedTabInfo : SharedTabInfo) {
+        self.sharedTabInfo = sharedTabInfo
+        self.viewModel = TtuDotViewModel(sharedTabInfo: sharedTabInfo)
+    }
+    
     //MARK: - Body
     var body: some View {
-        ZStack{
-            GeometryReader { geometry in
-                let center = CGPoint(x: geometry.size.width / 2, y: geometry.size.height * ( 1 - 0.075))
-                let radius = min(geometry.size.width, geometry.size.height) / 2 * 0.7
-                
-                ZStack {
-                    createTtuDotShape(geometry: geometry, radius: radius, center: center)
-                    createCenterCircle(geometry: geometry)
-                    createSectionViews(gemetry: geometry)
+            ZStack{
+                GeometryReader { geometry in
+                    let center = CGPoint(x: geometry.size.width / 2, y: geometry.size.height * ( 1 - 0.075))
+                    let radius = min(geometry.size.width, geometry.size.height) / 2 * 0.7
+                    
+                    ZStack {
+                        createTtuDotShape(geometry: geometry, radius: radius, center: center)
+                        createCenterCircle(geometry: geometry)
+                        createSectionViews(gemetry: geometry)
+                    }
+                    .gesture(createDragGesture(center: center))
+                    
                 }
-                .gesture(createDragGesture(center: center))
-                
             }
-        }
-        .onChange(of: viewModel.angle) { oldValue, newValue in
-            let angleDiff = newValue - oldValue
-            rotationVelocity = angleDiff
-        }
+            .onChange(of: viewModel.angle) { oldValue, newValue in
+                let angleDiff = newValue - oldValue
+                rotationVelocity = angleDiff
+            }
     }
     
     //MARK: - TtuDotButton View
@@ -130,12 +138,5 @@ struct TtuDotButton: View {
                 }
                 previousAngle = .zero
             }
-    }
-}
-
-//MARK: - Preview
-struct TtuDotButton_Previews: PreviewProvider {
-    static var previews: some View {
-        TtuDotButton()
     }
 }

@@ -9,9 +9,23 @@ import SwiftUI
 
 struct PlaceRegistrationView: View {
     
+    //MARK: - Property
+    var lastedSelectedTab: Int
+    
+    @State private var showSelectPlaceView = false
+    
     //MARK: - Body
     var body: some View {
-        allView
+        NavigationStack {
+            allView
+                .navigationDestination(isPresented: $showSelectPlaceView) {
+                    WhichSelectPlaceView()
+                }
+            //TODO: - 버튼 커스텀하여 사용하기
+            /**
+             루트뷰로 나가기 위해 NavigationStack으로 뷰 전환 시 생성되는 버튼 사용하지 말것!
+             */
+        }
     }
     
     //MARK: - PlaceRegistrationView
@@ -22,6 +36,7 @@ struct PlaceRegistrationView: View {
             ZStack(alignment: .top) {
                 backgroundView
                 blackOpacityView
+                CloseCancelButton(lastedSelectedTab: lastedSelectedTab)
                 TitleView(
                     titleText: "1분만에 장소를 \n 등록해보세요",
                     highlightText: "장소",
@@ -29,7 +44,7 @@ struct PlaceRegistrationView: View {
                     spacing: 30)
                 .padding(.top, 94)
                 nextButton
-                    .position(x: geometry.size.width/2, y: geometry.size.height * 0.95)
+                    .position(x: geometry.size.width/2, y: geometry.size.height * 0.93)
             }
         }
     }
@@ -55,22 +70,20 @@ struct PlaceRegistrationView: View {
     /// 다음 뷰로 넘어가는 버튼
     private var nextButton: some View {
         Button(action: {
-            print("hello")
+            showSelectPlaceView = true
         }, label: {
             Text("장소 등록하기")
                 .font(.sandol(type: .medium, size: 20))
                 .multilineTextAlignment(.center)
                 .foregroundStyle(Color.white)
-                .frame(maxWidth: 335, maxHeight: 55)
+                .frame(maxWidth: 335, maxHeight: 42)
                 .background((RoundedRectangle(cornerRadius: 19).fill(Color.primary03)))
         })
     }
 }
 
-
-
-
-
-#Preview {
-    PlaceRegistrationView()
+struct PlaceRegistrationView_Preview: PreviewProvider {
+    static var previews: some View {
+        PlaceRegistrationView(lastedSelectedTab: 2)
+    }
 }
