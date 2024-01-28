@@ -41,6 +41,8 @@ extension AppleLoginManager: ASAuthorizationControllerDelegate {
                    )
                    self.loginViewModel.sendAppleToken(userData: userData)
                    self.isLoggedIn = true
+                   print("authorizationCode : \(userData.authorizationCode ?? "")")
+                   print("identityToken : \(userData.identityToken ?? "")")
                }
            }
        }

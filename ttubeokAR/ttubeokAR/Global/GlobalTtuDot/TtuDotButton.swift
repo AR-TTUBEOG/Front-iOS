@@ -13,9 +13,15 @@ import SwiftUI
 struct TtuDotButton: View {
     
     //MARK: - Property
-    @ObservedObject var viewModel = TtuDotViewModel()
+    var sharedTabInfo: SharedTabInfo
+    @ObservedObject var viewModel: TtuDotViewModel
     @State private var previousAngle: Angle = .zero
     @State private var rotationVelocity: Double = 0
+    
+    init(sharedTabInfo : SharedTabInfo) {
+        self.sharedTabInfo = sharedTabInfo
+        self.viewModel = TtuDotViewModel(sharedTabInfo: sharedTabInfo)
+    }
     
     //MARK: - Body
     var body: some View {
@@ -130,12 +136,5 @@ struct TtuDotButton: View {
                 }
                 previousAngle = .zero
             }
-    }
-}
-
-//MARK: - Preview
-struct TtuDotButton_Previews: PreviewProvider {
-    static var previews: some View {
-        TtuDotButton()
     }
 }

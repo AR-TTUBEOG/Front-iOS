@@ -16,12 +16,16 @@ struct MainViewControl: View {
      changeTabView : 현재 뷰가 전환이 가능한가 불가능한가 정하기 위함 -> 뚜닷 버튼 때문에 필요
      ttuDOtButtonAngle : 뚜닷 버튼이 나타날 때 회전 애니메이션으로 나타나도록 하기 위함
      */
-    
     @StateObject private var viewModel = SearchViewModel()
-    @State private var selectedTab = 1
+    @State private var selectedTab: Int
     @State private var showTtuDotButton = false
     @State private var changeTabView = true
     @State private var ttuDotButtonAngle: Double = -90
+    @EnvironmentObject var sharedTabInfo: SharedTabInfo
+    
+    init(selectedTab: Int = 1) {
+        _selectedTab = State(initialValue:  selectedTab)
+    }
     
     //MARK: Body
     var body: some View {
@@ -58,7 +62,7 @@ struct MainViewControl: View {
                         }
                     }
                 VStack {
-                    TtuDotButton()
+                    TtuDotButton(sharedTabInfo: sharedTabInfo)
                         .rotationEffect(.degrees(ttuDotButtonAngle))
                         .opacity(showTtuDotButton ? 1 : 0)
                         .onAppear {
@@ -98,6 +102,7 @@ struct MainViewControl: View {
     /// 현재 상태의 반대가 되는 뷰를 메인 뷰로 부르기 위함
     private func handleTap() {
         selectedTab = selectedTab == 1 ? 2 : 1
+        sharedTabInfo.currentTab = selectedTab
     }
     
     /// 현재 뷰와 반대가 되는 뷰를 화면에 업데이트 한다.

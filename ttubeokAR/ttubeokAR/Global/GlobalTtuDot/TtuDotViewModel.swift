@@ -16,9 +16,9 @@ class TtuDotViewModel: ObservableObject {
     @Published var showPlaceRegistrationView = false
 
     //MARK: - Init
-    init() {
+    init(sharedTabInfo: SharedTabInfo) {
         sections = [
-            TtuDotSection(command: AddLocationCommand(), title: "장소 추가", imageName: "AddLocation"),
+            TtuDotSection(command: AddLocationCommand(sharedTabInfo: sharedTabInfo), title: "장소 추가", imageName: "AddLocation"),
             TtuDotSection(command: ARCommand(), title: "AR 보기", imageName: "ARBtn"),
             TtuDotSection(command: MyTicketCommand(), title: "내 쿠폰", imageName: "MyTicket"),
             TtuDotSection(command: SettingsCommand(), title: "마이 페이지", imageName: "myPage"),
