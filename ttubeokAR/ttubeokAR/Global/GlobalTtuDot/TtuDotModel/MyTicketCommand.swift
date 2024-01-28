@@ -8,6 +8,8 @@
 import Foundation
 
 class MyTicketCommand: TtuDotModel {
+    var onExecute: (() -> Void)?
+    
     func execute() {
         print("티켓 보관함 버튼입니다")
     }

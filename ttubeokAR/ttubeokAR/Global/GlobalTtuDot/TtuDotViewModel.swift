@@ -9,10 +9,13 @@ import Foundation
 import SwiftUI
 
 class TtuDotViewModel: ObservableObject {
+    //MARK: - Property
     @Published var angle: Double = 0
     @Published var sections: [TtuDotSection]
-    
-    
+    @Published var selectedSection: String?
+    @Published var showPlaceRegistrationView = false
+
+    //MARK: - Init
     init() {
         sections = [
             TtuDotSection(command: AddLocationCommand(), title: "장소 추가", imageName: "AddLocation"),

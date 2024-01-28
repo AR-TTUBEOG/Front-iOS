@@ -20,7 +20,6 @@ struct PlaceRegistrationView: View {
                     WhichSelectPlaceView()
                 }
         }
-        
     }
     
     //MARK: - PlaceRegistrationView

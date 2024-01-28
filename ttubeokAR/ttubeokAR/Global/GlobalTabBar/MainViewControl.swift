@@ -25,11 +25,11 @@ struct MainViewControl: View {
     
     //MARK: Body
     var body: some View {
-        ZStack {
-            mainTabView
-            searchControl
-            tabBarButton
-        }
+            ZStack {
+                mainTabView
+                searchControl
+                tabBarButton
+            }
     }
     
     //MARK: - Tab View
@@ -37,11 +37,11 @@ struct MainViewControl: View {
     /// 메인뷰의 변화를 위함 :: ExploreView, MainView의 전환
     private var mainTabView: some View {
         ZStack(alignment: .center) {
-                if selectedTab == 1 {
-                    ExploreViewControl()
-                } else if selectedTab == 2 {
-                    MapView()
-                }
+            if selectedTab == 1 {
+                ExploreViewControl()
+            } else if selectedTab == 2 {
+                MapView()
+            }
         }
     }
     
@@ -73,18 +73,18 @@ struct MainViewControl: View {
             
             VStack {
                 Spacer()
-                    Button(action: {
-                        if self.changeTabView == true {
-                            self.handleTap()
-                        }
-                    }) {
-                        Image(viewModel.buttonImage)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(maxWidth: 81, maxHeight: 42)
+                Button(action: {
+                    if self.changeTabView == true {
+                        self.handleTap()
                     }
-                    .opacity(showTtuDotButton ? 0 : 1)
-                    .simultaneousGesture(longPressGesture)
+                }) {
+                    Image(viewModel.buttonImage)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(maxWidth: 81, maxHeight: 42)
+                }
+                .opacity(showTtuDotButton ? 0 : 1)
+                .simultaneousGesture(longPressGesture)
             }
         }
     }

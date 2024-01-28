@@ -28,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         KakaoSDK.initSDK(appKey: "1c831262e8deaf4f7823434057f15384")
 
         // Create the SwiftUI view that provides the window contents.
-        let contentView = PlaceRegistrationView()
+        let contentView = MainViewControl()
 
         // Use a UIHostingController as window root view controller.
         let window = UIWindow(frame: UIScreen.main.bounds)
@@ -37,6 +37,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window.makeKeyAndVisible()
         return true
     }
+    /***/
+    func changeRootViewController(_ viewController: UIViewController, animated: Bool = true) {
+          guard let window = self.window else { return }
+
+          if animated {
+              UIView.transition(with: window, duration: 0.5, options: .transitionFlipFromRight, animations: {
+                  window.rootViewController = viewController
+              })
+          } else {
+              window.rootViewController = viewController
+          }
+      }
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

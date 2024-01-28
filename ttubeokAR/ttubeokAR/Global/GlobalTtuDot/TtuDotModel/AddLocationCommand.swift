@@ -6,9 +6,15 @@
 //
 
 import Foundation
+import SwiftUI
 
 class AddLocationCommand: TtuDotModel {
+    var onExecute: (() -> Void)?
+    
     func execute() {
-        print("장소 추가 버튼입니다!")
+        onExecute?()
+        let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        let newRootView = UIHostingController(rootView: PlaceRegistrationView())
+        appDelegate?.changeRootViewController(newRootView)
     }
 }

@@ -12,6 +12,7 @@ struct WhichSelectPlaceView: View {
     @State private var nextView = false
     @State private var isWalkChecked = false
     @State private var isMarketChecked = false
+    @Environment(\.presentationMode) var presentationMode
     
     //MARK: - Body
     var body: some View {
@@ -86,7 +87,7 @@ struct WhichSelectPlaceView: View {
     private var changeViewButton: some View {
         HStack(alignment: .bottom, spacing: 18) {
             Button(action: {
-                print("이전으로 가기")
+                presentationMode.wrappedValue.dismiss()
             }) {
                 Text("이전")
                     .font(.sandol(type: .medium, size: 20))
