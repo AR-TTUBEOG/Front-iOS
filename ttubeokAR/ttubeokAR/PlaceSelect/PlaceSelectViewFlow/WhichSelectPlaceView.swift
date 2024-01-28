@@ -16,18 +16,16 @@ struct WhichSelectPlaceView: View {
     
     //MARK: - Body
     var body: some View {
-        NavigationStack {
-            allView
-                .navigationDestination(isPresented: $nextView) {
-                    if isWalkChecked {
-                        WalkPlaceRegister()
-                    } else if isMarketChecked {
-                        MarketPlaceRegister()
-                    } else {
-                        EmptyView().hidden()
-                    }
+        allView
+            .navigationDestination(isPresented: $nextView) {
+                if isWalkChecked {
+                    WalkPlaceRegister()
+                } else if isMarketChecked {
+                    MarketPlaceRegister()
+                } else {
+                    EmptyView().hidden()
                 }
-        }
+            }
     }
     
     //MARK: - WhichSelectPlaceView
@@ -37,30 +35,9 @@ struct WhichSelectPlaceView: View {
             ZStack(alignment: .top) {
                 backgroundView
                 blackOpacityView
-                VStack(alignment: .center, spacing: 39) {
-                    TitleView(
-                        titleText: "어떤 장소를 \n 등록하시겠어요 ?",
-                        highlightText: "등록",
-                        subtitleText: nil,
-                        spacing: 0)
-                    .padding(.top, 94)
-                    HStack(alignment: .center) {
-                        PlaceSelect(type: .walk, isChecked: $isWalkChecked)
-                        PlaceSelect(type: .market, isChecked: $isMarketChecked)
-                    }
-                    .onChange(of: isWalkChecked) { oldValue, newValue in
-                        if newValue {
-                            isMarketChecked = false
-                        }
-                    }
-                    .onChange(of: isMarketChecked) { oldValue, newValue in
-                        if newValue {
-                            isWalkChecked = false
-                        }
-                    }
-                }
+                centerChoicePlace
                 changeViewButton
-                    .position(x: geometry.size.width / 2, y: geometry.size.height * 0.95)
+                    .position(x: geometry.size.width / 2, y: geometry.size.height * 0.93)
             }
         }
     }
@@ -83,6 +60,32 @@ struct WhichSelectPlaceView: View {
             .background(Color(red: 0.09, green: 0.08, blue: 0.12).opacity(0.3))
     }
     
+    /// 화면 가운데 표시될 뷰로써, 장소 선택 버튼이 주어진다.
+    private var centerChoicePlace: some View {
+        VStack(alignment: .center, spacing: 39) {
+            TitleView(
+                titleText: "어떤 장소를 \n 등록하시겠어요 ?",
+                highlightText: "등록",
+                subtitleText: nil,
+                spacing: 0)
+            .padding(.top, 94)
+            HStack(alignment: .center) {
+                PlaceSelect(type: .walk, isChecked: $isWalkChecked)
+                PlaceSelect(type: .market, isChecked: $isMarketChecked)
+            }
+            .onChange(of: isWalkChecked) { oldValue, newValue in
+                if newValue {
+                    isMarketChecked = false
+                }
+            }
+            .onChange(of: isMarketChecked) { oldValue, newValue in
+                if newValue {
+                    isWalkChecked = false
+                }
+            }
+        }
+    }
+    
     /// 화면 전환 버튼
     private var changeViewButton: some View {
         HStack(alignment: .bottom, spacing: 18) {
@@ -92,7 +95,7 @@ struct WhichSelectPlaceView: View {
                 Text("이전")
                     .font(.sandol(type: .medium, size: 20))
                     .foregroundColor(Color.textPink)
-                    .frame(maxWidth: 154, maxHeight: 39.53)
+                    .frame(maxWidth: 154, maxHeight: 42)
                     .contentShape(Rectangle())
             }
             .background(Color(red: 0.25, green: 0.24, blue: 0.33))

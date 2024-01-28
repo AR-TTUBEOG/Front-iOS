@@ -27,6 +27,7 @@ struct PlaceSelect: View {
     
     //MARK: - PlaceSelectView
     
+    /// 산책 또는 매장 등록에 대한 타이틀
     private var placeTitle: some View {
         Text(title)
             .frame(maxWidth: 95, maxHeight: 21)
@@ -36,6 +37,7 @@ struct PlaceSelect: View {
     }
     
     @ViewBuilder
+    /// 산책 또는 매장 등록에 대한 아이콘
     private var selectButton: some View {
         switch type {
         case .walk:
@@ -46,6 +48,7 @@ struct PlaceSelect: View {
     }
     
     @ViewBuilder
+    /// 산책 또는 매장 등록에 대한 서브 타이틀
     private var placeSubtitle: some View {
         Text(customAttributedString(for: subtitle,highlight: highlight))
             .font(.sandol(type: .bold, size: 15))

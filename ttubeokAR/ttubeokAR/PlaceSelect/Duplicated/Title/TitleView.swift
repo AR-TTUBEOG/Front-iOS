@@ -20,6 +20,7 @@ struct TitleView: View {
     }
     
     @ViewBuilder
+    /// 중복되는 상단 타이틀 작성
     private var title: some View {
         VStack(alignment: .center, spacing: spacing) {
             Text(customAttributedSting(for: titleText, highlight: highlightText))
@@ -38,6 +39,11 @@ struct TitleView: View {
         }
     }
     
+    /// 타이틀의 특정 단어에 대한 스타일 지정
+    /// - Parameters:
+    ///   - text: 전체 텍스트 값
+    ///   - highlight: 전체 텍스트 중 일부 스타일 지정을 위한 텍스트
+    /// - Returns: 스타일 지정에 대한 리턴값
     private func customAttributedSting(for text: String, highlight: String) -> AttributedString {
         var attr = AttributedString(text)
         if let range = attr.range(of: highlight) {
