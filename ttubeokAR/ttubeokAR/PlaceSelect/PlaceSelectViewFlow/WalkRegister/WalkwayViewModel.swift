@@ -21,7 +21,7 @@ class WalkwayViewModel: ObservableObject {
     @Published var firstPlaceName: String = ""
     @Published var secondAddressName: String = ""
     @Published var secondDetailAddress: String = ""
-    
+    @Published var fourthWalkwayDescription: String = ""
     //MARK: - Function
     /// 앨범 또는 카메라에서 사진을 가져와 추가하는 로직
     /// - Parameter image: 앨범 또는 카메라로 추가한 이미지

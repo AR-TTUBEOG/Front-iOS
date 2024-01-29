@@ -65,7 +65,7 @@ struct WhichSelectPlaceView: View {
         VStack(alignment: .center, spacing: 39) {
             TitleView(
                 titleText: "어떤 장소를 \n 등록하시겠어요 ?",
-                highlightText: "등록",
+                highlightText: ["등록"],
                 subtitleText: nil,
                 subtitleSize: nil,
                 titleWidth: 339,

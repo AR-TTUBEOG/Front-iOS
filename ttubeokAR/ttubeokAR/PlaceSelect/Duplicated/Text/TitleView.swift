@@ -10,7 +10,7 @@ import SwiftUI
 struct TitleView: View {
     //MARK: - Property
     let titleText: String
-    let highlightText: String
+    let highlightText: [String]
     let subtitleText: String?
     let subtitleSize: CGFloat?
     let titleWidth: CGFloat
@@ -31,7 +31,7 @@ struct TitleView: View {
     /// 중복되는 상단 타이틀 작성
     private var title: some View {
         VStack(alignment: .center, spacing: spacing) {
-            Text(customAttributedSting(for: titleText, highlight: highlightText))
+            Text(customAttributedSting(for: titleText, highlights: highlightText))
                 .font(.sandol(type: .bold, size: 28))
                 .frame(maxWidth: titleWidth, maxHeight: titleHeight, alignment: frameAlignment)
                 .foregroundStyle(Color.textPink)
@@ -40,10 +40,10 @@ struct TitleView: View {
             if let subtitle = subtitleText {
                 Text(subtitle)
                     .font(.sandol(type: .light, size: subtitleSize ?? 0))
-                    .multilineTextAlignment(textAlignment)
                     .lineSpacing(1.2)
                     .frame(maxWidth: subtitleWidth ?? 0, maxHeight: subtitleHeight ?? 0, alignment: frameAlignment)
                     .foregroundColor(Color(red: 0.92, green: 0.9, blue: 0.97).opacity(0.8))
+                    .multilineTextAlignment(textAlignment)
             }
         }
     }
@@ -53,11 +53,13 @@ struct TitleView: View {
     ///   - text: 전체 텍스트 값
     ///   - highlight: 전체 텍스트 중 일부 스타일 지정을 위한 텍스트
     /// - Returns: 스타일 지정에 대한 리턴값
-    private func customAttributedSting(for text: String, highlight: String) -> AttributedString {
+    private func customAttributedSting(for text: String, highlights: [String]) -> AttributedString {
         var attr = AttributedString(text)
-        if let range = attr.range(of: highlight) {
-            attr[range].font = .sandol(type: .bold, size: 28)
-            attr[range].foregroundColor = .primary03
+        for highlight in highlights {
+            if let range = attr.range(of: highlight) {
+                attr[range].font = .sandol(type: .bold, size: 28)
+                attr[range].foregroundColor = .primary03
+            }
         }
         return attr
     }
