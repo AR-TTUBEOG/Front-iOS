@@ -21,7 +21,7 @@ struct WalkwayPageContent: View {
     private let spacing: CGFloat = 10
     
     //MARK: - TextFieldShame
-    private let horizaontalPadding: CGFloat = 15
+    private let horizontalPadding: CGFloat = 15
     private let verticalPadding: CGFloat = 5
     
     
@@ -55,13 +55,14 @@ struct WalkwayPageContent: View {
     
     //MARK: - WalkwayFirstView
     
-    /// 장소이름 커스텀 텍스트 필드
+    /// 첫 번째장소이름 커스텀 텍스트 필드
     private var firstPlaceInputTextField: some View {
         CustomTextField(text: $viewModel.firstPlaceName,
                         placeholder: "예) 낙산공원",
                         fontSize: 20,
                         cornerSize: cornerSize,
-                        horizaontalPadding: horizaontalPadding,
+                        horizontalPadding: horizontalPadding,
+                        trailingHorizontalPadding: horizontalPadding,
                         verticalPadding: verticalPadding,
                         maxWidth: 345,
                         maxHeight: 45,
@@ -91,13 +92,14 @@ struct WalkwayPageContent: View {
     
     //MARK: - WalkwaySecondView
     
-    /// 주소검색 커스텀 텍스트 필드
+    /// 두 번째 주소검색 커스텀 텍스트 필드
     private var secondAddressInputTextField: some View {
         CustomTextField(text: $viewModel.secondAddressName,
                         placeholder: "주소를 검색해주세요.",
                         fontSize: 20,
                         cornerSize: cornerSize,
-                        horizaontalPadding: horizaontalPadding,
+                        horizontalPadding: horizontalPadding,
+                        trailingHorizontalPadding: horizontalPadding + 35,
                         verticalPadding: verticalPadding,
                         maxWidth: 275,
                         maxHeight: 45,
@@ -105,13 +107,14 @@ struct WalkwayPageContent: View {
                         onSearch: {})
     }
     
-    /// 상세 주소 입력
+    /// 두 번째 상세 주소 입력
     private var secondDetailAddressInputTextField: some View {
         CustomTextField(text: $viewModel.secondDetailAddress,
                         placeholder: "상세주소를 입력해주세요.",
                         fontSize: 20,
                         cornerSize: cornerSize,
-                        horizaontalPadding: horizaontalPadding,
+                        horizontalPadding: horizontalPadding,
+                        trailingHorizontalPadding: horizontalPadding + 35,
                         verticalPadding: verticalPadding,
                         maxWidth: 332,
                         maxHeight: 45,
@@ -171,17 +174,24 @@ struct WalkwayPageContent: View {
     //MARK: - FourthView
     
     //TODO: - 설명 텍스트 필드 작성할 것!
+    
+    /// 네 번째 설명 텍스트 필드
     private var fourthWalkwayDescription: some View {
         CustomTextField(text: $viewModel.fourthWalkwayDescription,
                         placeholder: "예) 가족들이랑 걷기 좋은 오솔길",
                         fontSize: 15,
                         cornerSize: cornerSize,
-                        horizaontalPadding: horizaontalPadding,
-                        verticalPadding: verticalPadding,
+                        horizontalPadding: 16,
+                        trailingHorizontalPadding: 16,
+                        verticalPadding: 12,
                         maxWidth: 314,
                         maxHeight: 102,
                         showSearchIcon: false,
-                        onSearch: {})
+                        onSearch: {},
+                        alignment: .topLeading,
+                        axis: .vertical,
+                        maxLength: 50
+        )
     }
     
     /// 네 번째 안내글 뷰

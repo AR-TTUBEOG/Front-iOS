@@ -14,16 +14,53 @@ struct CustomTextField: View {
     @FocusState private var isTextFocused: Bool
     
     
-    //MARK: - Shame
+    //MARK: - inputProperty
     let placeholder: String
     let fontSize: CGFloat
     let cornerSize: CGFloat
-    let horizaontalPadding: CGFloat
+    let horizontalPadding: CGFloat
+    let trailingHorizontalPadding: CGFloat
     let verticalPadding: CGFloat
     let maxWidth: CGFloat
     let maxHeight: CGFloat
     var showSearchIcon: Bool
     var onSearch: () -> Void
+    var alignment: Alignment
+    var axis: Axis
+    var maxLength: Int?
+    //MARK: - init
+    
+    init(text: Binding<String>,
+         isTextFocused: Bool = false,
+         placeholder: String,
+         fontSize: CGFloat,
+         cornerSize: CGFloat,
+         horizontalPadding: CGFloat,
+         trailingHorizontalPadding: CGFloat,
+         verticalPadding: CGFloat,
+         maxWidth: CGFloat,
+         maxHeight: CGFloat,
+         showSearchIcon: Bool,
+         onSearch: @escaping () -> Void,
+         alignment: Alignment = .leading,
+         axis: Axis = .horizontal,
+         maxLength: Int? = nil
+        ) {
+            self._text = text
+            self.placeholder = placeholder
+            self.fontSize = fontSize
+            self.cornerSize = cornerSize
+            self.horizontalPadding = horizontalPadding
+            self.trailingHorizontalPadding = trailingHorizontalPadding
+            self.verticalPadding = verticalPadding
+            self.maxWidth = maxWidth
+            self.maxHeight = maxHeight
+            self.showSearchIcon = showSearchIcon
+            self.onSearch = onSearch
+            self.alignment = alignment
+            self.axis = axis
+            self.maxLength = maxLength
+    }
     
     //MARK: - Body
     var body: some View {
@@ -31,14 +68,17 @@ struct CustomTextField: View {
     }
     
     //MARK: - CustomOneLineTextFieldView
+    /// 텍스트 필드 생성
     private var inputOneLineTextField: some View {
-        ZStack(alignment: .leading) {
-            TextField("", text: $text)
+        ZStack(alignment: alignment) {
+            TextField("", text: $text, axis: axis)
                 .font(.sandol(type: .regular, size: fontSize))
                 .foregroundStyle(Color.textPink)
-                .frame(maxWidth: maxWidth, maxHeight: maxHeight, alignment: .leading)
+                .frame(maxWidth: maxWidth, maxHeight: maxHeight, alignment: alignment)
                 .focused($isTextFocused)
-                .padding(.leading, horizaontalPadding)
+                .padding(.leading, horizontalPadding)
+                .padding(.trailing, trailingHorizontalPadding)
+                .padding([.top, .bottom], verticalPadding)
                 .background(Color(red: 0.25, green: 0.24, blue: 0.37))
                 .clipShape(.rect(cornerRadius: cornerSize))
                 .shadow(color: .black.opacity(0.15), radius: 2.5, x: 0, y: 1)
@@ -47,18 +87,24 @@ struct CustomTextField: View {
                         .inset(by: 0.5)
                         .stroke(Color.primary01, lineWidth: 1)
                 )
-                inputPlaceholder
+                .onChange(of: text) { oldText, newText in
+                    if let maxLength = maxLength, newText.count > maxLength {
+                        text = String(newText.prefix(maxLength))
+                    }
+                }
+            inputTextFieldPlaceholder
         }
         .frame(maxWidth: maxWidth, maxHeight: maxHeight)
     }
     
-    private var inputPlaceholder: some View {
-        ZStack(alignment: .leading){
-            if text.isEmpty && !isTextFocused{
+    /// 텍스트 필드 내 Plceholder 생성
+    private var inputTextFieldPlaceholder: some View {
+        ZStack(alignment: alignment) {
+            if text.isEmpty && !isTextFocused {
                 Text(placeholder)
                     .font(.sandol(type: .regular, size: fontSize))
                     .foregroundStyle(Color.textPink)
-                    .padding(.leading, horizaontalPadding)
+                    .padding(.leading, horizontalPadding)
                     .padding(.top, verticalPadding)
                     .allowsHitTesting(false)
             }
@@ -79,23 +125,6 @@ struct CustomTextField: View {
                 }
             }
         }
-        .frame(maxWidth: maxWidth, maxHeight: maxHeight, alignment: .leading)
-    }
-    
-    
-    //MARK: - CustomMoreThanOneLineTextFieldView
-    private var inputPlaceDescriptionHolder: some View {
-        VStack(alignment: .leading) {
-            if text.isEmpty && !isTextFocused{
-                Text(placeholder)
-                    .font(.sandol(type: .regular, size: fontSize))
-                    .foregroundStyle(Color.textPink)
-                    .padding(.leading, horizaontalPadding)
-                    .padding(.top, verticalPadding)
-                    .allowsHitTesting(false)
-            }
-        }
-        .frame(maxWidth: maxWidth, maxHeight: maxHeight, alignment: .topLeading)
-        .clipShape(.rect(cornerRadius: cornerSize))
+        .frame(maxWidth: maxWidth, maxHeight: maxHeight, alignment: alignment)
     }
 }
