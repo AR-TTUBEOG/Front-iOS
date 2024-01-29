@@ -7,20 +7,8 @@
 
 import Foundation
 
-//방명록
-struct Review: Codable {
-    var check: Bool //정상응답 여부
-    var information: ReviewInformation //데이터를 담고있는 객체
-}
 
-struct ReviewInformation: Codable {
-    var guestbookId: Int //방명록 아이디
-    var storeId: Int //매장 아이디
-    var userId: Int //등록유저 아이디
-    var content: String //방명록 내용
-    var stars: String //별점
-    var image: String //이미지
-}
+
 
 
 //매장 세부사항
@@ -44,9 +32,11 @@ struct StoreInformation: Codable {
     var benefit: [String]
     var likes: Int
     var guestbook : Int
+    var mark : Bool
+    
+    var distance : Double //임시 데이터
+    var times : Int //임시 데이터
 }
-
-
 
 
 
@@ -67,10 +57,17 @@ class DetailInfo {
             stars: 4.1,
             type: "restaurant",
             benefit: [
-                "giftIcon", "coupon", "Union"
+                "giftIcon", "Union"
             ],
-            likes: 123,
-            guestbook : 134
+            likes: 1000,
+            guestbook : 134,
+            mark : false,
+        
+            distance : 1.5,
+            times : 15
         )
     }
 }
+
+
+

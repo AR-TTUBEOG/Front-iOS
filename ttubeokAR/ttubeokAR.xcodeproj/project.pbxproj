@@ -135,7 +135,7 @@
 		6C7239F32B5C2A720082F12D /* ManagePlaceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagePlaceViewModel.swift; sourceTree = "<group>"; };
 		6C7239F72B5C2AE10082F12D /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
 		6C77ECBB2B5A486700C56890 /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
-		6CAF06D12B58FCD200526BC8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		6CAF06D12B58FCD200526BC8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6CAF06D22B5903B300526BC8 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		6CC4DDB62B55512F0080E7E8 /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
 		6CC4DDFE2B5687E80080E7E8 /* CouponView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponView.swift; sourceTree = "<group>"; };
@@ -368,8 +368,8 @@
 		48FF93912B43BA0600202F45 /* ttubeokAR */ = {
 			isa = PBXGroup;
 			children = (
-				486C2FE82B592A3100C88B04 /* Login */,
 				6CAF06D12B58FCD200526BC8 /* Info.plist */,
+				486C2FE82B592A3100C88B04 /* Login */,
 				483820DA2B4BE5A900C3FB14 /* Global */,
 				48FF93A02B43BA1400202F45 /* ExploreView */,
 				48FF93A22B43BA4500202F45 /* MapView */,
@@ -533,9 +533,9 @@
 			children = (
 				CA2513042B629109006D2EDF /* DetailViewControl.swift */,
 				CA2513022B6290DC006D2EDF /* DetailViewModel.swift */,
-				CA25130A2B62AF01006D2EDF /* DetailView.swift */,
 				CA2513062B629144006D2EDF /* GuestBookCard.swift */,
 				CA2513082B62918A006D2EDF /* GuestBookModel.swift */,
+				CA25130A2B62AF01006D2EDF /* DetailView.swift */,
 			);
 			path = ExploreDetail;
 			sourceTree = "<group>";

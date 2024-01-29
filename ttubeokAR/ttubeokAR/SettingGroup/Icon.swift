@@ -65,7 +65,15 @@ enum Icon: String {
     case Vector2 = "Vector2"
     case store = "store"
     case tree = "tree"
-    
+    case heartBold = "heartBold"
+    case Subtract = "Subtract"
+    case star2 = "star2"
+    case time2 = "time2"
+    case distance2 = "distance2"
+    case DetailViewtest = "DetailViewtest"
+    case Setting = "Setting"
+    case pressedheart = "pressedheart"
+    case unpressedheart = "unpressedheart"
     
     // MARK: - Login
     case warning = "nameWarning"
