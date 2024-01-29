@@ -46,7 +46,10 @@ struct PlaceRegistrationView: View {
                     titleHeight: 79,
                     subtitleWidth: 274,
                     subtitleHeight: 60,
-                    spacing: 30)
+                    spacing: 30,
+                    textAlignment: .center,
+                    frameAlignment: .center
+                )
                 .padding(.top, 94)
                 nextButton
                     .position(x: geometry.size.width/2, y: geometry.size.height * 0.93)

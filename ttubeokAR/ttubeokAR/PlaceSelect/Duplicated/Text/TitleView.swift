@@ -18,6 +18,8 @@ struct TitleView: View {
     let subtitleWidth: CGFloat?
     let subtitleHeight: CGFloat?
     let spacing: CGFloat
+    let textAlignment: TextAlignment
+    let frameAlignment: Alignment
 
     
     //MARK: - Body
@@ -31,15 +33,16 @@ struct TitleView: View {
         VStack(alignment: .center, spacing: spacing) {
             Text(customAttributedSting(for: titleText, highlight: highlightText))
                 .font(.sandol(type: .bold, size: 28))
-                .frame(maxWidth: titleWidth, maxHeight: titleHeight)
+                .frame(maxWidth: titleWidth, maxHeight: titleHeight, alignment: frameAlignment)
                 .foregroundStyle(Color.textPink)
-                .multilineTextAlignment(.center)
+                .multilineTextAlignment(textAlignment)
             
             if let subtitle = subtitleText {
                 Text(subtitle)
                     .font(.sandol(type: .light, size: subtitleSize ?? 0))
-                    .multilineTextAlignment(.center)
-                    .frame(maxWidth: subtitleWidth ?? 0, maxHeight: subtitleHeight ?? 0)
+                    .multilineTextAlignment(textAlignment)
+                    .lineSpacing(1.2)
+                    .frame(maxWidth: subtitleWidth ?? 0, maxHeight: subtitleHeight ?? 0, alignment: frameAlignment)
                     .foregroundColor(Color(red: 0.92, green: 0.9, blue: 0.97).opacity(0.8))
             }
         }

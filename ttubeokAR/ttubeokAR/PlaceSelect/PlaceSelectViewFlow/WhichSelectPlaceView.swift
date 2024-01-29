@@ -72,7 +72,10 @@ struct WhichSelectPlaceView: View {
                 titleHeight: 79,
                 subtitleWidth: nil,
                 subtitleHeight: nil,
-                spacing: 0)
+                spacing: 0,
+                textAlignment: .center,
+                frameAlignment: .center
+            )
             .padding(.top, 94)
             HStack(alignment: .center) {
                 PlaceSelect(type: .walk, isChecked: $isWalkChecked)

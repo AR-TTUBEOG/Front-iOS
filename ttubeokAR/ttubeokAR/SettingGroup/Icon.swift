@@ -101,6 +101,7 @@ enum Icon: String {
     case walkGroup = "walkGroup"
     case walkIcon = "walkIcon"
     case closeView = "closeView"
+    case searchAddress = "searchAddress"
     
     var image: Image {
         return Image(self.rawValue)
