@@ -12,17 +12,12 @@ struct WalkwayPageContent: View {
     @ObservedObject var viewModel: WalkwayViewModel
     @State private var walkWayName = ""
     
-    //MARK: - TitleShame
-    private let cornerSize: CGFloat = 19
-    private let subtitleSize: CGFloat = 15
-    private let titleWidth: CGFloat = 350
-    private let subtitleWidth: CGFloat = 350
-    private let subtitleHeight: CGFloat = 30
-    private let spacing: CGFloat = 10
-    
     //MARK: - TextFieldShame
     private let horizontalPadding: CGFloat = 15
-    private let verticalPadding: CGFloat = 5
+    
+    //MARK: - FourthPaddingShame
+    private let fourthHorizontalPadding: CGFloat = 16
+    private let fourthVerticalPadding: CGFloat = 12
     
     
     //MARK: - Body
@@ -59,14 +54,8 @@ struct WalkwayPageContent: View {
     private var firstPlaceInputTextField: some View {
         CustomTextField(text: $viewModel.firstPlaceName,
                         placeholder: "예) 낙산공원",
-                        fontSize: 20,
-                        cornerSize: cornerSize,
-                        horizontalPadding: horizontalPadding,
-                        trailingHorizontalPadding: horizontalPadding,
-                        verticalPadding: verticalPadding,
                         maxWidth: 345,
                         maxHeight: 45,
-                        showSearchIcon: false,
                         onSearch: {})
     }
     
@@ -77,12 +66,7 @@ struct WalkwayPageContent: View {
             TitleView(titleText: "산책스팟의 이름을 알려주세요",
                       highlightText: ["이름"],
                       subtitleText: "지도에 등록되는 산책로의 이름이에요!",
-                      subtitleSize: subtitleSize,
-                      titleWidth: titleWidth,
                       titleHeight: 36,
-                      subtitleWidth: subtitleWidth,
-                      subtitleHeight: subtitleHeight,
-                      spacing: spacing,
                       textAlignment: .leading,
                       frameAlignment: .topLeading
             )
@@ -96,11 +80,7 @@ struct WalkwayPageContent: View {
     private var secondAddressInputTextField: some View {
         CustomTextField(text: $viewModel.secondAddressName,
                         placeholder: "주소를 검색해주세요.",
-                        fontSize: 20,
-                        cornerSize: cornerSize,
-                        horizontalPadding: horizontalPadding,
                         trailingHorizontalPadding: horizontalPadding + 35,
-                        verticalPadding: verticalPadding,
                         maxWidth: 275,
                         maxHeight: 45,
                         showSearchIcon: true,
@@ -111,14 +91,9 @@ struct WalkwayPageContent: View {
     private var secondDetailAddressInputTextField: some View {
         CustomTextField(text: $viewModel.secondDetailAddress,
                         placeholder: "상세주소를 입력해주세요.",
-                        fontSize: 20,
-                        cornerSize: cornerSize,
-                        horizontalPadding: horizontalPadding,
                         trailingHorizontalPadding: horizontalPadding + 35,
-                        verticalPadding: verticalPadding,
                         maxWidth: 332,
                         maxHeight: 45,
-                        showSearchIcon: false,
                         onSearch: {})
     }
     
@@ -128,12 +103,8 @@ struct WalkwayPageContent: View {
             TitleView(titleText: "산책스팟의 위치를 알려주세요",
                       highlightText: ["위치"],
                       subtitleText: "산책로 중에 특정 위치의 주소를 입력해주세요 \n어디든 괜찮아요." ,
-                      subtitleSize: subtitleSize,
-                      titleWidth: titleWidth,
                       titleHeight: 36,
-                      subtitleWidth: subtitleWidth,
                       subtitleHeight: 50,
-                      spacing: spacing,
                       textAlignment: .leading,
                       frameAlignment: .topLeading
             )
@@ -161,32 +132,24 @@ struct WalkwayPageContent: View {
         TitleView(titleText: "소개와 사진 등 산책스팟 \n정보를 입력해보세요",
                   highlightText: ["정보"],
                   subtitleText: "정보를 입력해야 방문객에게 장소가 보여요.",
-                  subtitleSize: subtitleSize,
-                  titleWidth: titleWidth,
                   titleHeight: 80,
-                  subtitleWidth: subtitleWidth,
-                  subtitleHeight: subtitleHeight,
-                  spacing: spacing,
                   textAlignment: .center,
-                  frameAlignment: .center)
+                  frameAlignment: .center
+        )
     }
     
     //MARK: - FourthView
-    
-    //TODO: - 설명 텍스트 필드 작성할 것!
     
     /// 네 번째 설명 텍스트 필드
     private var fourthWalkwayDescription: some View {
         CustomTextField(text: $viewModel.fourthWalkwayDescription,
                         placeholder: "예) 가족들이랑 걷기 좋은 오솔길",
                         fontSize: 15,
-                        cornerSize: cornerSize,
-                        horizontalPadding: 16,
-                        trailingHorizontalPadding: 16,
-                        verticalPadding: 12,
+                        leadingHorizontalPadding: fourthHorizontalPadding,
+                        trailingHorizontalPadding: fourthHorizontalPadding,
+                        verticalPadding: fourthHorizontalPadding,
                         maxWidth: 314,
                         maxHeight: 102,
-                        showSearchIcon: false,
                         onSearch: {},
                         alignment: .topLeading,
                         axis: .vertical,
@@ -200,14 +163,10 @@ struct WalkwayPageContent: View {
             TitleView(titleText: "산책스팟을 소개해주세요",
                       highlightText: ["소개"],
                       subtitleText: "나중에 언제든지 변경할 수 있으니, 걱정하지 마세요",
-                      subtitleSize: subtitleSize,
-                      titleWidth: titleWidth,
                       titleHeight: 36,
-                      subtitleWidth: subtitleWidth,
-                      subtitleHeight: subtitleHeight,
-                      spacing: spacing,
                       textAlignment: .leading,
-                      frameAlignment: .topLeading)
+                      frameAlignment: .topLeading
+            )
             
             fourthWalkwayDescription
         }

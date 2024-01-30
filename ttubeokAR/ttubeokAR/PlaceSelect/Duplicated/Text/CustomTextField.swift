@@ -18,7 +18,7 @@ struct CustomTextField: View {
     let placeholder: String
     let fontSize: CGFloat
     let cornerSize: CGFloat
-    let horizontalPadding: CGFloat
+    let leadingHorizontalPadding: CGFloat
     let trailingHorizontalPadding: CGFloat
     let verticalPadding: CGFloat
     let maxWidth: CGFloat
@@ -33,14 +33,14 @@ struct CustomTextField: View {
     init(text: Binding<String>,
          isTextFocused: Bool = false,
          placeholder: String,
-         fontSize: CGFloat,
-         cornerSize: CGFloat,
-         horizontalPadding: CGFloat,
-         trailingHorizontalPadding: CGFloat,
-         verticalPadding: CGFloat,
+         fontSize: CGFloat = 20,
+         cornerSize: CGFloat = 19,
+         leadingHorizontalPadding: CGFloat = 15,
+         trailingHorizontalPadding: CGFloat = 15,
+         verticalPadding: CGFloat = 5,
          maxWidth: CGFloat,
          maxHeight: CGFloat,
-         showSearchIcon: Bool,
+         showSearchIcon: Bool = false,
          onSearch: @escaping () -> Void,
          alignment: Alignment = .leading,
          axis: Axis = .horizontal,
@@ -50,7 +50,7 @@ struct CustomTextField: View {
             self.placeholder = placeholder
             self.fontSize = fontSize
             self.cornerSize = cornerSize
-            self.horizontalPadding = horizontalPadding
+            self.leadingHorizontalPadding = leadingHorizontalPadding
             self.trailingHorizontalPadding = trailingHorizontalPadding
             self.verticalPadding = verticalPadding
             self.maxWidth = maxWidth
@@ -76,7 +76,7 @@ struct CustomTextField: View {
                 .foregroundStyle(Color.textPink)
                 .frame(maxWidth: maxWidth, maxHeight: maxHeight, alignment: alignment)
                 .focused($isTextFocused)
-                .padding(.leading, horizontalPadding)
+                .padding(.leading, leadingHorizontalPadding)
                 .padding(.trailing, trailingHorizontalPadding)
                 .padding([.top, .bottom], verticalPadding)
                 .background(Color(red: 0.25, green: 0.24, blue: 0.37))
@@ -104,7 +104,7 @@ struct CustomTextField: View {
                 Text(placeholder)
                     .font(.sandol(type: .regular, size: fontSize))
                     .foregroundStyle(Color.textPink)
-                    .padding(.leading, horizontalPadding)
+                    .padding(.leading, leadingHorizontalPadding)
                     .padding(.top, verticalPadding)
                     .allowsHitTesting(false)
             }

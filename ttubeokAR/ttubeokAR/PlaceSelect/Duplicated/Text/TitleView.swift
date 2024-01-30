@@ -20,6 +20,32 @@ struct TitleView: View {
     let spacing: CGFloat
     let textAlignment: TextAlignment
     let frameAlignment: Alignment
+    
+    
+    init(titleText: String,
+         highlightText: [String],
+         subtitleText: String?,
+         subtitleSize: CGFloat? = 15,
+         titleWidth: CGFloat = 350,
+         titleHeight: CGFloat,
+         subtitleWidth: CGFloat? = 350,
+         subtitleHeight: CGFloat? = 30,
+         spacing: CGFloat = 10,
+         textAlignment: TextAlignment,
+         frameAlignment: Alignment
+    ) {
+            self.titleText = titleText
+            self.highlightText = highlightText
+            self.subtitleText = subtitleText
+            self.subtitleSize = subtitleSize
+            self.titleWidth = titleWidth
+            self.titleHeight = titleHeight
+            self.subtitleWidth = subtitleWidth
+            self.subtitleHeight = subtitleHeight
+            self.spacing = spacing
+            self.textAlignment = textAlignment
+            self.frameAlignment = frameAlignment
+    }
 
     
     //MARK: - Body
