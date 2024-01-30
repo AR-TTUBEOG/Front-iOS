@@ -83,6 +83,7 @@
 		6CC4DE012B5687FB0080E7E8 /* CouponViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC4DE002B5687FB0080E7E8 /* CouponViewModel.swift */; };
 		6CC4DE032B5688080080E7E8 /* CouponModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC4DE022B5688080080E7E8 /* CouponModel.swift */; };
 		6CE46B072B680CD20030F323 /* AccountSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE46B062B680CD20030F323 /* AccountSettingView.swift */; };
+		6CE46B092B69304C0030F323 /* QuitSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE46B082B69304C0030F323 /* QuitSettingView.swift */; };
 		8787C0B86D8B1BA4B5836800 /* Pods_ttubeokAR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80F07BEF7B865CEE597BBE2F /* Pods_ttubeokAR.framework */; };
 		CA3A391A2B55753800BEB7DE /* RecommendedSpaceCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3A39192B55753800BEB7DE /* RecommendedSpaceCard.swift */; };
 		CAB9FA1C2B551B1500F0046A /* ExploreViewControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB9FA1B2B551B1500F0046A /* ExploreViewControl.swift */; };
@@ -160,6 +161,7 @@
 		6CC4DE002B5687FB0080E7E8 /* CouponViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponViewModel.swift; sourceTree = "<group>"; };
 		6CC4DE022B5688080080E7E8 /* CouponModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponModel.swift; sourceTree = "<group>"; };
 		6CE46B062B680CD20030F323 /* AccountSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingView.swift; sourceTree = "<group>"; };
+		6CE46B082B69304C0030F323 /* QuitSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuitSettingView.swift; sourceTree = "<group>"; };
 		80F07BEF7B865CEE597BBE2F /* Pods_ttubeokAR.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ttubeokAR.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C56E3B59267683C9A76C82BF /* Pods-ttubeokAR.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ttubeokAR.release.xcconfig"; path = "Target Support Files/Pods-ttubeokAR/Pods-ttubeokAR.release.xcconfig"; sourceTree = "<group>"; };
 		CA3A39192B55753800BEB7DE /* RecommendedSpaceCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedSpaceCard.swift; sourceTree = "<group>"; };
@@ -528,6 +530,7 @@
 				6C7239E92B5BA86A0082F12D /* NotiSettingView.swift */,
 				6C7239F12B5C12E30082F12D /* ManagePlaceSettingView.swift */,
 				6CE46B062B680CD20030F323 /* AccountSettingView.swift */,
+				6CE46B082B69304C0030F323 /* QuitSettingView.swift */,
 			);
 			path = SettingView;
 			sourceTree = "<group>";
@@ -781,6 +784,7 @@
 				482DB6B92B541797005538DE /* PlaceSettingsViewModel.swift in Sources */,
 				6C7239EF2B5BB7D00082F12D /* CustomToggle.swift in Sources */,
 				6CC4DE012B5687FB0080E7E8 /* CouponViewModel.swift in Sources */,
+				6CE46B092B69304C0030F323 /* QuitSettingView.swift in Sources */,
 				48D1CFF22B63FB5900CCD9E5 /* PlaceRegistrationView.swift in Sources */,
 				48FF93932B43BA0600202F45 /* AppDelegate.swift in Sources */,
 				489BD8F12B4A40EE003382AE /* SearchButtonModel.swift in Sources */,
