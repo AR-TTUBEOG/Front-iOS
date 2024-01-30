@@ -30,6 +30,23 @@ struct CustomTextField: View {
     var maxLength: Int?
     //MARK: - init
     
+    /// 커스텀 텍스트 필드 init 값 지정
+    /// - Parameters:
+    ///   - text: 입력하는 텍스트 값 실시간 저장
+    ///   - isTextFocused:텍스트 필드 클릭시 placeholder 값 삭제 되도록 하기 위함
+    ///   - placeholder: placeholder 텍스트 값 지정
+    ///   - fontSize: 기본 값 20 사용
+    ///   - cornerSize: 기본값 19 사용
+    ///   - leadingHorizontalPadding: leading padding 값
+    ///   - trailingHorizontalPadding: trailing padding 값 지정
+    ///   - verticalPadding: verical padding 값 지정
+    ///   - maxWidth: 커스텀 텍스트 필드 width 값
+    ///   - maxHeight: 커스텀 텍스트 필드 height 값
+    ///   - showSearchIcon: 돋보기 아이콘 보기 위한 Bool 값 지정
+    ///   - onSearch: 텍스트 필드가 수행해야 할 function 지정
+    ///   - alignment:스택 및 frame 정렬 값
+    ///   - axis: 텍스트 필드의 자동 줄 생성 축 지정
+    ///   - maxLength: 텍스트 필드의 최대 글자 수 지정
     init(text: Binding<String>,
          isTextFocused: Bool = false,
          placeholder: String,

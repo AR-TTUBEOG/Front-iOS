@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct TitleView: View {
+struct CustomTitleView: View {
     //MARK: - Property
     let titleText: String
     let highlightText: [String]
@@ -21,7 +21,20 @@ struct TitleView: View {
     let textAlignment: TextAlignment
     let frameAlignment: Alignment
     
-    
+    //MARK: - init
+    /// 커스텀 타이틀에 대한 init
+    /// - Parameters:
+    ///   - titleText: 타이틀에 작성할 String
+    ///   - highlightText: 타이틀 중 지정 단어에 대한 별도의 스타일 적용
+    ///   - subtitleText: 서브 타이틀 String
+    ///   - subtitleSize: 서븥 타이틀 크기 지정
+    ///   - titleWidth: 타이틀 가로 길이 지정
+    ///   - titleHeight: 타이틀 높이 길이 지정
+    ///   - subtitleWidth: 서브 타이틀 길이 지정
+    ///   - subtitleHeight: 서브 타이틀 높이 지정
+    ///   - spacing: Spacing 지정
+    ///   - textAlignment: 텍스트 정렬
+    ///   - frameAlignment: frame 정렬
     init(titleText: String,
          highlightText: [String],
          subtitleText: String?,
@@ -49,6 +62,7 @@ struct TitleView: View {
 
     
     //MARK: - Body
+    
     var body: some View {
         title
     }

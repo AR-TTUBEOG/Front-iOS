@@ -37,7 +37,7 @@ struct PlaceRegistrationView: View {
                 backgroundView
                 blackOpacityView
                 CloseCancelButton(lastedSelectedTab: lastedSelectedTab)
-                TitleView(
+                CustomTitleView(
                     titleText: "1분만에 장소를 \n 등록해보세요",
                     highlightText: ["장소"],
                     subtitleText: "장소를 등록하면 경로와 방명록을 \n 남길 수 있어요 !",

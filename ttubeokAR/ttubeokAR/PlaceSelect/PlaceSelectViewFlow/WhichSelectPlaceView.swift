@@ -63,7 +63,7 @@ struct WhichSelectPlaceView: View {
     /// 화면 가운데 표시될 뷰로써, 장소 선택 버튼이 주어진다.
     private var centerChoicePlace: some View {
         VStack(alignment: .center, spacing: 39) {
-            TitleView(
+            CustomTitleView(
                 titleText: "어떤 장소를 \n 등록하시겠어요 ?",
                 highlightText: ["등록"],
                 subtitleText: nil,

@@ -63,7 +63,7 @@ struct WalkwayPageContent: View {
     /// 첫 번째 안내글 뷰
     private var firstView: some View {
         VStack(alignment: .leading, spacing: 10) {
-            TitleView(titleText: "산책스팟의 이름을 알려주세요",
+            CustomTitleView(titleText: "산책스팟의 이름을 알려주세요",
                       highlightText: ["이름"],
                       subtitleText: "지도에 등록되는 산책로의 이름이에요!",
                       titleHeight: 36,
@@ -100,7 +100,7 @@ struct WalkwayPageContent: View {
     /// 두 번째 안내글 뷰
     private var secondeView: some View {
         VStack(alignment: .leading, spacing: 10) {
-            TitleView(titleText: "산책스팟의 위치를 알려주세요",
+            CustomTitleView(titleText: "산책스팟의 위치를 알려주세요",
                       highlightText: ["위치"],
                       subtitleText: "산책로 중에 특정 위치의 주소를 입력해주세요 \n어디든 괜찮아요." ,
                       titleHeight: 36,
@@ -129,7 +129,7 @@ struct WalkwayPageContent: View {
     
     /// 세 번째 안내글 뷰
     private var thirdView: some View {
-        TitleView(titleText: "소개와 사진 등 산책스팟 \n정보를 입력해보세요",
+        CustomTitleView(titleText: "소개와 사진 등 산책스팟 \n정보를 입력해보세요",
                   highlightText: ["정보"],
                   subtitleText: "정보를 입력해야 방문객에게 장소가 보여요.",
                   titleHeight: 80,
@@ -160,7 +160,7 @@ struct WalkwayPageContent: View {
     /// 네 번째 안내글 뷰
     private var fourthView: some View {
         VStack(alignment: .leading, spacing: 10) {
-            TitleView(titleText: "산책스팟을 소개해주세요",
+            CustomTitleView(titleText: "산책스팟을 소개해주세요",
                       highlightText: ["소개"],
                       subtitleText: "나중에 언제든지 변경할 수 있으니, 걱정하지 마세요",
                       titleHeight: 36,
