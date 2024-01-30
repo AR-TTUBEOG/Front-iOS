@@ -103,6 +103,9 @@ enum Icon: String {
     case closeView = "closeView"
     case searchAddress = "searchAddress"
     case examplePlace = "examplePlace"
+    case examplePlace2 = "examplePlace2"
+    case camera = "camera"
+    
     
     var image: Image {
         return Image(self.rawValue)

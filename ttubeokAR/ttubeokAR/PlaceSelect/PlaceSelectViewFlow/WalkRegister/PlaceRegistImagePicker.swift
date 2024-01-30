@@ -11,7 +11,7 @@ import PhotosUI
 /// 갤러리에서 이미지 10장을 고르도록 앨범을 부르기 위한 구조체
 struct PlaceRegistImagePicker: UIViewControllerRepresentable {
     @Environment(\.dismiss) var dismiss
-    @Binding var selectedImages: [UIImage]
+    var viewModel: WalkwayViewModel
     
     func makeUIViewController(context: Context) -> PHPickerViewController {
         var config = PHPickerConfiguration(photoLibrary: PHPhotoLibrary.shared())
@@ -26,14 +26,16 @@ struct PlaceRegistImagePicker: UIViewControllerRepresentable {
     func updateUIViewController(_ uiViewController: PHPickerViewController, context: Context) {}
     
     func makeCoordinator() -> Coordinator {
-        Coordinator(self)
+        Coordinator(self, viewModel: viewModel)
     }
     
     class Coordinator: NSObject, PHPickerViewControllerDelegate {
         var parent: PlaceRegistImagePicker
+        var viewModel: WalkwayViewModel
         
-        init(_ parent: PlaceRegistImagePicker) {
+        init(_ parent: PlaceRegistImagePicker, viewModel: WalkwayViewModel) {
             self.parent = parent
+            self.viewModel = viewModel
         }
         
         func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
@@ -43,7 +45,7 @@ struct PlaceRegistImagePicker: UIViewControllerRepresentable {
                 result.itemProvider.loadObject(ofClass: UIImage.self) { (object, error) in
                     if let image = object as? UIImage {
                         DispatchQueue.main.async {
-                            self.parent.selectedImages.append(image)
+                            self.viewModel.addImage([image])
                         }
                     }
                 }

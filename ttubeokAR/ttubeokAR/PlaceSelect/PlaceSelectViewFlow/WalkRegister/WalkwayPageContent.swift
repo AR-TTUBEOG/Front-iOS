@@ -6,11 +6,13 @@
 //
 
 import SwiftUI
+import PopupView
 
 struct WalkwayPageContent: View {
     //MARK: - Property
-    @ObservedObject var viewModel: WalkwayViewModel
+    @ObservedObject var viewModel = WalkwayViewModel()
     @State private var walkWayName = ""
+    @State private var selectedImages: [UIImage] = []
     
     //MARK: - TextFieldShame
     private let horizontalPadding: CGFloat = 15
@@ -41,8 +43,8 @@ struct WalkwayPageContent: View {
             thirdView
         case 3:
             fourthView
-            //        case 4:
-            //            EmptyView()
+        case 4:
+            fifthView
         default:
             EmptyView()
         }
@@ -64,11 +66,11 @@ struct WalkwayPageContent: View {
     private var firstView: some View {
         VStack(alignment: .leading, spacing: 10) {
             CustomTitleView(titleText: "산책스팟의 이름을 알려주세요",
-                      highlightText: ["이름"],
-                      subtitleText: "지도에 등록되는 산책로의 이름이에요!",
-                      titleHeight: 36,
-                      textAlignment: .leading,
-                      frameAlignment: .topLeading
+                            highlightText: ["이름"],
+                            subtitleText: "지도에 등록되는 산책로의 이름이에요!",
+                            titleHeight: 36,
+                            textAlignment: .leading,
+                            frameAlignment: .topLeading
             )
             firstPlaceInputTextField
         }
@@ -101,12 +103,12 @@ struct WalkwayPageContent: View {
     private var secondeView: some View {
         VStack(alignment: .leading, spacing: 10) {
             CustomTitleView(titleText: "산책스팟의 위치를 알려주세요",
-                      highlightText: ["위치"],
-                      subtitleText: "산책로 중에 특정 위치의 주소를 입력해주세요 \n어디든 괜찮아요." ,
-                      titleHeight: 36,
-                      subtitleHeight: 50,
-                      textAlignment: .leading,
-                      frameAlignment: .topLeading
+                            highlightText: ["위치"],
+                            subtitleText: "산책로 중에 특정 위치의 주소를 입력해주세요 \n어디든 괜찮아요." ,
+                            titleHeight: 36,
+                            subtitleHeight: 50,
+                            textAlignment: .leading,
+                            frameAlignment: .topLeading
             )
             
             VStack(alignment: .leading, spacing: 12) {
@@ -130,11 +132,11 @@ struct WalkwayPageContent: View {
     /// 세 번째 안내글 뷰
     private var thirdView: some View {
         CustomTitleView(titleText: "소개와 사진 등 산책스팟 \n정보를 입력해보세요",
-                  highlightText: ["정보"],
-                  subtitleText: "정보를 입력해야 방문객에게 장소가 보여요.",
-                  titleHeight: 80,
-                  textAlignment: .center,
-                  frameAlignment: .center
+                        highlightText: ["정보"],
+                        subtitleText: "정보를 입력해야 방문객에게 장소가 보여요.",
+                        titleHeight: 80,
+                        textAlignment: .center,
+                        frameAlignment: .center
         )
     }
     
@@ -185,7 +187,6 @@ struct WalkwayPageContent: View {
     private var fourthExampleImage: some View {
         Icon.examplePlace.image
             .resizable()
-//            .aspectRatio(contentMode: .fill)
             .frame(maxWidth: 326, maxHeight: 240)
     }
     
@@ -210,10 +211,63 @@ struct WalkwayPageContent: View {
         }
         .frame(maxWidth: 330)
     }
-}
-
-struct WalkwalyPageContent_Preview: PreviewProvider {
-    static var previews: some View {
-        WalkwayPageContent(viewModel: WalkwayViewModel())
+    
+    //MARK: - fifthView
+    
+    /// 이미지 추가 버튼
+    private var addImageButton: some View {
+        ZStack(alignment: .center) {
+            RoundedRectangle(cornerRadius: 19)
+                .foregroundStyle(Color.clear)
+                .frame(maxWidth: 80, maxHeight: 80)
+                .background(Color.textPink)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 19)
+                        .inset(by: 0.75)
+                        .stroke(Color.primary04, lineWidth: 1.5)
+                )
+            VStack(alignment: .center, spacing: 5)
+            {
+                Icon.camera.image
+                    .resizable()
+                    .frame(maxWidth: 32, maxHeight: 28)
+                Text("\(viewModel.selectedImageCount) / 10")
+                    .font(.sandol(type: .medium, size: 11))
+                    .foregroundStyle(Color.primary03)
+                    .frame(maxWidth: 28, maxHeight: 18, alignment: .center)
+            }
+        }
+        .frame(maxWidth: 80, maxHeight: 80)
+        .clipShape(.rect(cornerRadius: 19))
+    }
+    
+    /// 다섯 번째 뷰
+    private var fifthView: some View {
+        VStack(spacing: 20) {
+            VStack(alignment: .leading, spacing: 20) {
+                CustomTitleView(titleText: "배경사진을 등록해주세요",
+                                highlightText: ["사진, 등록"],
+                                subtitleText: "방문객은 배경 사진을 보고 산책로를 파악해요. \n사진은 이후 변경할 수 있지만 한 장은 필수 등록이에요!",
+                                titleHeight: 36,
+                                textAlignment: .leading,
+                                frameAlignment: .topLeading)
+                HStack(spacing: 13) {
+                    Button(action: {
+                        viewModel.showImagePicker()
+                    }) {
+                        addImageButton
+                    }
+                    .fullScreenCover(isPresented: $viewModel.isImagePickerPresented) {
+                        PlaceRegistImagePicker(viewModel: viewModel)
+                    }
+                }
+            }
+        }
+    }
+    
+    struct WalkwalyPageContent_Preview: PreviewProvider {
+        static var previews: some View {
+            WalkwayPageContent(viewModel: WalkwayViewModel())
+        }
     }
 }
