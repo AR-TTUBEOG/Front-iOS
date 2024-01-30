@@ -9,16 +9,12 @@ import SwiftUI
 
 struct DetailViewControl: View {
     // MARK: - Property
-    private let detailInfoInstance: DetailInfo
-    @ObservedObject private var viewModel: DetailView
-    private var imageNames: [String]
+    private let detailInfoInstance = DetailInfo()
+    @StateObject private var viewModel = DetailView()
+    
+
     private let Book = ReviewInfo()
 
-    init(detailInfoInstance: DetailInfo, viewModel: DetailView) {
-        self.detailInfoInstance = detailInfoInstance
-        self.viewModel = viewModel
-        self.imageNames = []
-    }
     
     // MARK: - Body
     var body: some View {
@@ -54,15 +50,18 @@ struct DetailViewControl: View {
                 }
             }
         }
+        .refreshable {
+                    print("새로고침 됨")
+                }
     }
     
     //장소 사진
     private var SpaceImage : some View {
-        Image(detailInfoInstance.SampleStoreInfo.image)
+        Image(detailInfoInstance.sampleStoreInfo.image)
             .resizable()
-            .aspectRatio(contentMode: .fit)
+            .aspectRatio(contentMode: .fill)
             .frame(maxWidth: .infinity)
-            .frame(height: 252)
+            .frame(maxHeight: 252)
             .padding(.top, 35)
         
     }
@@ -81,7 +80,7 @@ struct DetailViewControl: View {
     
     //장소 이름
     private var SpaceName : some View {
-        Text(detailInfoInstance.SampleStoreInfo.name)
+        Text(detailInfoInstance.sampleStoreInfo.name)
             .foregroundColor(Color.white)
             .padding(.top, 25)
             .padding(.leading, 5)
@@ -142,7 +141,7 @@ struct DetailViewControl: View {
     }
 
     func getImageForBenefit(benefitName: String) -> String {
-        let benefitsAvailable = detailInfoInstance.SampleStoreInfo.benefit
+        let benefitsAvailable = detailInfoInstance.sampleStoreInfo.benefit
 
         switch benefitName {
         case "giftIcon":
@@ -157,7 +156,7 @@ struct DetailViewControl: View {
     }
     
     private var Spaceinfomation : some View{
-        Text(detailInfoInstance.SampleStoreInfo.info)
+        Text(detailInfoInstance.sampleStoreInfo.info)
             .font(.system(size: 11, weight: .light))
             .foregroundColor(Color.white)
             .padding(.trailing,80)
@@ -179,7 +178,7 @@ struct DetailViewControl: View {
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 15, height: 15)
                 .offset(x: 7, y: 0)
-            Text(viewModel.formattedReviewCount(detailInfoInstance.SampleStoreInfo.likes))
+            Text(viewModel.formattedReviewCount(detailInfoInstance.sampleStoreInfo.likes))
                 .font(.system(size: 11, weight: .bold))
                 .foregroundColor(Color.white)
                 .offset(x:25, y:0)
@@ -200,7 +199,7 @@ struct DetailViewControl: View {
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 9, height: 11)
                 .offset(x: 7, y: 0)
-            Text(viewModel.formattedReviewCount(detailInfoInstance.SampleStoreInfo.guestbook))
+            Text(viewModel.formattedReviewCount(detailInfoInstance.sampleStoreInfo.guestbook))
                 .font(.system(size: 11, weight: .bold))
                 .foregroundColor(Color(red: 36/255, green: 88/255, blue: 139/255))
                 .offset(x:20, y:0)
@@ -216,7 +215,7 @@ struct DetailViewControl: View {
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 13, height: 13)
                 
-                Text(String(detailInfoInstance.SampleStoreInfo.stars))
+                Text(String(detailInfoInstance.sampleStoreInfo.stars))
                     .font(.system(size: 11, weight:.medium))
                     .foregroundColor(Color(red: 133 / 255.0, green: 135 / 255.0, blue: 152 / 255.0))
                 
@@ -227,8 +226,7 @@ struct DetailViewControl: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 12, height: 12)
-                
-                Text("\(String(detailInfoInstance.SampleStoreInfo.distance)) km")
+                Text("\(String(format: "%.1f", viewModel.distance / 1000)) km")
                     .font(.system(size: 11, weight:.medium))
                     .foregroundColor(Color(red: 133 / 255.0, green: 135 / 255.0, blue: 152 / 255.0))
                 
@@ -240,12 +238,15 @@ struct DetailViewControl: View {
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 10, height: 11)
                 
-                Text("약 \(String(detailInfoInstance.SampleStoreInfo.times))분")
+                Text("약 \(Int(round(viewModel.estimatedTime / 60)))분")
                     .font(.system(size: 11, weight:.medium))
                     .foregroundColor(Color(red: 133 / 255.0, green: 135 / 255.0, blue: 152 / 255.0))
             }
             .offset(x:-3 , y:0)
             
+        }
+        .onAppear{
+            viewModel.locationManager.startUpdatingLocation()
         }
         
         
@@ -272,8 +273,8 @@ struct DetailViewControl: View {
 struct DetailViewControl_Previews: PreviewProvider {
     static var previews: some View {
         let detailInfoInstance = DetailInfo()
-        let viewModel = DetailView()
-        return DetailViewControl(detailInfoInstance: detailInfoInstance, viewModel: viewModel)
+        _ = DetailView()
+        return DetailViewControl()
             .previewLayout(.sizeThatFits)
     }
 }
