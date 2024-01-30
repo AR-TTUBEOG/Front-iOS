@@ -142,34 +142,73 @@ struct WalkwayPageContent: View {
     
     /// 네 번째 설명 텍스트 필드
     private var fourthWalkwayDescription: some View {
-        CustomTextField(text: $viewModel.fourthWalkwayDescription,
-                        placeholder: "예) 가족들이랑 걷기 좋은 오솔길",
-                        fontSize: 15,
-                        leadingHorizontalPadding: fourthHorizontalPadding,
-                        trailingHorizontalPadding: fourthHorizontalPadding,
-                        verticalPadding: fourthHorizontalPadding,
-                        maxWidth: 314,
-                        maxHeight: 102,
-                        onSearch: {},
-                        alignment: .topLeading,
-                        axis: .vertical,
-                        maxLength: 50
-        )
+        ZStack(alignment: .bottomTrailing) {
+            CustomTextField(text: $viewModel.fourthWalkwayDescription,
+                            placeholder: "예) 가족들이랑 걷기 좋은 오솔길",
+                            fontSize: 15,
+                            leadingHorizontalPadding: fourthHorizontalPadding,
+                            trailingHorizontalPadding: fourthHorizontalPadding,
+                            verticalPadding: fourthHorizontalPadding,
+                            maxWidth: 314,
+                            maxHeight: 102,
+                            onSearch: {},
+                            alignment: .topLeading,
+                            axis: .vertical,
+                            maxLength: 60
+            )
+            
+            Text("\(viewModel.fourthWalkwayDescription.count) / 50")
+                .frame(maxWidth: 48, maxHeight: 30, alignment: .center)
+                .font(.sandol(type: .regular, size: 11))
+                .multilineTextAlignment(.center)
+                .foregroundStyle(Color.textPink)
+                .padding([.trailing, .bottom], 5)
+        }
+    }
+    
+    /// 네 번째 안내문 뷰
+    private var fourthInformationNotice: some View {
+        HStack(spacing: 9) {
+            Icon.lightOn.image
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .frame(maxWidth: 27, maxHeight: 27)
+            Text("입력한 정보는 이렇게 화면에 나와요.")
+                .font(.sandol(type: .medium, size: 12))
+                .foregroundStyle(.textPink)
+                .frame(maxWidth: 268, maxHeight: 16, alignment: .leading)
+            
+        }
+        .frame(maxWidth: 304, maxHeight: 27, alignment: .leading)
+    }
+    
+    private var fourthExampleImage: some View {
+        Icon.examplePlace.image
+            .resizable()
+//            .aspectRatio(contentMode: .fill)
+            .frame(maxWidth: 326, maxHeight: 240)
     }
     
     /// 네 번째 안내글 뷰
     private var fourthView: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            CustomTitleView(titleText: "산책스팟을 소개해주세요",
-                      highlightText: ["소개"],
-                      subtitleText: "나중에 언제든지 변경할 수 있으니, 걱정하지 마세요",
-                      titleHeight: 36,
-                      textAlignment: .leading,
-                      frameAlignment: .topLeading
-            )
-            
-            fourthWalkwayDescription
+        VStack(spacing: 5) {
+            VStack(alignment: .leading, spacing: 20) {
+                CustomTitleView(titleText: "산책스팟을 소개해주세요",
+                                highlightText: ["소개"],
+                                subtitleText: "나중에 언제든지 변경할 수 있으니, 걱정하지 마세요",
+                                titleHeight: 36,
+                                textAlignment: .leading,
+                                frameAlignment: .topLeading
+                )
+                fourthWalkwayDescription
+                
+                VStack(alignment: .leading, spacing: 24) {
+                    fourthInformationNotice
+                    fourthExampleImage
+                }
+            }
         }
+        .frame(maxWidth: 330)
     }
 }
 

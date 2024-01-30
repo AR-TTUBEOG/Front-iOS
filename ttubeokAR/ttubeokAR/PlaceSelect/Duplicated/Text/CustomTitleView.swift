@@ -43,7 +43,7 @@ struct CustomTitleView: View {
          titleHeight: CGFloat,
          subtitleWidth: CGFloat? = 350,
          subtitleHeight: CGFloat? = 30,
-         spacing: CGFloat = 10,
+         spacing: CGFloat = 20,
          textAlignment: TextAlignment,
          frameAlignment: Alignment
     ) {
