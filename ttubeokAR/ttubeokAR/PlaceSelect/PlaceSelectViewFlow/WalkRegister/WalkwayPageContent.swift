@@ -184,6 +184,7 @@ struct WalkwayPageContent: View {
         .frame(maxWidth: 304, maxHeight: 27, alignment: .leading)
     }
     
+    /// 네 번째 예시 사진
     private var fourthExampleImage: some View {
         Icon.examplePlace.image
             .resizable()
@@ -215,7 +216,7 @@ struct WalkwayPageContent: View {
     //MARK: - fifthView
     
     /// 이미지 추가 버튼
-    private var addImageButton: some View {
+    private var fifthAddImageButton: some View {
         ZStack(alignment: .center) {
             RoundedRectangle(cornerRadius: 19)
                 .foregroundStyle(Color.clear)
@@ -226,7 +227,7 @@ struct WalkwayPageContent: View {
                         .inset(by: 0.75)
                         .stroke(Color.primary04, lineWidth: 1.5)
                 )
-            VStack(alignment: .center, spacing: 5)
+            VStack(alignment: .center, spacing: 8)
             {
                 Icon.camera.image
                     .resizable()
@@ -241,33 +242,82 @@ struct WalkwayPageContent: View {
         .clipShape(.rect(cornerRadius: 19))
     }
     
-    /// 다섯 번째 뷰
-    private var fifthView: some View {
-        VStack(spacing: 20) {
-            VStack(alignment: .leading, spacing: 20) {
-                CustomTitleView(titleText: "배경사진을 등록해주세요",
-                                highlightText: ["사진, 등록"],
-                                subtitleText: "방문객은 배경 사진을 보고 산책로를 파악해요. \n사진은 이후 변경할 수 있지만 한 장은 필수 등록이에요!",
-                                titleHeight: 36,
-                                textAlignment: .leading,
-                                frameAlignment: .topLeading)
-                HStack(spacing: 13) {
-                    Button(action: {
-                        viewModel.showImagePicker()
-                    }) {
-                        addImageButton
-                    }
-                    .fullScreenCover(isPresented: $viewModel.isImagePickerPresented) {
-                        PlaceRegistImagePicker(viewModel: viewModel)
-                    }
+    /// 선택한 사진들 보기
+    private var fifthShowImages: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 13) {
+                ForEach(viewModel.walwayModel.images, id: \.self) { image in
+                    Image(uiImage: image)
+                        .resizable()
+                        .frame(maxWidth: 80, maxHeight: 80)
+                        .clipShape(.rect(cornerRadius: 19))
                 }
             }
         }
     }
     
-    struct WalkwalyPageContent_Preview: PreviewProvider {
-        static var previews: some View {
-            WalkwayPageContent(viewModel: WalkwayViewModel())
+    /// 이미지 추가 버튼 및 추가한 이미지 뷰
+    private var fifthChoiceImageView: some View {
+        HStack(spacing: 13) {
+            Button(action: {
+                viewModel.showImagePicker()
+            }) {
+                fifthAddImageButton
+            }
+            .sheet(isPresented: $viewModel.isImagePickerPresented) {
+                PlaceRegistImagePicker(viewModel: viewModel)
+            }
+            fifthShowImages
         }
+    }
+    
+    /// 다섯 번째 안내문 뷰
+    private var fifthInformationNotice: some View {
+        HStack(spacing: 9) {
+            Icon.lightOn.image
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .frame(maxWidth: 27, maxHeight: 27)
+            Text("등록된 사진은 이렇게 보여요.")
+                .font(.sandol(type: .medium, size: 12))
+                .foregroundStyle(.textPink)
+                .frame(maxWidth: 268, maxHeight: 16, alignment: .leading)
+            
+        }
+        .frame(maxWidth: 304, maxHeight: 27, alignment: .leading)
+    }
+    
+    /// 다섯 번째 예시 사진
+    private var fifththExampleImage: some View {
+        Icon.examplePlace2.image
+            .resizable()
+            .frame(maxWidth: 326, maxHeight: 260)
+    }
+    
+    /// 다섯 번째 뷰
+    private var fifthView: some View {
+        VStack(alignment: .center, spacing: 30) {
+            VStack(alignment: .leading) {
+                CustomTitleView(titleText: "배경사진을 등록해주세요",
+                                highlightText: ["사진, 등록"],
+                                subtitleText: "방문객은 배경 사진을 보고 산책로를 파악해요. \n사진은 이후 변경할 수 있지만 한 장은 필수 등록이에요!",
+                                titleHeight: 36,
+                                subtitleHeight: 60,
+                                textAlignment: .leading,
+                                frameAlignment: .topLeading)
+                fifthChoiceImageView
+            }
+            VStack(alignment: .leading, spacing: 14) {
+                fifthInformationNotice
+                fifththExampleImage
+            }
+        }
+        .frame(maxWidth: 330)
+    }
+}
+
+struct WalkwalyPageContent_Preview: PreviewProvider {
+    static var previews: some View {
+        WalkwayPageContent(viewModel: WalkwayViewModel())
     }
 }
