@@ -105,7 +105,7 @@ enum Icon: String {
     case examplePlace = "examplePlace"
     case examplePlace2 = "examplePlace2"
     case camera = "camera"
-    
+    case xButton = "Xbutton"
     
     var image: Image {
         return Image(self.rawValue)

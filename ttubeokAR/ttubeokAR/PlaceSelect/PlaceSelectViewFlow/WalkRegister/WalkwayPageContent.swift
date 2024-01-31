@@ -246,14 +246,33 @@ struct WalkwayPageContent: View {
     private var fifthShowImages: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 13) {
-                ForEach(viewModel.walwayModel.images, id: \.self) { image in
-                    Image(uiImage: image)
-                        .resizable()
-                        .frame(maxWidth: 80, maxHeight: 80)
-                        .clipShape(.rect(cornerRadius: 19))
+                ForEach(viewModel.walwayModel.images.indices, id: \.self) { index in
+                    imageRemove(for: index)
                 }
             }
         }
+    }
+    
+    @ViewBuilder
+    private func imageRemove(for index: Int) -> some View {
+        ZStack(alignment: .topTrailing) {
+            ZStack(alignment: .center){
+                Image(uiImage: viewModel.walwayModel.images[index])
+                    .resizable()
+                    .frame(maxWidth: 80, maxHeight: 80)
+            }
+            .frame(maxWidth: 80, maxHeight: 80)
+            .clipShape(.rect(cornerRadius: 19))
+                
+            Button(action: {
+                viewModel.removeImage(at: index)
+            }) {
+                Icon.xButton.image
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(maxWidth: 22, maxHeight: 22)
+            }
+        }.frame(maxWidth: 100, maxHeight: 100)
     }
     
     /// 이미지 추가 버튼 및 추가한 이미지 뷰

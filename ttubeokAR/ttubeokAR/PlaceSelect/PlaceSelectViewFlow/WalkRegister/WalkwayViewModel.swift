@@ -38,5 +38,10 @@ class WalkwayViewModel: ObservableObject {
         
     }
     
+    public func removeImage(at index: Int) {
+        guard walwayModel.images.indices.contains(index) else { return }
+        walwayModel.images.remove(at: index)
+        selectedImageCount = walwayModel.images.count
+    }
     
 }
