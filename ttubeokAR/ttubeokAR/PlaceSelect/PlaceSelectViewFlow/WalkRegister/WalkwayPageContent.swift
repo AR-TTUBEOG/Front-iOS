@@ -255,15 +255,12 @@ struct WalkwayPageContent: View {
     
     @ViewBuilder
     private func imageRemove(for index: Int) -> some View {
-        ZStack(alignment: .topTrailing) {
-            ZStack(alignment: .center){
-                Image(uiImage: viewModel.walwayModel.images[index])
-                    .resizable()
-                    .frame(maxWidth: 80, maxHeight: 80)
-            }
-            .frame(maxWidth: 80, maxHeight: 80)
-            .clipShape(.rect(cornerRadius: 19))
-                
+        ZStack(alignment: .topTrailing){
+            Image(uiImage: viewModel.walwayModel.images[index])
+                .resizable()
+                .frame(maxWidth: 80, maxHeight: 80)
+                .clipShape(.rect(cornerRadius: 19))
+            
             Button(action: {
                 viewModel.removeImage(at: index)
             }) {
@@ -271,8 +268,10 @@ struct WalkwayPageContent: View {
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(maxWidth: 22, maxHeight: 22)
+                    .padding([.horizontal, .vertical], -3)
             }
-        }.frame(maxWidth: 100, maxHeight: 100)
+        }
+        .frame(maxWidth: 95, maxHeight: 95)
     }
     
     /// 이미지 추가 버튼 및 추가한 이미지 뷰
@@ -288,6 +287,7 @@ struct WalkwayPageContent: View {
             }
             fifthShowImages
         }
+        .frame(maxHeight: 95)
     }
     
     /// 다섯 번째 안내문 뷰
