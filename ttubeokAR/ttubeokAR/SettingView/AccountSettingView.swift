@@ -20,6 +20,8 @@ struct AccountSettingView: View {
                 nickNameBtn(showingPopup: $showingPopup)
 
                 logoutBtn()
+                deleteBtn()
+                accountBtn()
                 Spacer()
             }
         }
@@ -125,13 +127,7 @@ struct AccountSettingView: View {
                             Button {
                                 showingPopup = false
                             } label: {
-                                RoundedRectangle(cornerRadius: 19)
-                                    .frame(height: 40)
-                                    .overlay {
-                                        Text("변경하기")
-                                            .foregroundStyle(.textPink)
-                                    }
-                                    .foregroundStyle(.primary03)
+                                 
                             }
                         }
                         .padding(.bottom, 27)
@@ -169,7 +165,7 @@ struct AccountSettingView: View {
                     HStack(spacing: 17) {
                         // TODO: - change assets
                         Image(systemName: "pencil")
-                        Text("로그아웃")
+                        Text("회원 탈퇴")
                         Spacer()
                     }
                     .padding(.leading, 25)
@@ -188,7 +184,7 @@ struct AccountSettingView: View {
                     HStack(spacing: 17) {
                         // TODO: - change assets
                         Image(systemName: "pencil")
-                        Text("로그아웃")
+                        Text("등록된 소셜 계정")
                         Spacer()
                     }
                     .padding(.leading, 25)
