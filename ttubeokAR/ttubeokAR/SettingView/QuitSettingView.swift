@@ -94,6 +94,21 @@ struct QuitSettingView: View {
             .disabled(!isChecked)
         }
     }
+    
+    private struct popup: View {
+        
+        fileprivate var body: some View {
+            RoundedRectangle(cornerRadius: 29)
+                .foregroundStyle(.stroke)
+                .overlay {
+                    Text("탈퇴하시겠습니까?")
+                        .foregroundStyle(.white)
+                        .font(.sandol(type: .medium, size: 16))
+                    
+                }
+                .frame(height: 230)
+        }
+    }
 }
 
 #Preview {
