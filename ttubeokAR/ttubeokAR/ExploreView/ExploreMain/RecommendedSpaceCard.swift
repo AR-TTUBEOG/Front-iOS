@@ -109,6 +109,23 @@ struct RecommendedSpaceCard: View {
         .padding(.top, 0)
     }
     
+    
+    func formatDistance(_ distance: Double) -> String {
+        if distance > 100 {
+            return "99km+"
+        } else {
+            return String(format: "%.1f km", distance / 1000)
+        }
+    }
+    func formatEstimatedTime(_ time: Double) -> String {
+        let minutes = Int(round(time / 60))
+        if minutes > 1000 {
+            return "999+ 분"
+        } else {
+            return "\(minutes)분"
+        }
+    }
+    
     //거리
     private var spaceDistance: some View {
            HStack {

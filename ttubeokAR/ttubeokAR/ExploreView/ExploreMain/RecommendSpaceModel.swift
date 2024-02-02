@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct RecommendedSpaceModel {
+struct RecommendedSpaceModel : Codable {
     var placeName: String //
     var placePhoto: String //
         //설명 ->
@@ -19,13 +19,29 @@ struct RecommendedSpaceModel {
     var isFavorited: Bool
     var placeType : [place]
     
+    enum CodingKeys: String, CodingKey {
+           case placeName = "name"
+           case placePhoto = "photo_url"
+           case starRating = "rating"
+           case distance = "distance_from_user"
+           case time = "time_open"
+           case reviewCount = "reviews_count"
+           case isFavorited = "favorited"
+           case placeType = "place_type"
+       }
+    
 }
 
 
 //장소 유형
-public struct place {
-    var walkingSpot : Bool
-    var storeSpot : Bool
+public struct place: Codable {
+    var walkingSpot: Bool
+    var storeSpot: Bool
+
+    enum CodingKeys: String, CodingKey {
+        case walkingSpot = "walking_spot"
+        case storeSpot = "store_spot"
+    }
 }
 
 //가게 유형
