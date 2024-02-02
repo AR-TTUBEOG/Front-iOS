@@ -8,8 +8,11 @@
 import SwiftUI
 
 struct PlaceSettingView: View {
+    
+    //MARK: - Property
     @ObservedObject var viewModel = PlaceSettingsViewModel()
     
+    //MARK: - Body
     var body: some View {
         GeometryReader { geometry in
             ZStack(alignment: .top){
@@ -21,6 +24,7 @@ struct PlaceSettingView: View {
         .frame(maxHeight: 420)
     }
     
+    //MARK: - PlaceSettingView
     /// 설정한 모든 뷰 Vstack으로 맞추기
     /// - Parameter geometry: 화면 사이즈에 맞추어 계산
     /// - Returns: 사이즈 조절된 뷰 리턴

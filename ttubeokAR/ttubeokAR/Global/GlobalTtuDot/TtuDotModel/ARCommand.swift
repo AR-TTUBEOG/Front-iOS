@@ -8,6 +8,8 @@
 import Foundation
 
 class ARCommand: TtuDotModel {
+    var onExecute: (() -> Void)?
+    
     func execute() {
         print("AR버튼입니다!!")
     }

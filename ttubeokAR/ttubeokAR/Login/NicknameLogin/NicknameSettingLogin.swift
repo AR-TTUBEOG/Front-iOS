@@ -9,10 +9,11 @@ import SwiftUI
 
 /// 닉네임 중복 검사 뷰
 struct NicknameSettingLogin: View {
-    //MARK: - Body
+    //MARK: - Property
     var transitionToNext: () -> Void
     @ObservedObject var viewModel: NicknameSettingViewModel
     
+    //MARK: - Body
     var body: some View {
         ZStack(alignment: .center) {
             allView

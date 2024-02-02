@@ -10,9 +10,12 @@ import KakaoSDKAuth
 import KakaoSDKUser
 
 class KakaoLoginManager: ObservableObject {
+    
+    //MARK: - Property
     private let loginViewModel = LoginViewModel()
     @Published var isLoggedIn = false
     
+    //MARK: - KakaoLoginManagerFunction
     /// 카카오톡 로그인 -> 앱 또는 웹으로 로그인 진행
     /// - Parameter completion: 로그인 결과에 대한 토큰 또는 에러처리
     private func login(completion: @escaping (Result<OAuthToken, Error>) -> Void) {

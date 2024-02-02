@@ -8,6 +8,8 @@
 import Foundation
 
 class SettingsCommand: TtuDotModel {
+    var onExecute: (() -> Void)?
+    
     func execute() {
         print("환경설정 버튼입니다!")
     }

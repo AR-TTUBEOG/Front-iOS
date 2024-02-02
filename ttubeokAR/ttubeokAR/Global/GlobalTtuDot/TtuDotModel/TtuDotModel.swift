@@ -8,6 +8,7 @@
 import Foundation
 
 protocol TtuDotModel {
+    var onExecute: (() -> Void)? { get set }
     func execute()
 }
 

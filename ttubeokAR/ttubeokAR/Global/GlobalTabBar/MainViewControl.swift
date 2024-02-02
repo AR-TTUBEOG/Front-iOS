@@ -9,27 +9,33 @@ import SwiftUI
 
 /// 온보드 화면이 끝난 후 rootView가 될 메인탭 컨트롤
 struct MainViewControl: View {
-    
+    //MARK: - Property
     /**
      viewModel : 뷰 모델 사용하기 위한 변수
      selectedTab : 현재 선택된 탭 버튼을 알기 위함 -> 나중에 현재 뷰를 추적하기 위해 필요
      changeTabView : 현재 뷰가 전환이 가능한가 불가능한가 정하기 위함 -> 뚜닷 버튼 때문에 필요
      ttuDOtButtonAngle : 뚜닷 버튼이 나타날 때 회전 애니메이션으로 나타나도록 하기 위함
      */
-    
     @StateObject private var viewModel = SearchViewModel()
-    @State private var selectedTab = 1
+    @State private var selectedTab: Int
     @State private var showTtuDotButton = false
     @State private var changeTabView = true
     @State private var ttuDotButtonAngle: Double = -90
+    @EnvironmentObject var sharedTabInfo: SharedTabInfo
+    
+    /// selectedTab 초기화
+    /// - Parameter selectedTab: 현재 선택된 탭 추적하여 값 전달 -> 뚜닷에 활용하기 위함
+    init(selectedTab: Int = 1) {
+        _selectedTab = State(initialValue:  selectedTab)
+    }
     
     //MARK: Body
     var body: some View {
-        ZStack {
-            mainTabView
-            searchControl
-            tabBarButton
-        }
+            ZStack {
+                mainTabView
+                searchControl
+                tabBarButton
+            }
     }
     
     //MARK: - Tab View
@@ -37,11 +43,11 @@ struct MainViewControl: View {
     /// 메인뷰의 변화를 위함 :: ExploreView, MainView의 전환
     private var mainTabView: some View {
         ZStack(alignment: .center) {
-                if selectedTab == 1 {
-                    ExploreViewControl()
-                } else if selectedTab == 2 {
-                    MapView()
-                }
+            if selectedTab == 1 {
+                ExploreViewControl()
+            } else if selectedTab == 2 {
+                MapView()
+            }
         }
     }
     
@@ -58,7 +64,7 @@ struct MainViewControl: View {
                         }
                     }
                 VStack {
-                    TtuDotButton()
+                    TtuDotButton(sharedTabInfo: sharedTabInfo)
                         .rotationEffect(.degrees(ttuDotButtonAngle))
                         .opacity(showTtuDotButton ? 1 : 0)
                         .onAppear {
@@ -73,18 +79,18 @@ struct MainViewControl: View {
             
             VStack {
                 Spacer()
-                    Button(action: {
-                        if self.changeTabView == true {
-                            self.handleTap()
-                        }
-                    }) {
-                        Image(viewModel.buttonImage)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(maxWidth: 81, maxHeight: 42)
+                Button(action: {
+                    if self.changeTabView == true {
+                        self.handleTap()
                     }
-                    .opacity(showTtuDotButton ? 0 : 1)
-                    .simultaneousGesture(longPressGesture)
+                }) {
+                    Image(viewModel.buttonImage)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(maxWidth: 81, maxHeight: 42)
+                }
+                .opacity(showTtuDotButton ? 0 : 1)
+                .simultaneousGesture(longPressGesture)
             }
         }
     }
@@ -98,6 +104,7 @@ struct MainViewControl: View {
     /// 현재 상태의 반대가 되는 뷰를 메인 뷰로 부르기 위함
     private func handleTap() {
         selectedTab = selectedTab == 1 ? 2 : 1
+        sharedTabInfo.currentTab = selectedTab
     }
     
     /// 현재 뷰와 반대가 되는 뷰를 화면에 업데이트 한다.
@@ -127,6 +134,6 @@ struct MainViewControl: View {
 // MARK: - Preview
 struct MainViewControl_Previews: PreviewProvider {
     static var previews: some View {
-        MainViewControl()
+        MainViewControl(selectedTab: 1)
     }
 }
