@@ -12,7 +12,7 @@ struct QuitSettingView: View {
         ZStack {
             Color.background.ignoresSafeArea(.all)
             VStack {
-                NavigationBar(isDisplayLeadingBtn: true, title: "회원 탈퇴", leadingItems: [( Icon.chevronLeft, {} )])
+                NavigationBar(isDisplayLeadingBtn: true, title: "회원 탈퇴")
                 Spacer()
                     .frame(height: 50)
                 

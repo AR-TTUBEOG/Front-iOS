@@ -26,7 +26,7 @@ struct CouponView: View {
         fileprivate var body: some View {
             VStack {
                 NavigationBar(isDisplayLeadingBtn: true,
-                              title: "내 쿠폰", leadingItems: [(.chevronLeft, {})])
+                              title: "내 쿠폰")
                 
                 HStack {
                     Text("\(couponViewModel.countsOfCoupons)개")

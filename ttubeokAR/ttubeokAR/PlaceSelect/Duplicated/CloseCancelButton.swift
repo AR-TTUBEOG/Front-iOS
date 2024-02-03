@@ -15,16 +15,11 @@ struct CloseCancelButton: View {
     
     //MARK: = Body
     var body: some View {
-        GeometryReader { geometry in
             closeButton
-                .position(x: geometry.size.width * 0.1)
-        }
-        
     }
     //MARK: = CloseCancelButtonView
     /// 뷰 종료 버튼
     private var closeButton: some View {
-        HStack {
             Button(action: {
                 changeRootViewToMainView(selectedTab: lastedSelectedTab)
             }){
@@ -32,9 +27,6 @@ struct CloseCancelButton: View {
                     .resizable()
                     .frame(maxWidth: 11, maxHeight: 18)
             }
-        }
-        .frame(maxWidth: 100)
-        .padding(.top, 30)
     }
     
     /// 원래의 루트뷰로 돌아가는 함수

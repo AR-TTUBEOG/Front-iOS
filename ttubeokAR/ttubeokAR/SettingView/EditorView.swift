@@ -18,7 +18,7 @@ struct EditorView: View {
         ZStack {
             Color.background.ignoresSafeArea(.all)
             VStack {
-                NavigationBar(isDisplayLeadingBtn: true, isDisplayTrailingBtn: true, leadingItems: [(.chevronLeft, {})], trailingItems: [(.chevronLeft, {})])
+                NavigationBar(isDisplayLeadingBtn: true, isDisplayTrailingBtn: true)
                 ScrollView {
                     VStack(alignment: .leading) {
                         HStack {
