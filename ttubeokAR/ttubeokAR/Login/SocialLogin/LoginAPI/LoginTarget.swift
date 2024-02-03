@@ -20,7 +20,7 @@ enum ServerAPI {
 }
 
 extension ServerAPI: TargetType {
-    var baseURL: URL { return URL(string: "http://loginServer")! }
+    var baseURL: URL { return URL(string: "http://ttubeog.kro.kr:8080")! }
     
     var path: String {
         switch self {
