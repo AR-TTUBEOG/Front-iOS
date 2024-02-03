@@ -11,7 +11,7 @@ struct LinearProgressViewStyle: ProgressViewStyle {
     func makeBody(configuration: Configuration) -> some View {
         ProgressView(configuration)
             .scaleEffect(x: 1, y: 2, anchor: .center)
-            .frame(maxWidth: 338, maxHeight: 8)
+            .frame(maxWidth: 350, maxHeight: 8)
             .background(Color(red: 0.78, green: 0.76, blue: 0.96).opacity(0.4))
             .clipShape(.rect(cornerRadius: 10))
             .overlay(

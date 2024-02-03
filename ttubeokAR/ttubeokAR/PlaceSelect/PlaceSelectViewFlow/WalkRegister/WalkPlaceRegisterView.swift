@@ -12,19 +12,23 @@ struct WalkPlaceRegisterView: View {
     //MARK: - Property
     @StateObject private var viewModel = WalkwayViewModel()
     @Environment(\.presentationMode) var presentationMode
+    var lastedSelectedTab: Int
     
     //MARK: - Body
     var body: some View {
         allView
             .navigationBarBackButtonHidden(true)
+            .navigationDestination(isPresented: $viewModel.navigationToNextView) {
+                PlaceRegisterFinishView(lastedSelectedTab: lastedSelectedTab)
+            }
     }
     
     private var allView: some View {
         GeometryReader { geometry in
             ZStack(alignment: .top) {
-                Color.black.ignoresSafeArea()
+                Color.background.ignoresSafeArea(.all)
                 VStack(alignment: .center, spacing: 35) {
-                    PlaceRegisterNavigation(currentPage: viewModel.currentPageIndex, totalPages: 6)
+                    PlaceRegisterNavigation(currentPage: viewModel.currentPageIndex, totalPages: 5, lastedSelectedTab: lastedSelectedTab)
                     WalkwayPageContent(viewModel: viewModel)
                 }
                 changeViewButton
@@ -59,14 +63,14 @@ struct WalkPlaceRegisterView: View {
             if viewModel.currentPageIndex <= 4 {
                 Button(action: {
                     withAnimation {
-                        if viewModel.currentPageIndex == 5 {
+                        if viewModel.currentPageIndex == 4 {
                             viewModel.navigationToNextView = true
                         } else {
                             viewModel.currentPageIndex += 1
                         }
                     }
                 }) {
-                    Text("다음")
+                    Text(viewModel.currentPageIndex == 4 ? "확인" : "다음")
                         .font(.sandol(type: .medium, size: 20))
                         .foregroundColor(Color.textPink)
                         .frame(maxWidth: 154, maxHeight: 39.53)
@@ -82,7 +86,7 @@ struct WalkPlaceRegisterView: View {
 
 struct WalkPlaceRegisterView_Previews: PreviewProvider {
     static var previews: some View { 
-        WalkPlaceRegisterView()
+        WalkPlaceRegisterView(lastedSelectedTab: 1)
     }
 }
 

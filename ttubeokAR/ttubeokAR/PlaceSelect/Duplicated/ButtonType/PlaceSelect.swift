@@ -15,14 +15,14 @@ struct PlaceSelect: View {
     
     //MARK: - Body
     var body: some View {
-        VStack(alignment: .center, spacing: 38) {
-            placeTitle
-            selectButton
-            placeSubtitle
-        }
-        .frame(maxWidth: 180)
-        .padding(.top, 10)
-        .background(Color.clear)
+            VStack(alignment: .center, spacing: 28) {
+                placeTitle
+                selectButton
+                placeSubtitle
+            }
+            .frame(maxWidth: 200, maxHeight: 320)
+            .padding(.top, 10)
+            .background(Color.clear)
     }
     
     //MARK: - PlaceSelectView
@@ -93,3 +93,25 @@ struct PlaceSelect: View {
         }
     }
 }
+
+// PlaceSelectType 열거형의 가정된 정의
+
+// PlaceSelect 뷰에 대한 프리뷰
+struct PlaceSelect_Previews: PreviewProvider {
+    @State static var isChecked = true
+
+    static var previews: some View {
+        // walk 타입의 PlaceSelect 뷰 프리뷰
+        PlaceSelect(type: .walk, isChecked: $isChecked)
+            .previewLayout(.sizeThatFits)
+            .padding()
+            .previewDisplayName("산책 스팟 선택")
+
+        // market 타입의 PlaceSelect 뷰 프리뷰
+        PlaceSelect(type: .market, isChecked: $isChecked)
+            .previewLayout(.sizeThatFits)
+            .padding()
+            .previewDisplayName("매장 선택")
+    }
+}
+

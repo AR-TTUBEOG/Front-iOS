@@ -36,9 +36,10 @@ struct PlaceRegistrationView: View {
             ZStack(alignment: .top) {
                 backgroundView
                 blackOpacityView
-                CloseCancelButton(lastedSelectedTab: lastedSelectedTab)
+                NavigationBar(lastedSelectedTab: lastedSelectedTab)
                 CustomTitleView(
                     titleText: "1분만에 장소를 \n 등록해보세요",
+                    titleRangeColor: Color.textBlue,
                     highlightText: ["장소"],
                     subtitleText: "장소를 등록하면 경로와 방명록을 \n 남길 수 있어요 !",
                     subtitleSize: 20,
@@ -59,7 +60,7 @@ struct PlaceRegistrationView: View {
     
     /// 배경 화면 설정
     private var backgroundView: some View {
-        Icon.PlaceBackground.image
+        Icon.RegisterBackground2.image
             .resizable()
             .aspectRatio(contentMode: .fill)
             .frame(maxWidth: 375, maxHeight: .infinity)
