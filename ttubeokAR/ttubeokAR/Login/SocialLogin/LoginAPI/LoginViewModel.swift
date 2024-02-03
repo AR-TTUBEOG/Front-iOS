@@ -26,8 +26,8 @@ class LoginViewModel: ObservableObject {
                 do {
                     let serverResponse = try JSONDecoder().decode(LoginServerResponse.self, from: response.data)
                     print("서버 응답 : \(serverResponse)") // 추후 삭제 할 것!
-                    if let accessToken = serverResponse.information?.accessToken,
-                        let refreshToken = serverResponse.information?.refreshToken {
+                    if let accessToken = serverResponse.accessToken,
+                        let refreshToken = serverResponse.refreshToken {
                         self.saveToken(accessToken: accessToken, refreshToken: refreshToken)
                     }
                 } catch {
@@ -48,8 +48,8 @@ class LoginViewModel: ObservableObject {
                 do {
                     let serverResponse = try JSONDecoder().decode(LoginServerResponse.self, from: response.data)
                     print("애플 로그인 서버 응답: \(serverResponse)")
-                    if let accessToken = serverResponse.information?.accessToken,
-                        let refreshToken = serverResponse.information?.refreshToken {
+                    if let accessToken = serverResponse.accessToken,
+                        let refreshToken = serverResponse.refreshToken {
                         self.saveToken(accessToken: accessToken, refreshToken: refreshToken)
                     }
                 } catch {
