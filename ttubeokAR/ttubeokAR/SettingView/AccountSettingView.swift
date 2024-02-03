@@ -16,7 +16,7 @@ struct AccountSettingView: View {
         ZStack {
             Color.background.ignoresSafeArea(.all)
             VStack {
-                NavigationBar(isDisplayLeadingBtn: true, title: "계정관리", leadingItems: [( Icon.chevronLeft, {} )])
+                NavigationBar(isDisplayLeadingBtn: true, title: "계정관리")
                 nickNameBtn(showingPopup: $showingPopup)
 
                 logoutBtn()
