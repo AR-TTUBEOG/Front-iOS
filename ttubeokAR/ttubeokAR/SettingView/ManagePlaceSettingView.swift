@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ManagePlaceSettingView: View {
     
-    @StateObject var mpViewModel = ManagePlaceViewModel()
+    @EnvironmentObject var mpViewModel: PlaceListViewModel
     
     var body: some View {
         ZStack {
@@ -17,9 +17,11 @@ struct ManagePlaceSettingView: View {
             
             VStack {
                 NavigationBar(isDisplayLeadingBtn: true, title: "등록된 장소 관리")
-                ScrollView {
-                    placeListView(mpViewModel: mpViewModel)
+                ScrollView(showsIndicators: false){
+                    placeListView()
+//                        .presentationDragIndicator(.hidden)
                 }
+                
                 Spacer()
             }
         }
@@ -27,11 +29,10 @@ struct ManagePlaceSettingView: View {
     
     private struct placeListView: View {
         
-        @ObservedObject var mpViewModel: ManagePlaceViewModel
+        @EnvironmentObject var mpViewModel: PlaceListViewModel
         
         fileprivate var body: some View {
             VStack {
-                // cell
                 ForEach(mpViewModel.places, id: \.self) { place in
                     placeCellView(place: place)
                 }
@@ -66,10 +67,10 @@ struct ManagePlaceSettingView: View {
                 .overlay {
                     VStack(alignment: .leading) {
                         Image("spaceTest")
-                        Text(place.title)
+                        Text(place.information.name)
                             .foregroundStyle(.white)
                             .font(.sandol(type: .regular, size: 14))
-                        Text(place.content)
+                        Text(place.information.info)
                             .foregroundStyle(.textPink).opacity(0.5)
                             .font(.sandol(type: .regular, size: 11))
                             .multilineTextAlignment(/*@START_MENU_TOKEN@*/.leading/*@END_MENU_TOKEN@*/)
@@ -85,4 +86,5 @@ struct ManagePlaceSettingView: View {
 
 #Preview {
     ManagePlaceSettingView()
+        .environmentObject(PlaceListViewModel())
 }
