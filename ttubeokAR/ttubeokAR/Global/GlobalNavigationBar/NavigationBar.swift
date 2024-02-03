@@ -46,6 +46,8 @@ struct NavigationBar: View {
                         },
                         label: {
                             item.0.image
+                                .imageScale(.large)
+                                .frame(maxWidth: 11, maxHeight: 18)
                         }
                     )
                 })
@@ -55,7 +57,7 @@ struct NavigationBar: View {
             
             Text(title)
                 .font(.sandol(type: fontType, size: fontSize))
-                .foregroundStyle(.white)
+                .foregroundStyle(Color.textPink)
             
             Spacer()
             
@@ -77,15 +79,15 @@ struct NavigationBar: View {
         .frame(height: 44)
     }
 }
-
-#Preview(traits: .sizeThatFitsLayout) {
-    NavigationBar()
-        
-}
-
-//struct NavigationBar_Previews: PreviewProvider {
-//    static var previews: some View {
-//        NavigationBar()
-//            .previewLayout(.sizeThatFits)
-//    }
+//
+//#Preview(traits: .sizeThatFitsLayout) {
+//    NavigationBar()
+//        
 //}
+
+struct NavigationBar_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationBar()
+            .previewLayout(.sizeThatFits)
+    }
+}
