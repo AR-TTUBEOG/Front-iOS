@@ -24,11 +24,9 @@ struct WalkwayPageContent: View {
     
     //MARK: - Body
     var body: some View {
-        ZStack {
-            Color.background
-            viewFlow
-        }
+        viewFlow
     }
+    
     
     //MARK: - WalkwayPageContentView
     
@@ -45,6 +43,8 @@ struct WalkwayPageContent: View {
             fourthView
         case 4:
             fifthView
+        case 5:
+            Text("완료}")
         default:
             EmptyView()
         }
@@ -231,14 +231,15 @@ struct WalkwayPageContent: View {
             {
                 Icon.camera.image
                     .resizable()
-                    .frame(maxWidth: 32, maxHeight: 28)
+                    .frame(maxWidth: 42, maxHeight: 31)
                 Text("\(viewModel.selectedImageCount) / 10")
                     .font(.sandol(type: .medium, size: 11))
                     .foregroundStyle(Color.primary03)
                     .frame(maxWidth: 28, maxHeight: 18, alignment: .center)
             }
+            .frame(alignment: .bottom)
+            .offset(y: 5)
         }
-        .frame(maxWidth: 80, maxHeight: 80)
         .clipShape(.rect(cornerRadius: 19))
     }
     

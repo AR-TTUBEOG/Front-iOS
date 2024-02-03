@@ -15,7 +15,6 @@ struct PlaceRegisterNavigation: View {
     //MARK: - Body
     var body: some View {
         ZStack(alignment: .top) {
-            Color.black.ignoresSafeArea()
             customNavigation
         }
     }
@@ -23,12 +22,12 @@ struct PlaceRegisterNavigation: View {
     /// 상단 커스텀 네비게이션 구현
     private var customNavigation: some View {
         VStack(alignment: .center, spacing: 8) {
-            NavigationBar(title: "Step \(currentPage) / \(totalPages)",
+            NavigationBar(title: "Step \(currentPage + 1) / \(totalPages)",
                           fontSize: 13,
                           fontType: .light
             )
             
-            ProgressView(value: Double(currentPage) / Double(totalPages))
+            ProgressView(value: Double(currentPage + 1) / Double(totalPages))
                 .progressViewStyle(LinearProgressViewStyle())
         }
     }
@@ -36,6 +35,6 @@ struct PlaceRegisterNavigation: View {
 
 struct PlaceRegisterNavigation_Preview: PreviewProvider {
     static var previews: some View {
-        PlaceRegisterNavigation(currentPage: 4, totalPages: 5)
+        PlaceRegisterNavigation(currentPage: 0, totalPages: 5)
     }
 }

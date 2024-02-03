@@ -15,8 +15,9 @@ class WalkwayViewModel: ObservableObject {
     //MARK: - Property
     @Published var walwayModel = WalkwayModel()
     @Published var isImagePickerPresented = false
-    @Published var currentPageIndex: Int = 4
-    @Published  var selectedImageCount: Int = 0
+    @Published var currentPageIndex: Int = 0
+    @Published var selectedImageCount: Int = 0
+    @Published var navigationToNextView = false
     
     //MARK: - saveTextInputs
     @Published var firstPlaceName: String = ""
