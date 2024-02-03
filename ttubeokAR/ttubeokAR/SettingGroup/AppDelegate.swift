@@ -28,7 +28,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         KakaoSDK.initSDK(appKey: "1c831262e8deaf4f7823434057f15384")
         
         // Create the SwiftUI view that provides the window contents.
-        let contentView = MainViewControl().environmentObject(SharedTabInfo())
+        //MainViewControl().environmentObject(SharedTabInfo())
+        //WalkwayPageContent(viewModel: WalkwayViewModel())
+        let contentView = LoginViewCycle()
         // Use a UIHostingController as window root view controller.
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.rootViewController = UIHostingController(rootView: contentView)

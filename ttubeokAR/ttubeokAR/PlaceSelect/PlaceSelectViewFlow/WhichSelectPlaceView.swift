@@ -13,19 +13,19 @@ struct WhichSelectPlaceView: View {
     @State private var isWalkChecked = false
     @State private var isMarketChecked = false
     @Environment(\.presentationMode) var presentationMode
+    var lastedSelectedTab: Int
     
     //MARK: - Body
     var body: some View {
         allView
             .navigationDestination(isPresented: $nextView) {
                 if isWalkChecked {
-                    WalkPlaceRegister()
+                    WalkPlaceRegisterView()
                 } else if isMarketChecked {
                     MarketPlaceRegister()
-                } else {
-                    EmptyView().hidden()
                 }
             }
+            .navigationBarBackButtonHidden(true)
     }
     
     //MARK: - WhichSelectPlaceView
@@ -35,6 +35,7 @@ struct WhichSelectPlaceView: View {
             ZStack(alignment: .top) {
                 backgroundView
                 blackOpacityView
+                CloseCancelButton(lastedSelectedTab: lastedSelectedTab)
                 centerChoicePlace
                 changeViewButton
                     .position(x: geometry.size.width / 2, y: geometry.size.height * 0.93)
@@ -63,11 +64,19 @@ struct WhichSelectPlaceView: View {
     /// 화면 가운데 표시될 뷰로써, 장소 선택 버튼이 주어진다.
     private var centerChoicePlace: some View {
         VStack(alignment: .center, spacing: 39) {
-            TitleView(
+            CustomTitleView(
                 titleText: "어떤 장소를 \n 등록하시겠어요 ?",
-                highlightText: "등록",
+                highlightText: ["등록"],
                 subtitleText: nil,
-                spacing: 0)
+                subtitleSize: nil,
+                titleWidth: 339,
+                titleHeight: 79,
+                subtitleWidth: nil,
+                subtitleHeight: nil,
+                spacing: 0,
+                textAlignment: .center,
+                frameAlignment: .center
+            )
             .padding(.top, 94)
             HStack(alignment: .center) {
                 PlaceSelect(type: .walk, isChecked: $isWalkChecked)
@@ -103,7 +112,9 @@ struct WhichSelectPlaceView: View {
             .shadow(color: .black.opacity(0.15), radius: 2.5, x: 0, y: 1)
             
             Button(action: {
-                nextView = true
+                if isWalkChecked || isMarketChecked {
+                    nextView = true
+                }
             }) {
                 Text("다음")
                     .font(.sandol(type: .medium, size: 20))
@@ -116,10 +127,11 @@ struct WhichSelectPlaceView: View {
             .shadow(color: .black.opacity(0.15), radius: 2.5, x: 0, y: 1)
         }
         
+        
     }
     
 }
 
 #Preview {
-    WhichSelectPlaceView()
+    WhichSelectPlaceView(lastedSelectedTab: 1)
 }

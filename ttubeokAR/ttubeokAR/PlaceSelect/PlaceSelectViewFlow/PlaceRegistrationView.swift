@@ -19,7 +19,7 @@ struct PlaceRegistrationView: View {
         NavigationStack {
             allView
                 .navigationDestination(isPresented: $showSelectPlaceView) {
-                    WhichSelectPlaceView()
+                    WhichSelectPlaceView(lastedSelectedTab: lastedSelectedTab)
                 }
             //TODO: - 버튼 커스텀하여 사용하기
             /**
@@ -37,11 +37,19 @@ struct PlaceRegistrationView: View {
                 backgroundView
                 blackOpacityView
                 CloseCancelButton(lastedSelectedTab: lastedSelectedTab)
-                TitleView(
+                CustomTitleView(
                     titleText: "1분만에 장소를 \n 등록해보세요",
-                    highlightText: "장소",
+                    highlightText: ["장소"],
                     subtitleText: "장소를 등록하면 경로와 방명록을 \n 남길 수 있어요 !",
-                    spacing: 30)
+                    subtitleSize: 20,
+                    titleWidth: 339,
+                    titleHeight: 79,
+                    subtitleWidth: 274,
+                    subtitleHeight: 60,
+                    spacing: 30,
+                    textAlignment: .center,
+                    frameAlignment: .center
+                )
                 .padding(.top, 94)
                 nextButton
                     .position(x: geometry.size.width/2, y: geometry.size.height * 0.93)
