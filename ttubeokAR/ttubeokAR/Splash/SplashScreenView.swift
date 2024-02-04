@@ -26,7 +26,6 @@ struct SplashScreenView: View {
     
     //MARK: SplashScreenView
     
-    //TODO: -
     /// 스플래쉬 화면 배경화면 사진
     private var backgroundSplashImage: some View {
         Icon.loginBackground.image

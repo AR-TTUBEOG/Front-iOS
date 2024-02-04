@@ -29,15 +29,25 @@ struct LoginView: View {
         ZStack(alignment: .center) {
             loginBackground
             blackOpacityView
+            GeometryReader { geometry in
+                VStack(alignment: .center) {
+                    loginTitle
+                    Spacer()
+                        .frame(maxHeight: 154)
+                    groupLoginButton
+                }
+                .position(x: geometry.size.width / 2, y: geometry.size.height * 0.58)
+            }
+        }
+    }
+    
+    private var groupLoginButton: some View {
+        VStack(alignment: .center, spacing: 15) {
+            centerLine
             VStack(alignment: .center) {
-                loginTitle
-                Spacer()
-                    .frame(maxHeight: 154)
-                centerLine
                 KakaoLogin(transitionToNext: transitionToNext)
                 AppleLogin(transitionToNext: transitionToNext)
             }
-            .offset(y: 60)
         }
     }
     
@@ -62,12 +72,12 @@ struct LoginView: View {
     /// 로그인 뷰 타이틀
     private var loginTitle: some View {
         Text("뚜벅과 함께 \n 걸어 볼까요?")
-            .font(.sandol(type: .bold, size: 28))
+            .font(.sandol(type: .bold, size: 32))
             .shadow(color: .black.opacity(0.7), radius: 4, x: 0, y: 4)
             .multilineTextAlignment(.center)
             .foregroundStyle(Color.white)
             .kerning(3.36)
-            .frame(maxWidth: 350, maxHeight: 80, alignment: .center)
+            .frame(maxWidth: 350, maxHeight: 82, alignment: .center)
     }
     
     /// 타이틀과 간편 로그인 버튼 사이 분리선
@@ -75,7 +85,7 @@ struct LoginView: View {
         HStack(alignment: .center, spacing: 4) {
             Rectangle()
                 .foregroundColor(.clear)
-                .frame(maxWidth: 119.41211, maxHeight: 0.5)
+                .frame(maxWidth: 130, maxHeight: 0.5)
                 .background(Color.white)
             
             Text("간편 로그인")
@@ -85,7 +95,7 @@ struct LoginView: View {
             
             Rectangle()
                 .foregroundColor(.clear)
-                .frame(maxWidth: 119.41211, maxHeight: 0.5)
+                .frame(maxWidth: 130.41211, maxHeight: 0.5)
                 .background(Color.white)
         }
     }

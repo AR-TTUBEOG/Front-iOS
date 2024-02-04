@@ -42,3 +42,9 @@ enum AppState {
     case nicknameSetting
     case mainView
 }
+
+struct LoginViewCycle_Preview: PreviewProvider {
+    static var previews: some View {
+        LoginViewCycle()
+    }
+}
