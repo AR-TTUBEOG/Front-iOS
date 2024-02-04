@@ -10,14 +10,14 @@ import SwiftUI
 /// 뚜닷으로 연결된 뷰의 종료 버튼
 struct CloseCancelButton: View {
     
-    //MARK: = Property
+    //MARK: - Property
     @State var lastedSelectedTab: Int
     
-    //MARK: = Body
+    //MARK: - Body
     var body: some View {
             closeButton
     }
-    //MARK: = CloseCancelButtonView
+    //MARK: - CloseCancelButtonView
     /// 뷰 종료 버튼
     private var closeButton: some View {
             Button(action: {

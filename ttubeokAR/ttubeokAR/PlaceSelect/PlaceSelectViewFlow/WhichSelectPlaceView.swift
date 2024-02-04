@@ -20,14 +20,13 @@ struct WhichSelectPlaceView: View {
         allView
             .navigationDestination(isPresented: $nextView) {
                 if isWalkChecked {
-                    WalkPlaceRegisterView()
+                    WalkPlaceRegisterView(lastedSelectedTab: lastedSelectedTab)
                 } else if isMarketChecked {
                     MarketPlaceRegister()
                 }
             }
             .navigationBarBackButtonHidden(true)
     }
-    
     //MARK: - WhichSelectPlaceView
     
     private var allView: some View {
@@ -35,7 +34,7 @@ struct WhichSelectPlaceView: View {
             ZStack(alignment: .top) {
                 backgroundView
                 blackOpacityView
-                CloseCancelButton(lastedSelectedTab: lastedSelectedTab)
+                NavigationBar(lastedSelectedTab: lastedSelectedTab)
                 centerChoicePlace
                 changeViewButton
                     .position(x: geometry.size.width / 2, y: geometry.size.height * 0.93)

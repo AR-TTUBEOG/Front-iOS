@@ -11,6 +11,7 @@ struct PlaceRegisterNavigation: View {
     //MARK: - Property
     var currentPage: Int
     let totalPages: Int
+    var lastedSelectedTab: Int
     
     //MARK: - Body
     var body: some View {
@@ -24,17 +25,12 @@ struct PlaceRegisterNavigation: View {
         VStack(alignment: .center, spacing: 8) {
             NavigationBar(title: "Step \(currentPage + 1) / \(totalPages)",
                           fontSize: 13,
-                          fontType: .light
+                          fontType: .light,
+                          lastedSelectedTab: lastedSelectedTab
             )
             
             ProgressView(value: Double(currentPage + 1) / Double(totalPages))
                 .progressViewStyle(LinearProgressViewStyle())
         }
-    }
-}
-
-struct PlaceRegisterNavigation_Preview: PreviewProvider {
-    static var previews: some View {
-        PlaceRegisterNavigation(currentPage: 0, totalPages: 5)
     }
 }

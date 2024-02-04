@@ -17,24 +17,26 @@ struct WalkSelectButton: View {
     
     //MARK: - Body
     var body: some View {
-        walkIconGroup
+            walkIconGroup
     }
     
     //MARK: - WalkSelectButtonView
     private var walkIconGroup: some View {
-        ZStack(alignment: .center) {
-            walkIconBackground
-            Button(action: {
-                isChecked.toggle()
-            }) {
-                walkIcon
-                    .offset(y: isChecked ? -10 : 0)
+            ZStack(alignment: .center) {
+                walkIconBackground
+                Button(action: {
+                    isChecked.toggle()
+                }) {
+                    walkIcon
+                        .offset(y: isChecked ? -23 : 0)
+                }
+                .animation(.easeOut(duration: 0.5), value: isChecked)
             }
-            .animation(.easeOut(duration: 0.5), value: isChecked)
+            .frame(maxWidth: frameSize, maxHeight: frameSize + 50)
+            .contentShape(RoundedRectangle(cornerRadius: cornerSize))
+            .clipShape(RoundedRectangle(cornerRadius: cornerSize))
         }
-        .frame(maxWidth: frameSize, maxHeight: frameSize)
-        .clipShape(.rect(cornerRadius: cornerSize))
-    }
+
     
     private var walkIconBackground: some View {
         ZStack(alignment: .bottomLeading){
@@ -67,6 +69,7 @@ struct WalkSelectButton: View {
                 )
         }
         .frame(maxWidth: frameSize, maxHeight: frameSize)
+        .clipShape(RoundedRectangle(cornerRadius: cornerSize))
     }
     
     private var walkIcon: some View {
@@ -83,7 +86,7 @@ struct WalkSelectButton: View {
                         .stroke(Color(red: 0.33, green: 1, blue: 0.27).opacity(0.2), lineWidth: 1)
                     
                 )
-                .blur(radius: 100)
+                .blur(radius: 20)
             Rectangle()
                 .foregroundColor(.clear)
                 .frame(width: frameSize, height: frameSize)
@@ -104,6 +107,30 @@ struct WalkSelectButton: View {
                 .frame(maxWidth: iconSize, maxHeight: iconSize)
         }
         .frame(maxWidth: frameSize, maxHeight: frameSize)
+        .clipShape(RoundedRectangle(cornerRadius: cornerSize))
+    }
+}
+
+struct WalkSelectButton_Previews: PreviewProvider {
+    static var previews: some View {
+        StatefulPreviewWrapper(false) { isChecked in
+            WalkSelectButton(isChecked: isChecked)
+        }
+    }
+}
+
+// isChecked 상태를 관리하기 위한 래퍼
+struct StatefulPreviewWrapper<Value, Content: View>: View {
+    @State private var value: Value
+    private let content: (Binding<Value>) -> Content
+
+    init(_ initialValue: Value, @ViewBuilder content: @escaping (Binding<Value>) -> Content) {
+        self._value = State(initialValue: initialValue)
+        self.content = content
+    }
+
+    var body: some View {
+        content($value)
     }
 }
 

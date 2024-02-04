@@ -57,12 +57,15 @@
 		489BD8F12B4A40EE003382AE /* SearchButtonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489BD8F02B4A40EE003382AE /* SearchButtonModel.swift */; };
 		48A12C202B5CF78E00E51200 /* NicknameRedundancyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A12C1F2B5CF78E00E51200 /* NicknameRedundancyModel.swift */; };
 		48A12C222B5CF84100E51200 /* NicknameRedundancyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A12C212B5CF84100E51200 /* NicknameRedundancyService.swift */; };
+		48A59C162B6E1BC5009CF83E /* PlaceRegisterFinishView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A59C152B6E1BC5009CF83E /* PlaceRegisterFinishView.swift */; };
+		48A59C182B6E2242009CF83E /* FinishButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A59C172B6E2242009CF83E /* FinishButton.swift */; };
 		48A6C6B62B5F800900CFF763 /* KeyChainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A6C6B52B5F800900CFF763 /* KeyChainManager.swift */; };
 		48ADCAA52B6645BD00765EDB /* SharedTabInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48ADCAA42B6645BD00765EDB /* SharedTabInfo.swift */; };
 		48C3D9DE2B554D3700E3F905 /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = 48C3D9DD2B554D3700E3F905 /* PopupView */; };
 		48CC6BCB2B6526420032A5E2 /* WalkPlaceRegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48CC6BCA2B6526420032A5E2 /* WalkPlaceRegisterView.swift */; };
 		48CC6BCD2B6526560032A5E2 /* MarketPlaceRegister.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48CC6BCC2B6526560032A5E2 /* MarketPlaceRegister.swift */; };
 		48CC6BD02B652B940032A5E2 /* PlaceselectType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48CC6BCF2B652B940032A5E2 /* PlaceselectType.swift */; };
+		48CC73222B6E990D0055C278 /* UserSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48CC73212B6E990D0055C278 /* UserSession.swift */; };
 		48D1CFF22B63FB5900CCD9E5 /* PlaceRegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D1CFF12B63FB5900CCD9E5 /* PlaceRegistrationView.swift */; };
 		48D88C232B5C1F7600A1B09E /* CombineMoya in Frameworks */ = {isa = PBXBuildFile; productRef = 48D88C222B5C1F7600A1B09E /* CombineMoya */; };
 		48D88C252B5C1F7600A1B09E /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 48D88C242B5C1F7600A1B09E /* Moya */; };
@@ -151,11 +154,14 @@
 		489BD8F02B4A40EE003382AE /* SearchButtonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchButtonModel.swift; sourceTree = "<group>"; };
 		48A12C1F2B5CF78E00E51200 /* NicknameRedundancyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameRedundancyModel.swift; sourceTree = "<group>"; };
 		48A12C212B5CF84100E51200 /* NicknameRedundancyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameRedundancyService.swift; sourceTree = "<group>"; };
+		48A59C152B6E1BC5009CF83E /* PlaceRegisterFinishView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceRegisterFinishView.swift; sourceTree = "<group>"; };
+		48A59C172B6E2242009CF83E /* FinishButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishButton.swift; sourceTree = "<group>"; };
 		48A6C6B52B5F800900CFF763 /* KeyChainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainManager.swift; sourceTree = "<group>"; };
 		48ADCAA42B6645BD00765EDB /* SharedTabInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedTabInfo.swift; sourceTree = "<group>"; };
 		48CC6BCA2B6526420032A5E2 /* WalkPlaceRegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkPlaceRegisterView.swift; sourceTree = "<group>"; };
 		48CC6BCC2B6526560032A5E2 /* MarketPlaceRegister.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketPlaceRegister.swift; sourceTree = "<group>"; };
 		48CC6BCF2B652B940032A5E2 /* PlaceselectType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceselectType.swift; sourceTree = "<group>"; };
+		48CC73212B6E990D0055C278 /* UserSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSession.swift; sourceTree = "<group>"; };
 		48D1CFF12B63FB5900CCD9E5 /* PlaceRegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceRegistrationView.swift; sourceTree = "<group>"; };
 		48D88C2B2B5C24A400A1B09E /* LoginServerResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginServerResponse.swift; sourceTree = "<group>"; };
 		48D88C2E2B5C259300A1B09E /* LoginTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTarget.swift; sourceTree = "<group>"; };
@@ -295,6 +301,7 @@
 		483820DA2B4BE5A900C3FB14 /* Global */ = {
 			isa = PBXGroup;
 			children = (
+				48CC73202B6E8D480055C278 /* GlobalButton */,
 				6C7239F02B5C11430082F12D /* GlobalToggle */,
 				6CC4DDB52B5551120080E7E8 /* GlobalNavigationBar */,
 				483612B42B4ED04C00E0B45A /* GlobalTabBar */,
@@ -330,11 +337,10 @@
 		483BFD182B649C7700C2AD5B /* Duplicated */ = {
 			isa = PBXGroup;
 			children = (
+				48A59C142B6E1B6B009CF83E /* FinishView */,
+				48A59C132B6E1B1F009CF83E /* ProgressNavigation */,
 				48CC6BCE2B652B720032A5E2 /* Text */,
 				488FA70E2B650F900030CE66 /* ButtonType */,
-				481B909D2B6677F300D366A7 /* CloseCancelButton.swift */,
-				481B909F2B66846D00D366A7 /* PlaceRegisterNavigation.swift */,
-				481B90A12B668CEA00D366A7 /* LinearProgressViewStyle.swift */,
 			);
 			path = Duplicated;
 			sourceTree = "<group>";
@@ -398,10 +404,28 @@
 			path = NicknameDuplicationAPI;
 			sourceTree = "<group>";
 		};
+		48A59C132B6E1B1F009CF83E /* ProgressNavigation */ = {
+			isa = PBXGroup;
+			children = (
+				481B909F2B66846D00D366A7 /* PlaceRegisterNavigation.swift */,
+				481B90A12B668CEA00D366A7 /* LinearProgressViewStyle.swift */,
+			);
+			path = ProgressNavigation;
+			sourceTree = "<group>";
+		};
+		48A59C142B6E1B6B009CF83E /* FinishView */ = {
+			isa = PBXGroup;
+			children = (
+				48A59C152B6E1BC5009CF83E /* PlaceRegisterFinishView.swift */,
+			);
+			path = FinishView;
+			sourceTree = "<group>";
+		};
 		48A6C6B42B5F7F0800CFF763 /* KeyChain */ = {
 			isa = PBXGroup;
 			children = (
 				48A6C6B52B5F800900CFF763 /* KeyChainManager.swift */,
+				48CC73212B6E990D0055C278 /* UserSession.swift */,
 			);
 			path = KeyChain;
 			sourceTree = "<group>";
@@ -433,6 +457,15 @@
 				488373C82B66B79D0036C0FD /* CustomTextField.swift */,
 			);
 			path = Text;
+			sourceTree = "<group>";
+		};
+		48CC73202B6E8D480055C278 /* GlobalButton */ = {
+			isa = PBXGroup;
+			children = (
+				481B909D2B6677F300D366A7 /* CloseCancelButton.swift */,
+				48A59C172B6E2242009CF83E /* FinishButton.swift */,
+			);
+			path = GlobalButton;
 			sourceTree = "<group>";
 		};
 		48D1CFF02B63FB1C00CCD9E5 /* PlaceSelect */ = {
@@ -814,7 +847,7 @@
 				48A12C202B5CF78E00E51200 /* NicknameRedundancyModel.swift in Sources */,
 				481B90A62B66940500D366A7 /* WalkwayViewModel.swift in Sources */,
 				48D88C2F2B5C259300A1B09E /* LoginTarget.swift in Sources */,
-				483BFD1A2B649CD000C2AD5B /* TitleView.swift in Sources */,
+				483BFD1A2B649CD000C2AD5B /* CustomTitleView.swift in Sources */,
 				6CE46B072B680CD20030F323 /* AccountSettingView.swift in Sources */,
 				483BFD1A2B649CD000C2AD5B /* CustomTitleView.swift in Sources */,
 				CAB9FA202B55443700F0046A /* RecommendSpaceModel.swift in Sources */,
@@ -850,17 +883,20 @@
 				4861FF242B54E35C00DC6E2D /* CustomSlider.swift in Sources */,
 				482DB6B92B541797005538DE /* PlaceSettingsViewModel.swift in Sources */,
 				6C7239EF2B5BB7D00082F12D /* CustomToggle.swift in Sources */,
+				48A59C162B6E1BC5009CF83E /* PlaceRegisterFinishView.swift in Sources */,
 				6CC4DE012B5687FB0080E7E8 /* CouponViewModel.swift in Sources */,
 				6CE46B092B69304C0030F323 /* QuitSettingView.swift in Sources */,
 				48D1CFF22B63FB5900CCD9E5 /* PlaceRegistrationView.swift in Sources */,
+				48CC73222B6E990D0055C278 /* UserSession.swift in Sources */,
 				48FF93932B43BA0600202F45 /* AppDelegate.swift in Sources */,
 				489BD8F12B4A40EE003382AE /* SearchButtonModel.swift in Sources */,
 				48CC6BCB2B6526420032A5E2 /* WalkPlaceRegisterView.swift in Sources */,
 				CA2513072B629144006D2EDF /* GuestBookCard.swift in Sources */,
-				48CC6BCB2B6526420032A5E2 /* WalkPlaceRegister.swift in Sources */,
+				48CC6BCB2B6526420032A5E2 /* WalkPlaceRegisterView.swift in Sources */,
 				488FA7122B6510890030CE66 /* MarketSelectButton.swift in Sources */,
 				483820E82B4BE8E500C3FB14 /* AddLocationCommand.swift in Sources */,
 				6CC4DDFF2B5687E80080E7E8 /* CouponView.swift in Sources */,
+				48A59C182B6E2242009CF83E /* FinishButton.swift in Sources */,
 				488373C92B66B79D0036C0FD /* CustomTextField.swift in Sources */,
 				481B90AA2B66A1B800D366A7 /* WalkwayPageContent.swift in Sources */,
 				488FA7102B650FAD0030CE66 /* WalkSelectButton.swift in Sources */,

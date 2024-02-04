@@ -27,12 +27,13 @@ struct MarketSelectButton: View {
                 isChecked.toggle()
             }) {
                 marketIcon
-                    .offset(y: isChecked ? -10 : 0)
+                    .offset(y: isChecked ? -23 : 0)
             }
-            .animation(.easeOut(duration: 0.5), value: isChecked)
+            .animation(.easeInOut(duration: 0.5), value: isChecked)
         }
-        .frame(maxWidth: frameSize, maxHeight: frameSize)
-        .clipShape(.rect(cornerRadius: cornerSize))
+        .frame(maxWidth: frameSize, maxHeight: frameSize + 50)
+        .contentShape(RoundedRectangle(cornerRadius: cornerSize))
+        .clipShape(RoundedRectangle(cornerRadius: cornerSize))
     }
     
     private var marketBackground: some View {
@@ -67,6 +68,7 @@ struct MarketSelectButton: View {
                 )
         }
         .frame(maxWidth: frameSize, maxHeight: frameSize)
+        .clipShape(RoundedRectangle(cornerRadius: cornerSize))
     }
     
     private var marketIcon: some View {
@@ -83,7 +85,7 @@ struct MarketSelectButton: View {
                         .stroke(Color(red: 0.33, green: 1, blue: 0.27).opacity(0.2), lineWidth: 1)
                     
                 )
-                .blur(radius: 100)
+                .blur(radius: 20)
             Rectangle()
                 .foregroundColor(.clear)
                 .frame(width: frameSize, height: frameSize)
@@ -104,5 +106,6 @@ struct MarketSelectButton: View {
                 .frame(maxWidth: iconSize, maxHeight: iconSize)
         }
         .frame(maxWidth: frameSize, maxHeight: frameSize)
+        .clipShape(RoundedRectangle(cornerRadius: cornerSize))
     }
 }

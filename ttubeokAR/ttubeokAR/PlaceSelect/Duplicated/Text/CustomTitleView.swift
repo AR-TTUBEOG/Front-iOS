@@ -10,6 +10,7 @@ import SwiftUI
 struct CustomTitleView: View {
     //MARK: - Property
     let titleText: String
+    let titleRangeColor: Color
     let highlightText: [String]
     let subtitleText: String?
     let subtitleSize: CGFloat?
@@ -36,6 +37,7 @@ struct CustomTitleView: View {
     ///   - textAlignment: 텍스트 정렬
     ///   - frameAlignment: frame 정렬
     init(titleText: String,
+         titleRangeColor: Color = Color.primary03,
          highlightText: [String],
          subtitleText: String?,
          subtitleSize: CGFloat? = 15,
@@ -48,6 +50,7 @@ struct CustomTitleView: View {
          frameAlignment: Alignment
     ) {
             self.titleText = titleText
+            self.titleRangeColor = titleRangeColor
             self.highlightText = highlightText
             self.subtitleText = subtitleText
             self.subtitleSize = subtitleSize
@@ -82,7 +85,7 @@ struct CustomTitleView: View {
                     .font(.sandol(type: .light, size: subtitleSize ?? 0))
                     .lineSpacing(1.2)
                     .frame(maxWidth: subtitleWidth ?? 0, maxHeight: subtitleHeight ?? 0, alignment: frameAlignment)
-                    .foregroundColor(Color(red: 0.92, green: 0.9, blue: 0.97).opacity(0.8))
+                    .foregroundStyle(Color.textPink)
                     .multilineTextAlignment(textAlignment)
             }
         }
@@ -98,7 +101,7 @@ struct CustomTitleView: View {
         for highlight in highlights {
             if let range = attr.range(of: highlight) {
                 attr[range].font = .sandol(type: .bold, size: 28)
-                attr[range].foregroundColor = .primary03
+                attr[range].foregroundColor = titleRangeColor
             }
         }
         return attr
