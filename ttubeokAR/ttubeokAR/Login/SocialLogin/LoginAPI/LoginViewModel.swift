@@ -63,15 +63,17 @@ class LoginViewModel: ObservableObject {
     
     /// 토큰 저장되어 있는지 체크하기
     public func checkLoginStatus() {
-        if let session = keyChainManger.loadSession(for: "userSession") {
+        if let session = keyChainManger.loadSession(for: "userSession"),
+           let nickname = session.nickname, !nickname.isEmpty {
             savedLoginToken = true
+            print(session)
         } else {
             savedLoginToken = false
         }
     }
     
     private func saveSession(accessToken: String, refreshToken: String) {
-        let session = UserSession(accessToken: accessToken, refreshToken: refreshToken, nickname: "")
+        let session = UserSession(accessToken: accessToken, refreshToken: refreshToken, nickname: nil)
         let saved = keyChainManger.saveSession(session, for: "userSession")
         if !saved {
             print("세션 저장 실패")
