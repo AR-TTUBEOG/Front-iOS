@@ -156,13 +156,13 @@ struct WalkwayPageContent: View {
                             fontSize: 15,
                             leadingHorizontalPadding: fourthHorizontalPadding,
                             trailingHorizontalPadding: fourthHorizontalPadding,
-                            verticalPadding: fourthHorizontalPadding,
+                            verticalPadding: fourthVerticalPadding,
                             maxWidth: 314,
                             maxHeight: 102,
                             onSearch: {},
                             alignment: .topLeading,
                             axis: .vertical,
-                            maxLength: 60
+                            maxLength: 50
             )
             
             Text("\(viewModel.fourthWalkwayDescription.count) / 50")
@@ -261,6 +261,9 @@ struct WalkwayPageContent: View {
     }
     
     @ViewBuilder
+    /// 이미지 추가 및 삭제
+    /// - Parameter index: 선택한 이미지 삭제 인덱스
+    /// - Returns: 이미지 삭제
     private func imageAddAndRemove(for index: Int) -> some View {
         ZStack(alignment: .topTrailing){
             Image(uiImage: viewModel.walwayModel.images[index])
@@ -290,7 +293,8 @@ struct WalkwayPageContent: View {
                 fifthAddImageButton
             }
             .sheet(isPresented: $viewModel.isImagePickerPresented) {
-                PlaceRegistImagePicker(viewModel: viewModel)
+                PlaceRegistImagePicker(imageHandler: viewModel)
+                    .ignoresSafeArea(.all)
             }
             fifthShowImages
         }
@@ -323,9 +327,9 @@ struct WalkwayPageContent: View {
     /// 다섯 번째 뷰
     private var fifthView: some View {
         VStack(alignment: .center, spacing: 30) {
-            VStack(alignment: .leading) {
+            VStack(alignment: .leading, spacing: 2) {
                 CustomTitleView(titleText: "배경사진을 등록해주세요",
-                                highlightText: ["사진, 등록"],
+                                highlightText: ["사진", "등록"],
                                 subtitleText: "방문객은 배경 사진을 보고 산책로를 파악해요. \n사진은 이후 변경할 수 있지만 한 장은 필수 등록이에요!",
                                 titleHeight: 36,
                                 subtitleHeight: 60,

@@ -10,7 +10,7 @@ import SwiftUI
 import UIKit
 import PhotosUI
 
-class WalkwayViewModel: ObservableObject {
+class WalkwayViewModel: ObservableObject, ImageHandling {
     
     //MARK: - Property
     @Published var walwayModel = WalkwayModel()
