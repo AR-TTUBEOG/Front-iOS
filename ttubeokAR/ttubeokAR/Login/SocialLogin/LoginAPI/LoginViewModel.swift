@@ -27,8 +27,8 @@ class LoginViewModel: ObservableObject {
                     let serverResponse = try JSONDecoder().decode(LoginServerResponse.self, from: response.data)
                     print("서버 응답 : \(serverResponse)") // 추후 삭제 할 것!
                     if let accessToken = serverResponse.accessToken,
-                        let refreshToken = serverResponse.refreshToken {
-                        self.saveToken(accessToken: accessToken, refreshToken: refreshToken)
+                       let refreshToken = serverResponse.refreshToken {
+                        self.saveSession(accessToken: accessToken, refreshToken: refreshToken)
                     }
                 } catch {
                     print("응답 실패: \(error)") // 추후 삭제 할 것!
@@ -49,8 +49,8 @@ class LoginViewModel: ObservableObject {
                     let serverResponse = try JSONDecoder().decode(LoginServerResponse.self, from: response.data)
                     print("애플 로그인 서버 응답: \(serverResponse)")
                     if let accessToken = serverResponse.accessToken,
-                        let refreshToken = serverResponse.refreshToken {
-                        self.saveToken(accessToken: accessToken, refreshToken: refreshToken)
+                       let refreshToken = serverResponse.refreshToken {
+                        self.saveSession(accessToken: accessToken, refreshToken: refreshToken)
                     }
                 } catch {
                     print("응답 실패 : \(error.localizedDescription)")
@@ -61,27 +61,20 @@ class LoginViewModel: ObservableObject {
         }
     }
     
+    /// 토큰 저장되어 있는지 체크하기
     public func checkLoginStatus() {
-        if let _ = keyChainManger.load(key: "accessToken") {
+        if let session = keyChainManger.loadSession(for: "userSession") {
             savedLoginToken = true
         } else {
             savedLoginToken = false
         }
     }
     
-    /// 서버로부터 전달받은 access토큰과 refresh 토큰을 저장한다.
-    /// - Parameters:
-    ///   - accessToken: 서버로 response로 받은 액세스 토큰 저장
-    ///   - refreshToken: 서버로 respoonse로 받은 리프레시 토큰 저장
-    private func saveToken(accessToken: String, refreshToken: String) {
-        if let accessTokenData = accessToken.data(using: .utf8),
-           let refreshTokenData = refreshToken.data(using: .utf8) {
-            let accessTokenSaved = keyChainManger.save(accessTokenData, for: "accessToken")
-            let refreshTokenSaved = keyChainManger.save(refreshTokenData, for: "refreshToken")
-            
-            if !accessTokenSaved || !refreshTokenSaved {
-                print("토큰 저장 안됨")
-            }
+    private func saveSession(accessToken: String, refreshToken: String) {
+        let session = UserSession(accessToken: accessToken, refreshToken: refreshToken, nickname: "")
+        let saved = keyChainManger.saveSession(session, for: "userSession")
+        if !saved {
+            print("세션 저장 실패")
         }
     }
 }

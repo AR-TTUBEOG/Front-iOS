@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// 산책로 등록 뷰(단계별로 등록하게되는 뷰 흐름
 struct WalkPlaceRegisterView: View {
     
     //MARK: - Property

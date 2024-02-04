@@ -12,6 +12,7 @@ struct NicknameSettingLogin: View {
     //MARK: - Property
     var transitionToNext: () -> Void
     @ObservedObject var viewModel: NicknameSettingViewModel
+    private let keyChainManager = KeyChainManager.stadard
     
     //MARK: - Body
     var body: some View {
@@ -135,6 +136,20 @@ struct NicknameSettingLogin: View {
                         .frame(maxWidth: 285, maxHeight: 30, alignment: .leading)
                 }
             }
+            
+            if let isAvailable = viewModel.isNicknameAvailable, isAvailable {
+                HStack(spacing: 3) {
+                    Icon.nameCheck.image
+                        .resizable()
+                        .frame(maxWidth: 20, maxHeight: 20)
+                        .aspectRatio(contentMode: .fit)
+                        .padding(.bottom, 2)
+                    Text("사용 가능한 닉네임입니다.")
+                        .font(.sandol(type: .regular, size: 15))
+                        .foregroundColor(Color(red: 0.68, green: 1, blue: 0.65).opacity(0.80))
+                        .frame(maxWidth: 285, maxHeight: 30, alignment: .leading)
+                }
+            }
         }
     }
     
@@ -143,6 +158,7 @@ struct NicknameSettingLogin: View {
         Button(action: {
             if viewModel.isNicknameValid, viewModel.isNicknameAvailable == true {
                 transitionToNext()
+                saveNickname(newNickname: viewModel.nickname)
             }
         }) {
             Text("시작하기")
@@ -153,6 +169,16 @@ struct NicknameSettingLogin: View {
                 .font(.sandol(type: .bold, size: 20))
                 .multilineTextAlignment(.center)
                 .clipShape(.rect(cornerRadius: 19))
+        }
+    }
+    
+    private func saveNickname(newNickname: String) {
+        if var session = keyChainManager.loadSession(for: "userSession") {
+            session.nickname = newNickname
+            let saved = keyChainManager.saveSession(session, for: "userSession")
+            if !saved {
+                print("닉네임 세션 실패")
+            }
         }
     }
 }

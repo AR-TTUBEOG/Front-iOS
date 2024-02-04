@@ -77,6 +77,7 @@ enum Icon: String {
     
     // MARK: - Login
     case warning = "nameWarning"
+    case nameCheck = "nameCheck"
     case apple = "appleLogin"
     case kakao = "kakaoLogin"
     case nickname = "nicknameView"

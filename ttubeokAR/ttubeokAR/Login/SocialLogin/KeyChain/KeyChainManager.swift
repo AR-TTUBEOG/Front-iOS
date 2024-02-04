@@ -63,4 +63,19 @@ class KeyChainManager {
         
         SecItemDelete(query as CFDictionary)
     }
+    
+    public func saveSession(_ session: UserSession, for key: String) -> Bool {
+        guard let data = try? JSONEncoder().encode(session) else { return false }
+        return save(data, for: key)
+    }
+    
+    public func loadSession(for key: String) -> UserSession? {
+        guard let data = load(key: key),
+              let session = try? JSONDecoder().decode(UserSession.self, from: data) else { return nil }
+        return session
+    }
+    
+    public func deleteSession(for key: String) {
+        delete(key: key)
+    }
 }

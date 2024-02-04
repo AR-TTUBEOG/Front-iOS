@@ -29,6 +29,7 @@ struct LoginViewCycle: View {
             }
         }
         .onAppear {
+            print("유효성 검사 시작함")
             loginViewModel.checkLoginStatus()
             currentState = loginViewModel.savedLoginToken ? .mainView : .login
         }

@@ -27,7 +27,6 @@ struct WhichSelectPlaceView: View {
             }
             .navigationBarBackButtonHidden(true)
     }
-    
     //MARK: - WhichSelectPlaceView
     
     private var allView: some View {

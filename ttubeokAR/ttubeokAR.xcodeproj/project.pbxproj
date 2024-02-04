@@ -65,6 +65,7 @@
 		48CC6BCB2B6526420032A5E2 /* WalkPlaceRegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48CC6BCA2B6526420032A5E2 /* WalkPlaceRegisterView.swift */; };
 		48CC6BCD2B6526560032A5E2 /* MarketPlaceRegister.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48CC6BCC2B6526560032A5E2 /* MarketPlaceRegister.swift */; };
 		48CC6BD02B652B940032A5E2 /* PlaceselectType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48CC6BCF2B652B940032A5E2 /* PlaceselectType.swift */; };
+		48CC73222B6E990D0055C278 /* UserSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48CC73212B6E990D0055C278 /* UserSession.swift */; };
 		48D1CFF22B63FB5900CCD9E5 /* PlaceRegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D1CFF12B63FB5900CCD9E5 /* PlaceRegistrationView.swift */; };
 		48D88C232B5C1F7600A1B09E /* CombineMoya in Frameworks */ = {isa = PBXBuildFile; productRef = 48D88C222B5C1F7600A1B09E /* CombineMoya */; };
 		48D88C252B5C1F7600A1B09E /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 48D88C242B5C1F7600A1B09E /* Moya */; };
@@ -160,6 +161,7 @@
 		48CC6BCA2B6526420032A5E2 /* WalkPlaceRegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkPlaceRegisterView.swift; sourceTree = "<group>"; };
 		48CC6BCC2B6526560032A5E2 /* MarketPlaceRegister.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketPlaceRegister.swift; sourceTree = "<group>"; };
 		48CC6BCF2B652B940032A5E2 /* PlaceselectType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceselectType.swift; sourceTree = "<group>"; };
+		48CC73212B6E990D0055C278 /* UserSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSession.swift; sourceTree = "<group>"; };
 		48D1CFF12B63FB5900CCD9E5 /* PlaceRegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceRegistrationView.swift; sourceTree = "<group>"; };
 		48D88C2B2B5C24A400A1B09E /* LoginServerResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginServerResponse.swift; sourceTree = "<group>"; };
 		48D88C2E2B5C259300A1B09E /* LoginTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTarget.swift; sourceTree = "<group>"; };
@@ -299,6 +301,7 @@
 		483820DA2B4BE5A900C3FB14 /* Global */ = {
 			isa = PBXGroup;
 			children = (
+				48CC73202B6E8D480055C278 /* GlobalButton */,
 				6C7239F02B5C11430082F12D /* GlobalToggle */,
 				6CC4DDB52B5551120080E7E8 /* GlobalNavigationBar */,
 				483612B42B4ED04C00E0B45A /* GlobalTabBar */,
@@ -368,8 +371,6 @@
 				48CC6BCF2B652B940032A5E2 /* PlaceselectType.swift */,
 				488FA70F2B650FAD0030CE66 /* WalkSelectButton.swift */,
 				488FA7112B6510890030CE66 /* MarketSelectButton.swift */,
-				481B909D2B6677F300D366A7 /* CloseCancelButton.swift */,
-				48A59C172B6E2242009CF83E /* FinishButton.swift */,
 			);
 			path = ButtonType;
 			sourceTree = "<group>";
@@ -424,6 +425,7 @@
 			isa = PBXGroup;
 			children = (
 				48A6C6B52B5F800900CFF763 /* KeyChainManager.swift */,
+				48CC73212B6E990D0055C278 /* UserSession.swift */,
 			);
 			path = KeyChain;
 			sourceTree = "<group>";
@@ -455,6 +457,15 @@
 				488373C82B66B79D0036C0FD /* CustomTextField.swift */,
 			);
 			path = Text;
+			sourceTree = "<group>";
+		};
+		48CC73202B6E8D480055C278 /* GlobalButton */ = {
+			isa = PBXGroup;
+			children = (
+				481B909D2B6677F300D366A7 /* CloseCancelButton.swift */,
+				48A59C172B6E2242009CF83E /* FinishButton.swift */,
+			);
+			path = GlobalButton;
 			sourceTree = "<group>";
 		};
 		48D1CFF02B63FB1C00CCD9E5 /* PlaceSelect */ = {
@@ -876,6 +887,7 @@
 				6CC4DE012B5687FB0080E7E8 /* CouponViewModel.swift in Sources */,
 				6CE46B092B69304C0030F323 /* QuitSettingView.swift in Sources */,
 				48D1CFF22B63FB5900CCD9E5 /* PlaceRegistrationView.swift in Sources */,
+				48CC73222B6E990D0055C278 /* UserSession.swift in Sources */,
 				48FF93932B43BA0600202F45 /* AppDelegate.swift in Sources */,
 				489BD8F12B4A40EE003382AE /* SearchButtonModel.swift in Sources */,
 				48CC6BCB2B6526420032A5E2 /* WalkPlaceRegisterView.swift in Sources */,
