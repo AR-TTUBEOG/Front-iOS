@@ -28,16 +28,17 @@ struct NicknameSettingLogin: View {
         ZStack(alignment: .center) {
             backgroundImageView
             blackOpacity
-            VStack(alignment: .center) {
-                nicknameInput
-                    .padding(.top, 0)
-                checkingNickname
-                Spacer()
-                    .frame(maxHeight: 270)
-                checkButton
+            GeometryReader { geometry in
+                VStack(alignment: .center) {
+                    nicknameInput
+                        .padding(.top, 0)
+                    checkingNickname
+                    Spacer()
+                        .frame(maxHeight: 270)
+                    checkButton
+                }
+                .position(x: geometry.size.width / 2, y: geometry.size.height * 0.58)
             }
-            .frame(maxHeight: 500)
-            .offset(y: 100)
         }
     }
     
@@ -163,12 +164,13 @@ struct NicknameSettingLogin: View {
         }) {
             Text("시작하기")
                 .frame(maxWidth: 305, maxHeight: 55)
-                .background(Color.primary03)
+                .background((viewModel.isNicknameValid && (viewModel.isNicknameAvailable == true)) ? Color.primary03 : Color(red: 0.25, green: 0.24, blue: 0.37))
                 .contentShape(RoundedRectangle(cornerRadius: 19))
                 .foregroundStyle(Color.white)
                 .font(.sandol(type: .bold, size: 20))
                 .multilineTextAlignment(.center)
                 .clipShape(.rect(cornerRadius: 19))
+                .shadow(color: .black.opacity(0.25), radius: 10, x: 0, y: 4)
         }
     }
     
