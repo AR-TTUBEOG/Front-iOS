@@ -84,6 +84,7 @@ enum Icon: String {
     case loginBackground = "loginViewImage"
     case checkbox_filled = "checkbox_filled"
     case checkbox = "checkbox"
+    case logoImage = "logoImage"
     
     // MARK: - Navigation bar
     case arrowLeft = "arrowLeft"

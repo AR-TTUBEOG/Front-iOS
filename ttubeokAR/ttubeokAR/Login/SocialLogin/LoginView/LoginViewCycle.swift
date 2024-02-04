@@ -23,9 +23,11 @@ struct LoginViewCycle: View {
             case .login:
                 LoginView(transitionToNext: { currentState = .nicknameSetting})
             case .nicknameSetting:
-                NicknameSettingLogin(transitionToNext: { currentState = .mainView}, viewModel: NicknameSettingViewModel())
+                NicknameSettingLogin(transitionToNext: { withAnimation {currentState = .mainView} }, viewModel: NicknameSettingViewModel())
+                    .transition(.opacity)
             case .mainView:
                 MainViewControl()
+                    .transition(.opacity)
             }
         }
         .onAppear {
@@ -41,4 +43,10 @@ enum AppState {
     case login
     case nicknameSetting
     case mainView
+}
+
+struct LoginViewCycle_Preview: PreviewProvider {
+    static var previews: some View {
+        LoginViewCycle()
+    }
 }

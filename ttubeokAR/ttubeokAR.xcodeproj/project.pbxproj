@@ -16,6 +16,9 @@
 		481B90A62B66940500D366A7 /* WalkwayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481B90A52B66940500D366A7 /* WalkwayViewModel.swift */; };
 		481B90A82B669B1A00D366A7 /* PlaceRegistImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481B90A72B669B1A00D366A7 /* PlaceRegistImagePicker.swift */; };
 		481B90AA2B66A1B800D366A7 /* WalkwayPageContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481B90A92B66A1B800D366A7 /* WalkwayPageContent.swift */; };
+		481EA2712B6F280200BAD5E0 /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481EA2702B6F280200BAD5E0 /* SplashScreenView.swift */; };
+		481EA2722B6F339700BAD5E0 /* CustomTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483BFD192B649CD000C2AD5B /* CustomTitleView.swift */; };
+		481EA2732B6F339C00BAD5E0 /* WalkPlaceRegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48CC6BCA2B6526420032A5E2 /* WalkPlaceRegisterView.swift */; };
 		482DB6B72B5416FF005538DE /* PlaceSettingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482DB6B62B5416FF005538DE /* PlaceSettingModel.swift */; };
 		482DB6B92B541797005538DE /* PlaceSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482DB6B82B541797005538DE /* PlaceSettingsViewModel.swift */; };
 		482DB6BB2B541E7E005538DE /* PlaceSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482DB6BA2B541E7E005538DE /* PlaceSettingView.swift */; };
@@ -38,7 +41,6 @@
 		483820EC2B4BE97300C3FB14 /* TtuDotViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483820EB2B4BE97300C3FB14 /* TtuDotViewModel.swift */; };
 		483820EE2B4BEAFE00C3FB14 /* TtuDotShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483820ED2B4BEAFE00C3FB14 /* TtuDotShape.swift */; };
 		483BFD172B64996400C2AD5B /* WhichSelectPlaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483BFD162B64996400C2AD5B /* WhichSelectPlaceView.swift */; };
-		483BFD1A2B649CD000C2AD5B /* CustomTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483BFD192B649CD000C2AD5B /* CustomTitleView.swift */; };
 		483BFD202B64A2A200C2AD5B /* PlaceSelect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483BFD1F2B64A2A200C2AD5B /* PlaceSelect.swift */; };
 		4844E13F2B5A243700E6619C /* Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4844E13E2B5A243700E6619C /* Icon.swift */; };
 		4861FF242B54E35C00DC6E2D /* CustomSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4861FF232B54E35C00DC6E2D /* CustomSlider.swift */; };
@@ -62,7 +64,6 @@
 		48A6C6B62B5F800900CFF763 /* KeyChainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A6C6B52B5F800900CFF763 /* KeyChainManager.swift */; };
 		48ADCAA52B6645BD00765EDB /* SharedTabInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48ADCAA42B6645BD00765EDB /* SharedTabInfo.swift */; };
 		48C3D9DE2B554D3700E3F905 /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = 48C3D9DD2B554D3700E3F905 /* PopupView */; };
-		48CC6BCB2B6526420032A5E2 /* WalkPlaceRegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48CC6BCA2B6526420032A5E2 /* WalkPlaceRegisterView.swift */; };
 		48CC6BCD2B6526560032A5E2 /* MarketPlaceRegister.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48CC6BCC2B6526560032A5E2 /* MarketPlaceRegister.swift */; };
 		48CC6BD02B652B940032A5E2 /* PlaceselectType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48CC6BCF2B652B940032A5E2 /* PlaceselectType.swift */; };
 		48CC73222B6E990D0055C278 /* UserSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48CC73212B6E990D0055C278 /* UserSession.swift */; };
@@ -118,6 +119,7 @@
 		481B90A52B66940500D366A7 /* WalkwayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkwayViewModel.swift; sourceTree = "<group>"; };
 		481B90A72B669B1A00D366A7 /* PlaceRegistImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceRegistImagePicker.swift; sourceTree = "<group>"; };
 		481B90A92B66A1B800D366A7 /* WalkwayPageContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkwayPageContent.swift; sourceTree = "<group>"; };
+		481EA2702B6F280200BAD5E0 /* SplashScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenView.swift; sourceTree = "<group>"; };
 		482DB6B62B5416FF005538DE /* PlaceSettingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceSettingModel.swift; sourceTree = "<group>"; };
 		482DB6B82B541797005538DE /* PlaceSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceSettingsViewModel.swift; sourceTree = "<group>"; };
 		482DB6BA2B541E7E005538DE /* PlaceSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceSettingView.swift; sourceTree = "<group>"; };
@@ -234,6 +236,14 @@
 				C56E3B59267683C9A76C82BF /* Pods-ttubeokAR.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		481EA26F2B6F27C200BAD5E0 /* Splash */ = {
+			isa = PBXGroup;
+			children = (
+				481EA2702B6F280200BAD5E0 /* SplashScreenView.swift */,
+			);
+			path = Splash;
 			sourceTree = "<group>";
 		};
 		482DB6B42B541693005538DE /* SearchOption */ = {
@@ -519,6 +529,7 @@
 			isa = PBXGroup;
 			children = (
 				6CAF06D12B58FCD200526BC8 /* Info.plist */,
+				481EA26F2B6F27C200BAD5E0 /* Splash */,
 				486C2FE82B592A3100C88B04 /* Login */,
 				483820DA2B4BE5A900C3FB14 /* Global */,
 				48FF93A02B43BA1400202F45 /* ExploreView */,
@@ -827,6 +838,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				481EA2732B6F339C00BAD5E0 /* WalkPlaceRegisterView.swift in Sources */,
+				481EA2722B6F339700BAD5E0 /* CustomTitleView.swift in Sources */,
 				48FF93952B43BA0600202F45 /* ContentView.swift in Sources */,
 				487E38492B5AE04A0026599D /* KakaoLoginManager.swift in Sources */,
 				48CC6BCD2B6526560032A5E2 /* MarketPlaceRegister.swift in Sources */,
@@ -842,14 +855,13 @@
 				483513862B5A602C0072ADFE /* KakaoLogin.swift in Sources */,
 				483820E62B4BE86200C3FB14 /* MyTicketCommand.swift in Sources */,
 				6CC4DDB72B55512F0080E7E8 /* NavigationBar.swift in Sources */,
+				481EA2712B6F280200BAD5E0 /* SplashScreenView.swift in Sources */,
 				4844E13F2B5A243700E6619C /* Icon.swift in Sources */,
 				CA25130B2B62AF01006D2EDF /* DetailViewModel.swift in Sources */,
 				48A12C202B5CF78E00E51200 /* NicknameRedundancyModel.swift in Sources */,
 				481B90A62B66940500D366A7 /* WalkwayViewModel.swift in Sources */,
 				48D88C2F2B5C259300A1B09E /* LoginTarget.swift in Sources */,
-				483BFD1A2B649CD000C2AD5B /* CustomTitleView.swift in Sources */,
 				6CE46B072B680CD20030F323 /* AccountSettingView.swift in Sources */,
-				483BFD1A2B649CD000C2AD5B /* CustomTitleView.swift in Sources */,
 				CAB9FA202B55443700F0046A /* RecommendSpaceModel.swift in Sources */,
 				483820EE2B4BEAFE00C3FB14 /* TtuDotShape.swift in Sources */,
 				481B90A22B668CEA00D366A7 /* LinearProgressViewStyle.swift in Sources */,
@@ -890,9 +902,7 @@
 				48CC73222B6E990D0055C278 /* UserSession.swift in Sources */,
 				48FF93932B43BA0600202F45 /* AppDelegate.swift in Sources */,
 				489BD8F12B4A40EE003382AE /* SearchButtonModel.swift in Sources */,
-				48CC6BCB2B6526420032A5E2 /* WalkPlaceRegisterView.swift in Sources */,
 				CA2513072B629144006D2EDF /* GuestBookCard.swift in Sources */,
-				48CC6BCB2B6526420032A5E2 /* WalkPlaceRegisterView.swift in Sources */,
 				488FA7122B6510890030CE66 /* MarketSelectButton.swift in Sources */,
 				483820E82B4BE8E500C3FB14 /* AddLocationCommand.swift in Sources */,
 				6CC4DDFF2B5687E80080E7E8 /* CouponView.swift in Sources */,
