@@ -118,6 +118,8 @@ enum Icon: String {
     case camera = "camera"
     case xButton = "Xbutton"
     case placeFinish = "placeFinish"
+    case whiteDrink = "whiteDrink"
+    case whiteRest = "whiteRest"
     
     var image: Image {
         return Image(self.rawValue)

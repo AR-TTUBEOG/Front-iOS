@@ -12,7 +12,6 @@ struct WalkwayPageContent: View {
     //MARK: - Property
     @ObservedObject var viewModel = WalkwayViewModel()
     @State private var walkWayName = ""
-    @State private var selectedImages: [UIImage] = []
     
     //MARK: - TextFieldShame
     private let horizontalPadding: CGFloat = 15
@@ -64,7 +63,7 @@ struct WalkwayPageContent: View {
     
     /// 첫 번째 안내글 뷰
     private var firstView: some View {
-        VStack(alignment: .leading, spacing: 10) {
+        VStack(alignment: .leading, spacing: 35) {
             CustomTitleView(titleText: "산책스팟의 이름을 알려주세요",
                             highlightText: ["이름"],
                             subtitleText: "지도에 등록되는 산책로의 이름이에요!",
@@ -85,7 +84,6 @@ struct WalkwayPageContent: View {
                         trailingHorizontalPadding: horizontalPadding + 35,
                         maxWidth: 275,
                         maxHeight: 45,
-                        showSearchIcon: true,
                         onSearch: {})
     }
     
@@ -99,9 +97,28 @@ struct WalkwayPageContent: View {
                         onSearch: {})
     }
     
+    //TODO: - 버튼 처리 로직 필요
+    
+    private var secondBottomAddressInputs: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            HStack(alignment: .center, spacing: 8) {
+                secondAddressInputTextField
+                Button(action: {
+                    print("hello")
+                },
+                       label: {
+                    Icon.searchAddress.image
+                        .resizable()
+                        .frame(maxWidth: 48, maxHeight: 45)
+                })
+            }
+            secondDetailAddressInputTextField
+        }
+    }
+    
     /// 두 번째 안내글 뷰
     private var secondeView: some View {
-        VStack(alignment: .leading, spacing: 10) {
+        VStack(alignment: .leading, spacing: 35) {
             CustomTitleView(titleText: "산책스팟의 위치를 알려주세요",
                             highlightText: ["위치"],
                             subtitleText: "산책로 중에 특정 위치의 주소를 입력해주세요 \n어디든 괜찮아요." ,
@@ -111,18 +128,7 @@ struct WalkwayPageContent: View {
                             frameAlignment: .topLeading
             )
             
-            VStack(alignment: .leading, spacing: 12) {
-                HStack(alignment: .center, spacing: 8) {
-                    secondAddressInputTextField
-                    Button(action: {},
-                           label: {
-                        Icon.searchAddress.image
-                            .resizable()
-                            .frame(maxWidth: 48, maxHeight: 45)
-                    })
-                }
-                secondDetailAddressInputTextField
-            }
+            secondBottomAddressInputs
         }
         
     }
@@ -248,14 +254,14 @@ struct WalkwayPageContent: View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 13) {
                 ForEach(viewModel.walwayModel.images.indices, id: \.self) { index in
-                    imageRemove(for: index)
+                    imageAddAndRemove(for: index)
                 }
             }
         }
     }
     
     @ViewBuilder
-    private func imageRemove(for index: Int) -> some View {
+    private func imageAddAndRemove(for index: Int) -> some View {
         ZStack(alignment: .topTrailing){
             Image(uiImage: viewModel.walwayModel.images[index])
                 .resizable()
