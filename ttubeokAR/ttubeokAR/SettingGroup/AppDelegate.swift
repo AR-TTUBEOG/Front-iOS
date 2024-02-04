@@ -30,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Create the SwiftUI view that provides the window contents.
         //MainViewControl().environmentObject(SharedTabInfo())
         //WalkwayPageContent(viewModel: WalkwayViewModel())
-        let contentView = LoginViewCycle()
+        let contentView = SplashScreenView()
         // Use a UIHostingController as window root view controller.
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.rootViewController = UIHostingController(rootView: contentView)
@@ -69,6 +69,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             })
         } else {
             window.rootViewController = viewController
+        }
+    }
+    
+    /// 스플래시 뷰 -> 로그인 뷰 전환 애내메이션
+    /// - Parameters:
+    ///   - ViewController: 변환하고자 하는 로그인 뷰 전환 뷰
+    ///   - animated: 변환 애니메이션
+    func changeRootSplashView(_ ViewController: UIViewController, animated: Bool = true) {
+        guard let window = self.window else { return }
+        
+        if animated {
+            UIView.transition(with: window, duration: 1.0, options: .transitionCrossDissolve, animations: {
+                window.rootViewController = ViewController
+                window.makeKeyAndVisible()
+            }, completion: nil)
+        } else {
+            window.rootViewController = ViewController
         }
     }
 
