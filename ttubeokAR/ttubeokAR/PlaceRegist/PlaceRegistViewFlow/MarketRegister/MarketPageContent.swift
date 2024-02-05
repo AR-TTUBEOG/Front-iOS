@@ -263,83 +263,6 @@ struct MarketPageContent: View {
     
     //MARK: - sixthView
     
-    /// 여섯 번째 이미지 추가 버튼
-    private var sixthAddImageButton: some View {
-        ZStack(alignment: .center) {
-            RoundedRectangle(cornerRadius: 19)
-                .foregroundStyle(Color.clear)
-                .frame(maxWidth: 80, maxHeight: 80)
-                .background(Color.textPink)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 19)
-                        .inset(by: 0/75)
-                        .stroke(Color.primary04, lineWidth: 1.5)
-                )
-            VStack(alignment: .center, spacing: 8)
-            {
-                Icon.camera.image
-                    .resizable()
-                    .frame(maxWidth: 42, maxHeight: 31)
-                Text("\(viewModel.selectedImageCount) / 10")
-                    .font(.sandol(type: .medium, size: 11))
-                    .foregroundStyle(Color.primary03)
-                    .frame(maxWidth: 28, maxHeight: 18, alignment: .center)
-            }
-            .frame(alignment: .bottom)
-            .offset(y: 5)
-        }
-        .clipShape(.rect(cornerRadius: 19))
-    }
-    
-    /// 선택한 사진 보기
-    private var sixthShowImages: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 13) {
-                ForEach(viewModel.marketModel.images.indices, id: \.self) { index in
-                    imageAddAndRemove(for: index)
-                }
-            }
-        }
-    }
-    
-    @ViewBuilder
-    private func imageAddAndRemove(for index: Int) -> some View {
-        ZStack(alignment: .topTrailing){
-            Image(uiImage: viewModel.marketModel.images[index])
-                .resizable()
-                .frame(maxWidth: 80, maxHeight: 80)
-                .clipShape(.rect(cornerRadius: 19))
-            
-            Button(action: {
-                viewModel.removeImage(at: index)
-            }) {
-                Icon.xButton.image
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(maxWidth: 22, maxHeight: 22)
-                    .padding([.horizontal, .vertical], -3)
-            }
-        }
-        .frame(maxWidth: 95, maxHeight: 95)
-    }
-    
-    /// 여섯 번째 이미지 추가 버튼 및 추가한 이미지 뷰
-    private var sixthChoiceImageView: some View {
-        HStack(spacing: 13) {
-            Button(action: {
-                viewModel.showImagePicker()
-            }) {
-                sixthAddImageButton
-            }
-            .sheet(isPresented: $viewModel.isImagePickerPresented) {
-                PlaceRegistImagePicker(imageHandler: viewModel)
-                    .ignoresSafeArea(.all)
-            }
-            sixthShowImages
-        }
-        .frame(maxHeight: 95)
-    }
-    
     /// 여섯 번째 안내문 뷰
     private var sixthInformationNotice: some View {
         HStack(spacing: 9) {
@@ -363,18 +286,23 @@ struct MarketPageContent: View {
             .frame(maxWidth: 326, maxHeight: 260)
     }
     
+    private var sixthTitle: some View {
+        CustomTitleView(titleText: "업체사진을 등록해주세요",
+                        highlightText: ["사진", "등록"],
+                        subtitleText: "방문객은 배경 사진을 보고 매장을 파악해요. \n사진은 이후 변경할 수 있지만 한 장은 필수 등록이에요!",
+                        titleHeight: 36,
+                        subtitleHeight: 60,
+                        textAlignment: .leading,
+                        frameAlignment: .topLeading)
+        
+    }
+    
     /// 여섯 번째 뷰
     private var sixthView: some View {
         VStack(alignment: .center, spacing: 30) {
             VStack(alignment: .leading, spacing: 2) {
-                CustomTitleView(titleText: "업체사진을 등록해주세요",
-                                highlightText: ["사진", "등록"],
-                                subtitleText: "방문객은 배경 사진을 보고 매장을 파악해요. \n사진은 이후 변경할 수 있지만 한 장은 필수 등록이에요!",
-                                titleHeight: 36,
-                                subtitleHeight: 60,
-                                textAlignment: .leading,
-                                frameAlignment: .topLeading)
-                sixthChoiceImageView
+                sixthTitle
+                ImageSelectionButton(viewModel: viewModel)
             }
             VStack(alignment: .leading, spacing: 14) {
                 sixthInformationNotice

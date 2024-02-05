@@ -221,86 +221,6 @@ struct WalkwayPageContent: View {
     
     //MARK: - fifthView
     
-    /// 이미지 추가 버튼
-    private var fifthAddImageButton: some View {
-        ZStack(alignment: .center) {
-            RoundedRectangle(cornerRadius: 19)
-                .foregroundStyle(Color.clear)
-                .frame(maxWidth: 80, maxHeight: 80)
-                .background(Color.textPink)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 19)
-                        .inset(by: 0.75)
-                        .stroke(Color.primary04, lineWidth: 1.5)
-                )
-            VStack(alignment: .center, spacing: 8)
-            {
-                Icon.camera.image
-                    .resizable()
-                    .frame(maxWidth: 42, maxHeight: 31)
-                Text("\(viewModel.selectedImageCount) / 10")
-                    .font(.sandol(type: .medium, size: 11))
-                    .foregroundStyle(Color.primary03)
-                    .frame(maxWidth: 28, maxHeight: 18, alignment: .center)
-            }
-            .frame(alignment: .bottom)
-            .offset(y: 5)
-        }
-        .clipShape(.rect(cornerRadius: 19))
-    }
-    
-    /// 선택한 사진들 보기
-    private var fifthShowImages: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 13) {
-                ForEach(viewModel.walwayModel.images.indices, id: \.self) { index in
-                    imageAddAndRemove(for: index)
-                }
-            }
-        }
-    }
-    
-    @ViewBuilder
-    /// 이미지 추가 및 삭제
-    /// - Parameter index: 선택한 이미지 삭제 인덱스
-    /// - Returns: 이미지 삭제
-    private func imageAddAndRemove(for index: Int) -> some View {
-        ZStack(alignment: .topTrailing){
-            Image(uiImage: viewModel.walwayModel.images[index])
-                .resizable()
-                .frame(maxWidth: 80, maxHeight: 80)
-                .clipShape(.rect(cornerRadius: 19))
-            
-            Button(action: {
-                viewModel.removeImage(at: index)
-            }) {
-                Icon.xButton.image
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(maxWidth: 22, maxHeight: 22)
-                    .padding([.horizontal, .vertical], -3)
-            }
-        }
-        .frame(maxWidth: 95, maxHeight: 95)
-    }
-    
-    /// 이미지 추가 버튼 및 추가한 이미지 뷰
-    private var fifthChoiceImageView: some View {
-        HStack(spacing: 13) {
-            Button(action: {
-                viewModel.showImagePicker()
-            }) {
-                fifthAddImageButton
-            }
-            .sheet(isPresented: $viewModel.isImagePickerPresented) {
-                PlaceRegistImagePicker(imageHandler: viewModel)
-                    .ignoresSafeArea(.all)
-            }
-            fifthShowImages
-        }
-        .frame(maxHeight: 95)
-    }
-    
     /// 다섯 번째 안내문 뷰
     private var fifthInformationNotice: some View {
         HStack(spacing: 9) {
@@ -335,7 +255,7 @@ struct WalkwayPageContent: View {
                                 subtitleHeight: 60,
                                 textAlignment: .leading,
                                 frameAlignment: .topLeading)
-                fifthChoiceImageView
+                ImageSelectionButton(viewModel: viewModel)
             }
             VStack(alignment: .leading, spacing: 14) {
                 fifthInformationNotice

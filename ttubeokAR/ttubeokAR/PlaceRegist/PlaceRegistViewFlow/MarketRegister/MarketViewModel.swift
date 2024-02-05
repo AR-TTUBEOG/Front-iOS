@@ -10,11 +10,14 @@ import SwiftUI
 
 class MarketViewModel: ObservableObject, ImageHandling {
     
+    
+    
     //MARK: - Property
     @Published var marketModel = MarketModel()
     @Published var currentPageIndext: Int = 5
     @Published var isImagePickerPresented = false
-    @Published var selectedImageCount: Int = 0
+    @Published var images: [UIImage] = []
+    
     
     //MARK: - saveTextInputs
     @Published var firstMarketName: String = ""
@@ -23,10 +26,15 @@ class MarketViewModel: ObservableObject, ImageHandling {
     @Published var thirdMarketTypeName: String = ""
     @Published var fifthMarketDescription: String = ""
     
-    //MARK: - Function
-    public func addImage(_ images: [UIImage]) {
-        marketModel.images.append(contentsOf: images)
-        selectedImageCount = marketModel.images.count
+    //MARK: - Protocol
+    
+    var selectedImageCount: Int {
+        images.count
+    }
+    
+    
+    public func addImage(_ newImages: [UIImage]) {
+        images.append(contentsOf: newImages)
     }
     
     public func showImagePicker() {
@@ -34,9 +42,15 @@ class MarketViewModel: ObservableObject, ImageHandling {
     }
     
     public func removeImage(at index: Int) {
-        guard marketModel.images.indices.contains(index) else { return }
-        marketModel.images.remove(at: index)
-        selectedImageCount = marketModel.images.count
+        if images.indices.contains(index) {
+            images.remove(at: index)
+        }
     }
+    
+    func getImages() -> [UIImage] {
+        images
+    }
+    
+    
 }
 

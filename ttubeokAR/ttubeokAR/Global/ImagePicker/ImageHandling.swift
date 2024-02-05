@@ -8,6 +8,12 @@
 import Foundation
 import SwiftUI
 
-protocol ImageHandling {
+protocol ImageHandling: AnyObject {
     func addImage(_ images: [UIImage])
+    func removeImage(at indext: Int)
+    func showImagePicker()
+    func getImages() -> [UIImage]
+    
+    var isImagePickerPresented: Bool { get set }
+    var selectedImageCount: Int { get }
 }
