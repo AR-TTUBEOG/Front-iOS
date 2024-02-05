@@ -9,12 +9,9 @@ import SwiftUI
 
 struct DetailViewControl: View {
     // MARK: - Property
-    private let detailInfoInstance = DetailInfo()
-    @StateObject private var viewModel = DetailView()
-    
-    
-    private let Book = ReviewInfo()
-    
+    @StateObject var viewModel = DetailViewModel()
+    let StoreInformation : StoreInformation
+    let GuestBookModel : GuestBookModel
     
     // MARK: - Body
     var body: some View {
@@ -37,6 +34,17 @@ struct DetailViewControl: View {
             }
             .frame(maxWidth: geometry.size.width, maxHeight: geometry.size.height)
         }
+        //Explore뷰에서 클릭했을때 작동이 되도록 해애함 (카드를 선택했을때) 바인딩을 사용하여(같은 메모리 주소를 공유) 두개의 뷰모델을 공유하도록 해야함 
+        .onAppear{
+            viewModel.fetchExploreDetail(storeId: StoreInformation.storeId) { result in
+                           switch result {
+                           case .success(let detailDataModel):
+                               print("성공: \(detailDataModel)")
+                           case .failure(let error):
+                               print("오류: \(error.localizedDescription)")
+                           }
+                       }
+                   }
     }
     
     //MARK: - 장소 사진 및 찜하기
@@ -54,7 +62,7 @@ struct DetailViewControl: View {
     
     //장소 사진
     private var SpaceImage : some View {
-        Image(detailInfoInstance.sampleStoreInfo.image)
+        Image(StoreInformation.image)
             .resizable()
             .frame(maxWidth: .infinity, maxHeight: 252)
     }
@@ -87,7 +95,7 @@ struct DetailViewControl: View {
     //TODO: - API 만들고 바꿀것
     //장소 이름
     private var spaceName : some View {
-        Text(detailInfoInstance.sampleStoreInfo.name)
+        Text(StoreInformation.name)
             .foregroundStyle(Color.textPink)
             .font(.sandol(type: .bold, size: 18))
             .multilineTextAlignment(.leading)
@@ -151,7 +159,7 @@ struct DetailViewControl: View {
     /// - Parameter benefitName: 받아올 아이템 이름
     /// - Returns: 이미지
     func getImageForBenefit(benefitName: String) -> String {
-        let benefitsAvailable = detailInfoInstance.sampleStoreInfo.benefit
+        let benefitsAvailable = StoreInformation.benefit
         
         switch benefitName {
         case "giftIcon":
@@ -177,7 +185,7 @@ struct DetailViewControl: View {
     
     /// 장소 설명 글
     private var spaceInfomation : some View{
-        Text(detailInfoInstance.sampleStoreInfo.info)
+        Text(StoreInformation.info)
             .font(.sandol(type: .regular, size: 11))
             .foregroundStyle(Color(red: 0.85, green: 0.85, blue: 0.85))
             .multilineTextAlignment(.leading)
@@ -193,7 +201,7 @@ struct DetailViewControl: View {
                         .aspectRatio(contentMode: .fit)
                         .frame(maxWidth: 13, maxHeight: 13)
                     
-                    Text(String(detailInfoInstance.sampleStoreInfo.stars))
+                    Text(String(StoreInformation.stars))
                         .frame(maxWidth: 42, maxHeight: 16, alignment: .leading)
                         .font(.sandol(type: .bold, size: 11))
                         .foregroundStyle(Color(red: 133 / 255.0, green: 135 / 255.0, blue: 152 / 255.0))
@@ -266,7 +274,7 @@ struct DetailViewControl: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(maxWidth: 15, maxHeight: 15)
-                Text(viewModel.formattedReviewCount(detailInfoInstance.sampleStoreInfo.likes))
+                Text(viewModel.formattedReviewCount(StoreInformation.likes))
                     .font(.sandol(type: .bold, size: 11))
                     .foregroundStyle(Color.white)
             }
@@ -285,7 +293,7 @@ struct DetailViewControl: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(maxWidth: 9, maxHeight: 11)
-                Text(viewModel.formattedReviewCount(detailInfoInstance.sampleStoreInfo.guestbook))
+                Text(viewModel.formattedReviewCount(StoreInformation.guestbook))
                     .font(.sandol(type: .bold, size: 11))
                     .foregroundStyle(Color(red: 36/255, green: 88/255, blue: 139/255))
             }
@@ -296,11 +304,14 @@ struct DetailViewControl: View {
     
     //MARK: - 스크롤 방명록 보기
     private var guestBookGrid: some View {
-        ScrollView(.vertical , showsIndicators: false) {
+        ScrollView(.vertical, showsIndicators: false) {
             LazyVGrid(columns: [GridItem(.flexible(minimum: 150), spacing: 10), GridItem(.flexible(minimum: 150), spacing: 100)], spacing: 13) {
-                ForEach(ReviewInfo.infos, id: \.userId) { info in
-                    GuestBookCard(guestBook: info)
-                        .frame(minWidth: 0, maxWidth: .infinity,  minHeight: 200)
+                // 안전하게 옵셔널을 처리하기 위해 옵셔널 바인딩 사용
+                if let informationList = self.viewModel.exploreDetailData?.information {
+                    ForEach(informationList, id: \.storeId) { information in
+                        GuestBookCard(viewModel: viewModel,GuestBookModel: GuestBookModel, StoreInformation: information)
+                            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 200)
+                    }
                 }
             }
         }
@@ -312,11 +323,4 @@ struct DetailViewControl: View {
 
 
 
-struct DetailViewControl_Previews: PreviewProvider {
-    static var previews: some View {
-        let detailInfoInstance = DetailInfo()
-        _ = DetailView()
-        return DetailViewControl()
-            .previewLayout(.sizeThatFits)
-    }
-}
+

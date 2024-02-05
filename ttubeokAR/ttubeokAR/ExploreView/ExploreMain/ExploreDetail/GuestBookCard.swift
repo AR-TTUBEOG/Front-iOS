@@ -10,14 +10,24 @@ import SwiftUI
 struct GuestBookCard : View {
     
     // MARK: - Property
-    @State var guestBook: GuestBookModel
-    
+    var viewModel : DetailViewModel
+    let GuestBookModel : GuestBookModel
+    let StoreInformation : StoreInformation
     // MARK: - Body
     
     
     var body: some View {
-        
         allView
+            .onAppear{
+                viewModel.fetchExploreDetail(storeId: GuestBookModel.storeId) { result in
+                               switch result {
+                               case .success(let detailDataModel):
+                                   print("성공: \(detailDataModel)")
+                               case .failure(let error):
+                                   print("오류: \(error.localizedDescription)")
+                               }
+                           }
+                       }
     }
     
     
@@ -64,13 +74,13 @@ struct GuestBookCard : View {
     }
         
     private var placeImage: some View {
-        Image(guestBook.image)
+        Image(GuestBookModel.image)
             .resizable()
             .frame(maxWidth: 103, maxHeight: 108)
     }
     
     private var nickName : some View{
-        Text(guestBook.userName)
+        Text(GuestBookModel.userName)
             .font(.sandol(type: .bold, size: 11))
             .multilineTextAlignment(.center)
             .foregroundStyle(Color(red: 0.91, green: 0.95, blue: 1))
@@ -89,7 +99,7 @@ struct GuestBookCard : View {
     }
     
     private var contentsDescript : some View{
-        Text(guestBook.content)
+        Text(GuestBookModel.content)
             .font(.sandol(type: .regular, size: 11))
             .multilineTextAlignment(.center)
             .foregroundStyle(Color(red: 0.91, green: 0.95, blue: 1))
@@ -98,7 +108,7 @@ struct GuestBookCard : View {
     
     private var stars: some View {
         HStack(spacing: 0) {
-            let starCount = Int(guestBook.stars) ?? 0
+            let starCount = Int(GuestBookModel.stars) ?? 0
             ForEach(0..<starCount, id: \.self) { _ in
                 Icon.star2.image
                     .frame(maxWidth: 13, maxHeight: 12)
@@ -108,24 +118,3 @@ struct GuestBookCard : View {
     
     
 }
-// MARK: - Preview
-#if DEBUG
-struct GuestBookCard_reviews: PreviewProvider {
-    static var previews: some View {
-        // 예시 데이터 생성
-        let sampleReview = GuestBookModel(
-            guestbookId: 1,
-            storeId: 1,
-            userId: 1,
-            content: "오늘도 즐거운 산책~!",
-            stars: "5",
-            image: "DetailViewtest",
-            userName: "메타몽"
-        )
-
-
-        GuestBookCard(guestBook: sampleReview)
-            .previewLayout(.sizeThatFits)
-    }
-}
-#endif

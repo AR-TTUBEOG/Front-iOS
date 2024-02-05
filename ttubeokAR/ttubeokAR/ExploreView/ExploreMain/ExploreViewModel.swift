@@ -7,19 +7,42 @@
 
 import Foundation
 import CoreLocation
+import Moya
 
 class ExploreViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
-    
     //MARK: - Property
+    
+    private let provider = MoyaProvider<ExploreAPITarget>()
+    var exploreData: ExploreDataModel?
     @Published var isFavorited: Bool = false
-    static var exploreViweModel = ExploreViewModel()
     @Published var distance: CLLocationDistance = 0
     @Published var estimatedTime: TimeInterval = 0
-    // CLLocationManager 인스턴스를 사용
-    var locationManager = CLLocationManager()
+    private var locationManager = CLLocationManager()
     var currentLocation: CLLocation? {
             locationManager.location
         }
+    
+    
+    // 서버로부터 ExploreDataModel 데이터를 받아오는 함수
+    func fetchExploreData() {
+        provider.request(.fetchExploreData) { [weak self] result in
+            switch result {
+            case .success(let response):
+                do {
+                    let decodedData = try JSONDecoder().decode(ExploreDataModel.self, from: response.data)
+                    DispatchQueue.main.async {
+                        self?.exploreData = decodedData
+                    }
+                } catch {
+                    print("Decoding error: \(error)")
+                }
+            case .failure(let error):
+                print("Network error: \(error)")
+            }
+        }
+    }
+    
+    
     
     // MARK: - ChangeExploreView
     
@@ -51,7 +74,7 @@ class ExploreViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
         return "SomeString"
     }
 
-
+    // MARK: - Distance Function
 
     //위치 관리자를 설정하고 위치 업데이트를 시작
     override init() {
@@ -61,24 +84,31 @@ class ExploreViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
         locationManager.requestWhenInUseAuthorization() // 위치 서비스 사용 권한 요청
           locationManager.startUpdatingLocation() //위치 업데이트
       }
-//
-//    //주어진 매장의 위치와 거리, 시간 계산 함수
-//     func calculateDistanceAndTime() {
-//           
-//           guard let currentLocation = locationManager.location else { return }
-//
-//         let storeLocation = CLLocation(latitude: CLLocationDegrees(ExploreViewModel.ExploreViweModel.distance), longitude: CLLocationDegrees(detailInfo.sampleStoreInfo.longitude))
-//           distance = currentLocation.distance(from: storeLocation)
-//
-//           let walkingSpeedPerMeterPerSecond: Double = 1.4 // 걷기 속도
-//           estimatedTime = distance / walkingSpeedPerMeterPerSecond
-//       }
-//
-//    @objc func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-//        calculateDistanceAndTime()
-//       }
-//
-//    @objc(locationManager:didChangeAuthorizationStatus:) func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-//           // 위치 서비스 권한 변경 시 필요한 작업 수행
-//       }
+
+    //주어진 매장의 위치와 거리, 시간 계산 함수
+    func calculateDistanceAndTime() {
+           guard let currentLocation = locationManager.location else { return }
+           
+           // 배열의 첫 번째 장소 정보를 사용
+        if let firstSpaceInfo = exploreData?.information.first {
+               let storeLocation = CLLocation(latitude: CLLocationDegrees(firstSpaceInfo.latitude), longitude: CLLocationDegrees(firstSpaceInfo.longtitude))
+               let distance = currentLocation.distance(from: storeLocation)
+
+               let walkingSpeedPerMeterPerSecond: Double = 1.4 // 걷기 속도
+               estimatedTime = distance / walkingSpeedPerMeterPerSecond
+               // 여기서 estimatedTime을 사용하거나 업데이트 하는 로직 추가
+           }
+       }
+
+       func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+           calculateDistanceAndTime()
+       }
+
+       func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+           if status == .authorizedWhenInUse || status == .authorizedAlways {
+               locationManager.startUpdatingLocation()
+           }
+           // 위치 서비스 권한 거부 시 필요한 작업 수행
+       }
 }
+

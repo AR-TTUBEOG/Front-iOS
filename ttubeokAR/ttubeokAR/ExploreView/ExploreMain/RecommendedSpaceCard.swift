@@ -9,13 +9,14 @@ import SwiftUI
 
 struct RecommendedSpaceCard: View {
     // MARK: - Property
-    @State var space: RecommendedSpaceModel
     @State private var isFavorited = false
-    @StateObject var viewModel = ExploreViewModel()
     @State var placeTypeColor: Color?
     @State var baseImage: Image?
     @State var placeTypeText: Text?
-    @ObservedObject var reviewViewModel = ExploreViewModel()
+    let viewModel : ExploreViewModel
+    let exploreDetailInfor: ExploreDetailInfor
+
+    // 장소 타입 저장할 변수 필요
     
     // MARK: - Body
     
@@ -60,7 +61,7 @@ struct RecommendedSpaceCard: View {
     //장소 이미지
     private var spaceImage : some View {
         VStack(spacing:0) {
-            Image(space.placePhoto)
+            Image(exploreDetailInfor.image)
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .frame(width: 150, height: 80)
@@ -73,7 +74,7 @@ struct RecommendedSpaceCard: View {
     
     //장소 이름
     private var spaceName : some View {
-        Text(space.placeName)
+        Text(exploreDetailInfor.name)
             .font(.system(size: 15, weight: .bold))
             .foregroundColor(.white)
             .padding(8)
@@ -101,7 +102,7 @@ struct RecommendedSpaceCard: View {
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 13, height: 13)
             
-            Text(String(space.starRating))
+            Text(String(exploreDetailInfor.stars))
                 .font(.system(size: 13, weight: .light))
                 .foregroundColor(.white)
         }
@@ -133,8 +134,8 @@ struct RecommendedSpaceCard: View {
                    .resizable()
                    .aspectRatio(contentMode: .fit)
                    .frame(width: 12, height: 12)
-               
-               Text("\(String(format: "%.1f", space.distance)) km")
+               //거리 수정
+               Text("\(String(format: "%.1f", formatEstimatedTime(viewModel.distance))) km")
                    .font(.system(size: 13, weight: .light))
                    .foregroundColor(.white)
            }
@@ -150,7 +151,7 @@ struct RecommendedSpaceCard: View {
                    .aspectRatio(contentMode: .fit)
                    .frame(width: 11, height: 11)
                
-               Text("약 \(space.time)분")
+               Text("약 \(formatEstimatedTime(viewModel.estimatedTime))분")
                         .font(.system(size: 13, weight: .light))
                         .foregroundColor(.white)
                }
@@ -170,7 +171,7 @@ struct RecommendedSpaceCard: View {
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 9, height: 9)
                 .offset(x: 4, y: 0)
-            Text(reviewViewModel.formattedReviewCount(space.reviewCount))
+            Text(viewModel.formattedReviewCount(exploreDetailInfor.guestbookCount))
                 .font(.system(size: 7, weight: .bold))
                 .foregroundColor(Color(red: 36 / 255, green: 88 / 255, blue: 139 / 255))
                 .offset(x:13, y:0)
@@ -185,13 +186,13 @@ struct RecommendedSpaceCard: View {
         VStack {
             Rectangle()
                 .frame(width: 36, height: 13)
-                .foregroundColor(getColor(for: space.placeType.first))
+                .foregroundColor(getColor(for: exploreDetailInfor.place.first))
                 .cornerRadius(19)
-            Text(getPlaceTypeText(for: space.placeType.first))
+            Text(getPlaceTypeText(for: exploreDetailInfor.place.first))
                 .font(.system(size: 7, weight: .bold))
-                .foregroundColor(getPlaceTypeTextColor(for: space.placeType.first))
+                .foregroundColor(getPlaceTypeTextColor(for: exploreDetailInfor.place.first))
                 .offset(x: 4, y: -13)
-            getImage(for: space.placeType.first)
+            getImage(for: exploreDetailInfor.place.first)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 9, height: 9)
@@ -199,15 +200,15 @@ struct RecommendedSpaceCard: View {
         }
     }
     
-    func getImage(for placeType: place?) -> Image {
-        guard let placeType = placeType else {
+    func getImage(for PlacePurpose: PlacePurpose?) -> Image {
+        guard let PlacePurpose = PlacePurpose else {
             // placeType이 nil일 경우 처리
             placeTypeColor = Color.lightGreen2
             return Image("default")
         }
-        if placeType.walkingSpot {
+        if PlacePurpose.store {
             return Icon.tree.image
-        } else if placeType.storeSpot {
+        } else if PlacePurpose.spot {
             return Icon.store.image
         }
         // 둘 다 아닐 시
@@ -215,42 +216,42 @@ struct RecommendedSpaceCard: View {
         return Image("default")
     }
     
-    func getColor(for placeType: place?) -> Color {
-        guard let placeType = placeType else {
+    func getColor(for PlacePurpose: PlacePurpose?) -> Color {
+        guard let PlacePurpose = PlacePurpose else {
             // placeType이 nil일 경우 처리
             return Color.lightGreen2
         }
         
-        if placeType.walkingSpot {
+        if PlacePurpose.spot {
             return Color.lightGreen2
-        } else if placeType.storeSpot {
+        } else if PlacePurpose.store {
             return Color.lightOrange
         }
         return Color.lightGreen2
     }
     
-    func getPlaceTypeText(for placeType: place?) -> String {
-            guard let placeType = placeType else {
+    func getPlaceTypeText(for PlacePurpose: PlacePurpose?) -> String {
+            guard let PlacePurpose = PlacePurpose else {
                 // placeType이 nil
                 return "산책"
             }
-            if placeType.walkingSpot {
+            if PlacePurpose.spot {
                 return "산책"
-            } else if placeType.storeSpot {
+            } else if PlacePurpose.store {
                 return "가게"
             }
             // 둘 다 아닐 시
             return "산책"
         }
     
-func getPlaceTypeTextColor(for placeType: place?) -> Color {
-        guard let placeType = placeType else {
+func getPlaceTypeTextColor(for PlacePurpose: PlacePurpose?) -> Color {
+        guard let PlacePurpose = PlacePurpose else {
             // placeType이 nil일 경우 처리
             return Color.green
         }
-        if placeType.walkingSpot {
+        if PlacePurpose.spot {
             return Color(red: 49 / 255, green: 97 / 255, blue: 0 / 255)
-        } else if placeType.storeSpot {
+        } else if PlacePurpose.store {
             return Color(red: 222 / 255, green: 98 / 255, blue: 8 / 255)
         }
         return Color.green
@@ -258,28 +259,6 @@ func getPlaceTypeTextColor(for placeType: place?) -> Color {
     
     
 }
-
-
-
-// MARK: - Preview
-#if DEBUG
-struct RecommendedSpaceCard_reviews: PreviewProvider {
-    static var previews: some View {
-               let sampleSpace = RecommendedSpaceModel(
-                   placeName: "낙산공원 한양도성길",
-                   placePhoto: "spaceTest",
-                   starRating: 4.5,
-                   distance: 2.3,
-                   time: "15",
-                   reviewCount: 123,
-                   isFavorited: false,
-                   placeType:[place(walkingSpot: true, storeSpot: false)]
-               )
-        RecommendedSpaceCard(space: sampleSpace)
-            .previewLayout(.sizeThatFits)
-    }
-}
-#endif
 
 
 
