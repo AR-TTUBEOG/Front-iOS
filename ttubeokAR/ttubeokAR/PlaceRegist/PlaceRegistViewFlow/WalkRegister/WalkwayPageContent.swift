@@ -12,7 +12,6 @@ struct WalkwayPageContent: View {
     //MARK: - Property
     @ObservedObject var viewModel = WalkwayViewModel()
     @State private var walkWayName = ""
-    @State private var selectedImages: [UIImage] = []
     
     //MARK: - TextFieldShame
     private let horizontalPadding: CGFloat = 15
@@ -64,7 +63,7 @@ struct WalkwayPageContent: View {
     
     /// 첫 번째 안내글 뷰
     private var firstView: some View {
-        VStack(alignment: .leading, spacing: 10) {
+        VStack(alignment: .leading, spacing: 35) {
             CustomTitleView(titleText: "산책스팟의 이름을 알려주세요",
                             highlightText: ["이름"],
                             subtitleText: "지도에 등록되는 산책로의 이름이에요!",
@@ -85,7 +84,6 @@ struct WalkwayPageContent: View {
                         trailingHorizontalPadding: horizontalPadding + 35,
                         maxWidth: 275,
                         maxHeight: 45,
-                        showSearchIcon: true,
                         onSearch: {})
     }
     
@@ -99,9 +97,28 @@ struct WalkwayPageContent: View {
                         onSearch: {})
     }
     
+    //TODO: - 버튼 처리 로직 필요
+    
+    private var secondBottomAddressInputs: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            HStack(alignment: .center, spacing: 8) {
+                secondAddressInputTextField
+                Button(action: {
+                    print("hello")
+                },
+                       label: {
+                    Icon.searchAddress.image
+                        .resizable()
+                        .frame(maxWidth: 48, maxHeight: 45)
+                })
+            }
+            secondDetailAddressInputTextField
+        }
+    }
+    
     /// 두 번째 안내글 뷰
     private var secondeView: some View {
-        VStack(alignment: .leading, spacing: 10) {
+        VStack(alignment: .leading, spacing: 35) {
             CustomTitleView(titleText: "산책스팟의 위치를 알려주세요",
                             highlightText: ["위치"],
                             subtitleText: "산책로 중에 특정 위치의 주소를 입력해주세요 \n어디든 괜찮아요." ,
@@ -111,18 +128,7 @@ struct WalkwayPageContent: View {
                             frameAlignment: .topLeading
             )
             
-            VStack(alignment: .leading, spacing: 12) {
-                HStack(alignment: .center, spacing: 8) {
-                    secondAddressInputTextField
-                    Button(action: {},
-                           label: {
-                        Icon.searchAddress.image
-                            .resizable()
-                            .frame(maxWidth: 48, maxHeight: 45)
-                    })
-                }
-                secondDetailAddressInputTextField
-            }
+            secondBottomAddressInputs
         }
         
     }
@@ -150,13 +156,13 @@ struct WalkwayPageContent: View {
                             fontSize: 15,
                             leadingHorizontalPadding: fourthHorizontalPadding,
                             trailingHorizontalPadding: fourthHorizontalPadding,
-                            verticalPadding: fourthHorizontalPadding,
+                            verticalPadding: fourthVerticalPadding,
                             maxWidth: 314,
                             maxHeight: 102,
                             onSearch: {},
                             alignment: .topLeading,
                             axis: .vertical,
-                            maxLength: 60
+                            maxLength: 50
             )
             
             Text("\(viewModel.fourthWalkwayDescription.count) / 50")
@@ -215,82 +221,6 @@ struct WalkwayPageContent: View {
     
     //MARK: - fifthView
     
-    /// 이미지 추가 버튼
-    private var fifthAddImageButton: some View {
-        ZStack(alignment: .center) {
-            RoundedRectangle(cornerRadius: 19)
-                .foregroundStyle(Color.clear)
-                .frame(maxWidth: 80, maxHeight: 80)
-                .background(Color.textPink)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 19)
-                        .inset(by: 0.75)
-                        .stroke(Color.primary04, lineWidth: 1.5)
-                )
-            VStack(alignment: .center, spacing: 8)
-            {
-                Icon.camera.image
-                    .resizable()
-                    .frame(maxWidth: 42, maxHeight: 31)
-                Text("\(viewModel.selectedImageCount) / 10")
-                    .font(.sandol(type: .medium, size: 11))
-                    .foregroundStyle(Color.primary03)
-                    .frame(maxWidth: 28, maxHeight: 18, alignment: .center)
-            }
-            .frame(alignment: .bottom)
-            .offset(y: 5)
-        }
-        .clipShape(.rect(cornerRadius: 19))
-    }
-    
-    /// 선택한 사진들 보기
-    private var fifthShowImages: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 13) {
-                ForEach(viewModel.walwayModel.images.indices, id: \.self) { index in
-                    imageRemove(for: index)
-                }
-            }
-        }
-    }
-    
-    @ViewBuilder
-    private func imageRemove(for index: Int) -> some View {
-        ZStack(alignment: .topTrailing){
-            Image(uiImage: viewModel.walwayModel.images[index])
-                .resizable()
-                .frame(maxWidth: 80, maxHeight: 80)
-                .clipShape(.rect(cornerRadius: 19))
-            
-            Button(action: {
-                viewModel.removeImage(at: index)
-            }) {
-                Icon.xButton.image
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(maxWidth: 22, maxHeight: 22)
-                    .padding([.horizontal, .vertical], -3)
-            }
-        }
-        .frame(maxWidth: 95, maxHeight: 95)
-    }
-    
-    /// 이미지 추가 버튼 및 추가한 이미지 뷰
-    private var fifthChoiceImageView: some View {
-        HStack(spacing: 13) {
-            Button(action: {
-                viewModel.showImagePicker()
-            }) {
-                fifthAddImageButton
-            }
-            .sheet(isPresented: $viewModel.isImagePickerPresented) {
-                PlaceRegistImagePicker(viewModel: viewModel)
-            }
-            fifthShowImages
-        }
-        .frame(maxHeight: 95)
-    }
-    
     /// 다섯 번째 안내문 뷰
     private var fifthInformationNotice: some View {
         HStack(spacing: 9) {
@@ -317,15 +247,15 @@ struct WalkwayPageContent: View {
     /// 다섯 번째 뷰
     private var fifthView: some View {
         VStack(alignment: .center, spacing: 30) {
-            VStack(alignment: .leading) {
+            VStack(alignment: .leading, spacing: 2) {
                 CustomTitleView(titleText: "배경사진을 등록해주세요",
-                                highlightText: ["사진, 등록"],
+                                highlightText: ["사진", "등록"],
                                 subtitleText: "방문객은 배경 사진을 보고 산책로를 파악해요. \n사진은 이후 변경할 수 있지만 한 장은 필수 등록이에요!",
                                 titleHeight: 36,
                                 subtitleHeight: 60,
                                 textAlignment: .leading,
                                 frameAlignment: .topLeading)
-                fifthChoiceImageView
+                ImageSelectionButton(viewModel: viewModel)
             }
             VStack(alignment: .leading, spacing: 14) {
                 fifthInformationNotice

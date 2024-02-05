@@ -45,7 +45,7 @@ struct CustomTitleView: View {
          titleHeight: CGFloat,
          subtitleWidth: CGFloat? = 350,
          subtitleHeight: CGFloat? = 30,
-         spacing: CGFloat = 20,
+         spacing: CGFloat = 11,
          textAlignment: TextAlignment,
          frameAlignment: Alignment
     ) {
@@ -83,7 +83,7 @@ struct CustomTitleView: View {
             if let subtitle = subtitleText {
                 Text(subtitle)
                     .font(.sandol(type: .light, size: subtitleSize ?? 0))
-                    .lineSpacing(1.2)
+                    .lineSpacing(1.5)
                     .frame(maxWidth: subtitleWidth ?? 0, maxHeight: subtitleHeight ?? 0, alignment: frameAlignment)
                     .foregroundStyle(Color.textPink)
                     .multilineTextAlignment(textAlignment)
