@@ -139,12 +139,19 @@ struct PlaceSettingView: View {
             Text("설정 완료")
                 .font(.sandol(type: .medium, size: 14))
                 .foregroundStyle(Color(red: 0.92, green: 0.9, blue: 0.97))
-                .frame(maxWidth: 343, maxHeight: 39.53)
+                .frame(maxWidth: 360, maxHeight: 39.53)
                 .contentShape(Rectangle())
                 .background(Color.primary03)
                 .clipShape(.rect(cornerRadius: 20))
         }
-        .padding(.horizontal, 16)
-        .padding(.vertical, 8)
+        .padding(.vertical, 10)
+        .padding(.horizontal, 15)
+    }
+}
+
+struct PlaceSettingView_Preview: PreviewProvider {
+    static var previews: some View {
+        PlaceSettingView(viewModel: PlaceSettingsViewModel())
+            .previewLayout(.sizeThatFits)
     }
 }

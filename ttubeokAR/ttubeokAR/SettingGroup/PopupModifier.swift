@@ -18,13 +18,6 @@ func getScreenSize() -> CGSize {
     return window.screen.bounds.size
 }
 
-extension View {
-    func customPopup<PopupContent: View>(isPresented: Binding<Bool>, @ViewBuilder content: @escaping () -> PopupContent) -> some View {
-        modifier(PopupModifier(isPresented: isPresented, popupContent: content))
-    }
-}
-
-
 struct PopupModifier<PopupContent: View>: ViewModifier {
     @Binding var isPresented: Bool
     let popupContent: () -> PopupContent
@@ -55,12 +48,15 @@ struct PopupModifier<PopupContent: View>: ViewModifier {
         }
     }
     
+    
+    
     func body(content: Content) -> some View {
         ZStack(alignment: .bottom) {
                     content
                     if isPresented {
                         popupContent()
-                            .animation(dragState.isDragging ? nil : .easeOut(duration: 0.5), value: dragState.translation.height) // 드래그 애니메이션 유지
+                            .offset(y: screenSize.height * 0.04)
+                            .animation(dragState.isDragging ? nil : .easeOut(duration: 0.5), value: dragState.translation.height)
                             .transition(.move(edge: .bottom))
                             .animation(.easeInOut(duration: 0.5), value: isPresented)
                             .offset(y: dragState.isDragging ? dragState.translation.height : 0)
@@ -72,7 +68,6 @@ struct PopupModifier<PopupContent: View>: ViewModifier {
                                     .onEnded { drag in
                                         if drag.translation.height > dragThreshold {
                                             withAnimation(.easeOut(duration: 0.5)) {
-                                                // 임계값을 넘으면 팝업을 사라지게 하고, 드래그 상태를 초기화
                                                 isPresented = false
                                                 
                                             }
@@ -85,3 +80,13 @@ struct PopupModifier<PopupContent: View>: ViewModifier {
         .animation(.easeInOut(duration: 0.5), value: isPresented)
     }
 }
+
+extension View {
+    func customPopup<PopupContent: View>(isPresented: Binding<Bool>, @ViewBuilder content: @escaping () -> PopupContent) -> some View {
+        modifier(PopupModifier(isPresented: isPresented, popupContent: content))
+    }
+}
+
+
+
+
