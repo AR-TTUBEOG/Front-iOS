@@ -11,10 +11,13 @@ class PlaceSettingsViewModel: ObservableObject {
     //MARK: - Property
     let maxSliderValue = 100.0
     @Published var selectPlace: PlaceType?
-    @Published var settings = PlaceSettingsModel(selectionPlace: .all, distance: 10.0)
+    
+    //TODO: - 수정하기
+    @Published var settings = PlaceSettingsModel(selectionPlace: .all)
+    @Published var distanceValue: Double = 5.0
     
     var distanceDisplay: String {
-        String(format: "%.1f km", settings.distance)
+        String(format: "%.1f km", self.distanceValue)
     }
     
     //MARK: - Function
@@ -42,7 +45,7 @@ class PlaceSettingsViewModel: ObservableObject {
     
     //슬라이더 값에 따른 새로운 거리 값
     public func updateDistance(_ newDistance: Double) {
-        settings.distance = calculateDistance(for: newDistance)
+        self.distanceValue = calculateDistance(for: newDistance)
     }
     
     

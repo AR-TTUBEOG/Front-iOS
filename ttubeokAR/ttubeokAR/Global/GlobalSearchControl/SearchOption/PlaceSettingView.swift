@@ -11,42 +11,48 @@ struct PlaceSettingView: View {
     
     //MARK: - Property
     @ObservedObject var viewModel = PlaceSettingsViewModel()
-    
     //MARK: - Body
     var body: some View {
-        GeometryReader { geometry in
-            ZStack(alignment: .top){
-                Color.background.ignoresSafeArea(.all)
-                topAllView(geometry: geometry)
-                    .padding(.horizontal, geometry.size.width * 0.1)
-            }
+        ZStack(alignment: .bottom) {
+            topAllView
+                .padding(.horizontal, 20)
         }
-        .frame(maxHeight: 420)
+        .background(Color.background.ignoresSafeArea(.all))
+        .roundedCorner(40, corners: [.topLeft, .topRight])
+        .frame(maxHeight: 420, alignment: .bottom)
     }
     
     //MARK: - PlaceSettingView
     /// 설정한 모든 뷰 Vstack으로 맞추기
     /// - Parameter geometry: 화면 사이즈에 맞추어 계산
     /// - Returns: 사이즈 조절된 뷰 리턴
-    private func topAllView(geometry: GeometryProxy) -> some View {
+    private var topAllView: some View {
         VStack(alignment: .center, spacing: 10){
-            topRectangle
-            title
-            Spacer().frame(height: 23)
+            topComponent
+            Spacer().frame(height: 15)
             VStack(alignment: .center, spacing: 60) {
                 placeSelectButton
                 sliderDistance
                 finishSelect
             }
         }
-        .offset(y: geometry.size.height * 0.05)
+        .frame(maxHeight: 460)
+    }
+    
+    private var topComponent: some View {
+        VStack(spacing: 15) {
+            topRectangle
+            title
+        }
+        .offset(y: -10)
+        .padding(.bottom, 15)
     }
     
     /// 상단 팝업 푸시 막대기
     private var topRectangle: some View {
         RoundedRectangle(cornerRadius: 20)
-            .frame(maxWidth: 72, maxHeight: 6)
-            .background(Color(red: 0.92, green: 0.9, blue: 0.97).opacity(0.3))
+            .fill(Color(red: 0.92, green: 0.90, blue: 0.97).opacity(0.30))
+            .frame(maxWidth: 72, maxHeight: 5,alignment: .top)
     }
     
     
@@ -56,7 +62,7 @@ struct PlaceSettingView: View {
             .font(.sandol(type: .medium, size: 25))
             .multilineTextAlignment(.center)
             .foregroundStyle(Color(red: 0.92, green: 0.9, blue: 0.97))
-            .frame(maxWidth: .infinity, alignment: .top)
+            .frame(maxWidth: .infinity, alignment: .center)
     }
     
     
@@ -117,7 +123,8 @@ struct PlaceSettingView: View {
             }
             .padding(.horizontal, 16)
             
-            CustomSlider(value: $viewModel.settings.distance, range: 0...10)
+            CustomSlider(value: $viewModel.distanceValue, range: 0...10)
+            
         }
         .padding(.vertical, 3)
         .padding(.leading, 0)
@@ -140,8 +147,4 @@ struct PlaceSettingView: View {
         .padding(.horizontal, 16)
         .padding(.vertical, 8)
     }
-}
-
-#Preview {
-    PlaceSettingView()
 }

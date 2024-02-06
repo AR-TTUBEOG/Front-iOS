@@ -9,7 +9,6 @@ import Foundation
 
 struct PlaceSettingsModel {
     var selectionPlace: PlaceType
-    var distance: Double
 }
 
 enum PlaceType: String, CaseIterable {
