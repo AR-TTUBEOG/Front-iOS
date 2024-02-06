@@ -23,7 +23,7 @@ struct PopupModifier<PopupContent: View>: ViewModifier {
     let popupContent: () -> PopupContent
     private var screenSize: CGSize { getScreenSize() }
     @GestureState private var dragState = DragState.inactive
-    private let dragThreshold: CGFloat = 50.0
+    private let dragThreshold: CGFloat = 120
     
     enum DragState {
         case inactive
@@ -55,7 +55,7 @@ struct PopupModifier<PopupContent: View>: ViewModifier {
                     content
                     if isPresented {
                         popupContent()
-                            .offset(y: screenSize.height * 0.04)
+                            .position(x: screenSize.width / 2, y: screenSize.height * 0.72)
                             .animation(dragState.isDragging ? nil : .easeOut(duration: 0.5), value: dragState.translation.height)
                             .transition(.move(edge: .bottom))
                             .animation(.easeInOut(duration: 0.5), value: isPresented)
@@ -67,7 +67,7 @@ struct PopupModifier<PopupContent: View>: ViewModifier {
                                     }
                                     .onEnded { drag in
                                         if drag.translation.height > dragThreshold {
-                                            withAnimation(.easeOut(duration: 0.5)) {
+                                            withAnimation(.smooth(duration: 1.0)) {
                                                 isPresented = false
                                                 
                                             }

@@ -13,13 +13,16 @@ struct PlaceSettingView: View {
     @ObservedObject var viewModel = PlaceSettingsViewModel()
     //MARK: - Body
     var body: some View {
-        ZStack(alignment: .bottom) {
-            topAllView
-                .padding(.horizontal, 20)
+        GeometryReader { geometry in
+            ZStack(alignment: .center) {
+                topAllView
+                    .position(x: geometry.size.width * 0.45, y: geometry.size.height * 0.45)
+                    .padding(.horizontal, 20)
+            }
+            .background(Color.background.ignoresSafeArea(.all))
+            .roundedCorner(40, corners: [.topLeft, .topRight])
         }
-        .background(Color.background.ignoresSafeArea(.all))
-        .roundedCorner(40, corners: [.topLeft, .topRight])
-        .frame(maxHeight: 420, alignment: .bottom)
+        .frame(maxHeight: 460)
     }
     
     //MARK: - PlaceSettingView
@@ -29,14 +32,15 @@ struct PlaceSettingView: View {
     private var topAllView: some View {
         VStack(alignment: .center, spacing: 10){
             topComponent
-            Spacer().frame(height: 15)
+            Spacer().frame(height: 20)
             VStack(alignment: .center, spacing: 60) {
                 placeSelectButton
                 sliderDistance
                 finishSelect
             }
         }
-        .frame(maxHeight: 460)
+        .background(Color.background.ignoresSafeArea(.all))
+        .frame(maxHeight: 490)
     }
     
     private var topComponent: some View {
