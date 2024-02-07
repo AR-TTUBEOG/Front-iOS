@@ -83,6 +83,9 @@
 		48D88C2F2B5C259300A1B09E /* LoginTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D88C2E2B5C259300A1B09E /* LoginTarget.swift */; };
 		48D88C312B5C288600A1B09E /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D88C302B5C288600A1B09E /* LoginViewModel.swift */; };
 		48D88C332B5C396000A1B09E /* LoginViewCycle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D88C322B5C396000A1B09E /* LoginViewCycle.swift */; };
+		48E10ED32B72578E00D6EECB /* BasketBallGameRulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E10ED22B72578E00D6EECB /* BasketBallGameRulesView.swift */; };
+		48E10EDC2B725B1600D6EECB /* BasketBallGameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E10EDB2B725B1600D6EECB /* BasketBallGameViewModel.swift */; };
+		48E10EDE2B725BD000D6EECB /* GiftDrawingGameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E10EDD2B725BD000D6EECB /* GiftDrawingGameViewModel.swift */; };
 		48FD30922B6F5E6800FB7E60 /* MarketPageContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FD30912B6F5E6800FB7E60 /* MarketPageContent.swift */; };
 		48FD30942B6F5F4C00FB7E60 /* MarketViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FD30932B6F5F4C00FB7E60 /* MarketViewModel.swift */; };
 		48FD30962B6F684F00FB7E60 /* SelectMarketType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FD30952B6F684F00FB7E60 /* SelectMarketType.swift */; };
@@ -186,6 +189,9 @@
 		48D88C2E2B5C259300A1B09E /* LoginTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTarget.swift; sourceTree = "<group>"; };
 		48D88C302B5C288600A1B09E /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		48D88C322B5C396000A1B09E /* LoginViewCycle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewCycle.swift; sourceTree = "<group>"; };
+		48E10ED22B72578E00D6EECB /* BasketBallGameRulesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketBallGameRulesView.swift; sourceTree = "<group>"; };
+		48E10EDB2B725B1600D6EECB /* BasketBallGameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketBallGameViewModel.swift; sourceTree = "<group>"; };
+		48E10EDD2B725BD000D6EECB /* GiftDrawingGameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiftDrawingGameViewModel.swift; sourceTree = "<group>"; };
 		48FD30912B6F5E6800FB7E60 /* MarketPageContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketPageContent.swift; sourceTree = "<group>"; };
 		48FD30932B6F5F4C00FB7E60 /* MarketViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketViewModel.swift; sourceTree = "<group>"; };
 		48FD30952B6F684F00FB7E60 /* SelectMarketType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectMarketType.swift; sourceTree = "<group>"; };
@@ -382,9 +388,8 @@
 			children = (
 				485B30F02B70AA7D00023785 /* WheelGame */,
 				485B30EF2B70AA6400023785 /* GiftDrawingGame */,
+				48E10EDF2B725D7100D6EECB /* GameManager */,
 				485B30EE2B70AA3C00023785 /* BasketBallGame */,
-				485B30EA2B70A9E300023785 /* GameManagerView.swift */,
-				485C83A12B70E3E6009D9B54 /* gameButtonView.swift */,
 			);
 			path = GlobalGameManager;
 			sourceTree = "<group>";
@@ -392,6 +397,8 @@
 		485B30EE2B70AA3C00023785 /* BasketBallGame */ = {
 			isa = PBXGroup;
 			children = (
+				48E10ED42B72580D00D6EECB /* GameRules */,
+				48E10EDB2B725B1600D6EECB /* BasketBallGameViewModel.swift */,
 			);
 			path = BasketBallGame;
 			sourceTree = "<group>";
@@ -399,6 +406,7 @@
 		485B30EF2B70AA6400023785 /* GiftDrawingGame */ = {
 			isa = PBXGroup;
 			children = (
+				48E10EDD2B725BD000D6EECB /* GiftDrawingGameViewModel.swift */,
 			);
 			path = GiftDrawingGame;
 			sourceTree = "<group>";
@@ -572,6 +580,23 @@
 				48D88C302B5C288600A1B09E /* LoginViewModel.swift */,
 			);
 			path = LoginAPI;
+			sourceTree = "<group>";
+		};
+		48E10ED42B72580D00D6EECB /* GameRules */ = {
+			isa = PBXGroup;
+			children = (
+				48E10ED22B72578E00D6EECB /* BasketBallGameRulesView.swift */,
+			);
+			path = GameRules;
+			sourceTree = "<group>";
+		};
+		48E10EDF2B725D7100D6EECB /* GameManager */ = {
+			isa = PBXGroup;
+			children = (
+				485B30EA2B70A9E300023785 /* GameManagerView.swift */,
+				485C83A12B70E3E6009D9B54 /* gameButtonView.swift */,
+			);
+			path = GameManager;
 			sourceTree = "<group>";
 		};
 		48FF93862B43BA0600202F45 = {
@@ -923,6 +948,7 @@
 				483820DF2B4BE61F00C3FB14 /* TtuDotModel.swift in Sources */,
 				483612B32B4ED00100E0B45A /* TestView.swift in Sources */,
 				48D88C312B5C288600A1B09E /* LoginViewModel.swift in Sources */,
+				48E10EDC2B725B1600D6EECB /* BasketBallGameViewModel.swift in Sources */,
 				481B90A42B66933400D366A7 /* WalkwayModel.swift in Sources */,
 				483513862B5A602C0072ADFE /* KakaoLogin.swift in Sources */,
 				48D192E62B71C68300A5EBE8 /* RoundedCorner.swift in Sources */,
@@ -946,10 +972,12 @@
 				481B90A82B669B1A00D366A7 /* PlaceRegistImagePicker.swift in Sources */,
 				483820E22B4BE7C100C3FB14 /* ARCommand.swift in Sources */,
 				CA3A391A2B55753800BEB7DE /* RecommendedSpaceCard.swift in Sources */,
+				48E10ED32B72578E00D6EECB /* BasketBallGameRulesView.swift in Sources */,
 				486C2FEB2B592A4B00C88B04 /* NicknameSettingLogin.swift in Sources */,
 				488365F32B6FDFA100F4E397 /* MarketModel.swift in Sources */,
 				CA2513032B6290DC006D2EDF /* DetailDataModel.swift in Sources */,
 				48ADCAA52B6645BD00765EDB /* SharedTabInfo.swift in Sources */,
+				48E10EDE2B725BD000D6EECB /* GiftDrawingGameViewModel.swift in Sources */,
 				6C7239ED2B5BA9090082F12D /* SettingViewModel.swift in Sources */,
 				6C6395242B590BBE00A20B1B /* TestMapView.swift in Sources */,
 				6C7239F42B5C2A720082F12D /* PlaceListViewModel.swift in Sources */,

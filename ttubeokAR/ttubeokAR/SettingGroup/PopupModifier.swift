@@ -63,13 +63,14 @@ struct PopupModifier<PopupContent: View>: ViewModifier {
                             .gesture(
                                 DragGesture()
                                     .updating($dragState) { drag, state, _ in
-                                        state = .dragging(translation: drag.translation)
+                                        if drag.translation.height > 0 {
+                                            state = .dragging(translation: drag.translation)
+                                        }
                                     }
                                     .onEnded { drag in
                                         if drag.translation.height > dragThreshold {
                                             withAnimation(.smooth(duration: 1.0)) {
                                                 isPresented = false
-                                                
                                             }
                                         }
                                     }
