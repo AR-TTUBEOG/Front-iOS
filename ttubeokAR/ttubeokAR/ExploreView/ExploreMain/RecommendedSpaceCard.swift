@@ -13,9 +13,12 @@ struct RecommendedSpaceCard: View {
     @State var placeTypeColor: Color?
     @State var baseImage: Image?
     @State var placeTypeText: Text?
-    let viewModel : ExploreViewModel
+    
+    let viewModel: ExploreViewModel
     let exploreDetailInfor: ExploreDetailInfor
-
+    
+    
+    
     // 장소 타입 저장할 변수 필요
     
     // MARK: - Body
@@ -24,7 +27,7 @@ struct RecommendedSpaceCard: View {
         VStack(spacing:0) {
             ZStack{
                 spaceImage
-                spaceBookmarked
+                spaceLiked
                     .offset(x: 52, y: -20)
             }
             spaceName
@@ -54,37 +57,34 @@ struct RecommendedSpaceCard: View {
         .cornerRadius(19)
         .frame(width: 150, height: 180)
         .shadow(radius: 5)
+        .onAppear {
+            viewModel.exploreDetailInfor = self.exploreDetailInfor
+        }
     }
     
-    // MARK: - SpaceCard View
-    
+    // MARK: - 장소 이미지 및 이름
     //장소 이미지
     private var spaceImage : some View {
-        VStack(spacing:0) {
-            Image(exploreDetailInfor.image)
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(width: 150, height: 80)
-                .cornerRadius(10)
-                .clipped()
-        }
-        .padding(.top, 3)
-        .padding(.horizontal, 3)
+        Image(exploreDetailInfor.image)
+            .resizable()
+            .aspectRatio(contentMode: .fill)
+            .frame(maxWidth: 150, maxHeight: 80)
+        //TODO: Radius 별개로 지정할 것
+        //TODO: 패딩필요하면 넣을 것
     }
     
     //장소 이름
     private var spaceName : some View {
         Text(exploreDetailInfor.name)
-            .font(.system(size: 15, weight: .bold))
-            .foregroundColor(.white)
-            .padding(8)
+            .font(.sandol(type: .regular, size: 15))
+            .foregroundColor(Color.textPink)
+            .frame(maxWidth: 130, maxHeight: 19, alignment: .center)
     }
     
-    //장소 북마크
-    private var spaceBookmarked: some View {
+    //장소 좋아요
+    private var spaceLiked: some View {
         Button(action: {
-            // 찜 버튼을 눌렀을 때 동작
-            viewModel.toggleFavorite()
+            sendPlaceType()
         }) {
             Image(viewModel.favoriteImageName)
                 .resizable()
@@ -93,109 +93,124 @@ struct RecommendedSpaceCard: View {
         }
     }
     
+    /// 장소 유형 전달하기
+    private func sendPlaceType() {
+        viewModel.isFavorited.toggle()
+        
+        if self.exploreDetailInfor.place.spot {
+            viewModel.placeType = .spot
+        } else if self.exploreDetailInfor.place.store {
+            viewModel.placeType = .store
+        }
+    }
     
+    // MARK: - 장소 간단 정보
     // 별점
     private var spaceRating: some View {
         HStack {
             Image("starRating")
                 .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 13, height: 13)
+                .aspectRatio(contentMode: .fill)
+                .frame(maxWidth: 13, maxHeight: 13)
             
             Text(String(exploreDetailInfor.stars))
-                .font(.system(size: 13, weight: .light))
-                .foregroundColor(.white)
+                .frame(maxWidth: 15, maxHeight: 15)
+                .font(.sandol(type: .regular, size: 11))
+                .foregroundColor(Color.textPink)
+            
         }
-        .padding(.leading, -62)
-        .padding(.top, 0)
+        .frame(maxWidth: 31, maxHeight: 16)
+    }
+    
+    //거리
+    private var spaceDistance: some View {
+        HStack {
+            Icon.distance.image
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .frame(maxWidth: 12, maxHeight: 12)
+            Text("\(String(format: "%.1f", formatDistance(viewModel.distance))) km")
+                .font(.sandol(type: .regular, size: 11))
+                .foregroundColor(.textPink)
+                .frame(maxWidth: 32, maxHeight: 15)
+        }
+        .frame(maxWidth: 46, maxHeight: 15)
     }
     
     
-    func formatDistance(_ distance: Double) -> String {
-        if distance > 100 {
-            return "99km+"
+    func formatDistance(_ distance: Double) -> Double {
+        let kmDistance = distance / 10000
+        if kmDistance > 100 {
+            return 99.9
         } else {
-            return String(format: "%.1f km", distance / 1000)
+            return kmDistance
         }
     }
+    
+    
+    // 시간
+    private var spaceTime: some View {
+        HStack {
+            Icon.time.image
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .frame(maxWidth: 11, maxHeight: 11)
+            
+            Text( formatEstimatedTime(viewModel.estimatedTime))
+                .font(.sandol(type: .regular, size: 11))
+                .foregroundColor(Color.textPink)
+                .frame(maxWidth: 32, maxHeight: 15)
+        }
+        .frame(maxWidth: 46, maxHeight: 15)
+    }
+    
     func formatEstimatedTime(_ time: Double) -> String {
         let minutes = Int(round(time / 60))
         if minutes > 1000 {
             return "999+ 분"
         } else {
-            return "\(minutes)분"
+            return "약 \(minutes)분"
         }
     }
     
-    //거리
-    private var spaceDistance: some View {
-           HStack {
-               Icon.distance.image
-                   .resizable()
-                   .aspectRatio(contentMode: .fit)
-                   .frame(width: 12, height: 12)
-               //거리 수정
-               Text("\(String(format: "%.1f", formatEstimatedTime(viewModel.distance))) km")
-                   .font(.system(size: 13, weight: .light))
-                   .foregroundColor(.white)
-           }
-           .padding(.leading, -62)
-           .padding(.top, 0)
-       }
-
-       // 시간
-       private var spaceTime: some View {
-           HStack {
-               Icon.time.image
-                   .resizable()
-                   .aspectRatio(contentMode: .fit)
-                   .frame(width: 11, height: 11)
-               
-               Text("약 \(formatEstimatedTime(viewModel.estimatedTime))분")
-                        .font(.system(size: 13, weight: .light))
-                        .foregroundColor(.white)
-               }
-           .padding(.leading, -62)
-           .padding(.top, 0)
-       }
-
+    
+    //MARK: - 방명록 수 및 타입 이미지
+    
     //리뷰 개수
     private var spaceReviewCount: some View {
-        ZStack(alignment: .leading) {
+        ZStack(alignment: .center) {
             Rectangle()
-                .frame(width: 36, height: 13)
+                .frame(maxWidth: 36, maxHeight: 13)
                 .foregroundColor(Color.textBlue)
-                .cornerRadius(19)
+                .clipShape(.rect(cornerRadius: 19))
             Icon.reviewCount.image
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(width: 9, height: 9)
-                .offset(x: 4, y: 0)
+                .frame(maxWidth: 9, maxHeight: 9)
+            offset(x: 4, y: 0)
             Text(viewModel.formattedReviewCount(exploreDetailInfor.guestbookCount))
-                .font(.system(size: 7, weight: .bold))
-                .foregroundColor(Color(red: 36 / 255, green: 88 / 255, blue: 139 / 255))
+                .font(.sandol(type: .bold, size: 7))
+                .foregroundStyle(Color(red: 36 / 255, green: 88 / 255, blue: 139 / 255))
                 .offset(x:13, y:0)
         }
-        .padding(.leading, -30)
-        .padding(.top, 0)
     }
     
     
     // 장소 유형
     private var spaceSpotType: some View {
-        VStack {
+        ZStack(alignment: .center) {
             Rectangle()
-                .frame(width: 36, height: 13)
-                .foregroundColor(getColor(for: exploreDetailInfor.place.first))
-                .cornerRadius(19)
-            Text(getPlaceTypeText(for: exploreDetailInfor.place.first))
-                .font(.system(size: 7, weight: .bold))
-                .foregroundColor(getPlaceTypeTextColor(for: exploreDetailInfor.place.first))
+                .frame(maxWidth: 36, maxHeight: 13)
+                .foregroundStyle(getColor(for: exploreDetailInfor.place))
+                .clipShape(.rect(cornerRadius: 19))
+            Text(getPlaceTypeText(for: exploreDetailInfor.place))
+                .font(.sandol(type: .bold, size: 7))
+                .foregroundStyle(getPlaceTypeTextColor(for: exploreDetailInfor.place))
                 .offset(x: 4, y: -13)
-            getImage(for: exploreDetailInfor.place.first)
+            getImage(for: exploreDetailInfor.place)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(width: 9, height: 9)
+                .frame(maxWidth: 9, maxHeight: 9)
                 .offset(x: -10, y: -27)
         }
     }
@@ -231,20 +246,20 @@ struct RecommendedSpaceCard: View {
     }
     
     func getPlaceTypeText(for PlacePurpose: PlacePurpose?) -> String {
-            guard let PlacePurpose = PlacePurpose else {
-                // placeType이 nil
-                return "산책"
-            }
-            if PlacePurpose.spot {
-                return "산책"
-            } else if PlacePurpose.store {
-                return "가게"
-            }
-            // 둘 다 아닐 시
+        guard let PlacePurpose = PlacePurpose else {
+            // placeType이 nil
             return "산책"
         }
+        if PlacePurpose.spot {
+            return "산책"
+        } else if PlacePurpose.store {
+            return "가게"
+        }
+        // 둘 다 아닐 시
+        return "산책"
+    }
     
-func getPlaceTypeTextColor(for PlacePurpose: PlacePurpose?) -> Color {
+    func getPlaceTypeTextColor(for PlacePurpose: PlacePurpose?) -> Color {
         guard let PlacePurpose = PlacePurpose else {
             // placeType이 nil일 경우 처리
             return Color.green

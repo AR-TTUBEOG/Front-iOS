@@ -20,7 +20,8 @@ class DetailViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
         locationManager.location
     }
     private let provider = MoyaProvider<DetailExploreAPITarget>()
-    
+    private let providerBook = MoyaProvider<GuestBookAPI>()
+    private let providerMark = MoyaProvider<BookMarkAPI>()
     var exploreDetailData: DetailDataModel?
     
     // MARK: - Function
@@ -43,10 +44,14 @@ class DetailViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
     public func toggleFavorite() {
         isFavorited.toggle()
         if isFavorited {
+            //TODO: - 좋아요 post 날리기
             print("북마크 버튼이 눌렸습니다.")
         } else {
             print("북마크 취소 버튼이 눌렸습니다.")
         }
+    }
+    
+    private func sendFavorite() {
     }
     
     // MARK: - distance Fuction
@@ -82,7 +87,7 @@ class DetailViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
             locationManager.startUpdatingLocation()
         }
     }
-
+    
     
     
     // MARK: - APIViewModel
@@ -108,6 +113,21 @@ class DetailViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
             }
         }
     }
-    
-    //방명록 api 함수 작성
+    // MARK: - GuestBookAPI
+    //방명록 api 함수
+    func createGuestBookEntry(name: String, message: String, completion: @escaping (Result<GuestBookModel, MoyaError>) -> Void) {
+        providerBook.request(.createBook(name: name, message: message)) { result in
+            switch result {
+            case .success(let response):
+                if let decodedResponse = try? JSONDecoder().decode(GuestBookModel.self, from: response.data) {
+                    completion(.success(decodedResponse))
+                } else {
+                    completion(.failure(.jsonMapping(response)))
+                }
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+
 }

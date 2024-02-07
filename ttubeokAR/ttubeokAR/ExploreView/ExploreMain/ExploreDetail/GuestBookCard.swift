@@ -13,6 +13,10 @@ struct GuestBookCard : View {
     var viewModel : DetailViewModel
     let GuestBookModel : GuestBookModel
     let StoreInformation : StoreInformation
+    
+    // 이미지 탭 여부 추적 변수
+    @State private var isImageTapped = false
+    
     // MARK: - Body
     
     
@@ -38,10 +42,22 @@ struct GuestBookCard : View {
         ZStack(alignment: .bottom) {
             GeometryReader { geometry in
                 Color.clear.ignoresSafeArea(.all)
+                    .blur(radius: isImageTapped ? 20 : 0) // 이미지 탭 시 배경 흐림 효과 적용
                 backGround
                     .position(x: geometry.size.width / 2, y: geometry.size.height / 1.83)
                 placeImage
                     .position(x: geometry.size.width / 2, y: geometry.size.height * 0.29)
+                    .onTapGesture {
+                                       self.isImageTapped.toggle()
+                                   }
+                                   .sheet(isPresented: $isImageTapped) {
+                                       // 전체 화면으로 이미지를 보여주는 뷰
+                                       Image(GuestBookModel.image)
+                                           .resizable()
+                                           .scaledToFit()
+                                           .frame(maxWidth: 315, maxHeight: 330)
+                                   }
+                
                 placeInfor
                     .position(x: geometry.size.width / 2, y: geometry.size.height * 0.76)
             }

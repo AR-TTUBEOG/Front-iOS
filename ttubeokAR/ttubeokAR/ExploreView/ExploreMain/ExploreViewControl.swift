@@ -46,7 +46,7 @@ struct ExploreViewControl: View {
     private func recommendedSpacesGrid(geometry: GeometryProxy) -> some View {
         ScrollView(.vertical) {
             LazyVGrid(columns: [GridItem(.flexible(minimum: 150), spacing: -8), GridItem(.flexible(minimum: 150), spacing: 15)], spacing: 25) {
-                ForEach(self.viewModel.exploreData!.information, id: \.id) { information in
+                ForEach(self.viewModel.exploreData?.information ?? [], id: \.self) { information in
                     RecommendedSpaceCard(viewModel: viewModel, exploreDetailInfor: information)
                         .frame(minWidth: 0, maxWidth: .infinity)
                 }

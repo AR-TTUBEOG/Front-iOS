@@ -12,6 +12,7 @@ struct DetailViewControl: View {
     @StateObject var viewModel = DetailViewModel()
     let StoreInformation : StoreInformation
     let GuestBookModel : GuestBookModel
+    @Binding var SelectedCard: ExploreViewModel?
     
     // MARK: - Body
     var body: some View {
@@ -34,18 +35,21 @@ struct DetailViewControl: View {
             }
             .frame(maxWidth: geometry.size.width, maxHeight: geometry.size.height)
         }
-        //Explore뷰에서 클릭했을때 작동이 되도록 해애함 (카드를 선택했을때) 바인딩을 사용하여(같은 메모리 주소를 공유) 두개의 뷰모델을 공유하도록 해야함 
-        .onAppear{
+        //Explore뷰에서 클릭했을때 작동이 되도록 해애함 (카드를 선택했을때) 바인딩을 사용하여(같은 메모리 주소를 공유) 두개의 뷰모델을 공유하도록 해야함
+        .onAppear {
+            // 선택된 카드의 정보를 확인하고 상세 정보를 불러옵니다.
             viewModel.fetchExploreDetail(storeId: StoreInformation.storeId) { result in
-                           switch result {
-                           case .success(let detailDataModel):
-                               print("성공: \(detailDataModel)")
-                           case .failure(let error):
-                               print("오류: \(error.localizedDescription)")
-                           }
-                       }
-                   }
-    }
+                    switch result {
+                    case .success(let detailDataModel):
+                        // 성공 시 처리 로직
+                        print("성공: \(detailDataModel)")
+                    case .failure(let error):
+                        // 실패 시 처리 로직
+                        print("오류: \(error.localizedDescription)")
+                    }
+                }
+            }
+        }
     
     //MARK: - 장소 사진 및 찜하기
     
@@ -122,9 +126,17 @@ struct DetailViewControl: View {
     //방명록 작성
     private var guestBook: some View {
         Button(action: {
-            print("방명록 작성")
-        }) {
-            Text("방문하기")
+                let guestBookService = viewModel
+                guestBookService.createGuestBookEntry(name: GuestBookModel.userName, message: GuestBookModel.content) { result in
+                    switch result {
+                    case .success(let response):
+                        print("방명록 작성 성공: \(response)")
+                    case .failure(let error):
+                        print("방명록 작성 실패: \(error.localizedDescription)")
+                    }
+                }
+            }) {
+            Text("방명록 작성")
                 .frame(maxWidth: 75, maxHeight: 27)
                 .background(Color.primary01)
                 .foregroundStyle(Color.white)

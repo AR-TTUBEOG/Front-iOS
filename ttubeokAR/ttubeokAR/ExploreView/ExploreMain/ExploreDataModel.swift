@@ -13,20 +13,32 @@ struct ExploreDataModel: Codable {
     var information: [ExploreDetailInfor]
 }
 
-struct ExploreDetailInfor: Codable {
-    var id: Int // 징소아이디
-    var place: [PlacePurpose]
+struct ExploreDetailInfor: Codable, Hashable {
+    var storeId: Int // 징소아이디
+    var place: PlacePurpose
     var memberId: Int //등록 유저 id
     var name: String
     var latitude: Double
     var longtitude: Double
     var image: String
-    var stars: Int
+    var stars: Double
     var guestbookCount: Int
     var isFavorited: Bool
 }
 
-struct PlacePurpose: Codable {
+struct PlacePurpose: Codable, Hashable {
     var store: Bool
     var spot: Bool
+}
+
+
+struct LikeModel: Codable {
+    var check: Bool
+    var information: LikeInfor
+}
+
+struct LikeInfor: Codable {
+    var likedId: Int
+    var spotId: Int
+    var userId: Int
 }
