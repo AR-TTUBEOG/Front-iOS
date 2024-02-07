@@ -24,43 +24,58 @@ struct RecommendedSpaceCard: View {
     // MARK: - Body
     
     var body: some View {
+        allView
+            .frame(maxWidth: 150, maxHeight: 180)
+            .padding(.top, 0)
+            .background(Color.btnBackground)
+            .clipShape(.rect(cornerRadius: 19))
+            .shadow(radius: 5)
+    }
+    
+    //MARK: - ViewSetting
+    private var allView: some View {
         VStack(spacing:0) {
-            ZStack{
-                spaceImage
-                spaceLiked
-                    .offset(x: 52, y: -20)
-            }
+            topInfor
             spaceName
             HStack{
-                VStack(spacing:1){
-                    spaceRating
-                    spaceDistance
-                    spaceTime
-                }
-                .offset(x: 20 , y: 0)
-                VStack(spacing:1.3) {
-                    spaceReviewCount
-                        .offset(x: 56, y: -17)
-                    
-                    spaceSpotType
-                        .offset(x: 41, y: -15)
-                }
-                .offset(x: 3 , y: 20)
+                bottomLeftSpaceInfo
+                bottomRightSpaceInfo
             }
             .padding(.horizontal, 30)
             
             Spacer()
             Spacer()
         }
-        .padding(.top, 0)
-        .background(Color.btnBackground)
-        .cornerRadius(19)
-        .frame(width: 150, height: 180)
-        .shadow(radius: 5)
-        .onAppear {
-            viewModel.updateDetailInfor(exploreDetailInfor)
+    }
+    
+    private var topInfor: some View {
+        ZStack{
+            spaceImage
+            spaceLiked
+                .offset(x: 52, y: -20)
         }
     }
+    
+    private var bottomLeftSpaceInfo: some View {
+        VStack(spacing:1){
+            spaceRating
+            spaceDistance
+            spaceTime
+        }
+        .offset(x: 20 , y: 0)
+    }
+    
+    private var bottomRightSpaceInfo: some View {
+        VStack(spacing: 1) {
+            spaceReviewCount
+                .offset(x: 56, y: -17)
+            
+            spaceSpotType
+                .offset(x: 41, y: -15)
+        }
+        .offset(x: 3 , y: 20)
+    }
+    
     
     // MARK: - 장소 이미지 및 이름
     //장소 이미지
@@ -84,7 +99,11 @@ struct RecommendedSpaceCard: View {
     //장소 좋아요
     private var spaceLiked: some View {
         Button(action: {
-            sendPlaceType()
+            changePlaceType()
+            DispatchQueue.main.async {
+                viewModel.isFavorited.toggle()
+                viewModel.checkLike()
+            }
         }) {
             Image(viewModel.favoriteImageName)
                 .resizable()
@@ -93,10 +112,7 @@ struct RecommendedSpaceCard: View {
         }
     }
     
-    /// 장소 유형 전달하기
-    private func sendPlaceType() {
-        viewModel.isFavorited.toggle()
-        
+    private func changePlaceType() {
         if self.exploreDetailInfor.placeType.spot {
             viewModel.placeType = .spot
         } else if self.exploreDetailInfor.placeType.store {

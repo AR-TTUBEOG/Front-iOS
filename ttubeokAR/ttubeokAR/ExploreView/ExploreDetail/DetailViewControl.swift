@@ -9,10 +9,7 @@ import SwiftUI
 
 struct DetailViewControl: View {
     // MARK: - Property
-    @StateObject var viewModel = DetailViewModel()
-    @Binding var SelectedCard: ExploreViewModel?
-    let GuestBookModel : GuestBookModel
-
+    @ObservedObject var viewModel: DetailViewModel
     
     // MARK: - Body
     var body: some View {
@@ -29,27 +26,12 @@ struct DetailViewControl: View {
                         
                     }
                     .frame(maxWidth: geometry.size.width * 0.9, maxHeight: 140)
-                    
                     guestBookGrid
                 }
             }
             .frame(maxWidth: geometry.size.width, maxHeight: geometry.size.height)
         }
-        //Explore뷰에서 클릭했을때 작동이 되도록 해애함 (카드를 선택했을때) 바인딩을 사용하여(같은 메모리 주소를 공유) 두개의 뷰모델을 공유하도록 해야함
-        .onAppear {
-            // 선택된 카드의 정보를 확인하고 상세 정보를 불러옵니다.
-            viewModel.fetchExploreDetail(storeId: StoreInformation.storeId) { result in
-                    switch result {
-                    case .success(let detailDataModel):
-                        // 성공 시 처리 로직
-                        print("성공: \(detailDataModel)")
-                    case .failure(let error):
-                        // 실패 시 처리 로직
-                        print("오류: \(error.localizedDescription)")
-                    }
-                }
-            }
-        }
+    }
     
     //MARK: - 장소 사진 및 찜하기
     

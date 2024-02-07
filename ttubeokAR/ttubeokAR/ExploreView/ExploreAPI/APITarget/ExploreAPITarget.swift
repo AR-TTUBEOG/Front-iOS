@@ -9,7 +9,7 @@ import Foundation
 import Moya
 
 enum ExploreAPITarget {
-    case fetchExploreData
+    case fetchExploreData(page: Int)
     case likeWalkWay(spotId: Int)
     case likeStoreData(storeId: Int)
 }
@@ -41,8 +41,8 @@ extension ExploreAPITarget: TargetType {
     
     var task: Moya.Task {
         switch self {
-        case .fetchExploreData:
-            return .requestPlain
+        case .fetchExploreData(let page):
+            return .requestParameters(parameters: ["page": page], encoding: URLEncoding.queryString)
         case .likeWalkWay(let spotId):
             return .requestParameters(parameters: ["spotId": spotId], encoding: JSONEncoding.default)
         case .likeStoreData(let storeId):

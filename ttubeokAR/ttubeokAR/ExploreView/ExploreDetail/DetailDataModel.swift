@@ -8,25 +8,48 @@
 import Foundation
 
 //매장 세부사항 조회 api
-struct DetailDataModel: Codable {
+struct WalkwayDetailDataModel: Codable {
     var check: Bool
-    var information: [StoreInformation]
+    var information: WalwayInformation
 }
 
-struct StoreInformation: Codable {
-    var storeId: Int
-    var dongareaId: Int
+struct WalwayInformation: Codable {
+    var id: Int
+    var dongAreaId: Int
     var userId: Int
     var detailAddress: String
     var name: String
     var info: String
     var latitude: Double
     var longitude: Double
-    var image: String
+    var image: [String]
     var stars: Float
-    var type: String
-    var benefit: [String]
     var likes: Int
     var guestbook : Int
-    var mark : Bool
+}
+
+struct StoreDetailDataModel: Codable {
+    var check: Bool
+    var information: StoreInformation
+}
+
+struct StoreInformation: Codable {
+    var storeId: Int
+    var userId: Int
+    var detailAddress: String
+    var name: String
+    var info: String
+    var latitude: Double
+    var longitude: Double
+    var image: [String]
+    var stars: Float
+    var type: StoreType
+    var benefit: [String]
+    var guestbookCount: Int
+    var likeCount: Int
+}
+
+enum StoreType: String, Codable {
+    case restaurant
+    case cafe
 }

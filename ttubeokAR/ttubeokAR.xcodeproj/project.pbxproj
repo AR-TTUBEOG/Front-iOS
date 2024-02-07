@@ -124,8 +124,6 @@
 		CA3A391A2B55753800BEB7DE /* RecommendedSpaceCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3A39192B55753800BEB7DE /* RecommendedSpaceCard.swift */; };
 		CA3DFFED2B6CE7C90007D2E6 /* ExploreAPITarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3DFFEC2B6CE7C90007D2E6 /* ExploreAPITarget.swift */; };
 		CA3DFFF12B6E42AE0007D2E6 /* DetailExploreAPITarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3DFFF02B6E42AE0007D2E6 /* DetailExploreAPITarget.swift */; };
-		CA82A9812B7266CD004E7683 /* GuestBookAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA82A9802B7266CD004E7683 /* GuestBookAPI.swift */; };
-		CA82A9832B726A8D004E7683 /* BookMarkAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA82A9822B726A8D004E7683 /* BookMarkAPI.swift */; };
 		CAB9FA1C2B551B1500F0046A /* ExploreViewControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB9FA1B2B551B1500F0046A /* ExploreViewControl.swift */; };
 		CAB9FA1E2B551B3E00F0046A /* ExploreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB9FA1D2B551B3E00F0046A /* ExploreViewModel.swift */; };
 		CAB9FA202B55443700F0046A /* ExploreDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB9FA1F2B55443700F0046A /* ExploreDataModel.swift */; };
@@ -243,8 +241,6 @@
 		CA3A39192B55753800BEB7DE /* RecommendedSpaceCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedSpaceCard.swift; sourceTree = "<group>"; };
 		CA3DFFEC2B6CE7C90007D2E6 /* ExploreAPITarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreAPITarget.swift; sourceTree = "<group>"; };
 		CA3DFFF02B6E42AE0007D2E6 /* DetailExploreAPITarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailExploreAPITarget.swift; sourceTree = "<group>"; };
-		CA82A9802B7266CD004E7683 /* GuestBookAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestBookAPI.swift; sourceTree = "<group>"; };
-		CA82A9822B726A8D004E7683 /* BookMarkAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookMarkAPI.swift; sourceTree = "<group>"; };
 		CAB9FA1B2B551B1500F0046A /* ExploreViewControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewControl.swift; sourceTree = "<group>"; };
 		CAB9FA1D2B551B3E00F0046A /* ExploreViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewModel.swift; sourceTree = "<group>"; };
 		CAB9FA1F2B55443700F0046A /* ExploreDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreDataModel.swift; sourceTree = "<group>"; };
@@ -846,8 +842,6 @@
 			children = (
 				CA3DFFEC2B6CE7C90007D2E6 /* ExploreAPITarget.swift */,
 				CA3DFFF02B6E42AE0007D2E6 /* DetailExploreAPITarget.swift */,
-				CA82A9802B7266CD004E7683 /* GuestBookAPI.swift */,
-				CA82A9822B726A8D004E7683 /* BookMarkAPI.swift */,
 			);
 			path = APITarget;
 			sourceTree = "<group>";
@@ -1072,14 +1066,12 @@
 				488FA7122B6510890030CE66 /* MarketSelectButton.swift in Sources */,
 				483820E82B4BE8E500C3FB14 /* AddLocationCommand.swift in Sources */,
 				6CC4DDFF2B5687E80080E7E8 /* CouponView.swift in Sources */,
-				CA82A9812B7266CD004E7683 /* GuestBookAPI.swift in Sources */,
 				48A59C182B6E2242009CF83E /* FinishButton.swift in Sources */,
 				488373C92B66B79D0036C0FD /* CustomTextField.swift in Sources */,
 				483CB9642B73329700938224 /* BasketBallGameBenefitsText.swift in Sources */,
 				481B90AA2B66A1B800D366A7 /* WalkwayPageContent.swift in Sources */,
 				485C83A22B70E3E6009D9B54 /* gameButtonView.swift in Sources */,
 				488FA7102B650FAD0030CE66 /* WalkSelectButton.swift in Sources */,
-				CA82A9832B726A8D004E7683 /* BookMarkAPI.swift in Sources */,
 				6C7239EA2B5BA86A0082F12D /* NotiSettingView.swift in Sources */,
 				483820DD2B4BE5E600C3FB14 /* TtuDotButton.swift in Sources */,
 				6CE46B0F2B6B5BA30030F323 /* EditorView.swift in Sources */,

@@ -17,7 +17,6 @@ enum PlaceTypeValue {
 
 class ExploreViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
     //MARK: - API
-    
     private let provider = MoyaProvider<ExploreAPITarget>()
     
     //MARK: - Moodel
@@ -35,6 +34,8 @@ class ExploreViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
         return isFavorited ? "Vector2" : "Vector"
     }
     
+    var curretnPage = 1
+    
     @Published var isFavorited: Bool = false
     @Published var distance: CLLocationDistance = 0
     @Published var estimatedTime: TimeInterval = 0
@@ -50,24 +51,24 @@ class ExploreViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
     //MARK: - API 호출 함수
     
     
-    // 서버로부터 ExploreDataModel 데이터를 받아오는 함수
-    func fetchExploreData() {
-        provider.request(.fetchExploreData) { [weak self] result in
-            switch result {
-            case .success(let response):
-                do {
-                    let decodedData = try JSONDecoder().decode(ExploreDataModel.self, from: response.data)
-                    DispatchQueue.main.async {
-                        self?.exploreData = decodedData
-                    }
-                } catch {
-                    print("Decoding error: \(error)")
-                }
-            case .failure(let error):
-                print("Network error: \(error)")
-            }
-        }
-    }
+//    // 서버로부터 ExploreDataModel 데이터를 받아오는 함수
+//    func fetchExploreData() {
+//        provider.request(.fetchExploreData(page: curretnPage)) { [weak self] result in
+//            switch result {
+//            case .success(let response):
+//                do {
+//                    let decodedData = try JSONDecoder().decode(ExploreDataModel.self, from: response.data)
+//                    DispatchQueue.main.async {
+//                        self?.exploreData = decodedData
+//                    }
+//                } catch {
+//                    print("Decoding error: \(error)")
+//                }
+//            case .failure(let error):
+//                print("Network error: \(error)")
+//            }
+//        }
+//    }
     
     // MARK: - 장소 좋아요 호출 함수
 
@@ -85,7 +86,7 @@ class ExploreViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
         
         switch self.placeType {
         case .spot:
-            likeStore(storeId: detailInfo.id)
+            likeWalkWay(spotId: detailInfo.id)
         case .store:
             likeStore(storeId: detailInfo.id)
         case .none:
@@ -102,7 +103,7 @@ class ExploreViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
             case .success(let response):
                 do {
                     let decodedResponse = try JSONDecoder().decode(WalkWayLikeModel.self, from: response.data)
-                    print("산책로 좋아요 성공 \(decodedResponse)")
+                    print(decodedResponse)
                 } catch {
                     print("산책로 error")
                 }
@@ -118,13 +119,43 @@ class ExploreViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
             case .success(let response):
                 do {
                     let decodedResponse = try JSONDecoder().decode(StoreLikeModel.self, from: response.data)
-                    print("매장 좋아요 성공 \(decodedResponse)")
+                    
                 } catch {
                     print("매장 error")
                 }
             case .failure(let error):
                 print("매장 error: \(error)")
             }
+        }
+    }
+    // MARK: - 페이징
+    public func fetchExploreData(page: Int) {
+        provider.request(.fetchExploreData(page: page)) { [weak self] result in
+            switch result {
+            case .success(let response):
+                do {
+                    let decodedData = try JSONDecoder().decode(ExploreDataModel.self, from: response.data)
+                    DispatchQueue.main.async {
+                        if page == 1 {
+                            self?.exploreData = decodedData
+                        } else {
+                            self?.exploreData?.information.append(contentsOf: decodedData.information)
+                        }
+                        self?.curretnPage = page
+                    }
+                } catch {
+                    print("해독 error: \(error.localizedDescription)")
+                }
+            case .failure(let error):
+                print("네트워크 error \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    public func loadMoreContent(currentItem item: ExploreDetailInfor) {
+        guard let items = exploreData?.information, !items.isEmpty else { return }
+        if let lastItem = items.last, lastItem == item {
+            fetchExploreData(page: curretnPage + 1)
         }
     }
     
