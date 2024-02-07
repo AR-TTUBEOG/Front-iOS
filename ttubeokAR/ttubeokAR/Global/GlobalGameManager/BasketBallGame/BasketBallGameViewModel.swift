@@ -14,6 +14,9 @@ class BasketBallGameViewModel: ObservableObject{
     @Published var ballCount: Int = 5
     @Published var successCount: Int = 3
     
+    //MARK: 농구게임 혜택 문구 텍스트 길이
+    @Published var benefitsText: String = ""
+    
     
     //MARK: - 제한 시간 조절
     public func increaseTime() {

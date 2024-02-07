@@ -44,6 +44,8 @@
 		483BFD202B64A2A200C2AD5B /* PlaceSelect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483BFD1F2B64A2A200C2AD5B /* PlaceSelect.swift */; };
 		483CB95D2B73247D00938224 /* GameRulesTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483CB95C2B73247D00938224 /* GameRulesTextView.swift */; };
 		483CB9602B732DC200938224 /* GameSettingSubTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483CB95F2B732DC200938224 /* GameSettingSubTitle.swift */; };
+		483CB9622B732F4A00938224 /* GameBenefitsTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483CB9612B732F4A00938224 /* GameBenefitsTextField.swift */; };
+		483CB9642B73329700938224 /* BasketBallGameBenefitsText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483CB9632B73329700938224 /* BasketBallGameBenefitsText.swift */; };
 		4844E13F2B5A243700E6619C /* Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4844E13E2B5A243700E6619C /* Icon.swift */; };
 		485B30E62B709BF500023785 /* ImageSelectionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485B30E52B709BF500023785 /* ImageSelectionButton.swift */; };
 		485B30EB2B70A9E300023785 /* GameManagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485B30EA2B70A9E300023785 /* GameManagerView.swift */; };
@@ -161,6 +163,8 @@
 		483BFD1F2B64A2A200C2AD5B /* PlaceSelect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceSelect.swift; sourceTree = "<group>"; };
 		483CB95C2B73247D00938224 /* GameRulesTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameRulesTextView.swift; sourceTree = "<group>"; };
 		483CB95F2B732DC200938224 /* GameSettingSubTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSettingSubTitle.swift; sourceTree = "<group>"; };
+		483CB9612B732F4A00938224 /* GameBenefitsTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBenefitsTextField.swift; sourceTree = "<group>"; };
+		483CB9632B73329700938224 /* BasketBallGameBenefitsText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketBallGameBenefitsText.swift; sourceTree = "<group>"; };
 		4844E13E2B5A243700E6619C /* Icon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icon.swift; sourceTree = "<group>"; };
 		485B30E52B709BF500023785 /* ImageSelectionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSelectionButton.swift; sourceTree = "<group>"; };
 		485B30EA2B70A9E300023785 /* GameManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManagerView.swift; sourceTree = "<group>"; };
@@ -392,6 +396,7 @@
 			children = (
 				483CB95C2B73247D00938224 /* GameRulesTextView.swift */,
 				483CB95F2B732DC200938224 /* GameSettingSubTitle.swift */,
+				483CB9612B732F4A00938224 /* GameBenefitsTextField.swift */,
 			);
 			path = DuplicatedGameManager;
 			sourceTree = "<group>";
@@ -600,6 +605,7 @@
 			isa = PBXGroup;
 			children = (
 				48E10ED22B72578E00D6EECB /* BasketBallGameRulesView.swift */,
+				483CB9632B73329700938224 /* BasketBallGameBenefitsText.swift */,
 			);
 			path = BasketBallComponent;
 			sourceTree = "<group>";
@@ -1030,6 +1036,7 @@
 				6CC4DDFF2B5687E80080E7E8 /* CouponView.swift in Sources */,
 				48A59C182B6E2242009CF83E /* FinishButton.swift in Sources */,
 				488373C92B66B79D0036C0FD /* CustomTextField.swift in Sources */,
+				483CB9642B73329700938224 /* BasketBallGameBenefitsText.swift in Sources */,
 				481B90AA2B66A1B800D366A7 /* WalkwayPageContent.swift in Sources */,
 				485C83A22B70E3E6009D9B54 /* gameButtonView.swift in Sources */,
 				488FA7102B650FAD0030CE66 /* WalkSelectButton.swift in Sources */,
@@ -1048,6 +1055,7 @@
 				CA2513052B629109006D2EDF /* DetailViewControl.swift in Sources */,
 				CAB9FA1C2B551B1500F0046A /* ExploreViewControl.swift in Sources */,
 				483612B12B4ECFD900E0B45A /* MapView.swift in Sources */,
+				483CB9622B732F4A00938224 /* GameBenefitsTextField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
