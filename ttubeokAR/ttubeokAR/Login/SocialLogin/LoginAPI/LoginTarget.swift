@@ -20,7 +20,7 @@ enum ServerAPI {
 }
 
 extension ServerAPI: TargetType {
-    var baseURL: URL { return URL(string: "https://loginServer")! }
+    var baseURL: URL { return URL(string: "http://ttubeog.kro.kr:8080")! }
     
     var path: String {
         switch self {
@@ -47,9 +47,7 @@ extension ServerAPI: TargetType {
             return .requestParameters(parameters: ["accessToken": token], encoding: JSONEncoding.default)
         case.sendAppleLoginInfo(let userData):
             let parameters: [String: Any] = [
-                "userIdentifier": userData.userIdentifier,
-                "authorizationCode": userData.authorizationCode ?? "",
-                "identityToken": userData.identityToken ?? ""
+                "token": userData.identityToken ?? ""
             ]
             return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
         }

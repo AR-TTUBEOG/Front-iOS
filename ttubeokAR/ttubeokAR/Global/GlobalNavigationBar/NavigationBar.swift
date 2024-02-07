@@ -14,9 +14,8 @@ struct NavigationBar: View {
     let title: String
     let fontSize: CGFloat
     let fontType: Font.Sandol
+    let lastedSelectedTab: Int
     
-    let leadingItems: [(Icon, () -> Void)]
-    let trailingItems: [(Icon, () -> Void)]
     
     init(
         isDisplayLeadingBtn: Bool = true,
@@ -24,68 +23,43 @@ struct NavigationBar: View {
         title: String = "",
         fontSize: CGFloat = 16,
         fontType: Font.Sandol = .bold,
-        leadingItems: [(Icon, () -> Void)] = [(.chevronLeft, {})],
-        trailingItems: [(Icon, () -> Void)] = [(.chevronLeft, {}), (.chevronLeft, {})]
+        lastedSelectedTab: Int = 1
     ) {
         self.isDisplayLeadingBtn = isDisplayLeadingBtn
         self.isDisplayTrailingBtn = isDisplayTrailingBtn
         self.title = title
         self.fontSize = fontSize
         self.fontType = fontType
-        self.leadingItems = leadingItems
-        self.trailingItems = trailingItems
+        self.lastedSelectedTab = lastedSelectedTab
     }
     
     var body: some View {
-        HStack(spacing: 0) {
-            if isDisplayLeadingBtn {
-                ForEach(leadingItems, id: \.0, content: { item in
-                    Button(
-                        action: {
-                            item.1()
-                        },
-                        label: {
-                            item.0.image
-                        }
-                    )
-                })
+            
+            HStack(spacing: 0) {
+                CloseCancelButton(lastedSelectedTab: lastedSelectedTab)
+                
+                Spacer()
+                
+                Text(title)
+                    .font(.sandol(type: fontType, size: fontSize))
+                    .foregroundStyle(Color.textPink)
+                
+                Spacer()
+                
             }
-            
-            Spacer()
-            
-            Text(title)
-                .font(.sandol(type: fontType, size: fontSize))
-                .foregroundStyle(.white)
-            
-            Spacer()
-            
-            if isDisplayTrailingBtn {
-                ForEach(trailingItems, id: \.0, content: { item in
-                    Button(
-                        action: {
-                            item.1()
-                        },
-                        label: {
-                            item.0.image
-                        }
-                    )
-                    .padding(.leading, 18)
-                })
-            }
-        }
-        .padding(.horizontal, 20)
-        .frame(height: 44)
+            .padding(.horizontal, 20)
+            .frame(height: 44)
     }
 }
-
-#Preview(traits: .sizeThatFitsLayout) {
-    NavigationBar()
-        
-}
-
-//struct NavigationBar_Previews: PreviewProvider {
-//    static var previews: some View {
-//        NavigationBar()
-//            .previewLayout(.sizeThatFits)
-//    }
+//
+//#Preview(traits: .sizeThatFitsLayout) {
+//    NavigationBar()
+//        
 //}
+
+struct NavigationBar_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationBar(lastedSelectedTab: 1)
+            .previewLayout(.sizeThatFits)
+    }
+}

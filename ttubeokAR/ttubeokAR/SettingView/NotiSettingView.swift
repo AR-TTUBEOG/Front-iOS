@@ -15,7 +15,7 @@ struct NotiSettingView: View {
         ZStack {
             Color.background.ignoresSafeArea(.all)
             VStack {
-                NavigationBar(isDisplayLeadingBtn: true, title: "알림", leadingItems: [(Icon.chevronLeft, {})])
+                NavigationBar(isDisplayLeadingBtn: true, title: "알림")
                 
                 buttonList(settingViewModel: settingViewModel)
                 Spacer()

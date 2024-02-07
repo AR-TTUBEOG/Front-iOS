@@ -77,12 +77,14 @@ enum Icon: String {
     
     // MARK: - Login
     case warning = "nameWarning"
+    case nameCheck = "nameCheck"
     case apple = "appleLogin"
     case kakao = "kakaoLogin"
     case nickname = "nicknameView"
     case loginBackground = "loginViewImage"
     case checkbox_filled = "checkbox_filled"
     case checkbox = "checkbox"
+    case logoImage = "logoImage"
     
     // MARK: - Navigation bar
     case arrowLeft = "arrowLeft"
@@ -104,11 +106,29 @@ enum Icon: String {
     
     //MARK: - PlaceSetting
     case PlaceBackground = "RegisterBackground"
+    case RegisterBackground2 = "RegisterBackground2"
     case marketGroup = "marketGroup"
     case marketIcon = "marketIcon"
     case walkGroup = "walkGroup"
     case walkIcon = "walkIcon"
     case closeView = "closeView"
+    case searchAddress = "searchAddress"
+    case examplePlace = "examplePlace"
+    case examplePlace2 = "examplePlace2"
+    case camera = "camera"
+    case xButton = "Xbutton"
+    case placeFinish = "placeFinish"
+    case whiteDrink = "whiteDrink"
+    case whiteRest = "whiteRest"
+    case exampleMarket = "exampleMarket"
+    case exampleMarket2 = "exampleMarket2"
+    
+    
+    //MARK: - Game
+    case checkCircle = "checkCircle"
+    case gameBox = "gameBox"
+    case gameCoupon = "gameCoupon"
+    case gameOnePlus = "gameOnePlus"
     
     var image: Image {
         return Image(self.rawValue)

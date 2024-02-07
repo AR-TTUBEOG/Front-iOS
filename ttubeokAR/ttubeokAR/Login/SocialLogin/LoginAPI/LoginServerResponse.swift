@@ -12,12 +12,7 @@ import Foundation
  */
 
 struct LoginServerResponse: Codable {
-    var check: Bool
-    var information: Information?
-}
-
-struct Information: Codable {
-    var accessToken: String
-    var refreshToken: String
-    var early: Bool
+    var accessToken: String?
+    var refreshToken: String?
+    var isRegistered: Bool
 }

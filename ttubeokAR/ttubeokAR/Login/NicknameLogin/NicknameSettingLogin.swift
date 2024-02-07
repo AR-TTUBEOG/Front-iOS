@@ -12,6 +12,7 @@ struct NicknameSettingLogin: View {
     //MARK: - Property
     var transitionToNext: () -> Void
     @ObservedObject var viewModel: NicknameSettingViewModel
+    private let keyChainManager = KeyChainManager.stadard
     
     //MARK: - Body
     var body: some View {
@@ -27,16 +28,17 @@ struct NicknameSettingLogin: View {
         ZStack(alignment: .center) {
             backgroundImageView
             blackOpacity
-            VStack(alignment: .center) {
-                nicknameInput
-                    .padding(.top, 0)
-                checkingNickname
-                Spacer()
-                    .frame(maxHeight: 270)
-                checkButton
+            GeometryReader { geometry in
+                VStack(alignment: .center) {
+                    nicknameInput
+                        .padding(.top, 0)
+                    checkingNickname
+                    Spacer()
+                        .frame(maxHeight: 270)
+                    checkButton
+                }
+                .position(x: geometry.size.width / 2, y: geometry.size.height * 0.58)
             }
-            .frame(maxHeight: 500)
-            .offset(y: 100)
         }
     }
     
@@ -135,6 +137,20 @@ struct NicknameSettingLogin: View {
                         .frame(maxWidth: 285, maxHeight: 30, alignment: .leading)
                 }
             }
+            
+            if let isAvailable = viewModel.isNicknameAvailable, isAvailable {
+                HStack(spacing: 3) {
+                    Icon.nameCheck.image
+                        .resizable()
+                        .frame(maxWidth: 20, maxHeight: 20)
+                        .aspectRatio(contentMode: .fit)
+                        .padding(.bottom, 2)
+                    Text("사용 가능한 닉네임입니다.")
+                        .font(.sandol(type: .regular, size: 15))
+                        .foregroundColor(Color(red: 0.68, green: 1, blue: 0.65).opacity(0.80))
+                        .frame(maxWidth: 285, maxHeight: 30, alignment: .leading)
+                }
+            }
         }
     }
     
@@ -143,16 +159,28 @@ struct NicknameSettingLogin: View {
         Button(action: {
             if viewModel.isNicknameValid, viewModel.isNicknameAvailable == true {
                 transitionToNext()
+                saveNickname(newNickname: viewModel.nickname)
             }
         }) {
             Text("시작하기")
                 .frame(maxWidth: 305, maxHeight: 55)
-                .background(Color.primary03)
+                .background((viewModel.isNicknameValid && (viewModel.isNicknameAvailable == true)) ? Color.primary03 : Color(red: 0.25, green: 0.24, blue: 0.37))
                 .contentShape(RoundedRectangle(cornerRadius: 19))
                 .foregroundStyle(Color.white)
                 .font(.sandol(type: .bold, size: 20))
                 .multilineTextAlignment(.center)
                 .clipShape(.rect(cornerRadius: 19))
+                .shadow(color: .black.opacity(0.25), radius: 10, x: 0, y: 4)
+        }
+    }
+    
+    private func saveNickname(newNickname: String) {
+        if var session = keyChainManager.loadSession(for: "userSession") {
+            session.nickname = newNickname
+            let saved = keyChainManager.saveSession(session, for: "userSession")
+            if !saved {
+                print("닉네임 세션 실패")
+            }
         }
     }
 }

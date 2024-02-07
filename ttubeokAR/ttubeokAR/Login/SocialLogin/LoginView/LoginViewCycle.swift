@@ -23,12 +23,15 @@ struct LoginViewCycle: View {
             case .login:
                 LoginView(transitionToNext: { currentState = .nicknameSetting})
             case .nicknameSetting:
-                NicknameSettingLogin(transitionToNext: { currentState = .mainView}, viewModel: NicknameSettingViewModel())
+                NicknameSettingLogin(transitionToNext: { withAnimation {currentState = .mainView} }, viewModel: NicknameSettingViewModel())
+                    .transition(.opacity)
             case .mainView:
                 MainViewControl()
+                    .transition(.opacity)
             }
         }
         .onAppear {
+            print("유효성 검사 시작함")
             loginViewModel.checkLoginStatus()
             currentState = loginViewModel.savedLoginToken ? .mainView : .login
         }
@@ -40,4 +43,10 @@ enum AppState {
     case login
     case nicknameSetting
     case mainView
+}
+
+struct LoginViewCycle_Preview: PreviewProvider {
+    static var previews: some View {
+        LoginViewCycle()
+    }
 }

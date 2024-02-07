@@ -13,7 +13,7 @@ import PopupView
 struct SearchControl: View {
     // MARK: - Property
     @ObservedObject var viewModel: SearchViewModel
-    @State private var isShowingPopup = false
+    @Binding var isShowingPopup: Bool
     
     
     // MARK: - Body
@@ -26,19 +26,6 @@ struct SearchControl: View {
                 }
                 .offset(y: -10)
                 .frame(minWidth: 0, maxWidth: .infinity)
-                
-                .popup(isPresented: $isShowingPopup) {
-                    PlaceSettingView()
-                        .clipShape(.rect(cornerRadius: 40))
-                } customize: {
-                    $0
-                        .type(.toast)
-                        .position(.bottom)
-                        .animation(.spring)
-                        .appearFrom(.bottom)
-                        .dragToDismiss(true)
-                        .closeOnTap(true)
-                }
             }
             //TODO: - 구현 필요
             .onTapGesture {
@@ -137,7 +124,7 @@ struct SearchControl: View {
     /// 검색 옵션을 설정하기 위해 검색 옵션을 설정한다.
     private var searchOptionButton: some View {
         Button(action: {
-            isShowingPopup = true
+            isShowingPopup.toggle()
         }) {
             ZStack {
                 Rectangle()
@@ -153,16 +140,6 @@ struct SearchControl: View {
 }
 
 // MARK: - Preview
-
-struct SearchControl_Previews: PreviewProvider {
-    static var previews: some View {
-        // Create an instance of SearchViewModel
-        let viewModel = SearchViewModel()
-        
-        // Pass the viewModel to the test1 view
-        SearchControl(viewModel: viewModel)
-    }
-}
 
 #if canImport(UIKit)
 extension View {
