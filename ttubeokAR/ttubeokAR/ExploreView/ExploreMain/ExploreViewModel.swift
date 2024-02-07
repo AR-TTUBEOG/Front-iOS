@@ -22,13 +22,17 @@ class ExploreViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
     
     //MARK: - Moodel
     var exploreData: ExploreDataModel?
-    var likeModel: LikeModel?
     var exploreDetailInfor: ExploreDetailInfor?
     
     //MARK: - Property
     private var locationManager = CLLocationManager()
+    
     var currentLocation: CLLocation? {
         locationManager.location
+    }
+    
+    var favoriteImageName: String {
+        return isFavorited ? "Vector2" : "Vector"
     }
     
     @Published var isFavorited: Bool = false
@@ -36,8 +40,14 @@ class ExploreViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
     @Published var estimatedTime: TimeInterval = 0
     @Published var placeType: PlaceTypeValue = .none
     
+    //MARK: - Init 함수
+    
+    public func updateDetailInfor(_ infor: ExploreDetailInfor) {
+        self.exploreDetailInfor = infor
+    }
     
     
+    //MARK: - API 호출 함수
     
     
     // 서버로부터 ExploreDataModel 데이터를 받아오는 함수
@@ -59,69 +69,70 @@ class ExploreViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
         }
     }
     
-    // MARK: - BookMarkAPI
-    //찜버튼 api 함수
-    func bookmarkSpace(storeId: Int, completion: @escaping (Result<Bool, MoyaError>) -> Void) {
-        providerMark.request(.bookmarkSpace(storeId:storeId)) { result in
-            switch result {
-            case .success(let _response):
-                completion(.success(true))
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
-    }
-    
-    
-    // MARK: - ChangeExploreView
-    
-    var favoriteImageName: String {
-        return isFavorited ? "Vector2" : "Vector"
-    }
-    
-    
-    
-    
     // MARK: - 장소 좋아요 호출 함수
 
     /// 장소 타입에 따른 API 호출
     public func checkLike() {
-        
         if self.isFavorited {
             sendLike()
-        } else {
-            print("이렇게 해두기")
         }
     }
     
+    /// 장소 타입에 따라 좋아요 버튼 작동
     private func sendLike() {
+        
+        guard let detailInfo = exploreDetailInfor else { return }
+        
         switch self.placeType {
         case .spot:
-            // 산책로 API
+            likeStore(storeId: detailInfo.id)
         case .store:
-            // 매장 API
+            likeStore(storeId: detailInfo.id)
         case .none:
             print("error")
         }
     }
     
-    //TODO: - 산책로 API 호출
     
+    /// 산책로 좋아요 버튼 API 호출
+    /// - Parameter spotId: 산책로 아이디 제공할 것
+    private func likeWalkWay(spotId: Int) {
+        provider.request(.likeWalkWay(spotId: spotId)) { result in
+            switch result {
+            case .success(let response):
+                do {
+                    let decodedResponse = try JSONDecoder().decode(WalkWayLikeModel.self, from: response.data)
+                    print("산책로 좋아요 성공 \(decodedResponse)")
+                } catch {
+                    print("산책로 error")
+                }
+            case .failure(let error):
+                print("산책로 error : \(error)")
+            }
+        }
+    }
     
-    //TODO: - 매장 API 호출
+    private func likeStore(storeId: Int) {
+        provider.request(.likeStoreData(storeId: storeId)) { result in
+            switch result {
+            case .success(let response):
+                do {
+                    let decodedResponse = try JSONDecoder().decode(StoreLikeModel.self, from: response.data)
+                    print("매장 좋아요 성공 \(decodedResponse)")
+                } catch {
+                    print("매장 error")
+                }
+            case .failure(let error):
+                print("매장 error: \(error)")
+            }
+        }
+    }
     
     
     // MARK: - Function
     
     public func formattedReviewCount(_ count: Int) -> String {
         return count > 999 ? "999+" : "\(count)"
-    }
-    
-    func getPlaceTypeText(for place: Place?) -> String {
-        guard let place = place else {
-            return "Unknown"
-        }
-        return "SomeString"
     }
     
     // MARK: - Distance Function

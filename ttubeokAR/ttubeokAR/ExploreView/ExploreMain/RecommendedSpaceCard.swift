@@ -58,7 +58,7 @@ struct RecommendedSpaceCard: View {
         .frame(width: 150, height: 180)
         .shadow(radius: 5)
         .onAppear {
-            viewModel.exploreDetailInfor = self.exploreDetailInfor
+            viewModel.updateDetailInfor(exploreDetailInfor)
         }
     }
     
@@ -97,9 +97,9 @@ struct RecommendedSpaceCard: View {
     private func sendPlaceType() {
         viewModel.isFavorited.toggle()
         
-        if self.exploreDetailInfor.place.spot {
+        if self.exploreDetailInfor.placeType.spot {
             viewModel.placeType = .spot
-        } else if self.exploreDetailInfor.place.store {
+        } else if self.exploreDetailInfor.placeType.store {
             viewModel.placeType = .store
         }
     }
@@ -201,13 +201,13 @@ struct RecommendedSpaceCard: View {
         ZStack(alignment: .center) {
             Rectangle()
                 .frame(maxWidth: 36, maxHeight: 13)
-                .foregroundStyle(getColor(for: exploreDetailInfor.place))
+                .foregroundStyle(getColor(for: exploreDetailInfor.placeType))
                 .clipShape(.rect(cornerRadius: 19))
-            Text(getPlaceTypeText(for: exploreDetailInfor.place))
+            Text(getPlaceTypeText(for: exploreDetailInfor.placeType))
                 .font(.sandol(type: .bold, size: 7))
-                .foregroundStyle(getPlaceTypeTextColor(for: exploreDetailInfor.place))
+                .foregroundStyle(getPlaceTypeTextColor(for: exploreDetailInfor.placeType))
                 .offset(x: 4, y: -13)
-            getImage(for: exploreDetailInfor.place)
+            getImage(for: exploreDetailInfor.placeType)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(maxWidth: 9, maxHeight: 9)

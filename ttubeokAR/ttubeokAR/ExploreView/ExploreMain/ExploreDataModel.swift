@@ -7,15 +7,16 @@
 
 import Foundation
 
-//전체 장소 조회 api
-struct ExploreDataModel: Codable {
+//MARK: - 전체 장소 모델 데이터
+struct ExploreDataModel: Codable{
+    
     var check: Bool
     var information: [ExploreDetailInfor]
 }
 
 struct ExploreDetailInfor: Codable, Hashable {
-    var storeId: Int // 징소아이디
-    var place: PlacePurpose
+    var id: Int // 징소아이디
+    var placeType: PlacePurpose
     var memberId: Int //등록 유저 id
     var name: String
     var latitude: Double
@@ -31,14 +32,24 @@ struct PlacePurpose: Codable, Hashable {
     var spot: Bool
 }
 
-
-struct LikeModel: Codable {
+//MARK: - 산책로 좋아요 모델 데이터
+struct WalkWayLikeModel: Codable {
     var check: Bool
-    var information: LikeInfor
+    var information: WalkWayLikeInfor
 }
 
-struct LikeInfor: Codable {
+struct WalkWayLikeInfor: Codable {
     var likedId: Int
     var spotId: Int
     var userId: Int
+}
+
+//MARK: - 매장 좋아요 모델 데이터
+struct StoreLikeModel: Codable {
+    var check: Bool
+    var information: StoreLikeInfor
+}
+
+struct StoreLikeInfor: Codable {
+    var message: String
 }
