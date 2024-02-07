@@ -11,7 +11,7 @@ import SwiftUI
 struct ExploreViewControl: View {
     
     // MARK: - Property
-    @StateObject var viewModel = ExploreViewModel()
+    @StateObject var viewModel: ExploreViewModel
     @StateObject var detailViewModel = DetailViewModel()
     @State private var showDetail = false
     
@@ -81,9 +81,4 @@ struct ExploreViewControl: View {
 
 
 // MARK: - Preview
-
-#Preview {
-    ExploreViewControl()
-}
-
 

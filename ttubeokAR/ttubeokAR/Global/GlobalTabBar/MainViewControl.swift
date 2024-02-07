@@ -10,13 +10,17 @@ import SwiftUI
 /// 온보드 화면이 끝난 후 rootView가 될 메인탭 컨트롤
 struct MainViewControl: View {
     //MARK: - Property
+    
     /**
      viewModel : 뷰 모델 사용하기 위한 변수
      selectedTab : 현재 선택된 탭 버튼을 알기 위함 -> 나중에 현재 뷰를 추적하기 위해 필요
      changeTabView : 현재 뷰가 전환이 가능한가 불가능한가 정하기 위함 -> 뚜닷 버튼 때문에 필요
      ttuDOtButtonAngle : 뚜닷 버튼이 나타날 때 회전 애니메이션으로 나타나도록 하기 위함
      */
-    @StateObject private var viewModel = SearchViewModel()
+    
+    @StateObject private var searchViewModel = SearchViewModel()
+    @StateObject private var exploreViewModel = ExploreViewModel()
+    
     @State private var selectedTab: Int
     @State private var showTtuDotButton = false
     @State private var changeTabView = true
@@ -49,7 +53,7 @@ struct MainViewControl: View {
     private var mainTabView: some View {
         ZStack(alignment: .center) {
             if selectedTab == 1 {
-                ExploreViewControl()
+                ExploreViewControl(viewModel: exploreViewModel)
             } else if selectedTab == 2 {
                 MapView()
             }
@@ -88,7 +92,7 @@ struct MainViewControl: View {
                         self.handleTap()
                     }
                 }) {
-                    Image(viewModel.buttonImage)
+                    Image(searchViewModel.buttonImage)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(maxWidth: 81, maxHeight: 42)
@@ -101,7 +105,7 @@ struct MainViewControl: View {
     
     /// 상단 검색 바(Map, Explore 뷰에 따라 달라진다)
     private var searchControl: some View {
-        SearchControl(viewModel: viewModel, isShowingPopup: $showSearchOptionButton)
+        SearchControl(viewModel: searchViewModel, isShowingPopup: $showSearchOptionButton)
     }
     
     
@@ -117,9 +121,9 @@ struct MainViewControl: View {
     private func updateCurrentView(tag: Int) {
         switch tag {
         case 1 :
-            viewModel.currentView = .exploreView
+            searchViewModel.currentView = .exploreView
         case 2:
-            viewModel.currentView = .mapView
+            searchViewModel.currentView = .mapView
         default :
             print("error")
         }

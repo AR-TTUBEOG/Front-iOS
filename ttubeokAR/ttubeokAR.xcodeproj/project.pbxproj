@@ -22,6 +22,7 @@
 		482DB6B72B5416FF005538DE /* PlaceSettingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482DB6B62B5416FF005538DE /* PlaceSettingModel.swift */; };
 		482DB6B92B541797005538DE /* PlaceSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482DB6B82B541797005538DE /* PlaceSettingsViewModel.swift */; };
 		482DB6BB2B541E7E005538DE /* PlaceSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482DB6BA2B541E7E005538DE /* PlaceSettingView.swift */; };
+		4831BEC02B742866006E184C /* SearchAPITarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4831BEBF2B742866006E184C /* SearchAPITarget.swift */; };
 		483513842B5A60150072ADFE /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483513832B5A60150072ADFE /* LoginView.swift */; };
 		483513862B5A602C0072ADFE /* KakaoLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483513852B5A602C0072ADFE /* KakaoLogin.swift */; };
 		483513882B5A603D0072ADFE /* AppleLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483513872B5A603D0072ADFE /* AppleLogin.swift */; };
@@ -143,6 +144,7 @@
 		482DB6B62B5416FF005538DE /* PlaceSettingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceSettingModel.swift; sourceTree = "<group>"; };
 		482DB6B82B541797005538DE /* PlaceSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceSettingsViewModel.swift; sourceTree = "<group>"; };
 		482DB6BA2B541E7E005538DE /* PlaceSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceSettingView.swift; sourceTree = "<group>"; };
+		4831BEBF2B742866006E184C /* SearchAPITarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAPITarget.swift; sourceTree = "<group>"; };
 		483513832B5A60150072ADFE /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		483513852B5A602C0072ADFE /* KakaoLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoLogin.swift; sourceTree = "<group>"; };
 		483513872B5A603D0072ADFE /* AppleLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLogin.swift; sourceTree = "<group>"; };
@@ -500,6 +502,7 @@
 			children = (
 				482DB6B52B5416B2005538DE /* SearchBar */,
 				482DB6B42B541693005538DE /* SearchOption */,
+				4831BEBF2B742866006E184C /* SearchAPITarget.swift */,
 			);
 			path = GlobalSearchControl;
 			sourceTree = "<group>";
@@ -1080,6 +1083,7 @@
 				483CB95D2B73247D00938224 /* GameRulesTextView.swift in Sources */,
 				48D88C2C2B5C24A400A1B09E /* LoginServerResponse.swift in Sources */,
 				482DB6BB2B541E7E005538DE /* PlaceSettingView.swift in Sources */,
+				4831BEC02B742866006E184C /* SearchAPITarget.swift in Sources */,
 				483BFD202B64A2A200C2AD5B /* PlaceSelect.swift in Sources */,
 				483612BA2B4ED14500E0B45A /* MainViewControl.swift in Sources */,
 				6CE46B0D2B6B5A350030F323 /* PlaceViewModel.swift in Sources */,
