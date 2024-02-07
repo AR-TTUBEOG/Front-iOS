@@ -10,9 +10,9 @@ import SwiftUI
 struct DetailViewControl: View {
     // MARK: - Property
     @StateObject var viewModel = DetailViewModel()
-    let StoreInformation : StoreInformation
-    let GuestBookModel : GuestBookModel
     @Binding var SelectedCard: ExploreViewModel?
+    let GuestBookModel : GuestBookModel
+
     
     // MARK: - Body
     var body: some View {

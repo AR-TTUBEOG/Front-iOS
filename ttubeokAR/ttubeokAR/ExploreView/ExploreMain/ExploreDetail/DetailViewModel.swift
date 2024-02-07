@@ -22,7 +22,8 @@ class DetailViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
     private let provider = MoyaProvider<DetailExploreAPITarget>()
     private let providerBook = MoyaProvider<GuestBookAPI>()
     private let providerMark = MoyaProvider<BookMarkAPI>()
-    var exploreDetailData: DetailDataModel?
+    var exploreDetailData: DetailDataModel? // 산책로
+    //var exploreDetailData: DetailDataModel? // 매장
     
     // MARK: - Function
     func GuestVisitAction() {
