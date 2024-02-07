@@ -9,13 +9,16 @@ import Foundation
 
 class BasketBallGameViewModel: ObservableObject{
     
-    //MARK: 농구게임 게임 룰 설정
+    //MARK: - 농구게임 게임 룰 설정
     @Published var timeLimit: Int =  30
     @Published var ballCount: Int = 5
     @Published var successCount: Int = 3
     
-    //MARK: 농구게임 혜택 문구 텍스트 길이
+    //MARK: - 농구게임 혜택 문구 텍스트 길이
     @Published var benefitsText: String = ""
+    
+    //MARK: - 농구게임 혜택 쿠폰
+    @Published var selectCoupon: Int? = nil
     
     
     //MARK: - 제한 시간 조절

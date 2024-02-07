@@ -124,6 +124,12 @@ enum Icon: String {
     case exampleMarket2 = "exampleMarket2"
     
     
+    //MARK: - Game
+    case checkCircle = "checkCircle"
+    case gameBox = "gameBox"
+    case gameCoupon = "gameCoupon"
+    case gameOnePlus = "gameOnePlus"
+    
     var image: Image {
         return Image(self.rawValue)
     }
