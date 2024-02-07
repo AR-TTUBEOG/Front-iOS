@@ -13,6 +13,7 @@ struct CustomSlider: View {
     
     @Binding var value: Double
     var range: ClosedRange<Double>
+    
     // 슬라이더 배경색 ( 회색계열 )
     private let backgroundFill = Color(red: 0.78, green: 0.76, blue: 0.96).opacity(0.4)
     
@@ -55,7 +56,7 @@ struct CustomSlider: View {
     private func backgroundSlider(geometry: GeometryProxy) -> some View {
         Rectangle()
             .fill(backgroundFill)
-            .frame(width: geometry.size.width * 0.85, height: 17)
+            .frame(width: geometry.size.width * 0.87, height: 17)
             .clipShape(.rect(cornerRadius: 10))
     }
     
@@ -81,11 +82,14 @@ struct CustomSlider: View {
             .fixedSize()
             .aspectRatio(contentMode: .fit)
             .offset(x: handlePosition, y: 0)
-            .gesture(DragGesture(minimumDistance: 0).onChanged { gesture in
-                let newSliderPosition = min(max(gesture.location.x, 0), totalSliderWidth)
-                let newValue = Double((newSliderPosition) / sliderWidth) * (range.upperBound - range.lowerBound) + range.lowerBound
-                self.value = min(max(newValue, range.lowerBound), range.upperBound)
-            })
+            .highPriorityGesture(DragGesture(minimumDistance: 0)
+                .onChanged { gesture in
+                    print(self.value)
+                    let newSliderPosition = min(max(gesture.location.x, 0), totalSliderWidth)
+                    let newValue = Double((newSliderPosition) / sliderWidth) * (range.upperBound - range.lowerBound) + range.lowerBound
+                    self.value = min(max(newValue, range.lowerBound), range.upperBound)
+                }
+            )
     }
     
     private func markPosition(_ position: Double, label: String, geometry: GeometryProxy) -> some View {
@@ -95,27 +99,13 @@ struct CustomSlider: View {
         
         return VStack {
             Rectangle()
-            .fill(Color.white.opacity(0.5))
-            .frame(width: 2, height: 17)
+                .fill(Color.white.opacity(0.5))
+                .frame(width: 2, height: 17)
             Text(label)
                 .font(.sandol(type: .medium, size: 11))
                 .foregroundStyle(Color(red: 0.92, green: 0.9, blue: 0.97))
         }
         .offset(x: markPosition, y: 9)
-    }
-}
-
-struct CustomSlider_Preview: PreviewProvider {
-    struct PreviewWrapper: View {
-        @State private var sliderValue: Double = 5 // Initial value
-        
-        var body: some View {
-            CustomSlider(value: $sliderValue, range: 0...10)
-        }
-    }
-    
-    static var previews: some View {
-        PreviewWrapper()
     }
 }
 

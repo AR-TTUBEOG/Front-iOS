@@ -20,6 +20,8 @@ struct MainViewControl: View {
     @State private var selectedTab: Int
     @State private var showTtuDotButton = false
     @State private var changeTabView = true
+    @State private var showSearchOptionButton = false
+    @State private var isSliderActive = false
     @State private var ttuDotButtonAngle: Double = -90
     @EnvironmentObject var sharedTabInfo: SharedTabInfo
     
@@ -31,11 +33,14 @@ struct MainViewControl: View {
     
     //MARK: Body
     var body: some View {
-            ZStack {
-                mainTabView
-                searchControl
-                tabBarButton
-            }
+        ZStack {
+            mainTabView
+            searchControl
+            tabBarButton
+        }
+            .customPopup(isPresented: $showSearchOptionButton, content: {
+                PlaceSettingView()
+            })
     }
     
     //MARK: - Tab View
@@ -73,8 +78,7 @@ struct MainViewControl: View {
                             }
                         }
                 }
-                .transition(.move(edge: .bottom))
-                
+                .transition(AnyTransition.opacity.combined(with: .identity).animation(.easeInOut(duration: 0.4)))
             }
             
             VStack {
@@ -97,7 +101,7 @@ struct MainViewControl: View {
     
     /// 상단 검색 바(Map, Explore 뷰에 따라 달라진다)
     private var searchControl: some View {
-        SearchControl(viewModel: viewModel)
+        SearchControl(viewModel: viewModel, isShowingPopup: $showSearchOptionButton)
     }
     
     
@@ -105,6 +109,7 @@ struct MainViewControl: View {
     private func handleTap() {
         selectedTab = selectedTab == 1 ? 2 : 1
         sharedTabInfo.currentTab = selectedTab
+        updateCurrentView(tag: selectedTab)
     }
     
     /// 현재 뷰와 반대가 되는 뷰를 화면에 업데이트 한다.
@@ -122,7 +127,7 @@ struct MainViewControl: View {
     
     /// 길게 누르면 뚜닷을 부른다.
     private var longPressGesture: some Gesture {
-        LongPressGesture(minimumDuration: 1)
+        LongPressGesture(minimumDuration: 0.5)
             .onChanged{ _ in showTtuDotButton = false }
             .onEnded{ _ in
                 changeTabView = false

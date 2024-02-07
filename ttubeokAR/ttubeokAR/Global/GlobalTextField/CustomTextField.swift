@@ -143,5 +143,10 @@ struct CustomTextField: View {
             }
         }
         .frame(maxWidth: maxWidth, maxHeight: maxHeight, alignment: alignment)
+        .contentShape(Rectangle())
+        .onTapGesture {
+            isTextFocused = true
+        }
     }
 }
+
