@@ -122,9 +122,15 @@
 		CA2513092B62918A006D2EDF /* GuestBookModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2513082B62918A006D2EDF /* GuestBookModel.swift */; };
 		CA25130B2B62AF01006D2EDF /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA25130A2B62AF01006D2EDF /* DetailViewModel.swift */; };
 		CA3A391A2B55753800BEB7DE /* RecommendedSpaceCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3A39192B55753800BEB7DE /* RecommendedSpaceCard.swift */; };
+		CA3DFFED2B6CE7C90007D2E6 /* ExploreAPITarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3DFFEC2B6CE7C90007D2E6 /* ExploreAPITarget.swift */; };
+		CA3DFFF12B6E42AE0007D2E6 /* DetailExploreAPITarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3DFFF02B6E42AE0007D2E6 /* DetailExploreAPITarget.swift */; };
+		CA82A9812B7266CD004E7683 /* GuestBookAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA82A9802B7266CD004E7683 /* GuestBookAPI.swift */; };
+		CA82A9832B726A8D004E7683 /* BookMarkAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA82A9822B726A8D004E7683 /* BookMarkAPI.swift */; };
+		CA82A9862B72703B004E7683 /* BookMarkViewControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA82A9852B72703B004E7683 /* BookMarkViewControl.swift */; };
+		CA82A9882B72705B004E7683 /* BookMarkDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA82A9872B72705B004E7683 /* BookMarkDataModel.swift */; };
 		CAB9FA1C2B551B1500F0046A /* ExploreViewControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB9FA1B2B551B1500F0046A /* ExploreViewControl.swift */; };
 		CAB9FA1E2B551B3E00F0046A /* ExploreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB9FA1D2B551B3E00F0046A /* ExploreViewModel.swift */; };
-		CAB9FA202B55443700F0046A /* RecommendSpaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB9FA1F2B55443700F0046A /* RecommendSpaceModel.swift */; };
+		CAB9FA202B55443700F0046A /* ExploreDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB9FA1F2B55443700F0046A /* ExploreDataModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -237,9 +243,15 @@
 		CA2513082B62918A006D2EDF /* GuestBookModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestBookModel.swift; sourceTree = "<group>"; };
 		CA25130A2B62AF01006D2EDF /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		CA3A39192B55753800BEB7DE /* RecommendedSpaceCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedSpaceCard.swift; sourceTree = "<group>"; };
+		CA3DFFEC2B6CE7C90007D2E6 /* ExploreAPITarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreAPITarget.swift; sourceTree = "<group>"; };
+		CA3DFFF02B6E42AE0007D2E6 /* DetailExploreAPITarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailExploreAPITarget.swift; sourceTree = "<group>"; };
+		CA82A9802B7266CD004E7683 /* GuestBookAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestBookAPI.swift; sourceTree = "<group>"; };
+		CA82A9822B726A8D004E7683 /* BookMarkAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookMarkAPI.swift; sourceTree = "<group>"; };
+		CA82A9852B72703B004E7683 /* BookMarkViewControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookMarkViewControl.swift; sourceTree = "<group>"; };
+		CA82A9872B72705B004E7683 /* BookMarkDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookMarkDataModel.swift; sourceTree = "<group>"; };
 		CAB9FA1B2B551B1500F0046A /* ExploreViewControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewControl.swift; sourceTree = "<group>"; };
 		CAB9FA1D2B551B3E00F0046A /* ExploreViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewModel.swift; sourceTree = "<group>"; };
-		CAB9FA1F2B55443700F0046A /* RecommendSpaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendSpaceModel.swift; sourceTree = "<group>"; };
+		CAB9FA1F2B55443700F0046A /* ExploreDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreDataModel.swift; sourceTree = "<group>"; };
 		D1C0D12416FF09B1C416874C /* Pods-ttubeokAR.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ttubeokAR.debug.xcconfig"; path = "Target Support Files/Pods-ttubeokAR/Pods-ttubeokAR.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -671,6 +683,7 @@
 		48FF93A02B43BA1400202F45 /* ExploreView */ = {
 			isa = PBXGroup;
 			children = (
+				CA3DFFEB2B6CE1550007D2E6 /* ExploreAPI */,
 				CA2513002B6286C1006D2EDF /* ExploreMain */,
 			);
 			path = ExploreView;
@@ -803,9 +816,10 @@
 		CA2513002B6286C1006D2EDF /* ExploreMain */ = {
 			isa = PBXGroup;
 			children = (
+				CA82A9842B72700A004E7683 /* BookMark */,
 				CAB9FA1B2B551B1500F0046A /* ExploreViewControl.swift */,
-				CAB9FA1F2B55443700F0046A /* RecommendSpaceModel.swift */,
 				CAB9FA1D2B551B3E00F0046A /* ExploreViewModel.swift */,
+				CAB9FA1F2B55443700F0046A /* ExploreDataModel.swift */,
 				CA3A39192B55753800BEB7DE /* RecommendedSpaceCard.swift */,
 				CA2513012B628710006D2EDF /* ExploreDetail */,
 			);
@@ -817,11 +831,39 @@
 			children = (
 				CA2513042B629109006D2EDF /* DetailViewControl.swift */,
 				CA2513022B6290DC006D2EDF /* DetailDataModel.swift */,
+				CA25130A2B62AF01006D2EDF /* DetailViewModel.swift */,
 				CA2513062B629144006D2EDF /* GuestBookCard.swift */,
 				CA2513082B62918A006D2EDF /* GuestBookModel.swift */,
-				CA25130A2B62AF01006D2EDF /* DetailViewModel.swift */,
 			);
 			path = ExploreDetail;
+			sourceTree = "<group>";
+		};
+		CA3DFFEB2B6CE1550007D2E6 /* ExploreAPI */ = {
+			isa = PBXGroup;
+			children = (
+				CA3DFFF22B6E42B30007D2E6 /* APITarget */,
+			);
+			path = ExploreAPI;
+			sourceTree = "<group>";
+		};
+		CA3DFFF22B6E42B30007D2E6 /* APITarget */ = {
+			isa = PBXGroup;
+			children = (
+				CA3DFFEC2B6CE7C90007D2E6 /* ExploreAPITarget.swift */,
+				CA3DFFF02B6E42AE0007D2E6 /* DetailExploreAPITarget.swift */,
+				CA82A9802B7266CD004E7683 /* GuestBookAPI.swift */,
+				CA82A9822B726A8D004E7683 /* BookMarkAPI.swift */,
+			);
+			path = APITarget;
+			sourceTree = "<group>";
+		};
+		CA82A9842B72700A004E7683 /* BookMark */ = {
+			isa = PBXGroup;
+			children = (
+				CA82A9852B72703B004E7683 /* BookMarkViewControl.swift */,
+				CA82A9872B72705B004E7683 /* BookMarkDataModel.swift */,
+			);
+			path = BookMark;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -986,6 +1028,8 @@
 				481B90A62B66940500D366A7 /* WalkwayViewModel.swift in Sources */,
 				485B30EB2B70A9E300023785 /* GameManagerView.swift in Sources */,
 				48D88C2F2B5C259300A1B09E /* LoginTarget.swift in Sources */,
+				483BFD1A2B649CD000C2AD5B /* TitleView.swift in Sources */,
+				CAB9FA202B55443700F0046A /* ExploreDataModel.swift in Sources */,
 				48D192E82B71D08000A5EBE8 /* PopupModifier.swift in Sources */,
 				6CE46B072B680CD20030F323 /* AccountSettingView.swift in Sources */,
 				CAB9FA202B55443700F0046A /* RecommendSpaceModel.swift in Sources */,
@@ -996,12 +1040,19 @@
 				483513842B5A60150072ADFE /* LoginView.swift in Sources */,
 				481B90A82B669B1A00D366A7 /* PlaceRegistImagePicker.swift in Sources */,
 				483820E22B4BE7C100C3FB14 /* ARCommand.swift in Sources */,
+				CA3DFFED2B6CE7C90007D2E6 /* ExploreAPITarget.swift in Sources */,
 				CA3A391A2B55753800BEB7DE /* RecommendedSpaceCard.swift in Sources */,
+				CA82A9882B72705B004E7683 /* BookMarkDataModel.swift in Sources */,
 				48E10ED32B72578E00D6EECB /* BasketBallGameRulesView.swift in Sources */,
 				486C2FEB2B592A4B00C88B04 /* NicknameSettingLogin.swift in Sources */,
 				488365F32B6FDFA100F4E397 /* MarketModel.swift in Sources */,
 				CA2513032B6290DC006D2EDF /* DetailDataModel.swift in Sources */,
 				48ADCAA52B6645BD00765EDB /* SharedTabInfo.swift in Sources */,
+				CA3DFFF12B6E42AE0007D2E6 /* DetailExploreAPITarget.swift in Sources */,
+				6C7239ED2B5BA9090082F12D /* SettingViewModel.swift in Sources */,
+				6C6395242B590BBE00A20B1B /* TestMapView.swift in Sources */,
+				6C7239F42B5C2A720082F12D /* ManagePlaceViewModel.swift in Sources */,
+				CA82A9862B72703B004E7683 /* BookMarkViewControl.swift in Sources */,
 				48E10EDE2B725BD000D6EECB /* GiftDrawingGameViewModel.swift in Sources */,
 				6C7239ED2B5BA9090082F12D /* SettingViewModel.swift in Sources */,
 				6C6395242B590BBE00A20B1B /* TestMapView.swift in Sources */,
@@ -1038,12 +1089,14 @@
 				488FA7122B6510890030CE66 /* MarketSelectButton.swift in Sources */,
 				483820E82B4BE8E500C3FB14 /* AddLocationCommand.swift in Sources */,
 				6CC4DDFF2B5687E80080E7E8 /* CouponView.swift in Sources */,
+				CA82A9812B7266CD004E7683 /* GuestBookAPI.swift in Sources */,
 				48A59C182B6E2242009CF83E /* FinishButton.swift in Sources */,
 				488373C92B66B79D0036C0FD /* CustomTextField.swift in Sources */,
 				483CB9642B73329700938224 /* BasketBallGameBenefitsText.swift in Sources */,
 				481B90AA2B66A1B800D366A7 /* WalkwayPageContent.swift in Sources */,
 				485C83A22B70E3E6009D9B54 /* gameButtonView.swift in Sources */,
 				488FA7102B650FAD0030CE66 /* WalkSelectButton.swift in Sources */,
+				CA82A9832B726A8D004E7683 /* BookMarkAPI.swift in Sources */,
 				6C7239EA2B5BA86A0082F12D /* NotiSettingView.swift in Sources */,
 				483820DD2B4BE5E600C3FB14 /* TtuDotButton.swift in Sources */,
 				6CE46B0F2B6B5BA30030F323 /* EditorView.swift in Sources */,
