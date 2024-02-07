@@ -106,6 +106,7 @@
 		6C0E64B12B7359A400A238A7 /* Anno.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0E64B02B7359A400A238A7 /* Anno.swift */; };
 		6C0E64B32B7359B100A238A7 /* AnnotationButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0E64B22B7359B100A238A7 /* AnnotationButtonView.swift */; };
 		6C0E64B52B7359C500A238A7 /* AnnoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0E64B42B7359C500A238A7 /* AnnoViewModel.swift */; };
+		6C0E64B72B735B7A00A238A7 /* DetailPlaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0E64B62B735B7A00A238A7 /* DetailPlaceView.swift */; };
 		6C6395242B590BBE00A20B1B /* TestMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C6395232B590BBE00A20B1B /* TestMapView.swift */; };
 		6C7239E82B5BA7BA0082F12D /* NotiOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C7239E72B5BA7BA0082F12D /* NotiOption.swift */; };
 		6C7239EA2B5BA86A0082F12D /* NotiSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C7239E92B5BA86A0082F12D /* NotiSettingView.swift */; };
@@ -226,6 +227,7 @@
 		6C0E64B02B7359A400A238A7 /* Anno.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Anno.swift; sourceTree = "<group>"; };
 		6C0E64B22B7359B100A238A7 /* AnnotationButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationButtonView.swift; sourceTree = "<group>"; };
 		6C0E64B42B7359C500A238A7 /* AnnoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnoViewModel.swift; sourceTree = "<group>"; };
+		6C0E64B62B735B7A00A238A7 /* DetailPlaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPlaceView.swift; sourceTree = "<group>"; };
 		6C6395232B590BBE00A20B1B /* TestMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestMapView.swift; sourceTree = "<group>"; };
 		6C7239E72B5BA7BA0082F12D /* NotiOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotiOption.swift; sourceTree = "<group>"; };
 		6C7239E92B5BA86A0082F12D /* NotiSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotiSettingView.swift; sourceTree = "<group>"; };
