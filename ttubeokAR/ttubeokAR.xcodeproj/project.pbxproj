@@ -98,6 +98,10 @@
 		48FF93952B43BA0600202F45 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FF93942B43BA0600202F45 /* ContentView.swift */; };
 		48FF93972B43BA0700202F45 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 48FF93962B43BA0700202F45 /* Assets.xcassets */; };
 		48FF939A2B43BA0700202F45 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 48FF93992B43BA0700202F45 /* Preview Assets.xcassets */; };
+		6C0E64A62B73574600A238A7 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0E64A52B73574600A238A7 /* Route.swift */; };
+		6C0E64AA2B73576400A238A7 /* RouteAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0E64A92B73576400A238A7 /* RouteAPI.swift */; };
+		6C0E64AC2B73577800A238A7 /* RouteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0E64AB2B73577800A238A7 /* RouteService.swift */; };
+		6C0E64AE2B73578600A238A7 /* RouteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0E64AD2B73578600A238A7 /* RouteViewModel.swift */; };
 		6C6395242B590BBE00A20B1B /* TestMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C6395232B590BBE00A20B1B /* TestMapView.swift */; };
 		6C7239E82B5BA7BA0082F12D /* NotiOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C7239E72B5BA7BA0082F12D /* NotiOption.swift */; };
 		6C7239EA2B5BA86A0082F12D /* NotiSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C7239E92B5BA86A0082F12D /* NotiSettingView.swift */; };
@@ -210,6 +214,10 @@
 		48FF93942B43BA0600202F45 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		48FF93962B43BA0700202F45 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		48FF93992B43BA0700202F45 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		6C0E64A52B73574600A238A7 /* Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
+		6C0E64A92B73576400A238A7 /* RouteAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteAPI.swift; sourceTree = "<group>"; };
+		6C0E64AB2B73577800A238A7 /* RouteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteService.swift; sourceTree = "<group>"; };
+		6C0E64AD2B73578600A238A7 /* RouteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteViewModel.swift; sourceTree = "<group>"; };
 		6C6395232B590BBE00A20B1B /* TestMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestMapView.swift; sourceTree = "<group>"; };
 		6C7239E72B5BA7BA0082F12D /* NotiOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotiOption.swift; sourceTree = "<group>"; };
 		6C7239E92B5BA86A0082F12D /* NotiSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotiSettingView.swift; sourceTree = "<group>"; };
@@ -687,6 +695,7 @@
 		48FF93A22B43BA4500202F45 /* MapView */ = {
 			isa = PBXGroup;
 			children = (
+				6C0E64A42B73573E00A238A7 /* Network */,
 				6C6395252B590BFC00A20B1B /* Test */,
 				483612B02B4ECFD900E0B45A /* MapView.swift */,
 				483612B22B4ED00100E0B45A /* TestView.swift */,
@@ -707,6 +716,17 @@
 				48D192E72B71D08000A5EBE8 /* PopupModifier.swift */,
 			);
 			path = SettingGroup;
+			sourceTree = "<group>";
+		};
+		6C0E64A42B73573E00A238A7 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				6C0E64A52B73574600A238A7 /* Route.swift */,
+				6C0E64A92B73576400A238A7 /* RouteAPI.swift */,
+				6C0E64AB2B73577800A238A7 /* RouteService.swift */,
+				6C0E64AD2B73578600A238A7 /* RouteViewModel.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 		6C6395252B590BFC00A20B1B /* Test */ = {
@@ -961,8 +981,10 @@
 				48FF93952B43BA0600202F45 /* ContentView.swift in Sources */,
 				487E38492B5AE04A0026599D /* KakaoLoginManager.swift in Sources */,
 				48CC6BCD2B6526560032A5E2 /* MarketPlaceRegister.swift in Sources */,
+				6C0E64AC2B73577800A238A7 /* RouteService.swift in Sources */,
 				6CAF06D32B5903B300526BC8 /* Coordinator.swift in Sources */,
 				485B30E62B709BF500023785 /* ImageSelectionButton.swift in Sources */,
+				6C0E64AA2B73576400A238A7 /* RouteAPI.swift in Sources */,
 				480448722B4B0D52008A4638 /* SearchViewModel.swift in Sources */,
 				481B909E2B6677F300D366A7 /* CloseCancelButton.swift in Sources */,
 				48FD30922B6F5E6800FB7E60 /* MarketPageContent.swift in Sources */,
@@ -976,6 +998,7 @@
 				481B90A42B66933400D366A7 /* WalkwayModel.swift in Sources */,
 				483513862B5A602C0072ADFE /* KakaoLogin.swift in Sources */,
 				48D192E62B71C68300A5EBE8 /* RoundedCorner.swift in Sources */,
+				6C0E64A62B73574600A238A7 /* Route.swift in Sources */,
 				483820E62B4BE86200C3FB14 /* MyTicketCommand.swift in Sources */,
 				6CC4DDB72B55512F0080E7E8 /* NavigationBar.swift in Sources */,
 				481EA2712B6F280200BAD5E0 /* SplashScreenView.swift in Sources */,
@@ -1038,6 +1061,7 @@
 				488FA7122B6510890030CE66 /* MarketSelectButton.swift in Sources */,
 				483820E82B4BE8E500C3FB14 /* AddLocationCommand.swift in Sources */,
 				6CC4DDFF2B5687E80080E7E8 /* CouponView.swift in Sources */,
+				6C0E64AE2B73578600A238A7 /* RouteViewModel.swift in Sources */,
 				48A59C182B6E2242009CF83E /* FinishButton.swift in Sources */,
 				488373C92B66B79D0036C0FD /* CustomTextField.swift in Sources */,
 				483CB9642B73329700938224 /* BasketBallGameBenefitsText.swift in Sources */,
