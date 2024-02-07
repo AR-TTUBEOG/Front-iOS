@@ -10,11 +10,43 @@ import Foundation
 class BasketBallGameViewModel: ObservableObject{
     
     //MARK: 농구게임 게임 룰 설정
-    @Published var timeLimit: Int
+    @Published var timeLimit: Int =  30
     @Published var ballCount: Int = 5
     @Published var successCount: Int = 3
     
-    init(timeLimit: Int = 30) {
-        self.timeLimit = timeLimit
+    
+    //MARK: - 제한 시간 조절
+    public func increaseTime() {
+        self.timeLimit += 1
     }
+    
+    public func decreaseTime() {
+        if timeLimit > 0{
+            self.timeLimit -= 1
+        }
+    }
+    
+    //MARK: - 공 개수 조절
+    public func increaseBallCount() {
+        self.ballCount += 1
+    }
+    
+    public func decreaseBallCount() {
+        if ballCount > 0 {
+            self.ballCount -= 1
+        }
+    }
+    
+    //MARK: - 게임 성공 개수
+    public func increaseSuccessCount() {
+        self.successCount += 1
+    }
+    
+    public func decreaseSuccessCount() {
+        if successCount > 0 {
+            self.successCount -= 1
+        }
+    }
+    
+    
 }
