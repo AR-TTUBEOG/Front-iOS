@@ -20,8 +20,7 @@ class DetailViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
         locationManager.location
     }
     private let provider = MoyaProvider<DetailExploreAPITarget>()
-    private let providerBook = MoyaProvider<GuestBookAPI>()
-    private let providerMark = MoyaProvider<BookMarkAPI>()
+    private let providerBook = MoyaProvider<ExploreAPITarget>()
     var exploreDetailData: DetailDataModel? // 산책로
     //var exploreDetailData: DetailDataModel? // 매장
     
@@ -114,21 +113,4 @@ class DetailViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
             }
         }
     }
-    // MARK: - GuestBookAPI
-    //방명록 api 함수
-    func createGuestBookEntry(name: String, message: String, completion: @escaping (Result<GuestBookModel, MoyaError>) -> Void) {
-        providerBook.request(.createBook(name: name, message: message)) { result in
-            switch result {
-            case .success(let response):
-                if let decodedResponse = try? JSONDecoder().decode(GuestBookModel.self, from: response.data) {
-                    completion(.success(decodedResponse))
-                } else {
-                    completion(.failure(.jsonMapping(response)))
-                }
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
-    }
-
 }

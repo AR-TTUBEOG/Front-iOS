@@ -61,17 +61,17 @@ class ExploreViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
     
     // MARK: - BookMarkAPI
     //찜버튼 api 함수
-    func bookmarkSpace(storeId: Int, completion: @escaping (Result<Bool, MoyaError>) -> Void) {
-        providerMark.request(.bookmarkSpace(storeId:storeId)) { result in
-            switch result {
-            case .success(let _response):
-                completion(.success(true))
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
-    }
-    
+//    func bookmarkSpace(storeId: Int, completion: @escaping (Result<Bool, MoyaError>) -> Void) {
+//        providerMark.request(.bookmarkSpace(storeId:storeId)) { result in
+//            switch result {
+//            case .success(let _response):
+//                completion(.success(true))
+//            case .failure(let error):
+//                completion(.failure(error))
+//            }
+//        }
+//    }
+//    
     
     // MARK: - ChangeExploreView
     
@@ -84,26 +84,26 @@ class ExploreViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
     
     // MARK: - 장소 좋아요 호출 함수
 
-    /// 장소 타입에 따른 API 호출
-    public func checkLike() {
-        
-        if self.isFavorited {
-            sendLike()
-        } else {
-            print("이렇게 해두기")
-        }
-    }
+//    /// 장소 타입에 따른 API 호출
+//    public func checkLike() {
+//        
+//        if self.isFavorited {
+//            sendLike()
+//        } else {
+//            print("이렇게 해두기")
+//        }
+//    }
     
-    private func sendLike() {
-        switch self.placeType {
-        case .spot:
-            // 산책로 API
-        case .store:
-            // 매장 API
-        case .none:
-            print("error")
-        }
-    }
+//    private func sendLike() {
+//        switch self.placeType {
+//        case .spot:
+//            // 산책로 API
+//        case .store:
+//            // 매장 API
+//        case .none:
+//            print("error")
+//        }
+//    }
     
     //TODO: - 산책로 API 호출
     

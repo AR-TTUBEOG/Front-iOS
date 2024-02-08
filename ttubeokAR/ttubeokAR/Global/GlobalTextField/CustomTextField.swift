@@ -28,6 +28,9 @@ struct CustomTextField: View {
     var alignment: Alignment
     var axis: Axis
     var maxLength: Int?
+    var backgroundColor: Color
+    var fontColor: Color
+    var lineWidth: CGFloat
     //MARK: - init
     
     /// 커스텀 텍스트 필드 init 값 지정
@@ -61,7 +64,10 @@ struct CustomTextField: View {
          onSearch: @escaping () -> Void,
          alignment: Alignment = .leading,
          axis: Axis = .horizontal,
-         maxLength: Int? = nil
+         maxLength: Int? = nil,
+         backgroundColor: Color = Color(red: 0.25, green: 0.24, blue: 0.37),
+         fontColor: Color = Color.textPink,
+         lineWidth: CGFloat = 1
         ) {
             self._text = text
             self.placeholder = placeholder
@@ -77,6 +83,9 @@ struct CustomTextField: View {
             self.alignment = alignment
             self.axis = axis
             self.maxLength = maxLength
+            self.backgroundColor = backgroundColor
+            self.fontColor = fontColor
+            self.lineWidth = lineWidth
     }
     
     //MARK: - Body
@@ -90,19 +99,19 @@ struct CustomTextField: View {
         ZStack(alignment: alignment) {
             TextField("", text: $text, axis: axis)
                 .font(.sandol(type: .regular, size: fontSize))
-                .foregroundStyle(Color.textPink)
+                .foregroundStyle(fontColor)
                 .frame(maxWidth: maxWidth, maxHeight: maxHeight, alignment: alignment)
                 .focused($isTextFocused)
                 .padding(.leading, leadingHorizontalPadding)
                 .padding(.trailing, trailingHorizontalPadding)
                 .padding([.top, .bottom], verticalPadding)
-                .background(Color(red: 0.25, green: 0.24, blue: 0.37))
+                .background(backgroundColor)
                 .clipShape(.rect(cornerRadius: cornerSize))
                 .shadow(color: .black.opacity(0.15), radius: 2.5, x: 0, y: 1)
                 .overlay(
                     RoundedRectangle(cornerRadius: cornerSize)
                         .inset(by: 0.5)
-                        .stroke(Color.primary01, lineWidth: 1)
+                        .stroke(Color.primary01, lineWidth: lineWidth)
                 )
                 .onChange(of: text) { oldText, newText in
                     if let maxLength = maxLength, newText.count > maxLength {
