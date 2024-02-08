@@ -19,11 +19,11 @@ struct TestMap: View {
     /// 지도 확대 비율
     let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
     
-    @State private var isSelected: Bool = false
+    @State private var isSelectedTotal: Bool = false
     
     /// 최단 경로 coordinates 값 저장
     @State private var routes: [CLLocationCoordinate2D] = []
-    
+    @State private var selectedId: String? = nil
 
                             
 //    MapCamearPosition(ce)
@@ -40,7 +40,13 @@ struct TestMap: View {
                                coordinate: .init(latitude: anno.latitude, longitude: anno.longitude),
                                anchor: .bottom
                     ) {
-                        AnnoButtonView(type: annoViewModel.annoType, isSelected: $isSelected)
+                        if !isSelectedTotal || selectedId != anno.id.uuidString {
+                            AnnoButtonView(type: .cafe, selectedId: $selectedId, isSelectedTotal: $isSelectedTotal, isSelected: false, id: anno.id.uuidString)
+                        }
+                        
+                        if selectedId == anno.id.uuidString {
+                            AnnoButtonView(type: .cafe, selectedId: $selectedId, isSelectedTotal: $isSelectedTotal, isSelected: true, id: anno.id.uuidString)
+                        }
                     }
                 }
             }

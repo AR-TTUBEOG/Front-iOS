@@ -9,8 +9,11 @@ import SwiftUI
 
 struct AnnoButtonView: View {
     var type: AnnoType
-    @Binding var isSelected: Bool
-    
+    @Binding var selectedId: String?
+    @Binding var isSelectedTotal: Bool
+    @State var isSelected: Bool
+    @State var id: String
+
 
     var body: some View {
 
@@ -20,7 +23,11 @@ struct AnnoButtonView: View {
                 }
                 
                 Button {
-                    isSelected.toggle()
+                    selectedId = id
+                    
+                    if !isSelectedTotal {
+                        isSelectedTotal = true
+                    }
                     
                 } label: {
                     switch type {
@@ -41,7 +48,7 @@ struct AnnoButtonView: View {
     
     private struct backgroundView: View {
         
-        let gradient = LinearGradient(gradient: Gradient(colors: [.purple, .white]), startPoint: .bottom, endPoint: .center)
+        let gradient = LinearGradient(gradient: Gradient(colors: [.primary03, .white]), startPoint: .bottom, endPoint: .center)
         
         fileprivate var body: some View {
             Circle()
@@ -50,7 +57,7 @@ struct AnnoButtonView: View {
                 .rotationEffect(.degrees(180))
                 .offset(y: -25)
                 .frame(width: 100, height: 100)
-//                .foregroundStyle(gradient)
+                .foregroundStyle(gradient)
                 .overlay {
                     HStack {
                         Button {
@@ -73,13 +80,12 @@ struct AnnoButtonView: View {
                             Image("message")
                         }
                         .offset(x: 15, y: -52)
-                    }
-                    
+                    }                    
                 }
         }
     }
 }
 
 #Preview {
-    AnnoButtonView(type: .cafe, isSelected: .constant(true))
+    AnnoButtonView(type: .cafe, selectedId: .constant(""), isSelectedTotal: .constant(false), isSelected: true, id: "")
 }

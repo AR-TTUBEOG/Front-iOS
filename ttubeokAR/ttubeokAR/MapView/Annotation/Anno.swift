@@ -8,13 +8,13 @@
 import Foundation
 import SwiftUI
 
-struct Anno : Identifiable {
+struct Anno : Hashable {
     var id: UUID = UUID()
     var latitude: Double
     var longitude: Double
 //    var location: CLLocationCoordinate2D
     var type: AnnoType
-    var image: Image
+    var image: String
     var isSelected: Bool
 }
 
