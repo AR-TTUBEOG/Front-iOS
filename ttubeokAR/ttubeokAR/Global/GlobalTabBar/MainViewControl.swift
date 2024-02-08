@@ -21,6 +21,16 @@ struct MainViewControl: View {
     @StateObject private var searchViewModel = SearchViewModel()
     @StateObject private var exploreViewModel = ExploreViewModel()
     
+    init() {
+        _searchViewModel = StateObject(wrappedValue: SearchViewModel())
+        _exploreViewModel = StateObject(wrappedValue: ExploreViewModel())
+        
+        searchViewModel.searchTypeChanged = { [weak exploreViewModel] newType in
+            exploreViewModel?.resetPage()
+            exploreViewModel?.decisionSearchType(newType)
+        }
+    }
+    
     @State private var selectedTab: Int
     @State private var showTtuDotButton = false
     @State private var changeTabView = true

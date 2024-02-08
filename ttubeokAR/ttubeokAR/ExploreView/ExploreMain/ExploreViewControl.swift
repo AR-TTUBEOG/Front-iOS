@@ -51,7 +51,7 @@ struct ExploreViewControl: View {
     private func recommendedSpacesGrid(geometry: GeometryProxy) -> some View {
         ScrollView(.vertical) {
             refreshable {
-                viewModel.fetchExploreData(page: 1)
+                viewModel.fetchDateSearch(viewModel.currentSearchType, page: 1)
             }
             LazyVGrid(columns: [GridItem(.flexible(minimum: 150), spacing: -8), GridItem(.flexible(minimum: 150), spacing: 15)], spacing: 25) {
                 ForEach(self.viewModel.exploreData?.information ?? [], id: \.self) { place in
@@ -60,7 +60,7 @@ struct ExploreViewControl: View {
                         .onAppear {
                             viewModel.exploreDetailInfor = place
                             if place == self.viewModel.exploreData?.information.last {
-                                viewModel.fetchExploreData(page: viewModel.curretnPage + 1)
+                                viewModel.fetchDateSearch(viewModel.currentSearchType, page: viewModel.curretnPage + 1)
                             }
                         }
                         .onTapGesture {

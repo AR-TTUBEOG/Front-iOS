@@ -18,6 +18,7 @@ enum PlaceTypeValue {
 class ExploreViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
     //MARK: - API
     private let provider = MoyaProvider<ExploreAPITarget>()
+    private let searchProvider = MoyaProvider<SearchAPITarget>()
     
     //MARK: - Moodel
     var exploreData: ExploreDataModel?
@@ -35,12 +36,12 @@ class ExploreViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
     }
     
     var curretnPage = 1
-    
+
     @Published var isFavorited: Bool = false
     @Published var distance: CLLocationDistance = 0
     @Published var estimatedTime: TimeInterval = 0
     @Published var placeType: PlaceTypeValue = .none
-    
+    @Published var currentSearchType: SearchType = .all
     //MARK: - Init 함수
     
     public func updateDetailInfor(_ infor: ExploreDetailInfor) {
@@ -48,27 +49,7 @@ class ExploreViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
     }
     
     
-    //MARK: - API 호출 함수
     
-    
-//    // 서버로부터 ExploreDataModel 데이터를 받아오는 함수
-//    func fetchExploreData() {
-//        provider.request(.fetchExploreData(page: curretnPage)) { [weak self] result in
-//            switch result {
-//            case .success(let response):
-//                do {
-//                    let decodedData = try JSONDecoder().decode(ExploreDataModel.self, from: response.data)
-//                    DispatchQueue.main.async {
-//                        self?.exploreData = decodedData
-//                    }
-//                } catch {
-//                    print("Decoding error: \(error)")
-//                }
-//            case .failure(let error):
-//                print("Network error: \(error)")
-//            }
-//        }
-//    }
     
     // MARK: - 장소 좋아요 호출 함수
 
@@ -129,8 +110,42 @@ class ExploreViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
         }
     }
     // MARK: - 페이징
-    public func fetchExploreData(page: Int) {
-        provider.request(.fetchExploreData(page: page)) { [weak self] result in
+    
+    public func decisionSearchType(_ searchType: SearchType) {
+        switch searchType {
+        case .all:
+            self.currentSearchType = .all
+        case .latest:
+            self.currentSearchType = .latest
+        case .distance:
+            self.currentSearchType = .distance
+        case .recommended:
+            self.currentSearchType = .recommended
+        }
+    }
+    
+    public func fetchDateSearch(_ searchType: SearchType, page: Int) {
+        switch searchType {
+        case .all:
+            fetchExploreDataAll(page: page)
+        case .latest:
+            fetchExploreDataLatest(page: page)
+        case .distance:
+            fetchExploreDataDistance(page: page)
+        case .recommended:
+            fetchExploreDataRecommend(page: page)
+        }
+        self.curretnPage = page
+    }
+
+    //MARK: - 검색 타입에 따른 API 호출 함수
+    
+    public func resetPage() {
+        curretnPage = 1
+    }
+    
+    public func fetchExploreDataAll(page: Int) {
+        searchProvider.request(.searchAll(page: page)) { [weak self] result in
             switch result {
             case .success(let response):
                 do {
@@ -144,20 +159,83 @@ class ExploreViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
                         self?.curretnPage = page
                     }
                 } catch {
-                    print("해독 error: \(error.localizedDescription)")
+                    print("전체선택 error: \(error.localizedDescription)")
                 }
             case .failure(let error):
-                print("네트워크 error \(error.localizedDescription)")
+                print("전체 선택네트워크 error \(error.localizedDescription)")
             }
         }
     }
     
-    public func loadMoreContent(currentItem item: ExploreDetailInfor) {
-        guard let items = exploreData?.information, !items.isEmpty else { return }
-        if let lastItem = items.last, lastItem == item {
-            fetchExploreData(page: curretnPage + 1)
+    public func fetchExploreDataLatest(page: Int) {
+        searchProvider.request(.searchLatest(page: page)) { [weak self] result in
+            switch result {
+            case .success(let response):
+                do {
+                    let decodedData = try JSONDecoder().decode(ExploreDataModel.self, from: response.data)
+                    DispatchQueue.main.async {
+                        if page == 1 {
+                            self?.exploreData = decodedData
+                        } else {
+                            self?.exploreData?.information.append(contentsOf: decodedData.information)
+                        }
+                        self?.curretnPage = page
+                    }
+                } catch {
+                    print("최신순 error: \(error.localizedDescription)")
+                }
+            case .failure(let error):
+                print("최신순 네트워크 error \(error.localizedDescription)")
+            }
         }
     }
+    
+    public func fetchExploreDataDistance(page: Int) {
+        searchProvider.request(.searchDistance(page: page)) { [weak self] result in
+            switch result {
+            case .success(let response):
+                do {
+                    let decodedData = try JSONDecoder().decode(ExploreDataModel.self, from: response.data)
+                    DispatchQueue.main.async {
+                        if page == 1 {
+                            self?.exploreData = decodedData
+                        } else {
+                            self?.exploreData?.information.append(contentsOf: decodedData.information)
+                        }
+                        self?.curretnPage = page
+                    }
+                } catch {
+                    print("거리순 error: \(error.localizedDescription)")
+                }
+            case .failure(let error):
+                print("거리순 네트워크 error \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    public func fetchExploreDataRecommend(page: Int) {
+        searchProvider.request(.searchRecommend(page: page)) { [weak self] result in
+            switch result {
+            case .success(let response):
+                do {
+                    let decodedData = try JSONDecoder().decode(ExploreDataModel.self, from: response.data)
+                    DispatchQueue.main.async {
+                        if page == 1 {
+                            self?.exploreData = decodedData
+                        } else {
+                            self?.exploreData?.information.append(contentsOf: decodedData.information)
+                        }
+                        self?.curretnPage = page
+                    }
+                } catch {
+                    print("추천순 error: \(error.localizedDescription)")
+                }
+            case .failure(let error):
+                print("추천순 네트워크 error \(error.localizedDescription)")
+            }
+        }
+    }
+    
     
     
     // MARK: - Function
