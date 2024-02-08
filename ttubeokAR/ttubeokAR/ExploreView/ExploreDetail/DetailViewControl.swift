@@ -26,10 +26,13 @@ struct DetailViewControl: View {
                         
                     }
                     .frame(maxWidth: geometry.size.width * 0.9, maxHeight: 140)
-                    guestBookGrid
+                    //guestBookGrid
                 }
             }
             .frame(maxWidth: geometry.size.width, maxHeight: geometry.size.height)
+            .onAppear{
+                viewModel.locationManager.startUpdatingLocation()
+            }
         }
     }
     
@@ -38,23 +41,36 @@ struct DetailViewControl: View {
     /// 장소  사진  및 찜하기 버튼
     private var topImageAndBookmarked: some View {
         ZStack(alignment: .topTrailing) {
-            SpaceImage
-            spaceBookmarked
+            spaceImage
+            spaceLiked
                 .padding(.vertical, 10)
                 .padding(.horizontal, 20)
         }
         .frame(maxWidth: .infinity, maxHeight: 226)
     }
     
+    
+    //MARK: - 장소 사진 설정
     //장소 사진
-    private var SpaceImage : some View {
-        Image(StoreInformation.image)
+    private var spaceImage: some View {
+        Image(viewModel.images[viewModel.currentImageIndex])
             .resizable()
             .frame(maxWidth: .infinity, maxHeight: 252)
+            .aspectRatio(contentMode: .fill)
+            .gesture(
+                DragGesture()
+                    .onEnded{ value in
+                        if value.translation.width < 0 {
+                            viewModel.nextImage()
+                        } else if value.translation.width > 0 {
+                            viewModel.previousImage()
+                        }
+                    }
+            )
     }
     
-    // 찜 버튼
-    private var spaceBookmarked: some View {
+    //MARK: - 장소 좋아요 버튼
+    private var spaceLiked: some View {
         Button(action: {
             viewModel.toggleFavorite()
         }) {
@@ -64,6 +80,7 @@ struct DetailViewControl: View {
                 .frame(maxWidth: 40, maxHeight: 40, alignment: .bottomTrailing)
         }
     }
+    
     
     //MARK: - 장소이름 및 방명록 버튼
     
@@ -78,16 +95,17 @@ struct DetailViewControl: View {
         .frame(maxWidth: 420, alignment: .center)
     }
     
-    //TODO: - API 만들고 바꿀것
     //장소 이름
     private var spaceName : some View {
-        Text(StoreInformation.name)
+        Text(viewModel.title)
             .foregroundStyle(Color.textPink)
             .font(.sandol(type: .bold, size: 18))
             .multilineTextAlignment(.leading)
             .kerning(0.9)
             .frame(maxWidth: 280, maxHeight: 24,alignment: .leading)
     }
+    
+    //TODO: 방문하기 시 등장해야 할 뷰 지정하기
     
     //방문하기
     private var guestVisitBook: some View {
@@ -105,19 +123,13 @@ struct DetailViewControl: View {
         }
     }
     
+    //TODO: 방명록 작성 버튼 뷰 지정하기
+    
     //방명록 작성
     private var guestBook: some View {
         Button(action: {
-                let guestBookService = viewModel
-                guestBookService.createGuestBookEntry(name: GuestBookModel.userName, message: GuestBookModel.content) { result in
-                    switch result {
-                    case .success(let response):
-                        print("방명록 작성 성공: \(response)")
-                    case .failure(let error):
-                        print("방명록 작성 실패: \(error.localizedDescription)")
-                    }
-                }
-            }) {
+            print("방명록 작성")
+        }) {
             Text("방명록 작성")
                 .frame(maxWidth: 75, maxHeight: 27)
                 .background(Color.primary01)
@@ -130,18 +142,19 @@ struct DetailViewControl: View {
     }
     
     //MARK: - 아이템 아이콘 정의
+    
     //아이템들
     private var eventImage: some View {
         HStack(alignment: .center, spacing: 13) {
-            Image(getImageForBenefit(benefitName: "giftIcon"))
+            viewModel.saleBenefit
                 .resizable()
                 .frame(maxWidth: 15, maxHeight: 15)
             
-            Image(getImageForBenefit(benefitName: "coupon"))
+            viewModel.plusBenefit
                 .resizable()
                 .frame(maxWidth: 20, maxHeight: 15)
             
-            Image(getImageForBenefit(benefitName: "Union"))
+            viewModel.gitBeneft
                 .resizable()
                 .frame(maxWidth: 21, maxHeight: 15)
         }
@@ -149,25 +162,8 @@ struct DetailViewControl: View {
         .frame(maxWidth: 100, maxHeight: 25, alignment: .center)
     }
     
-    /// 아이템 이름 받아오기
-    /// - Parameter benefitName: 받아올 아이템 이름
-    /// - Returns: 이미지
-    func getImageForBenefit(benefitName: String) -> String {
-        let benefitsAvailable = StoreInformation.benefit
-        
-        switch benefitName {
-        case "giftIcon":
-            return benefitsAvailable.contains("giftIcon") ? "giftIcon" : "giftIcon2"
-        case "coupon":
-            return benefitsAvailable.contains("coupon") ? "coupon" : "coupon2"
-        case "Union":
-            return benefitsAvailable.contains("Union") ? "Union" : "Union2"
-        default:
-            return "defaultImage"
-        }
-    }
     
-    //MARK: - 장소 정보(설명, 시간, 길이)
+    //MARK: - 장소 정보(설명, 시간, 거리)
     
     private var groupspaceInfor: some View {
         HStack(alignment: .center, spacing: 40) {
@@ -179,7 +175,7 @@ struct DetailViewControl: View {
     
     /// 장소 설명 글
     private var spaceInfomation : some View{
-        Text(StoreInformation.info)
+        Text(viewModel.spaceDescript)
             .font(.sandol(type: .regular, size: 11))
             .foregroundStyle(Color(red: 0.85, green: 0.85, blue: 0.85))
             .multilineTextAlignment(.leading)
@@ -188,36 +184,34 @@ struct DetailViewControl: View {
     }
     
     private var count : some View {
-            VStack(alignment: .center, spacing: 2) {
-                HStack(alignment: .center, spacing: 3) {
-                    Icon.star2.image
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(maxWidth: 13, maxHeight: 13)
-                    
-                    Text(String(StoreInformation.stars))
-                        .frame(maxWidth: 42, maxHeight: 16, alignment: .leading)
-                        .font(.sandol(type: .bold, size: 11))
-                        .foregroundStyle(Color(red: 133 / 255.0, green: 135 / 255.0, blue: 152 / 255.0))
-                }
+        VStack(alignment: .center, spacing: 2) {
+            HStack(alignment: .center, spacing: 3) {
+                Icon.unstar.image
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(maxWidth: 13, maxHeight: 13)
+                
+                Text(String(viewModel.sapceStartPoint))
+                    .frame(maxWidth: 42, maxHeight: 16, alignment: .leading)
+                    .font(.sandol(type: .bold, size: 11))
+                    .foregroundStyle(Color(red: 133 / 255.0, green: 135 / 255.0, blue: 152 / 255.0))
+            }
+            
+            HStack(alignment: .center, spacing: 3) {
+                Icon.unDistance.image
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(maxWidth: 12, maxHeight: 12)
+                Text(formatDistance(viewModel.distance))
+                    .font(.sandol(type: .bold, size: 11))
+                    .foregroundStyle(Color(red: 133 / 255.0, green: 135 / 255.0, blue: 152 / 255.0))
+                    .frame(maxWidth: 42, maxHeight: 16, alignment: .leading)
                 
                 HStack(alignment: .center, spacing: 3) {
-                    Icon.distance2.image
+                    Icon.unTime.image
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .frame(width: 12, height: 12)
-                    Text(formatDistance(viewModel.distance))
-                        .font(.sandol(type: .bold, size: 11))
-                        .foregroundStyle(Color(red: 133 / 255.0, green: 135 / 255.0, blue: 152 / 255.0))
-                        .frame(maxWidth: 42, maxHeight: 16, alignment: .leading)
-                    
-                }
-                
-                HStack(alignment: .center, spacing: 3) {
-                    Icon.time2.image
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 10, height: 11)
+                        .frame(maxWidth: 10, maxHeight: 11)
                     
                     Text(formatEstimatedTime(viewModel.estimatedTime))
                         .font(.sandol(type: .bold, size: 11))
@@ -226,18 +220,17 @@ struct DetailViewControl: View {
                 }
                 
             }
-            .onAppear{
-                viewModel.locationManager.startUpdatingLocation()
-            }
         }
+    }
     
     func formatDistance(_ distance: Double) -> String {
-        if distance > 100 {
+        if (distance / 1000) > 100 {
             return "99km+"
         } else {
             return String(format: "%.1f km", distance / 1000)
         }
     }
+    
     func formatEstimatedTime(_ time: Double) -> String {
         let minutes = Int(round(time / 60))
         if minutes > 1000 {
@@ -246,75 +239,75 @@ struct DetailViewControl: View {
             return "\(minutes)분"
         }
     }
+        //MARK: - 좋아요 및 방명록 수
     
-    //MARK: - 좋아요 및 방명록 수
-    
-    private var groupCount: some View {
-        HStack(spacing: 9) {
-            likesCount
-            bookCount
+        private var groupCount: some View {
+            HStack(spacing: 9) {
+                likesCount
+                bookCount
+            }
         }
-    }
     
-    // 좋아요 수
-    private var likesCount : some View{
-        ZStack(alignment: .center) {
+        // 좋아요 수
+        private var likesCount : some View{
+            ZStack(alignment: .center) {
                 Rectangle()
                     .foregroundStyle(Color.chart)
                     .clipShape(.rect(cornerRadius: 19))
                     .frame(maxWidth: 65, maxHeight: 22)
-            HStack(spacing: 4) {
-                Icon.heartBold.image
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(maxWidth: 15, maxHeight: 15)
-                Text(viewModel.formattedReviewCount(StoreInformation.likes))
-                    .font(.sandol(type: .bold, size: 11))
-                    .foregroundStyle(Color.white)
-            }
-        }
-    }
-    
-    // 방명록 수
-    private var bookCount : some View{
-        ZStack(alignment: .center){
-            Rectangle()
-                .foregroundStyle(Color.textBlue)
-                .clipShape(.rect(cornerRadius: 19))
-                .frame(maxWidth: 55, maxHeight: 22)
-            HStack(spacing: 4) {
-                Icon.Subtract.image
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(maxWidth: 9, maxHeight: 11)
-                Text(viewModel.formattedReviewCount(StoreInformation.guestbook))
-                    .font(.sandol(type: .bold, size: 11))
-                    .foregroundStyle(Color(red: 36/255, green: 88/255, blue: 139/255))
-            }
-        }
-        
-    }
-    
-    
-    //MARK: - 스크롤 방명록 보기
-    private var guestBookGrid: some View {
-        ScrollView(.vertical, showsIndicators: false) {
-            LazyVGrid(columns: [GridItem(.flexible(minimum: 150), spacing: 10), GridItem(.flexible(minimum: 150), spacing: 100)], spacing: 13) {
-                // 안전하게 옵셔널을 처리하기 위해 옵셔널 바인딩 사용
-                if let informationList = self.viewModel.exploreDetailData?.information {
-                    ForEach(informationList, id: \.storeId) { information in
-                        GuestBookCard(viewModel: viewModel,GuestBookModel: GuestBookModel, StoreInformation: information)
-                            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 200)
-                    }
+                HStack(spacing: 4) {
+                    Icon.heartBold.image
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(maxWidth: 15, maxHeight: 15)
+                    Text(viewModel.formattedCount(viewModel.likeText))
+                        .font(.sandol(type: .bold, size: 11))
+                        .foregroundStyle(Color.white)
                 }
             }
         }
-        .frame(maxWidth: 300, maxHeight: .infinity, alignment: .center)
-    }
     
+        // 방명록 수
+        private var bookCount : some View{
+            ZStack(alignment: .center){
+                Rectangle()
+                    .foregroundStyle(Color.textBlue)
+                    .clipShape(.rect(cornerRadius: 19))
+                    .frame(maxWidth: 55, maxHeight: 22)
+                HStack(spacing: 4) {
+                    Icon.Subtract.image
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(maxWidth: 9, maxHeight: 11)
+                    Text(viewModel.formattedCount(viewModel.reviewText))
+                        .font(.sandol(type: .bold, size: 11))
+                        .foregroundStyle(Color(red: 36/255, green: 88/255, blue: 139/255))
+                }
+            }
+    
+        }
+    
+    //
+    //    //MARK: - 스크롤 방명록 보기
+    //    private var guestBookGrid: some View {
+    //        ScrollView(.vertical, showsIndicators: false) {
+    //            LazyVGrid(columns: [GridItem(.flexible(minimum: 150), spacing: 10), GridItem(.flexible(minimum: 150), spacing: 100)], spacing: 13) {
+    //                // 안전하게 옵셔널을 처리하기 위해 옵셔널 바인딩 사용
+    //                if let informationList = self.viewModel.exploreDetailData?.information {
+    //                    ForEach(informationList, id: \.storeId) { information in
+    //                        GuestBookCard(viewModel: viewModel,GuestBookModel: GuestBookModel, StoreInformation: information)
+    //                            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 200)
+    //                    }
+    //                }
+    //            }
+    //        }
+    //        .frame(maxWidth: 300, maxHeight: .infinity, alignment: .center)
+    //    }
+    //
+    //}
+    //
+    //
+    //
+    //
+    //
 }
-
-
-
-
-

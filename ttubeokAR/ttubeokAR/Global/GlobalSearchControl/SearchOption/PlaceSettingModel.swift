@@ -8,10 +8,10 @@
 import Foundation
 
 struct PlaceSettingsModel {
-    var selectionPlace: PlaceType
+    var selectionPlace: SearchPlaceType
 }
 
-enum PlaceType: String, CaseIterable {
+enum SearchPlaceType: String, CaseIterable {
     case all = "전체선택"
     case walkingTrail = "산책로"
     case cafe = "카페"

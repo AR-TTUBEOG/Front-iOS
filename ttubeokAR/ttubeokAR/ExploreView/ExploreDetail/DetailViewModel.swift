@@ -8,11 +8,13 @@
 import Foundation
 import CoreLocation
 import Moya
+import SwiftUI
 
 class DetailViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
     
     //MARK: - API
     private let provider = MoyaProvider<DetailExploreAPITarget>()
+    private let likeProvider = MoyaProvider<ExploreAPITarget>()
     
     //MARK: - Model
     var walkwayDetailDataModel: WalkwayDetailDataModel?
@@ -22,9 +24,10 @@ class DetailViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
     @Published var isFavorited: Bool = false
     @Published var distance: CLLocationDistance = 0
     @Published var estimatedTime: TimeInterval = 0
+    @Published var currentImageIndex = 0
     
-    // CLLocationManager 인스턴스를 사용
     var locationManager = CLLocationManager()
+    var placeType: PlaceTypeValue = .spot
     var currentLocation: CLLocation? {
         locationManager.location
     }
@@ -32,9 +35,11 @@ class DetailViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
     //MARK: - API Fetch 함수
     public func fetchDetails(for place: ExploreDetailInfor) {
         if place.placeType.spot {
+            self.placeType = .spot
             walkWayGet(get: place)
         }
         else if place.placeType.store {
+            self.placeType = .store
             storeGet(get: place)
         }
     }
@@ -84,8 +89,51 @@ class DetailViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
         print("방명록을 작성합니다.")
     }
     
-    public func formattedReviewCount(_ count: Int) -> String {
+    // MARK: - 방명록 및 좋아요 수
+    public func formattedCount(_ count: Int) -> String {
         return count > 999 ? "999+" : "\(count)"
+    }
+    
+    var reviewText: Int {
+        switch placeType {
+        case .spot:
+            return walkwayDetailDataModel?.information.guestbook ?? 0
+        case .store:
+            return storeDetailDataModel?.information.guestbookCount ?? 0
+        }
+    }
+    var likeText: Int {
+        switch placeType {
+        case .spot:
+            return walkwayDetailDataModel?.information.likes ?? 0
+        case .store:
+            return storeDetailDataModel?.information.likeCount ?? 0
+        }
+    }
+    
+    
+    
+    //MARK: - 사진 처리 함수
+    
+    var images: [String] {
+        switch placeType {
+        case .spot:
+            return walkwayDetailDataModel?.information.image ?? []
+        case .store:
+            return storeDetailDataModel?.information.image ?? []
+        }
+    }
+    
+    public func nextImage() {
+        if currentImageIndex < (images.count - 1) {
+            currentImageIndex += 1
+        }
+    }
+    
+    public func previousImage() {
+        if currentImageIndex > 0 {
+            currentImageIndex -= 1
+        }
     }
     
     //MARK: - 좋아요 버튼
@@ -96,19 +144,173 @@ class DetailViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
     
     public func toggleFavorite() {
         isFavorited.toggle()
-        if isFavorited {
-            //TODO: - 좋아요 post 날리기
-            print("북마크 버튼이 눌렸습니다.")
-        } else {
-            print("북마크 취소 버튼이 눌렸습니다.")
+        
+        if self.isFavorited {
+            sendLike()
         }
     }
     
-    private func sendFavorite() {
-        
-        
+    private func sendLike() {
+        switch placeType {
+        case .spot:
+            likeWalkWay(spotId: walkwayDetailDataModel?.information.id ?? 0)
+        case .store:
+            likeStore(storeId: storeDetailDataModel?.information.storeId ?? 0)
+        }
     }
     
+    private func likeWalkWay(spotId: Int) {
+        likeProvider.request(.likeWalkWay(spotId: spotId)) { result in
+            switch result {
+            case .success(let response):
+                do {
+                    let decodedResponse = try JSONDecoder().decode(WalkWayLikeModel.self, from: response.data)
+                    print(decodedResponse)
+                } catch {
+                    print("산책로 error")
+                }
+            case .failure(let error):
+                print("산책로 error : \(error)")
+            }
+        }
+    }
+    
+    private func likeStore(storeId: Int) {
+        likeProvider.request(.likeStoreData(storeId: storeId)) { result in
+            switch result {
+            case .success(let response):
+                do {
+                    let decodedResponse = try JSONDecoder().decode(StoreLikeModel.self, from: response.data)
+                    print(decodedResponse)
+                } catch {
+                    print("매장 error")
+                }
+            case .failure(let error):
+                print("매장 error: \(error)")
+            }
+        }
+    }
+    
+    //MARK: - 장소 이름
+    
+    var title: String {
+        switch placeType {
+        case .spot:
+            return walkwayDetailDataModel?.information.name ?? ""
+        case .store:
+            return storeDetailDataModel?.information.name ?? ""
+        }
+    }
+    
+    
+    //MARK: - 장소 혜택 처리 함수
+    
+    private func storeImage(benefitName: String) -> SwiftUI.Image {
+        if let storeBenefit = storeDetailDataModel?.information.benefit {
+            switch benefitName {
+            case "gift":
+                return storeBenefit.contains("GIFT") ? Icon.checkGift.image : Icon.nonGift.image
+            case "sale":
+                return storeBenefit.contains("SALE") ? Icon.checkCoupon.image : Icon.nonCoupon.image
+            default:
+                return storeBenefit.contains("PLUS") ? Icon.onePlusOne.image : Icon.unOnePlus.image
+            }
+        } else {
+            return Image(systemName: "photo")
+        }
+    }
+    
+    var gitBeneft: SwiftUI.Image {
+        switch placeType {
+        case .spot:
+            return Icon.nonGift.image
+        case .store:
+            return storeImage(benefitName: "GIFT")
+        }
+    }
+    
+    var saleBenefit: SwiftUI.Image {
+        switch placeType {
+        case .spot:
+            return Icon.nonCoupon.image
+        case .store:
+            return storeImage(benefitName: "SALE")
+        }
+    }
+    
+    var plusBenefit: SwiftUI.Image {
+        switch placeType {
+        case .spot:
+            return Icon.unOnePlus.image
+        case .store:
+            return storeImage(benefitName: "PLUS")
+        }
+    }
+    
+    //MARK: - 장소 설명
+    
+    var spaceDescript: String {
+        switch placeType {
+        case .spot:
+            return walkwayDetailDataModel?.information.info ?? ""
+        case .store:
+            return storeDetailDataModel?.information.info ?? ""
+        }
+    }
+    
+    //MARK: - 장소 별점 및 위도, 경도
+    
+    var sapceStartPoint: Float {
+        switch placeType {
+        case .spot:
+            return walkwayDetailDataModel?.information.stars ?? 0.0
+        case .store:
+            return storeDetailDataModel?.information.stars ?? 0.0
+        }
+    }
+    
+    private func typeDistanceAndTime() {
+        switch placeType {
+        case .spot:
+            walWayCalculateDistanceAndTime()
+        case .store:
+            marketCalculateDistanceAndTime()
+        }
+    }
+    
+    private func marketCalculateDistanceAndTime() {
+        guard let currentLocation = locationManager.location else { return }
+        
+        // 배열의 첫 번째 장소 정보를 사용
+        if let marketCalculateDistance = storeDetailDataModel?.information {
+            let storeLocation = CLLocation(latitude: CLLocationDegrees(marketCalculateDistance.latitude), longitude: CLLocationDegrees(marketCalculateDistance.longitude))
+            let distance = currentLocation.distance(from: storeLocation)
+            let marketSpeedPerMeterPerSecond: Double = 1.4 // 걷기 속도
+            self.estimatedTime = distance / marketSpeedPerMeterPerSecond
+        }
+    }
+    
+    private func walWayCalculateDistanceAndTime() {
+        guard let currentLocation = locationManager.location else { return }
+        
+        // 배열의 첫 번째 장소 정보를 사용
+        if let marketCalculateDistance = walkwayDetailDataModel?.information {
+            let storeLocation = CLLocation(latitude: CLLocationDegrees(marketCalculateDistance.latitude), longitude: CLLocationDegrees(marketCalculateDistance.longitude))
+            let distance = currentLocation.distance(from: storeLocation)
+            let walkingSpeedPerMeterPerSecond: Double = 1.4 // 걷기 속도
+            self.estimatedTime = distance / walkingSpeedPerMeterPerSecond
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        typeDistanceAndTime()
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if status == .authorizedWhenInUse || status == .authorizedAlways {
+            locationManager.startUpdatingLocation()
+        }
+    }
     
     
     // MARK: - distance Fuction
@@ -121,54 +323,4 @@ class DetailViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
         locationManager.requestWhenInUseAuthorization() // 위치 서비스 사용 권한 요청
         locationManager.startUpdatingLocation() //위치 업데이트
     }
-    
-//    //주어진 매장의 위치와 거리, 시간 계산 함수
-//    func calculateDistanceAndTime() {
-//        guard let currentLocation = locationManager.location else { return }
-//        
-//        // 배열의 첫 번째 장소 정보를 사용
-//        if let firstSpaceInfo = exploreDetailData?.information.first {
-//            let storeLocation = CLLocation(latitude: CLLocationDegrees(firstSpaceInfo.latitude), longitude: CLLocationDegrees(firstSpaceInfo.longitude))
-//            let distance = currentLocation.distance(from: storeLocation)
-//            let walkingSpeedPerMeterPerSecond: Double = 1.4 // 걷기 속도
-//            estimatedTime = distance / walkingSpeedPerMeterPerSecond
-//            // 여기서 estimatedTime을 사용하거나 업데이트 하는 로직 추가
-//        }
-//    }
-//    
-//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-//        calculateDistanceAndTime()
-//    }
-//    
-//    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-//        if status == .authorizedWhenInUse || status == .authorizedAlways {
-//            locationManager.startUpdatingLocation()
-//        }
-//    }
-//    
-//    
-//    
-//    // MARK: - APIViewModel
-//    // DetailDataModel를 서버로부터 받아오는 함수
-//    public func fetchExploreDetail(storeId: Int, completion: @escaping (Result<DetailDataModel, Error>) -> Void) {
-//        provider.request(.fetchExploreDetail(storeId: storeId)) { result in
-//            switch result {
-//            case .success(let response):
-//                do {
-//                    let responseData = try JSONDecoder().decode(DetailDataModel.self, from: response.data)
-//                    DispatchQueue.main.async {
-//                        self.exploreDetailData = responseData
-//                    }
-//                } catch {
-//                    DispatchQueue.main.async {
-//                        completion(.failure(error))
-//                    }
-//                }
-//            case .failure(let error):
-//                DispatchQueue.main.async {
-//                    completion(.failure(error))
-//                }
-//            }
-//        }
-//    }
-//}|
+}

@@ -11,7 +11,7 @@ import SwiftUI
 struct ExploreViewControl: View {
     
     // MARK: - Property
-    @StateObject var viewModel: ExploreViewModel
+    @StateObject var viewModel:  ExploreViewModel
     @StateObject var detailViewModel = DetailViewModel()
     @State private var showDetail = false
     
@@ -50,15 +50,11 @@ struct ExploreViewControl: View {
     // 추천 장소
     private func recommendedSpacesGrid(geometry: GeometryProxy) -> some View {
         ScrollView(.vertical) {
-            refreshable {
-                viewModel.fetchDateSearch(viewModel.currentSearchType, page: 1)
-            }
             LazyVGrid(columns: [GridItem(.flexible(minimum: 150), spacing: -8), GridItem(.flexible(minimum: 150), spacing: 15)], spacing: 25) {
                 ForEach(self.viewModel.exploreData?.information ?? [], id: \.self) { place in
-                    RecommendedSpaceCard(viewModel: viewModel, exploreDetailInfor: place)
+                    RecommendedSpaceCard(viewModel: viewModel, exploreDataInfor: place)
                         .frame(minWidth: 0, maxWidth: .infinity)
                         .onAppear {
-                            viewModel.exploreDetailInfor = place
                             if place == self.viewModel.exploreData?.information.last {
                                 viewModel.fetchDateSearch(viewModel.currentSearchType, page: viewModel.curretnPage + 1)
                             }
@@ -75,10 +71,8 @@ struct ExploreViewControl: View {
             .padding()
             .frame(maxWidth: .infinity)
         }
+        .refreshable {
+            viewModel.fetchDateSearch(viewModel.currentSearchType, page: 1)
+        }
     }
 }
-
-
-
-// MARK: - Preview
-

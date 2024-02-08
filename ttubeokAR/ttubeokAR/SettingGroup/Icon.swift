@@ -17,7 +17,6 @@ enum Icon: String {
     // MARK: - GlobalSearchBarControl
     case book = "book"
     case drink = "drink"
-    case logo = "logo"
     case option = "option"
     case restaurant = "restaurant"
     case search = "search"
@@ -34,7 +33,6 @@ enum Icon: String {
     case couponPresent = "couponPresent"
     case cross = "cross"
     case document = "document"
-    case game = "game"
     case headphonesGray = "headphonesGray"
     
     case headphonesPurple = "headphonesPurple"
@@ -47,7 +45,6 @@ enum Icon: String {
     case restaurant_map2 = "restaurant_map2"
     case star_filled = "star_filled"
     case star = "star"
-    case start = "start"
     
     case step = "step"
     case top = "top"
@@ -61,19 +58,26 @@ enum Icon: String {
     case spaceTest = "spaceTest"
     case starRating = "starRating"
     case time = "time"
-    case Vector = "Vector"
-    case Vector2 = "Vector2"
     case store = "store"
     case tree = "tree"
     case heartBold = "heartBold"
     case Subtract = "Subtract"
-    case star2 = "star2"
-    case time2 = "time2"
-    case distance2 = "distance2"
     case DetailViewtest = "DetailViewtest"
     case Setting = "Setting"
     case pressedheart = "pressedheart"
     case unpressedheart = "unpressedheart"
+    case unstar = "unstar"
+    case checkStart = "checkStart"
+    case checkTime = "checkTime"
+    case unTime = "unTime"
+    case unOnePlus = "unOnePlus"
+    case unDistance = "unDistance"
+    
+    // MARK: - DetailExploreView
+    case checkGift = "checkGift"
+    case nonGift = "nonGift"
+    case checkCoupon = "checkCoupon"
+    case nonCoupon = "nonCoupon"
     
     // MARK: - Login
     case warning = "nameWarning"
@@ -97,6 +101,8 @@ enum Icon: String {
     case ExploreTabButton = "ExploreTabButton"
     case mapTabButton = "mapTabButton"
     
+    //MARK: - Search
+    case searchLogo = "searchLogo"
     // MARK: - TtuDotBtn
     case AddLocation = "AddLocation"
     case ARBtn = "ARBtn"

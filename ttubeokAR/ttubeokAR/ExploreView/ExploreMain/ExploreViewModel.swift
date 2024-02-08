@@ -9,18 +9,13 @@ import Foundation
 import CoreLocation
 import Moya
 
-enum PlaceTypeValue {
-    case spot
-    case store
-    case none
-}
-
 class ExploreViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
     //MARK: - API
     private let provider = MoyaProvider<ExploreAPITarget>()
     private let searchProvider = MoyaProvider<SearchAPITarget>()
     
     //MARK: - Moodel
+    
     var exploreData: ExploreDataModel?
     var exploreDetailInfor: ExploreDetailInfor?
     
@@ -32,27 +27,22 @@ class ExploreViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
     }
     
     var favoriteImageName: String {
-        return isFavorited ? "Vector2" : "Vector"
+        return isFavorited ? "checkHeart" : "unCheckHeart"
     }
     
     var curretnPage = 1
-
+    
     @Published var isFavorited: Bool = false
     @Published var distance: CLLocationDistance = 0
     @Published var estimatedTime: TimeInterval = 0
-    @Published var placeType: PlaceTypeValue = .none
+    @Published var placeType: PlaceTypeValue? = nil
     @Published var currentSearchType: SearchType = .all
-    //MARK: - Init 함수
-    
-    public func updateDetailInfor(_ infor: ExploreDetailInfor) {
-        self.exploreDetailInfor = infor
-    }
     
     
     
     
     // MARK: - 장소 좋아요 호출 함수
-
+    
     /// 장소 타입에 따른 API 호출
     public func checkLike() {
         if self.isFavorited {
@@ -100,7 +90,7 @@ class ExploreViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
             case .success(let response):
                 do {
                     let decodedResponse = try JSONDecoder().decode(StoreLikeModel.self, from: response.data)
-                    
+                    print(decodedResponse)
                 } catch {
                     print("매장 error")
                 }
@@ -137,7 +127,7 @@ class ExploreViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
         }
         self.curretnPage = page
     }
-
+    
     //MARK: - 검색 타입에 따른 API 호출 함수
     
     public func resetPage() {
@@ -265,11 +255,11 @@ class ExploreViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
             let distance = currentLocation.distance(from: storeLocation)
             
             let walkingSpeedPerMeterPerSecond: Double = 1.4 // 걷기 속도
-            estimatedTime = distance / walkingSpeedPerMeterPerSecond
-            // 여기서 estimatedTime을 사용하거나 업데이트 하는 로직 추가
+            self.estimatedTime = distance / walkingSpeedPerMeterPerSecond
+            self.distance = distance
         }
     }
-    
+    //
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         calculateDistanceAndTime()
     }
@@ -282,4 +272,3 @@ class ExploreViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
     }
     
 }
-

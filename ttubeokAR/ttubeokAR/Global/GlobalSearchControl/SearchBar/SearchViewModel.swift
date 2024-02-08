@@ -29,7 +29,7 @@ class SearchViewModel: ObservableObject {
             return Image("book")
             
         case .exploreView:
-            return Image("logo")
+            return Icon.searchLogo.image
         }
     }
     
