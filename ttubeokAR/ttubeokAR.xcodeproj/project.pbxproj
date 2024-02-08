@@ -105,11 +105,21 @@
 		48FF93952B43BA0600202F45 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FF93942B43BA0600202F45 /* ContentView.swift */; };
 		48FF93972B43BA0700202F45 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 48FF93962B43BA0700202F45 /* Assets.xcassets */; };
 		48FF939A2B43BA0700202F45 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 48FF93992B43BA0700202F45 /* Preview Assets.xcassets */; };
+		6C0E64A32B73571200A238A7 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0E64A22B73571200A238A7 /* LocationManager.swift */; };
+		6C0E64A62B73574600A238A7 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0E64A52B73574600A238A7 /* Route.swift */; };
+		6C0E64AA2B73576400A238A7 /* RouteAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0E64A92B73576400A238A7 /* RouteAPI.swift */; };
+		6C0E64AC2B73577800A238A7 /* RouteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0E64AB2B73577800A238A7 /* RouteService.swift */; };
+		6C0E64AE2B73578600A238A7 /* RouteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0E64AD2B73578600A238A7 /* RouteViewModel.swift */; };
+		6C0E64B12B7359A400A238A7 /* Anno.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0E64B02B7359A400A238A7 /* Anno.swift */; };
+		6C0E64B52B7359C500A238A7 /* AnnoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0E64B42B7359C500A238A7 /* AnnoViewModel.swift */; };
+		6C0E64B72B735B7A00A238A7 /* DetailPlaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0E64B62B735B7A00A238A7 /* DetailPlaceView.swift */; };
 		6C7239E82B5BA7BA0082F12D /* NotiOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C7239E72B5BA7BA0082F12D /* NotiOption.swift */; };
 		6C7239EA2B5BA86A0082F12D /* NotiSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C7239E92B5BA86A0082F12D /* NotiSettingView.swift */; };
 		6C7239EF2B5BB7D00082F12D /* CustomToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C7239EE2B5BB7D00082F12D /* CustomToggle.swift */; };
 		6C7239F22B5C12E30082F12D /* ManagePlaceSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C7239F12B5C12E30082F12D /* ManagePlaceSettingView.swift */; };
 		6C7239F82B5C2AE10082F12D /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C7239F72B5C2AE10082F12D /* Place.swift */; };
+		6C76E8F92B73643500B42A65 /* TestMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C76E8F82B73643500B42A65 /* TestMap.swift */; };
+		6C7748022B74F8D800D26F22 /* AnnoButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C7748012B74F8D800D26F22 /* AnnoButtonView.swift */; };
 		6CAF06D32B5903B300526BC8 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CAF06D22B5903B300526BC8 /* Coordinator.swift */; };
 		6CC4DDB72B55512F0080E7E8 /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC4DDB62B55512F0080E7E8 /* NavigationBar.swift */; };
 		6CC4DDFF2B5687E80080E7E8 /* CouponView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC4DDFE2B5687E80080E7E8 /* CouponView.swift */; };
@@ -218,7 +228,14 @@
 		48FF93942B43BA0600202F45 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		48FF93962B43BA0700202F45 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		48FF93992B43BA0700202F45 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		6C6395232B590BBE00A20B1B /* TestMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestMapView.swift; sourceTree = "<group>"; };
+		6C0E64A22B73571200A238A7 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		6C0E64A52B73574600A238A7 /* Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
+		6C0E64A92B73576400A238A7 /* RouteAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteAPI.swift; sourceTree = "<group>"; };
+		6C0E64AB2B73577800A238A7 /* RouteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteService.swift; sourceTree = "<group>"; };
+		6C0E64AD2B73578600A238A7 /* RouteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteViewModel.swift; sourceTree = "<group>"; };
+		6C0E64B02B7359A400A238A7 /* Anno.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Anno.swift; sourceTree = "<group>"; };
+		6C0E64B42B7359C500A238A7 /* AnnoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnoViewModel.swift; sourceTree = "<group>"; };
+		6C0E64B62B735B7A00A238A7 /* DetailPlaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPlaceView.swift; sourceTree = "<group>"; };
 		6C7239E72B5BA7BA0082F12D /* NotiOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotiOption.swift; sourceTree = "<group>"; };
 		6C7239E92B5BA86A0082F12D /* NotiSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotiSettingView.swift; sourceTree = "<group>"; };
 		6C7239EC2B5BA9090082F12D /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
@@ -226,6 +243,8 @@
 		6C7239F12B5C12E30082F12D /* ManagePlaceSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagePlaceSettingView.swift; sourceTree = "<group>"; };
 		6C7239F32B5C2A720082F12D /* PlaceListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceListViewModel.swift; sourceTree = "<group>"; };
 		6C7239F72B5C2AE10082F12D /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
+		6C76E8F82B73643500B42A65 /* TestMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestMap.swift; sourceTree = "<group>"; };
+		6C7748012B74F8D800D26F22 /* AnnoButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnoButtonView.swift; sourceTree = "<group>"; };
 		6C77ECBB2B5A486700C56890 /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		6CAF06D12B58FCD200526BC8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6CAF06D22B5903B300526BC8 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
@@ -701,10 +720,14 @@
 		48FF93A22B43BA4500202F45 /* MapView */ = {
 			isa = PBXGroup;
 			children = (
+				6C0E64AF2B73599D00A238A7 /* Annotation */,
+				6C0E64A42B73573E00A238A7 /* Network */,
+				6C0E64A12B73570600A238A7 /* Location */,
 				6C6395252B590BFC00A20B1B /* Test */,
 				483612B02B4ECFD900E0B45A /* MapView.swift */,
 				483612B22B4ED00100E0B45A /* TestView.swift */,
 				6CAF06D22B5903B300526BC8 /* Coordinator.swift */,
+				6C0E64B62B735B7A00A238A7 /* DetailPlaceView.swift */,
 			);
 			path = MapView;
 			sourceTree = "<group>";
@@ -723,10 +746,39 @@
 			path = SettingGroup;
 			sourceTree = "<group>";
 		};
+		6C0E64A12B73570600A238A7 /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				6C0E64A22B73571200A238A7 /* LocationManager.swift */,
+			);
+			path = Location;
+			sourceTree = "<group>";
+		};
+		6C0E64A42B73573E00A238A7 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				6C0E64A52B73574600A238A7 /* Route.swift */,
+				6C0E64A92B73576400A238A7 /* RouteAPI.swift */,
+				6C0E64AB2B73577800A238A7 /* RouteService.swift */,
+				6C0E64AD2B73578600A238A7 /* RouteViewModel.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		6C0E64AF2B73599D00A238A7 /* Annotation */ = {
+			isa = PBXGroup;
+			children = (
+				6C0E64B02B7359A400A238A7 /* Anno.swift */,
+				6C0E64B42B7359C500A238A7 /* AnnoViewModel.swift */,
+				6C7748012B74F8D800D26F22 /* AnnoButtonView.swift */,
+			);
+			path = Annotation;
+			sourceTree = "<group>";
+		};
 		6C6395252B590BFC00A20B1B /* Test */ = {
 			isa = PBXGroup;
 			children = (
-				6C6395232B590BBE00A20B1B /* TestMapView.swift */,
+				6C76E8F82B73643500B42A65 /* TestMap.swift */,
 			);
 			path = Test;
 			sourceTree = "<group>";
@@ -997,8 +1049,11 @@
 				489E1DBF2B74484400DA37C8 /* SearchType.swift in Sources */,
 				487E38492B5AE04A0026599D /* KakaoLoginManager.swift in Sources */,
 				48CC6BCD2B6526560032A5E2 /* MarketPlaceRegister.swift in Sources */,
+				6C0E64AC2B73577800A238A7 /* RouteService.swift in Sources */,
+				6C76E8F92B73643500B42A65 /* TestMap.swift in Sources */,
 				6CAF06D32B5903B300526BC8 /* Coordinator.swift in Sources */,
 				485B30E62B709BF500023785 /* ImageSelectionButton.swift in Sources */,
+				6C0E64AA2B73576400A238A7 /* RouteAPI.swift in Sources */,
 				480448722B4B0D52008A4638 /* SearchViewModel.swift in Sources */,
 				481B909E2B6677F300D366A7 /* CloseCancelButton.swift in Sources */,
 				48FD30922B6F5E6800FB7E60 /* MarketPageContent.swift in Sources */,
@@ -1009,9 +1064,11 @@
 				48D88C312B5C288600A1B09E /* LoginViewModel.swift in Sources */,
 				483CB9602B732DC200938224 /* GameSettingSubTitle.swift in Sources */,
 				48E10EDC2B725B1600D6EECB /* BasketBallGameViewModel.swift in Sources */,
+				6C0E64A32B73571200A238A7 /* LocationManager.swift in Sources */,
 				481B90A42B66933400D366A7 /* WalkwayModel.swift in Sources */,
 				483513862B5A602C0072ADFE /* KakaoLogin.swift in Sources */,
 				48D192E62B71C68300A5EBE8 /* RoundedCorner.swift in Sources */,
+				6C0E64A62B73574600A238A7 /* Route.swift in Sources */,
 				483820E62B4BE86200C3FB14 /* MyTicketCommand.swift in Sources */,
 				6CC4DDB72B55512F0080E7E8 /* NavigationBar.swift in Sources */,
 				481EA2712B6F280200BAD5E0 /* SplashScreenView.swift in Sources */,
@@ -1034,6 +1091,7 @@
 				483820E22B4BE7C100C3FB14 /* ARCommand.swift in Sources */,
 				CA3DFFED2B6CE7C90007D2E6 /* ExploreAPITarget.swift in Sources */,
 				CA3A391A2B55753800BEB7DE /* RecommendedSpaceCard.swift in Sources */,
+				6C0E64B12B7359A400A238A7 /* Anno.swift in Sources */,
 				48E10ED32B72578E00D6EECB /* BasketBallGameRulesView.swift in Sources */,
 				486C2FEB2B592A4B00C88B04 /* NicknameSettingLogin.swift in Sources */,
 				488365F32B6FDFA100F4E397 /* MarketModel.swift in Sources */,
@@ -1041,6 +1099,9 @@
 				48ADCAA52B6645BD00765EDB /* SharedTabInfo.swift in Sources */,
 				CA3DFFF12B6E42AE0007D2E6 /* DetailExploreAPITarget.swift in Sources */,
 				48E10EDE2B725BD000D6EECB /* GiftDrawingGameViewModel.swift in Sources */,
+				6C7239ED2B5BA9090082F12D /* SettingViewModel.swift in Sources */,
+				6C0E64B52B7359C500A238A7 /* AnnoViewModel.swift in Sources */,
+				6C7239F42B5C2A720082F12D /* PlaceListViewModel.swift in Sources */,
 				48D88C332B5C396000A1B09E /* LoginViewCycle.swift in Sources */,
 				4835138A2B5A605F0072ADFE /* AppleLoginManager.swift in Sources */,
 				482DB6B72B5416FF005538DE /* PlaceSettingModel.swift in Sources */,
@@ -1066,6 +1127,7 @@
 				6CE46B092B69304C0030F323 /* QuitSettingView.swift in Sources */,
 				48D1CFF22B63FB5900CCD9E5 /* PlaceRegistrationView.swift in Sources */,
 				48CC73222B6E990D0055C278 /* UserSession.swift in Sources */,
+				6C7748022B74F8D800D26F22 /* AnnoButtonView.swift in Sources */,
 				48FF93932B43BA0600202F45 /* AppDelegate.swift in Sources */,
 				48FD30942B6F5F4C00FB7E60 /* MarketViewModel.swift in Sources */,
 				489BD8F12B4A40EE003382AE /* SearchButtonModel.swift in Sources */,
@@ -1073,6 +1135,9 @@
 				488FA7122B6510890030CE66 /* MarketSelectButton.swift in Sources */,
 				483820E82B4BE8E500C3FB14 /* AddLocationCommand.swift in Sources */,
 				6CC4DDFF2B5687E80080E7E8 /* CouponView.swift in Sources */,
+				6C0E64B72B735B7A00A238A7 /* DetailPlaceView.swift in Sources */,
+				6C0E64AE2B73578600A238A7 /* RouteViewModel.swift in Sources */,
+				CA82A9812B7266CD004E7683 /* GuestBookAPI.swift in Sources */,
 				48A59C182B6E2242009CF83E /* FinishButton.swift in Sources */,
 				488373C92B66B79D0036C0FD /* CustomTextField.swift in Sources */,
 				483CB9642B73329700938224 /* BasketBallGameBenefitsText.swift in Sources */,
