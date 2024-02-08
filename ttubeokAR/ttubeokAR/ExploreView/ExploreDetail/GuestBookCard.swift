@@ -10,14 +10,28 @@ import SwiftUI
 struct GuestBookCard : View {
     
     // MARK: - Property
-    @State var guestBook: GuestBookModel
+    var viewModel : DetailViewModel
+    let GuestBookModel : GuestBookModel
+    let StoreInformation : StoreInformation
+    
+    // 이미지 탭 여부 추적 변수
+    @State private var isImageTapped = false
     
     // MARK: - Body
     
     
     var body: some View {
-        
         allView
+            .onAppear{
+                viewModel.fetchExploreDetail(storeId: GuestBookModel.storeId) { result in
+                               switch result {
+                               case .success(let detailDataModel):
+                                   print("성공: \(detailDataModel)")
+                               case .failure(let error):
+                                   print("오류: \(error.localizedDescription)")
+                               }
+                           }
+                       }
     }
     
     
@@ -28,10 +42,22 @@ struct GuestBookCard : View {
         ZStack(alignment: .bottom) {
             GeometryReader { geometry in
                 Color.clear.ignoresSafeArea(.all)
+                    .blur(radius: isImageTapped ? 20 : 0) // 이미지 탭 시 배경 흐림 효과 적용
                 backGround
                     .position(x: geometry.size.width / 2, y: geometry.size.height / 1.83)
                 placeImage
                     .position(x: geometry.size.width / 2, y: geometry.size.height * 0.29)
+                    .onTapGesture {
+                                       self.isImageTapped.toggle()
+                                   }
+                                   .sheet(isPresented: $isImageTapped) {
+                                       // 전체 화면으로 이미지를 보여주는 뷰
+                                       Image(GuestBookModel.image)
+                                           .resizable()
+                                           .scaledToFit()
+                                           .frame(maxWidth: 315, maxHeight: 330)
+                                   }
+                
                 placeInfor
                     .position(x: geometry.size.width / 2, y: geometry.size.height * 0.76)
             }
@@ -64,13 +90,13 @@ struct GuestBookCard : View {
     }
         
     private var placeImage: some View {
-        Image(guestBook.image)
+        Image(GuestBookModel.image)
             .resizable()
             .frame(maxWidth: 103, maxHeight: 108)
     }
     
     private var nickName : some View{
-        Text(guestBook.userName)
+        Text(GuestBookModel.userName)
             .font(.sandol(type: .bold, size: 11))
             .multilineTextAlignment(.center)
             .foregroundStyle(Color(red: 0.91, green: 0.95, blue: 1))
@@ -89,7 +115,7 @@ struct GuestBookCard : View {
     }
     
     private var contentsDescript : some View{
-        Text(guestBook.content)
+        Text(GuestBookModel.content)
             .font(.sandol(type: .regular, size: 11))
             .multilineTextAlignment(.center)
             .foregroundStyle(Color(red: 0.91, green: 0.95, blue: 1))
@@ -98,7 +124,7 @@ struct GuestBookCard : View {
     
     private var stars: some View {
         HStack(spacing: 0) {
-            let starCount = Int(guestBook.stars) ?? 0
+            let starCount = Int(GuestBookModel.stars) ?? 0
             ForEach(0..<starCount, id: \.self) { _ in
                 Icon.star2.image
                     .frame(maxWidth: 13, maxHeight: 12)
@@ -108,24 +134,3 @@ struct GuestBookCard : View {
     
     
 }
-// MARK: - Preview
-#if DEBUG
-struct GuestBookCard_reviews: PreviewProvider {
-    static var previews: some View {
-        // 예시 데이터 생성
-        let sampleReview = GuestBookModel(
-            guestbookId: 1,
-            storeId: 1,
-            userId: 1,
-            content: "오늘도 즐거운 산책~!",
-            stars: "5",
-            image: "DetailViewtest",
-            userName: "메타몽"
-        )
-
-
-        GuestBookCard(guestBook: sampleReview)
-            .previewLayout(.sizeThatFits)
-    }
-}
-#endif
