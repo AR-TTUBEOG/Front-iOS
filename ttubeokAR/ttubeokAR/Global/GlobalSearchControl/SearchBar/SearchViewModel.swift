@@ -12,6 +12,7 @@ import SwiftUI
 class SearchViewModel: ObservableObject {
     
     //MARK: - Property
+    @Published var searchType: SearchType = .all
     @Published var searchText: String = ""
     @Published var selectedButtonIndex: Int? = 0
     @Published var buttons: [SearchButtonModel] = []
@@ -20,6 +21,7 @@ class SearchViewModel: ObservableObject {
             setupButton()
         }
     }
+    var exploreViewModel: ExploreViewModel?
     
     // MARK: - ChangeMainView
     var logoImage: Image {
@@ -28,7 +30,7 @@ class SearchViewModel: ObservableObject {
             return Image("book")
             
         case .exploreView:
-            return Image("logo")
+            return Icon.searchLogo.image
         }
     }
     
@@ -71,8 +73,7 @@ class SearchViewModel: ObservableObject {
                 SearchButtonModel(title: "전체 선택", buttonImage: "", action: self.selectAll),
                 SearchButtonModel(title: "최신순", buttonImage: "", action: self.sortByLatest),
                 SearchButtonModel(title: "거리순", buttonImage: "", action: self.sortByDistance),
-                SearchButtonModel(title: "추천순", buttonImage: "", action: self.sortByRecommendation),
-                SearchButtonModel(title: "방명록순", buttonImage: "", action: self.sortByGuestBook)
+                SearchButtonModel(title: "추천순", buttonImage: "", action: self.sortByRecommendation)
             ]
         }
     }
@@ -90,34 +91,39 @@ class SearchViewModel: ObservableObject {
         return searchText
     }
     
-    // TODO: - 구현 코드 작성해야할 부분
-    /*
-     추후에 하단 함수의 기능을 다시 재작성하여 구현할것!
-     */
     
-    //MARK: - SearchView 버트
+    
+    //MARK: - SearchView 버튼
+    
+    var searchTypeChanged: ((SearchType) -> Void)?
+    
+    public func updateSearchType(_ newType: SearchType) {
+        searchType = newType
+        searchTypeChanged?(newType)
+    }
+    
     public func search() {
         print("검색합니다.")
     }
     
     public func selectAll(){
-        print("전체 선택")
+        exploreViewModel?.currentSearchType = .all
+        print("전체 검색 버튼 누름")
     }
     
     public func sortByLatest(){
-        print("최신순 정렬")
+        exploreViewModel?.currentSearchType = .latest
+        print("최근 검색 버튼 누름")
     }
     
     public func sortByDistance(){
-        print("거리순 정렬")
+        exploreViewModel?.currentSearchType = .distance
+        print("거리순 검색 버튼 누름")
     }
     
     public func sortByRecommendation(){
-        print("추천순 정렬")
-    }
-    
-    public func sortByGuestBook(){
-        print("방명록 정렬")
+        exploreViewModel?.currentSearchType = .recommended
+        print("추천순 검색 버튼 누름")
     }
     
     //MARK: - MapView 간편 검색 버튼

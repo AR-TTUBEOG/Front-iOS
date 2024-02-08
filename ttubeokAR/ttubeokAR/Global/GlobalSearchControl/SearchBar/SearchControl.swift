@@ -14,6 +14,15 @@ struct SearchControl: View {
     // MARK: - Property
     @ObservedObject var viewModel: SearchViewModel
     @Binding var isShowingPopup: Bool
+    var exploreViewModel: ExploreViewModel
+    
+    init(viewModel: SearchViewModel, isShowingPopup: Binding<Bool>, exploreViewModel: ExploreViewModel) {
+        self._isShowingPopup = isShowingPopup
+        self.exploreViewModel = exploreViewModel
+        self.viewModel = viewModel
+        self.viewModel.exploreViewModel = exploreViewModel
+    }
+    
     
     
     // MARK: - Body

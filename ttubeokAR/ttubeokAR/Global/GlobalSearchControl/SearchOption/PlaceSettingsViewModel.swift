@@ -10,7 +10,7 @@ import Foundation
 class PlaceSettingsViewModel: ObservableObject {
     //MARK: - Property
     let maxSliderValue = 100.0
-    @Published var selectPlace: PlaceType?
+    @Published var selectPlace: SearchPlaceType? = nil
     
     //TODO: - 수정하기
     @Published var settings = PlaceSettingsModel(selectionPlace: .all)
@@ -39,7 +39,7 @@ class PlaceSettingsViewModel: ObservableObject {
     }
     
     //버튼에 따른 장소 값
-    public func updateSelectionPlace(_ place: PlaceType) {
+    public func updateSelectionPlace(_ place: SearchPlaceType) {
         settings.selectionPlace = place
     }
     
