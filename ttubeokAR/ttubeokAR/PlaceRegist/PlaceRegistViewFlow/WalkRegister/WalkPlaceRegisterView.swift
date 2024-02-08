@@ -25,9 +25,10 @@ struct WalkPlaceRegisterView: View {
     }
     
     private var allView: some View {
-        GeometryReader { geometry in
-            ZStack(alignment: .top) {
-                Color.background.ignoresSafeArea(.all)
+        ZStack(alignment: .top) {
+            GeometryReader { geometry in
+                backgroundLogo
+                    .offset(x: geometry.size.width / 5, y: geometry.size.height * 0.4)
                 VStack(alignment: .center, spacing: 35) {
                     PlaceRegisterNavigation(currentPage: viewModel.currentPageIndex, totalPages: 5, lastedSelectedTab: lastedSelectedTab)
                     WalkwayPageContent(viewModel: viewModel)
@@ -36,6 +37,14 @@ struct WalkPlaceRegisterView: View {
                     .position(x: geometry.size.width / 2, y: geometry.size.height * 0.93)
             }
         }
+        .background(Color.background.ignoresSafeArea(.all))
+    }
+    
+    private var backgroundLogo: some View {
+        Icon.backgroundLogo.image
+            .resizable()
+            .aspectRatio(contentMode: .fill)
+            .frame(maxWidth: 206, maxHeight: 300)
     }
     
     //MARK: - WalkPlaceRegisterView
@@ -86,9 +95,9 @@ struct WalkPlaceRegisterView: View {
 }
 
 struct WalkPlaceRegisterView_Previews: PreviewProvider {
-    static var previews: some View { 
+    static var previews: some View {
         WalkPlaceRegisterView(lastedSelectedTab: 1)
     }
 }
 
-                
+

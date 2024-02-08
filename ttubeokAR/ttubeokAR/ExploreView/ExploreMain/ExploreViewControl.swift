@@ -32,7 +32,7 @@ struct ExploreViewControl: View {
                 VStack(spacing:20){
                     mainImage
                     centerView(geometry: geometry)
-                        .onAppear {
+                        .onReceive(viewModel.$currentSearchType) { _ in
                             viewModel.fetchDataSearch(viewModel.currentSearchType, page: 1)
                         }
                 }

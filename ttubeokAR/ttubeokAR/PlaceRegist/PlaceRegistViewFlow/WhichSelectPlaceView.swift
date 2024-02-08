@@ -44,7 +44,7 @@ struct WhichSelectPlaceView: View {
     
     /// 배경 화면 설정
     private var backgroundView: some View {
-        Icon.PlaceBackground.image
+        Icon.RegisterBackground2.image
             .resizable()
             .aspectRatio(contentMode: .fill)
             .frame(maxWidth: 375, maxHeight: .infinity)
@@ -65,6 +65,7 @@ struct WhichSelectPlaceView: View {
         VStack(alignment: .center, spacing: 39) {
             CustomTitleView(
                 titleText: "어떤 장소를 \n 등록하시겠어요 ?",
+                titleRangeColor: Color.textBlue,
                 highlightText: ["등록"],
                 subtitleText: nil,
                 subtitleSize: nil,

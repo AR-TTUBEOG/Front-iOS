@@ -60,9 +60,8 @@ struct MainViewControl: View {
         ZStack(alignment: .center) {
             if selectedTab == 1 {
                 ExploreViewControl(viewModel: exploreViewModel)
-                EmptyView()
             } else if selectedTab == 2 {
-                MapView()
+                EmptyView()
             }
         }
     }
