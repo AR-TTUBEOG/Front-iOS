@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "emptyStar.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

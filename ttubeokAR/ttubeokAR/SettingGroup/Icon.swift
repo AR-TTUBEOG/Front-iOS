@@ -141,4 +141,10 @@ enum Icon: String {
     var image: Image {
         return Image(self.rawValue)
     }
+    //MARK: - GuestBook
+    case closeIcon = "closeIcon"
+    case ImagePlus = "ImagePlus"
+    case StarFilled = "StarFilled"
+    case emptyStar = "emptyStar"
+    case CommentIcon = "CommentIcon"
 }
