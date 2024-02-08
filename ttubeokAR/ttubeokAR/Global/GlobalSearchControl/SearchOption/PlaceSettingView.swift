@@ -88,7 +88,7 @@ struct PlaceSettingView: View {
     /// 장소 타입 버튼 종류
     private var placeTypeButton: some View {
         HStack(alignment: .center, spacing: 7) {
-            ForEach(PlaceType.allCases, id: \.self) { place in
+            ForEach(SearchPlaceType.allCases, id: \.self) { place in
                 Button(place.rawValue) {
                     viewModel.updateSelectionPlace(place)
                 }

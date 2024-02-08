@@ -9,18 +9,13 @@ import Foundation
 import CoreLocation
 import Moya
 
-enum PlaceTypeValue {
-    case spot
-    case store
-    case none
-}
-
 class ExploreViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
     //MARK: - API
-    
     private let provider = MoyaProvider<ExploreAPITarget>()
+    private let searchProvider = MoyaProvider<SearchAPITarget>()
     
     //MARK: - Moodel
+    
     var exploreData: ExploreDataModel?
     var exploreDetailInfor: ExploreDetailInfor?
     
@@ -32,45 +27,22 @@ class ExploreViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
     }
     
     var favoriteImageName: String {
-        return isFavorited ? "Vector2" : "Vector"
+        return isFavorited ? "checkHeart" : "unCheckHeart"
     }
+    
+    var curretnPage = 1
     
     @Published var isFavorited: Bool = false
     @Published var distance: CLLocationDistance = 0
     @Published var estimatedTime: TimeInterval = 0
-    @Published var placeType: PlaceTypeValue = .none
-    
-    //MARK: - Init 함수
-    
-    public func updateDetailInfor(_ infor: ExploreDetailInfor) {
-        self.exploreDetailInfor = infor
-    }
+    @Published var placeType: PlaceTypeValue? = nil
+    @Published var currentSearchType: SearchType = .all
     
     
-    //MARK: - API 호출 함수
     
-    
-    // 서버로부터 ExploreDataModel 데이터를 받아오는 함수
-    func fetchExploreData() {
-        provider.request(.fetchExploreData) { [weak self] result in
-            switch result {
-            case .success(let response):
-                do {
-                    let decodedData = try JSONDecoder().decode(ExploreDataModel.self, from: response.data)
-                    DispatchQueue.main.async {
-                        self?.exploreData = decodedData
-                    }
-                } catch {
-                    print("Decoding error: \(error)")
-                }
-            case .failure(let error):
-                print("Network error: \(error)")
-            }
-        }
-    }
     
     // MARK: - 장소 좋아요 호출 함수
-
+    
     /// 장소 타입에 따른 API 호출
     public func checkLike() {
         if self.isFavorited {
@@ -85,7 +57,7 @@ class ExploreViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
         
         switch self.placeType {
         case .spot:
-            likeStore(storeId: detailInfo.id)
+            likeWalkWay(spotId: detailInfo.id)
         case .store:
             likeStore(storeId: detailInfo.id)
         case .none:
@@ -102,7 +74,7 @@ class ExploreViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
             case .success(let response):
                 do {
                     let decodedResponse = try JSONDecoder().decode(WalkWayLikeModel.self, from: response.data)
-                    print("산책로 좋아요 성공 \(decodedResponse)")
+                    print(decodedResponse)
                 } catch {
                     print("산책로 error")
                 }
@@ -118,7 +90,7 @@ class ExploreViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
             case .success(let response):
                 do {
                     let decodedResponse = try JSONDecoder().decode(StoreLikeModel.self, from: response.data)
-                    print("매장 좋아요 성공 \(decodedResponse)")
+                    print(decodedResponse)
                 } catch {
                     print("매장 error")
                 }
@@ -127,6 +99,133 @@ class ExploreViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
             }
         }
     }
+    // MARK: - 페이징
+    
+    public func decisionSearchType(_ searchType: SearchType) {
+        switch searchType {
+        case .all:
+            self.currentSearchType = .all
+        case .latest:
+            self.currentSearchType = .latest
+        case .distance:
+            self.currentSearchType = .distance
+        case .recommended:
+            self.currentSearchType = .recommended
+        }
+    }
+    
+    public func fetchDataSearch(_ searchType: SearchType, page: Int) {
+        switch searchType {
+        case .all:
+            fetchExploreDataAll(page: page)
+        case .latest:
+            fetchExploreDataLatest(page: page)
+        case .distance:
+            fetchExploreDataDistance(page: page)
+        case .recommended:
+            fetchExploreDataRecommend(page: page)
+        }
+        self.curretnPage = page
+    }
+    
+    //MARK: - 검색 타입에 따른 API 호출 함수
+    
+    public func resetPage() {
+        curretnPage = 1
+    }
+    
+    public func fetchExploreDataAll(page: Int) {
+        searchProvider.request(.searchAll(page: page)) { [weak self] result in
+            switch result {
+            case .success(let response):
+                do {
+                    let decodedData = try JSONDecoder().decode(ExploreDataModel.self, from: response.data)
+                    DispatchQueue.main.async {
+                        if page == 1 {
+                            self?.exploreData = decodedData
+                        } else {
+                            self?.exploreData?.information.append(contentsOf: decodedData.information)
+                        }
+                        self?.curretnPage = page
+                    }
+                } catch {
+                    print("전체선택 error: \(error.localizedDescription)")
+                }
+            case .failure(let error):
+                print("전체 선택네트워크 error \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    public func fetchExploreDataLatest(page: Int) {
+        searchProvider.request(.searchLatest(page: page)) { [weak self] result in
+            switch result {
+            case .success(let response):
+                do {
+                    let decodedData = try JSONDecoder().decode(ExploreDataModel.self, from: response.data)
+                    DispatchQueue.main.async {
+                        if page == 1 {
+                            self?.exploreData = decodedData
+                        } else {
+                            self?.exploreData?.information.append(contentsOf: decodedData.information)
+                        }
+                        self?.curretnPage = page
+                    }
+                } catch {
+                    print("최신순 error: \(error.localizedDescription)")
+                }
+            case .failure(let error):
+                print("최신순 네트워크 error \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    public func fetchExploreDataDistance(page: Int) {
+        searchProvider.request(.searchDistance(page: page)) { [weak self] result in
+            switch result {
+            case .success(let response):
+                do {
+                    let decodedData = try JSONDecoder().decode(ExploreDataModel.self, from: response.data)
+                    DispatchQueue.main.async {
+                        if page == 1 {
+                            self?.exploreData = decodedData
+                        } else {
+                            self?.exploreData?.information.append(contentsOf: decodedData.information)
+                        }
+                        self?.curretnPage = page
+                    }
+                } catch {
+                    print("거리순 error: \(error.localizedDescription)")
+                }
+            case .failure(let error):
+                print("거리순 네트워크 error \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    public func fetchExploreDataRecommend(page: Int) {
+        searchProvider.request(.searchRecommend(page: page)) { [weak self] result in
+            switch result {
+            case .success(let response):
+                do {
+                    let decodedData = try JSONDecoder().decode(ExploreDataModel.self, from: response.data)
+                    DispatchQueue.main.async {
+                        if page == 1 {
+                            self?.exploreData = decodedData
+                        } else {
+                            self?.exploreData?.information.append(contentsOf: decodedData.information)
+                        }
+                        self?.curretnPage = page
+                    }
+                } catch {
+                    print("추천순 error: \(error.localizedDescription)")
+                }
+            case .failure(let error):
+                print("추천순 네트워크 error \(error.localizedDescription)")
+            }
+        }
+    }
+    
     
     
     // MARK: - Function
@@ -156,11 +255,11 @@ class ExploreViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
             let distance = currentLocation.distance(from: storeLocation)
             
             let walkingSpeedPerMeterPerSecond: Double = 1.4 // 걷기 속도
-            estimatedTime = distance / walkingSpeedPerMeterPerSecond
-            // 여기서 estimatedTime을 사용하거나 업데이트 하는 로직 추가
+            self.estimatedTime = distance / walkingSpeedPerMeterPerSecond
+            self.distance = distance
         }
     }
-    
+    //
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         calculateDistanceAndTime()
     }
@@ -173,4 +272,3 @@ class ExploreViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
     }
     
 }
-
