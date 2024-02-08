@@ -50,6 +50,8 @@ enum Icon: String {
     case top = "top"
     case trailMap = "trailMap"
     case waste = "waste"
+    case backgroundLogo = "backgroundLogo"
+    
     // MARK: - ExploreView
     
     case banner = "banner"

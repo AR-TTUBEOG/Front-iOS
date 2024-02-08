@@ -32,7 +32,7 @@ struct MainViewControl: View {
     /// selectedTab 초기화
     /// - Parameter selectedTab: 현재 선택된 탭 추적하여 값 전달 -> 뚜닷에 활용하기 위함
     init(selectedTab: Int = 1) {
-        _selectedTab = State(initialValue:  selectedTab)
+        _selectedTab = State(initialValue: selectedTab)
     }
     
     //MARK: Body
@@ -112,7 +112,7 @@ struct MainViewControl: View {
     
     /// 상단 검색 바(Map, Explore 뷰에 따라 달라진다)
     private var searchControl: some View {
-        SearchControl(viewModel: searchViewModel, isShowingPopup: $showSearchOptionButton)
+        SearchControl(viewModel: searchViewModel, isShowingPopup: $showSearchOptionButton, exploreViewModel: exploreViewModel)
     }
     
     

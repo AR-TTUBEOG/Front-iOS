@@ -19,6 +19,7 @@ struct ExploreViewControl: View {
     var body: some View {
         NavigationStack {
             allView
+                
         }
     }
     
@@ -30,11 +31,22 @@ struct ExploreViewControl: View {
                 Color.background.ignoresSafeArea()
                 VStack(spacing:20){
                     mainImage
-                    recommendedSpacesGrid(geometry: geometry)
+                    centerView(geometry: geometry)
+                        .onAppear {
+                            viewModel.fetchDataSearch(viewModel.currentSearchType, page: 1)
+                        }
                 }
                 .padding(.top,108.6)
             }
         }
+    }
+    
+    private var imgBackground: some View {
+        Icon.backgroundLogo.image
+            .resizable()
+            .frame(maxWidth: 287, maxHeight: 418)
+            .aspectRatio(contentMode: .fill)
+            .padding(.top, 10)
     }
     
     //뚜벅 메인페이지 슬로건
@@ -47,6 +59,15 @@ struct ExploreViewControl: View {
         
     }
     
+    
+    private func centerView(geometry: GeometryProxy)->  some View {
+        if let information = viewModel.exploreData?.information, !information.isEmpty {
+            return AnyView(recommendedSpacesGrid(geometry: geometry))
+        } else {
+            return AnyView(imgBackground)
+        }
+    }
+    
     // 추천 장소
     private func recommendedSpacesGrid(geometry: GeometryProxy) -> some View {
         ScrollView(.vertical) {
@@ -56,7 +77,7 @@ struct ExploreViewControl: View {
                         .frame(minWidth: 0, maxWidth: .infinity)
                         .onAppear {
                             if place == self.viewModel.exploreData?.information.last {
-                                viewModel.fetchDateSearch(viewModel.currentSearchType, page: viewModel.curretnPage + 1)
+                                viewModel.fetchDataSearch(viewModel.currentSearchType, page: viewModel.curretnPage + 1)
                             }
                         }
                         .onTapGesture {
@@ -72,7 +93,7 @@ struct ExploreViewControl: View {
             .frame(maxWidth: .infinity)
         }
         .refreshable {
-            viewModel.fetchDateSearch(viewModel.currentSearchType, page: 1)
+            viewModel.fetchDataSearch(viewModel.currentSearchType, page: 1)
         }
     }
 }

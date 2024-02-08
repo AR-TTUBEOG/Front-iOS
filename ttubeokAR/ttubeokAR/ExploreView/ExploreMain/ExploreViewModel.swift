@@ -114,7 +114,7 @@ class ExploreViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
         }
     }
     
-    public func fetchDateSearch(_ searchType: SearchType, page: Int) {
+    public func fetchDataSearch(_ searchType: SearchType, page: Int) {
         switch searchType {
         case .all:
             fetchExploreDataAll(page: page)
