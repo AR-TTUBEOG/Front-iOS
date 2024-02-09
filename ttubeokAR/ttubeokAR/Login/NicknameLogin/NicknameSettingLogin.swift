@@ -159,7 +159,7 @@ struct NicknameSettingLogin: View {
         Button(action: {
             if viewModel.isNicknameValid, viewModel.isNicknameAvailable == true {
                 transitionToNext()
-                saveNickname(newNickname: viewModel.nickname)
+                viewModel.saveNickname(newNickname: viewModel.nickname)
             }
         }) {
             Text("시작하기")
@@ -171,16 +171,6 @@ struct NicknameSettingLogin: View {
                 .multilineTextAlignment(.center)
                 .clipShape(.rect(cornerRadius: 19))
                 .shadow(color: .black.opacity(0.25), radius: 10, x: 0, y: 4)
-        }
-    }
-    
-    private func saveNickname(newNickname: String) {
-        if var session = keyChainManager.loadSession(for: "userSession") {
-            session.nickname = newNickname
-            let saved = keyChainManager.saveSession(session, for: "userSession")
-            if !saved {
-                print("닉네임 세션 실패")
-            }
         }
     }
 }

@@ -78,4 +78,9 @@ class KeyChainManager {
     public func deleteSession(for key: String) {
         delete(key: key)
     }
+    
+    public func getAccessToken(for key: String) -> String? {
+        guard let session = loadSession(for: key) else { return nil }
+        return session.accessToken
+    }
 }

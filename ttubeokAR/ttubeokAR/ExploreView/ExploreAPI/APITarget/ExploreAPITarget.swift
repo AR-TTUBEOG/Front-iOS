@@ -38,6 +38,7 @@ extension ExploreAPITarget: TargetType {
         case .fetchExploreData:
             return .get
         case .createBookMark:
+            return .post
         case .likeWalkWay:
             return .post
         case .likeStoreData:

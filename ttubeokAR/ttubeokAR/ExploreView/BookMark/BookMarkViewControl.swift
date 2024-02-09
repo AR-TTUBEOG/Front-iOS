@@ -125,7 +125,7 @@ struct GuestBookView: View {
         HStack(spacing: 8) {
             ForEach(0..<5, id: \.self) { index in
                 if index < viewModel.filledStarCount {
-                    Icon.StarFilled.image
+                    Icon.star_filled.image
                         .frame(maxWidth: 25, maxHeight: 25)
                         .onTapGesture {
                             viewModel.filledStarCount = index + 1

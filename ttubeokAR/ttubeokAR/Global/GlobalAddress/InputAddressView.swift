@@ -6,10 +6,13 @@
 //
 
 import SwiftUI
+import Moya
 
 struct InputAddressView<ViewModel: InputAddressProtocol & ObservableObject>: View {
     @ObservedObject var viewModel: ViewModel
     private let horizontalPadding: CGFloat = 15
+    let provider = MoyaProvider<NaverReverseGeocodingAPI>()
+    
     
     var body: some View {
         groupAddressInputs
@@ -19,11 +22,13 @@ struct InputAddressView<ViewModel: InputAddressProtocol & ObservableObject>: Vie
     private var addressInputTextField: some View {
         CustomTextField(text: $viewModel.address,
                         placeholder: "주소를 검색해주세요.",
-                        trailingHorizontalPadding: horizontalPadding + 35,
+                        fontSize: 20,
+                        trailingHorizontalPadding: horizontalPadding,
                         maxWidth: 275,
                         maxHeight: 45,
                         onSearch: {}
         )
+        .disabled(true)
     }
     
     /// 상세 주소 입력
@@ -43,7 +48,7 @@ struct InputAddressView<ViewModel: InputAddressProtocol & ObservableObject>: Vie
             HStack(alignment: .center, spacing: 8) {
                 addressInputTextField
                 Button(action: {
-                    print("hello")
+                    viewModel.searchAddress()
                 },
                        label: {
                     Icon.searchAddress.image

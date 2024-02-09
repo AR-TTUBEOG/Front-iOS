@@ -27,17 +27,33 @@ class NicknameSettingViewModel: ObservableObject {
             return
         }
         
-        provider.request(.checkNicname(nickname)) { [weak self] result in
+        guard let accessToken = KeyChainManager.stadard.getAccessToken(for: "userSession") else {
+            print("accessToken")
+            return
+        }
+        
+        provider.request(.checkNickname(nickname, token: accessToken)) { [weak self] result in
             switch result {
             case .success(let response):
                 do {
                     let nicknameRedundancy = try JSONDecoder().decode(NicknameRedundancyModel.self, from: response.data)
-                    self?.isNicknameAvailable = nicknameRedundancy.availability
+                    self?.isNicknameAvailable = nicknameRedundancy.information.isUsed
+                    print("중복검사 진행함")
                 } catch {
                     print("중복성 검사 반응 error : \(error.localizedDescription)")
                 }
             case .failure(let error):
                 print("요청 error : \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    public func saveNickname(newNickname: String) {
+        if var session = KeyChainManager.stadard.loadSession(for: "userSession") {
+            session.nickname = newNickname
+            let saved = KeyChainManager.stadard.saveSession(session, for: "userSession")
+            if !saved {
+                print("닉네임 세션 실패")
             }
         }
     }
