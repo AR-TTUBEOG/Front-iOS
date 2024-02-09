@@ -77,45 +77,6 @@ struct WalkwayPageContent: View {
     
     //MARK: - WalkwaySecondView
     
-    /// 두 번째 주소검색 커스텀 텍스트 필드
-    private var secondAddressInputTextField: some View {
-        CustomTextField(text: $viewModel.secondAddressName,
-                        placeholder: "주소를 검색해주세요.",
-                        trailingHorizontalPadding: horizontalPadding + 35,
-                        maxWidth: 275,
-                        maxHeight: 45,
-                        onSearch: {})
-    }
-    
-    /// 두 번째 상세 주소 입력
-    private var secondDetailAddressInputTextField: some View {
-        CustomTextField(text: $viewModel.secondDetailAddress,
-                        placeholder: "상세주소를 입력해주세요.",
-                        trailingHorizontalPadding: horizontalPadding + 35,
-                        maxWidth: 332,
-                        maxHeight: 45,
-                        onSearch: {})
-    }
-    
-    //TODO: - 버튼 처리 로직 필요
-    
-    private var secondBottomAddressInputs: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            HStack(alignment: .center, spacing: 8) {
-                secondAddressInputTextField
-                Button(action: {
-                    print("hello")
-                },
-                       label: {
-                    Icon.searchAddress.image
-                        .resizable()
-                        .frame(maxWidth: 48, maxHeight: 45)
-                })
-            }
-            secondDetailAddressInputTextField
-        }
-    }
-    
     /// 두 번째 안내글 뷰
     private var secondeView: some View {
         VStack(alignment: .leading, spacing: 35) {
@@ -128,7 +89,7 @@ struct WalkwayPageContent: View {
                             frameAlignment: .topLeading
             )
             
-            secondBottomAddressInputs
+            InputAddressView(viewModel: viewModel)
         }
         
     }

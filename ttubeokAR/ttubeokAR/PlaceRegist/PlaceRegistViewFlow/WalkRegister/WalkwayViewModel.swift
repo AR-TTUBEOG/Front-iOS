@@ -10,7 +10,14 @@ import SwiftUI
 import UIKit
 import PhotosUI
 
-class WalkwayViewModel: ObservableObject, ImageHandling {
+class WalkwayViewModel: ObservableObject, ImageHandling, InputAddressProtocol {
+    @Published var address: String = ""
+    @Published var detailAddress: String = ""
+    
+    public func searchAddress() {
+        <#code#>
+    }
+    
     
     
     
