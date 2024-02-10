@@ -24,7 +24,7 @@ struct InputAddressView<ViewModel: InputAddressProtocol & ObservableObject>: Vie
                         placeholder: "주소를 검색해주세요.",
                         fontSize: 20,
                         trailingHorizontalPadding: horizontalPadding,
-                        maxWidth: 275,
+                        maxWidth: 295,
                         maxHeight: 45,
                         onSearch: {}
         )
@@ -35,8 +35,8 @@ struct InputAddressView<ViewModel: InputAddressProtocol & ObservableObject>: Vie
     private var detailAddressInputTextField: some View {
         CustomTextField(text: $viewModel.detailAddress,
                         placeholder: "상세주소를 입력해주세요.",
-                        trailingHorizontalPadding: horizontalPadding + 35,
-                        maxWidth: 332,
+                        trailingHorizontalPadding: horizontalPadding,
+                        maxWidth: 355,
                         maxHeight: 45,
                         onSearch: {}
         )

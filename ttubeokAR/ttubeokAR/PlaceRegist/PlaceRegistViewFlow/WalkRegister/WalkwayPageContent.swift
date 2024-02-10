@@ -55,7 +55,7 @@ struct WalkwayPageContent: View {
     private var firstPlaceInputTextField: some View {
         CustomTextField(text: $viewModel.firstPlaceName,
                         placeholder: "예) 낙산공원",
-                        maxWidth: 345,
+                        maxWidth: 355,
                         maxHeight: 45,
                         onSearch: {})
     }
@@ -73,7 +73,6 @@ struct WalkwayPageContent: View {
             )
             firstPlaceInputTextField
         }
-        .frame(maxWidth: 340, maxHeight: 155)
     }
     
     //MARK: - WalkwaySecondView
@@ -119,7 +118,7 @@ struct WalkwayPageContent: View {
                             leadingHorizontalPadding: fourthHorizontalPadding,
                             trailingHorizontalPadding: fourthHorizontalPadding,
                             verticalPadding: fourthVerticalPadding,
-                            maxWidth: 314,
+                            maxWidth: 339,
                             maxHeight: 102,
                             onSearch: {},
                             alignment: .topLeading,
@@ -149,13 +148,14 @@ struct WalkwayPageContent: View {
                 .frame(maxWidth: 268, maxHeight: 16, alignment: .leading)
             
         }
-        .frame(maxWidth: 304, maxHeight: 27, alignment: .leading)
+        .frame(maxWidth: 324, maxHeight: 27, alignment: .leading)
     }
     
     /// 네 번째 예시 사진
     private var fourthExampleImage: some View {
         Icon.examplePlace.image
             .resizable()
+            .aspectRatio(contentMode: .fit)
             .frame(maxWidth: 326, maxHeight: 240)
     }
     
@@ -170,12 +170,14 @@ struct WalkwayPageContent: View {
                                 textAlignment: .leading,
                                 frameAlignment: .topLeading
                 )
+                
                 fourthWalkwayDescription
                 
                 VStack(alignment: .leading, spacing: 24) {
                     fourthInformationNotice
                     fourthExampleImage
                 }
+                .frame(maxWidth: 334, maxHeight: 263)
             }
         }
         .frame(maxWidth: 330)
