@@ -75,10 +75,11 @@ struct CustomTitleView: View {
     private var title: some View {
         VStack(alignment: .center, spacing: spacing) {
             Text(customAttributedSting(for: titleText, highlights: highlightText))
-                .font(.sandol(type: .bold, size: 28))
+                .font(.sandol(type: .bold, size: 30))
                 .frame(maxWidth: titleWidth, maxHeight: titleHeight, alignment: frameAlignment)
                 .foregroundStyle(Color.textPink)
                 .multilineTextAlignment(textAlignment)
+                .lineSpacing(2)
             
             if let subtitle = subtitleText {
                 Text(subtitle)

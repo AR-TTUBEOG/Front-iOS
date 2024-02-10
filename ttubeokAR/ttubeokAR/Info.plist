@@ -26,5 +26,7 @@
 	</array>
 	<key>NMFClientId</key>
 	<string>$(NMFClientId)</string>
+	<key>NMFClientSecret</key>
+	<string>$(NMFClientSecret)</string>
 </dict>
 </plist>

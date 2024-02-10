@@ -13,6 +13,8 @@ struct WalkPlaceRegisterView: View {
     //MARK: - Property
     @StateObject private var viewModel = WalkwayViewModel()
     @Environment(\.presentationMode) var presentationMode
+    @State private var keyboardVisible = false
+    
     var lastedSelectedTab: Int
     
     //MARK: - Body
@@ -20,21 +22,38 @@ struct WalkPlaceRegisterView: View {
         allView
             .navigationBarBackButtonHidden(true)
             .navigationDestination(isPresented: $viewModel.navigationToNextView) {
-                PlaceRegisterFinishView(lastedSelectedTab: lastedSelectedTab)
+                PlaceRegisterFinishView(viewModel: viewModel, lastedSelectedTab: lastedSelectedTab)
             }
     }
     
     private var allView: some View {
-        GeometryReader { geometry in
-            ZStack(alignment: .top) {
-                Color.background.ignoresSafeArea(.all)
-                VStack(alignment: .center, spacing: 35) {
-                    PlaceRegisterNavigation(currentPage: viewModel.currentPageIndex, totalPages: 5, lastedSelectedTab: lastedSelectedTab)
-                    WalkwayPageContent(viewModel: viewModel)
-                }
+        VStack(alignment: .center, spacing: 35) {
+            
+            PlaceRegisterNavigation(currentPage: viewModel.currentPageIndex, totalPages: 5, lastedSelectedTab: lastedSelectedTab)
+            WalkwayPageContent(viewModel: viewModel)
+            
+            Spacer()
+            
+            if !keyboardVisible{
                 changeViewButton
-                    .position(x: geometry.size.width / 2, y: geometry.size.height * 0.93)
+                    .padding(.bottom, 20)
             }
+        }
+        .background(Color.background.ignoresSafeArea(.all))
+        .onTapGesture {
+            self.keyboardResponsive()
+        }
+        .onAppear {
+            NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { _ in
+                keyboardVisible = true
+            }
+            
+            NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: .main) { _ in
+                keyboardVisible = false
+            }
+        }
+        .onDisappear {
+            NotificationCenter.default.removeObserver(self)
         }
     }
     
@@ -86,9 +105,9 @@ struct WalkPlaceRegisterView: View {
 }
 
 struct WalkPlaceRegisterView_Previews: PreviewProvider {
-    static var previews: some View { 
+    static var previews: some View {
         WalkPlaceRegisterView(lastedSelectedTab: 1)
     }
 }
 
-                
+

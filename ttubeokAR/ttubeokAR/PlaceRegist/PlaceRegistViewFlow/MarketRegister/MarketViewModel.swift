@@ -7,10 +7,23 @@
 
 import Foundation
 import SwiftUI
+import Moya
+import UIKit
 
-class MarketViewModel: ObservableObject, ImageHandling {
+
+class MarketViewModel: ObservableObject, ImageHandling, InputAddressProtocol, FinishViewProtocol {
     
     
+    
+    func searchAddress() {
+        print("hello")
+    }
+    
+    func finishPlaceRegist() {
+        print("hello")
+    }
+    
+
     
     //MARK: - Property
     @Published var marketModel = MarketModel()
@@ -25,6 +38,10 @@ class MarketViewModel: ObservableObject, ImageHandling {
     @Published var secondDetailAddress: String = ""
     @Published var thirdMarketTypeName: String = ""
     @Published var fifthMarketDescription: String = ""
+    
+    var titleText: String = "매장 등록이 \n완료되었습니다."
+    
+    var highlightText: String = "매장"
     
     //MARK: - Protocol
     
@@ -51,6 +68,17 @@ class MarketViewModel: ObservableObject, ImageHandling {
         images
     }
     
+    func imageToBase64String(img: UIImage) -> String? {
+        return "test"
+    }
+    
+    
+    //MARK: - CurrentAddress
+    
+    
+    @Published var address: String = ""
+    
+    @Published var detailAddress: String = ""
     
 }
 

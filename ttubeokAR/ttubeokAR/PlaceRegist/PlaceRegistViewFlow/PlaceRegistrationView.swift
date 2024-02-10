@@ -18,7 +18,7 @@ struct PlaceRegistrationView: View {
     var body: some View {
         NavigationStack {
             allView
-                .navigationDestination(isPresented: $showSelectPlaceView) {
+                .navigationDestination(isPresented:  $showSelectPlaceView) {
                     WhichSelectPlaceView(lastedSelectedTab: lastedSelectedTab)
                 }
             //TODO: - 버튼 커스텀하여 사용하기

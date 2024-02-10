@@ -36,8 +36,11 @@ struct WhichSelectPlaceView: View {
                 blackOpacityView
                 NavigationBar(lastedSelectedTab: lastedSelectedTab)
                 centerChoicePlace
-                changeViewButton
-                    .position(x: geometry.size.width / 2, y: geometry.size.height * 0.93)
+                VStack() {
+                    Spacer()
+                    changeViewButton
+                        .padding(.bottom, 20)
+                }
             }
         }
     }

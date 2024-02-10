@@ -14,8 +14,8 @@ struct MapView: View {
     
     var body: some View {
         ZStack{
-            NaverMap()
-                .ignoresSafeArea(.all, edges: .top)
+//            NaverMap()
+//                .ignoresSafeArea(.all, edges: .top)
             
         }
         .onAppear {
