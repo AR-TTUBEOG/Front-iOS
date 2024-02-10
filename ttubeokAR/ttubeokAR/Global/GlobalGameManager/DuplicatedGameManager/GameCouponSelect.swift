@@ -18,8 +18,8 @@ struct GameCouponSelect: View {
             makeCheckBtn(name: "1+1 쿠폰", img: Icon.gameOnePlus.image, id: 2)
             makeCheckBtn(name: "무료 쿠폰", img: Icon.gameBox.image, id: 3)
         }
-        .padding(.horizontal, 4)
-        .frame(maxWidth: 228, maxHeight: 107, alignment: .leading)
+        .padding(.leading, 20)
+        .frame(maxWidth: 260, maxHeight: 130, alignment: .leading)
         .background(Color(red: 0.25, green: 0.24, blue: 0.37))
         .clipShape(.rect(cornerRadius: 19))
         .overlay(
@@ -46,13 +46,13 @@ struct GameCouponSelect: View {
                 if self.selectedBtnID == selectID {
                     Icon.checkCircle.image
                         .resizable()
-                        .frame(maxWidth: 15, maxHeight: 15)
-                        .aspectRatio(contentMode: .fill)
+                        .aspectRatio(contentMode: .fit)
+                        .frame(maxWidth: 20, maxHeight: 20)
                     
                 } else {
                     Circle()
                         .fill(Color(red: 0.92, green: 0.90, blue: 0.97).opacity(0.30))
-                        .frame(maxWidth: 15, maxHeight: 15)
+                        .frame(maxWidth: 20, maxHeight: 20)
                         .overlay(
                             Circle()
                                 .inset(by: 0.50)
@@ -62,16 +62,23 @@ struct GameCouponSelect: View {
             })
             
             Text(title)
-                .frame(maxWidth: 50, maxHeight: 18, alignment: .bottom)
-                .font(.sandol(type: .bold, size: 12))
+                .frame(maxWidth: 70, maxHeight: 20, alignment: .bottom)
+                .font(.sandol(type: .bold, size: 13))
                 .foregroundStyle(Color.textPink)
             
             image
                 .resizable()
-                .frame(maxWidth: 15, maxHeight: 15)
-                .aspectRatio(contentMode: .fill)
+                .frame(maxWidth: 20, maxHeight: 20)
+                .aspectRatio(contentMode: .fit)
             
         }
-        .frame(maxWidth: 120, maxHeight: 18)
+        .frame(maxWidth: 140, maxHeight: 25)
+    }
+}
+
+struct GameCouponSelect_Preview: PreviewProvider {
+    static var previews: some View {
+        @State var select: Int? = 1
+        GameCouponSelect(selectedBtnID: $select)
     }
 }

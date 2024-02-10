@@ -7,24 +7,20 @@
 
 import SwiftUI
 
-struct BasketBallGameBenefitsText: View {
+struct GameBenefitsText: View {
     //MARK: - Property
-    @ObservedObject var viewModel: BasketBallGameViewModel
     
+    @Binding var text: String
     
     //MARK: - Body
     var body: some View {
         ZStack(alignment: .topLeading) {
             GameSettingSubTitle(title: "혜택 문구")
                 .offset(x: 13)
-            GameBenefitsTextField(text: $viewModel.benefitsText)
+            GameBenefitsTextField(text: $text)
                 .offset(y: 30)
         }
-        .frame(maxWidth: 260, maxHeight: 172)
+        .frame(maxWidth: 260, maxHeight: 170)
     }
     
-}
-
-#Preview {
-    BasketBallGameBenefitsText(viewModel: BasketBallGameViewModel())
 }

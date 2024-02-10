@@ -9,6 +9,8 @@ import Foundation
 
 class BasketBallGameViewModel: ObservableObject{
     
+    
+    
     //MARK: - 농구게임 게임 룰 설정
     @Published var timeLimit: Int =  30
     @Published var ballCount: Int = 5
@@ -19,7 +21,6 @@ class BasketBallGameViewModel: ObservableObject{
     
     //MARK: - 농구게임 혜택 쿠폰
     @Published var selectCoupon: Int? = nil
-    
     
     //MARK: - 제한 시간 조절
     public func increaseTime() {

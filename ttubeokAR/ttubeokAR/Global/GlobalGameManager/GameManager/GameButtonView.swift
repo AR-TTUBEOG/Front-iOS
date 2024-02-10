@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct gameButtonView: View {
+struct GameButtonView: View {
     
     //MARK: - Property
     let title: String

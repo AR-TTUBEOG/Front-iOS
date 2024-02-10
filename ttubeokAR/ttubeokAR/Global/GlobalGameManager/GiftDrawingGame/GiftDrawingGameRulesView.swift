@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-struct BasketBallGameRulesView: View {
+struct GiftDrawingGameRulesView: View {
     //MARK: - Property
-    @ObservedObject var viewModel: BasketBallGameViewModel
+    @ObservedObject var viewModel: GiftDrawingGameViewModel
     
     //MARK: - Body
     var body: some View {
@@ -25,7 +25,7 @@ struct BasketBallGameRulesView: View {
             settingGameRules
                 .offset(y: 30)
         }
-        .frame(maxWidth: 260, maxHeight: 172)
+        .frame(maxWidth: 260, maxHeight: 180)
     }
     
  
@@ -43,20 +43,10 @@ struct BasketBallGameRulesView: View {
                 .background(Color(red: 0.63, green: 0.62, blue: 0.95))
                 .frame(maxHeight: 0.5)
             
-            GameRulesTextView(label: "공 개수",
-                              onMinusTapped: { viewModel.decreaseBallCount() },
-                              valueLabel: "\(viewModel.ballCount)개",
-                              onPlustTapped: { viewModel.increaseBallCount() }
-            )
-            
-            Divider()
-                .background(Color(red: 0.63, green: 0.62, blue: 0.95))
-                .frame(maxHeight: 0.5)
-            
-            GameRulesTextView(label: "성공 개수",
-                              onMinusTapped: { viewModel.decreaseSuccessCount() },
-                              valueLabel: "\(viewModel.successCount)개",
-                              onPlustTapped: { viewModel.increaseSuccessCount() }
+            GameRulesTextView(label: "선물 개수",
+                              onMinusTapped: { viewModel.decreaseGiftCount() },
+                              valueLabel: "\(viewModel.giftCount)개",
+                              onPlustTapped: { viewModel.increaseGifCount() }
             )
         }
         .frame(maxWidth: 270, maxHeight: 143, alignment: .center)
@@ -68,9 +58,4 @@ struct BasketBallGameRulesView: View {
                 .stroke(Color.primary03, lineWidth: 0.5)
         )
     }
-}
-
-#Preview {
-    BasketBallGameRulesView(viewModel: BasketBallGameViewModel())
-        .previewLayout(.sizeThatFits)
 }

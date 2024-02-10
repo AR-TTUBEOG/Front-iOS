@@ -21,7 +21,7 @@ struct GameRulesTextView: View {
     private func makeText() -> some View {
         HStack(spacing: 35) {
             Text(self.label)
-                .font(.sandol(type: .regular, size: 12))
+                .font(.sandol(type: .regular, size: 13))
                 .frame(maxWidth: 58, maxHeight: 16, alignment: .center)
                 .foregroundStyle(Color.textPink)
             
@@ -39,7 +39,7 @@ struct GameRulesTextView: View {
                 
                 Text(valueLabel)
                     .frame(maxWidth: 70, maxHeight: 25)
-                    .font(.sandol(type: .regular, size: 12))
+                    .font(.sandol(type: .regular, size: 13))
                     .foregroundStyle(Color.textPink)
                     
                 

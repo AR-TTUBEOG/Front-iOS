@@ -23,7 +23,7 @@ struct GameBenefitsTextField: View {
         ZStack(alignment: .bottomTrailing) {
             CustomTextField(text: $text,
                             placeholder: "혜택 문구를 입력해주세요",
-                            fontSize: 14,
+                            fontSize: 13,
                             leadingHorizontalPadding: 18,
                             trailingHorizontalPadding: 18,
                             verticalPadding: 18,
@@ -36,7 +36,7 @@ struct GameBenefitsTextField: View {
             )
             
             Text("\(text.count) / 20")
-                .frame(maxWidth: 39, maxHeight: 14, alignment: .center)
+                .frame(maxWidth: 39, maxHeight: 13, alignment: .center)
                 .font(.sandol(type: .regular, size: 11))
                 .multilineTextAlignment(.center)
                 .foregroundStyle(Color.textPink)
