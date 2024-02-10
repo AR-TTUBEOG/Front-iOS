@@ -62,7 +62,7 @@ struct MainViewControl: View {
                 ExploreViewControl(viewModel: exploreViewModel)
                 EmptyView()
             } else if selectedTab == 2 {
-                MapView()
+                EmptyView()
             }
         }
     }
