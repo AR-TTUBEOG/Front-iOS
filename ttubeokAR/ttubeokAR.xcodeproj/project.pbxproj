@@ -84,7 +84,9 @@
 		48B21D0D2B77953500C26317 /* FinishViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B21D0C2B77953500C26317 /* FinishViewProtocol.swift */; };
 		48B21D152B77B5EF00C26317 /* GiftDrawingGameRulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B21D142B77B5EF00C26317 /* GiftDrawingGameRulesView.swift */; };
 		48B21D172B77B6FD00C26317 /* WheelGameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B21D162B77B6FD00C26317 /* WheelGameViewModel.swift */; };
-		48B21D192B77B72C00C26317 /* WheelGameRulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B21D182B77B72C00C26317 /* WheelGameRulesView.swift */; };
+		48B21D192B77B72C00C26317 /* WheelGameRulesSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B21D182B77B72C00C26317 /* WheelGameRulesSettingView.swift */; };
+		48B21D1B2B77D4C400C26317 /* WheelGamePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B21D1A2B77D4C400C26317 /* WheelGamePicker.swift */; };
+		48B21D1D2B77D78D00C26317 /* WheelGamePickerMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B21D1C2B77D78D00C26317 /* WheelGamePickerMenu.swift */; };
 		48B57FBB2B75CB62005965FD /* InputAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B57FBA2B75CB62005965FD /* InputAddressView.swift */; };
 		48B57FBE2B75CCCB005965FD /* InputAddressProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B57FBD2B75CCCB005965FD /* InputAddressProtocol.swift */; };
 		48B57FBF2B75D4EC005965FD /* AccountSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE46B062B680CD20030F323 /* AccountSettingView.swift */; };
@@ -233,7 +235,9 @@
 		48B21D0C2B77953500C26317 /* FinishViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishViewProtocol.swift; sourceTree = "<group>"; };
 		48B21D142B77B5EF00C26317 /* GiftDrawingGameRulesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiftDrawingGameRulesView.swift; sourceTree = "<group>"; };
 		48B21D162B77B6FD00C26317 /* WheelGameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WheelGameViewModel.swift; sourceTree = "<group>"; };
-		48B21D182B77B72C00C26317 /* WheelGameRulesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WheelGameRulesView.swift; sourceTree = "<group>"; };
+		48B21D182B77B72C00C26317 /* WheelGameRulesSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WheelGameRulesSettingView.swift; sourceTree = "<group>"; };
+		48B21D1A2B77D4C400C26317 /* WheelGamePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WheelGamePicker.swift; sourceTree = "<group>"; };
+		48B21D1C2B77D78D00C26317 /* WheelGamePickerMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WheelGamePickerMenu.swift; sourceTree = "<group>"; };
 		48B57FBA2B75CB62005965FD /* InputAddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputAddressView.swift; sourceTree = "<group>"; };
 		48B57FBD2B75CCCB005965FD /* InputAddressProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputAddressProtocol.swift; sourceTree = "<group>"; };
 		48B57FC52B75FAE8005965FD /* NaverReverseGeocodingAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverReverseGeocodingAPI.swift; sourceTree = "<group>"; };
@@ -512,7 +516,9 @@
 			isa = PBXGroup;
 			children = (
 				48B21D162B77B6FD00C26317 /* WheelGameViewModel.swift */,
-				48B21D182B77B72C00C26317 /* WheelGameRulesView.swift */,
+				48B21D182B77B72C00C26317 /* WheelGameRulesSettingView.swift */,
+				48B21D1A2B77D4C400C26317 /* WheelGamePicker.swift */,
+				48B21D1C2B77D78D00C26317 /* WheelGamePickerMenu.swift */,
 			);
 			path = WheelGame;
 			sourceTree = "<group>";
@@ -1147,6 +1153,7 @@
 				CAFAE8252B750B5100C20502 /* BookMarkViewModel.swift in Sources */,
 				485B30E62B709BF500023785 /* ImageSelectionButton.swift in Sources */,
 				6C0E64AA2B73576400A238A7 /* RouteAPI.swift in Sources */,
+				48B21D1B2B77D4C400C26317 /* WheelGamePicker.swift in Sources */,
 				480448722B4B0D52008A4638 /* SearchViewModel.swift in Sources */,
 				481B909E2B6677F300D366A7 /* CloseCancelButton.swift in Sources */,
 				48FD30922B6F5E6800FB7E60 /* MarketPageContent.swift in Sources */,
@@ -1193,6 +1200,7 @@
 				48E10ED32B72578E00D6EECB /* BasketBallGameRulesView.swift in Sources */,
 				486C2FEB2B592A4B00C88B04 /* NicknameSettingLogin.swift in Sources */,
 				488365F32B6FDFA100F4E397 /* MarketModel.swift in Sources */,
+				48B21D1D2B77D78D00C26317 /* WheelGamePickerMenu.swift in Sources */,
 				CA2513032B6290DC006D2EDF /* DetailDataModel.swift in Sources */,
 				48ADCAA52B6645BD00765EDB /* SharedTabInfo.swift in Sources */,
 				CA3DFFF12B6E42AE0007D2E6 /* DetailExploreAPITarget.swift in Sources */,
@@ -1244,7 +1252,7 @@
 				48A59C182B6E2242009CF83E /* FinishButton.swift in Sources */,
 				48B21D152B77B5EF00C26317 /* GiftDrawingGameRulesView.swift in Sources */,
 				488373C92B66B79D0036C0FD /* CustomTextField.swift in Sources */,
-				48B21D192B77B72C00C26317 /* WheelGameRulesView.swift in Sources */,
+				48B21D192B77B72C00C26317 /* WheelGameRulesSettingView.swift in Sources */,
 				483CB9642B73329700938224 /* GameBenefitsText.swift in Sources */,
 				481B90AA2B66A1B800D366A7 /* WalkwayPageContent.swift in Sources */,
 				485C83A22B70E3E6009D9B54 /* GameButtonView.swift in Sources */,

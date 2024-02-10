@@ -137,6 +137,7 @@ enum Icon: String {
     case gameBox = "gameBox"
     case gameCoupon = "gameCoupon"
     case gameOnePlus = "gameOnePlus"
+    case pickerBtn = "pickerBtn"
     
     var image: Image {
         return Image(self.rawValue)

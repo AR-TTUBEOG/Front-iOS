@@ -43,18 +43,6 @@ struct WalkPlaceRegisterView: View {
         .onTapGesture {
             self.keyboardResponsive()
         }
-        .onAppear {
-            NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { _ in
-                keyboardVisible = true
-            }
-            
-            NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: .main) { _ in
-                keyboardVisible = false
-            }
-        }
-        .onDisappear {
-            NotificationCenter.default.removeObserver(self)
-        }
     }
     
     //MARK: - WalkPlaceRegisterView
