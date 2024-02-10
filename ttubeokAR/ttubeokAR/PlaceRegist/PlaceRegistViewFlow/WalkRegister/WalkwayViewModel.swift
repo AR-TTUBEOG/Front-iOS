@@ -11,7 +11,7 @@ import UIKit
 import PhotosUI
 import Moya
 
-class WalkwayViewModel: ObservableObject, ImageHandling, InputAddressProtocol {
+class WalkwayViewModel: ObservableObject, ImageHandling, InputAddressProtocol, FinishViewProtocol {
     
     //MARK: - Property
     @Published var requestWalwayRegistModel: RequestWalwayRegistModel?
@@ -26,6 +26,10 @@ class WalkwayViewModel: ObservableObject, ImageHandling, InputAddressProtocol {
     @Published var fourthWalkwayDescription: String = ""
     @Published var currentLocation: CLLocation?
     
+    var titleText: String = "산책스팟 등록이 \n완료되었습니다."
+    
+    var highlightText: String = "산책스팟"
+
     
     //MARK: - ImageFunction
     /// 앨범 또는 카메라에서 사진을 가져와 추가하는 로직
@@ -146,6 +150,7 @@ class WalkwayViewModel: ObservableObject, ImageHandling, InputAddressProtocol {
     private func matchWalkwayRegisterData() {
         saveStringImage()
         self.requestWalwayRegistModel = createParameters()
+        print("match완료")
     }
     
     
@@ -153,9 +158,4 @@ class WalkwayViewModel: ObservableObject, ImageHandling, InputAddressProtocol {
         matchWalkwayRegisterData()
         sendDataWalkwayInfo()
     }
-    
-    
-    
-    
-    
 }

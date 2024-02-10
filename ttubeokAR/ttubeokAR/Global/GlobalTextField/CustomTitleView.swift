@@ -79,6 +79,7 @@ struct CustomTitleView: View {
                 .frame(maxWidth: titleWidth, maxHeight: titleHeight, alignment: frameAlignment)
                 .foregroundStyle(Color.textPink)
                 .multilineTextAlignment(textAlignment)
+                .lineSpacing(2)
             
             if let subtitle = subtitleText {
                 Text(subtitle)

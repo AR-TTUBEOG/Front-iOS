@@ -21,7 +21,7 @@ struct RequestWalwayRegistModel {
 
 struct ResponseWalwayRegistModel: Codable {
     var check: Bool
-    var inforamtion: WalwayRegistInfor
+    var information: WalwayRegistInfor
 }
 
 struct WalwayRegistInfor: Codable {

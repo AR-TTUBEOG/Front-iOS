@@ -22,7 +22,7 @@ struct WalkPlaceRegisterView: View {
         allView
             .navigationBarBackButtonHidden(true)
             .navigationDestination(isPresented: $viewModel.navigationToNextView) {
-                PlaceRegisterFinishView(lastedSelectedTab: lastedSelectedTab)
+                PlaceRegisterFinishView(viewModel: viewModel, lastedSelectedTab: lastedSelectedTab)
             }
     }
     

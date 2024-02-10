@@ -18,19 +18,18 @@ struct PlaceRegisterFinishView<ViewModel: FinishViewProtocol & ObservableObject>
     }
     
     private var allView: some View {
-            ZStack(alignment: .top) {
-                Color.background.ignoresSafeArea(.all)
-                VStack {
-                    finishTitle
-                        .padding(.top, 100)
-                    
-                    Spacer()
-                    
-                    FinishButton(viewModel: viewModel, lastedSelectedTab: lastedSelectedTab)
-                        .padding(.bottom, 20)
-                }
-            }
+        VStack {
+            finishTitle
+                .padding(.top, 100)
+            
+            Spacer()
+            
+            FinishButton(viewModel: viewModel, lastedSelectedTab: lastedSelectedTab)
+                .padding(.bottom, 20)
         }
+        .frame(maxWidth: .infinity)
+        .background(Color.background.ignoresSafeArea(.all))
+    }
     
     private var finishTitle: some View {
         VStack(alignment: .center, spacing: 35) {
@@ -49,5 +48,11 @@ struct PlaceRegisterFinishView<ViewModel: FinishViewProtocol & ObservableObject>
             .frame(maxWidth: 330, maxHeight: 200)
         }
         .frame(maxWidth: 278, maxHeight: 300)
+    }
+}
+
+struct PlaceRegisterFinishView_Previews: PreviewProvider {
+    static var previews: some View {
+        PlaceRegisterFinishView(viewModel: WalkwayViewModel(), lastedSelectedTab: 1)
     }
 }
