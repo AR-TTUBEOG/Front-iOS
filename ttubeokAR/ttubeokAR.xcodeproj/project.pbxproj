@@ -50,7 +50,7 @@
 		483CB9622B732F4A00938224 /* GameBenefitsTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483CB9612B732F4A00938224 /* GameBenefitsTextField.swift */; };
 		483CB9642B73329700938224 /* BasketBallGameBenefitsText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483CB9632B73329700938224 /* BasketBallGameBenefitsText.swift */; };
 		4844E13F2B5A243700E6619C /* Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4844E13E2B5A243700E6619C /* Icon.swift */; };
-		4850B00F2B766FAB00F8CD90 /* TestLo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4850B00E2B766FAB00F8CD90 /* TestLo.swift */; };
+		4850B00F2B766FAB00F8CD90 /* BaseLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4850B00E2B766FAB00F8CD90 /* BaseLocationManager.swift */; };
 		485B30E62B709BF500023785 /* ImageSelectionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485B30E52B709BF500023785 /* ImageSelectionButton.swift */; };
 		485B30EB2B70A9E300023785 /* GameManagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485B30EA2B70A9E300023785 /* GameManagerView.swift */; };
 		485C83A22B70E3E6009D9B54 /* gameButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485C83A12B70E3E6009D9B54 /* gameButtonView.swift */; };
@@ -78,6 +78,7 @@
 		48A59C182B6E2242009CF83E /* FinishButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A59C172B6E2242009CF83E /* FinishButton.swift */; };
 		48A6C6B62B5F800900CFF763 /* KeyChainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A6C6B52B5F800900CFF763 /* KeyChainManager.swift */; };
 		48ADCAA52B6645BD00765EDB /* SharedTabInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48ADCAA42B6645BD00765EDB /* SharedTabInfo.swift */; };
+		48AFE30E2B7705B80032F0CE /* ReverseGeocodingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AFE30D2B7705B80032F0CE /* ReverseGeocodingService.swift */; };
 		48B57FBB2B75CB62005965FD /* InputAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B57FBA2B75CB62005965FD /* InputAddressView.swift */; };
 		48B57FBE2B75CCCB005965FD /* InputAddressProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B57FBD2B75CCCB005965FD /* InputAddressProtocol.swift */; };
 		48B57FBF2B75D4EC005965FD /* AccountSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE46B062B680CD20030F323 /* AccountSettingView.swift */; };
@@ -197,7 +198,7 @@
 		483CB9612B732F4A00938224 /* GameBenefitsTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBenefitsTextField.swift; sourceTree = "<group>"; };
 		483CB9632B73329700938224 /* BasketBallGameBenefitsText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketBallGameBenefitsText.swift; sourceTree = "<group>"; };
 		4844E13E2B5A243700E6619C /* Icon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icon.swift; sourceTree = "<group>"; };
-		4850B00E2B766FAB00F8CD90 /* TestLo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestLo.swift; sourceTree = "<group>"; };
+		4850B00E2B766FAB00F8CD90 /* BaseLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseLocationManager.swift; sourceTree = "<group>"; };
 		485B30E52B709BF500023785 /* ImageSelectionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSelectionButton.swift; sourceTree = "<group>"; };
 		485B30EA2B70A9E300023785 /* GameManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManagerView.swift; sourceTree = "<group>"; };
 		485C83A12B70E3E6009D9B54 /* gameButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gameButtonView.swift; sourceTree = "<group>"; };
@@ -220,6 +221,7 @@
 		48A59C172B6E2242009CF83E /* FinishButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishButton.swift; sourceTree = "<group>"; };
 		48A6C6B52B5F800900CFF763 /* KeyChainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainManager.swift; sourceTree = "<group>"; };
 		48ADCAA42B6645BD00765EDB /* SharedTabInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedTabInfo.swift; sourceTree = "<group>"; };
+		48AFE30D2B7705B80032F0CE /* ReverseGeocodingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReverseGeocodingService.swift; sourceTree = "<group>"; };
 		48B57FBA2B75CB62005965FD /* InputAddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputAddressView.swift; sourceTree = "<group>"; };
 		48B57FBD2B75CCCB005965FD /* InputAddressProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputAddressProtocol.swift; sourceTree = "<group>"; };
 		48B57FC52B75FAE8005965FD /* NaverReverseGeocodingAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverReverseGeocodingAPI.swift; sourceTree = "<group>"; };
@@ -405,6 +407,7 @@
 		483820DA2B4BE5A900C3FB14 /* Global */ = {
 			isa = PBXGroup;
 			children = (
+				48AFE30A2B77024B0032F0CE /* NaverGeoCoding */,
 				48B57FBC2B75CC9C005965FD /* GlobalAddress */,
 				485B30E92B70A9C900023785 /* GlobalGameManager */,
 				488365F42B6FE22B00F4E397 /* GlobalImagePicker */,
@@ -595,13 +598,22 @@
 			path = KeyChain;
 			sourceTree = "<group>";
 		};
+		48AFE30A2B77024B0032F0CE /* NaverGeoCoding */ = {
+			isa = PBXGroup;
+			children = (
+				48B57FC52B75FAE8005965FD /* NaverReverseGeocodingAPI.swift */,
+				48B57FC92B761025005965FD /* ReverseGeoCodingData.swift */,
+				48AFE30D2B7705B80032F0CE /* ReverseGeocodingService.swift */,
+			);
+			path = NaverGeoCoding;
+			sourceTree = "<group>";
+		};
 		48B57FBC2B75CC9C005965FD /* GlobalAddress */ = {
 			isa = PBXGroup;
 			children = (
 				48B57FBA2B75CB62005965FD /* InputAddressView.swift */,
 				48B57FBD2B75CCCB005965FD /* InputAddressProtocol.swift */,
-				48B57FC52B75FAE8005965FD /* NaverReverseGeocodingAPI.swift */,
-				48B57FC92B761025005965FD /* ReverseGeoCodingData.swift */,
+				4850B00E2B766FAB00F8CD90 /* BaseLocationManager.swift */,
 			);
 			path = GlobalAddress;
 			sourceTree = "<group>";
@@ -624,7 +636,6 @@
 				481B90A32B66933400D366A7 /* WalkwayModel.swift */,
 				481B90A52B66940500D366A7 /* WalkwayViewModel.swift */,
 				481B90A92B66A1B800D366A7 /* WalkwayPageContent.swift */,
-				4850B00E2B766FAB00F8CD90 /* TestLo.swift */,
 			);
 			path = WalkRegister;
 			sourceTree = "<group>";
@@ -1108,7 +1119,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				48B57FC12B75D506005965FD /* ExploreDataModel.swift in Sources */,
-				4850B00F2B766FAB00F8CD90 /* TestLo.swift in Sources */,
+				4850B00F2B766FAB00F8CD90 /* BaseLocationManager.swift in Sources */,
 				48B57FC02B75D4F0005965FD /* PopupModifier.swift in Sources */,
 				48B57FBF2B75D4EC005965FD /* AccountSettingView.swift in Sources */,
 				48249D962B7527B5002849B3 /* SettingViewModel.swift in Sources */,
@@ -1117,6 +1128,7 @@
 				481EA2722B6F339700BAD5E0 /* CustomTitleView.swift in Sources */,
 				48FF93952B43BA0600202F45 /* ContentView.swift in Sources */,
 				489E1DBF2B74484400DA37C8 /* SearchType.swift in Sources */,
+				48AFE30E2B7705B80032F0CE /* ReverseGeocodingService.swift in Sources */,
 				487E38492B5AE04A0026599D /* KakaoLoginManager.swift in Sources */,
 				48CC6BCD2B6526560032A5E2 /* MarketPlaceRegister.swift in Sources */,
 				6C0E64AC2B73577800A238A7 /* RouteService.swift in Sources */,

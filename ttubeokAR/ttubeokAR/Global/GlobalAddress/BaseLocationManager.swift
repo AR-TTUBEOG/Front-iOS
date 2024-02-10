@@ -8,8 +8,8 @@
 import Foundation
 import CoreLocation
 
-class LocationManagerA: NSObject, CLLocationManagerDelegate {
-    static let shared = LocationManagerA()
+class BaseLocationManager: NSObject, CLLocationManagerDelegate {
+    static let shared = BaseLocationManager()
 
     private let locationManager = CLLocationManager()
     var currentLocation: CLLocation?
@@ -18,9 +18,6 @@ class LocationManagerA: NSObject, CLLocationManagerDelegate {
         super.init()
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-    }
-
-    func requestLocationAuthorization() {
         locationManager.requestWhenInUseAuthorization()
     }
 
@@ -31,13 +28,16 @@ class LocationManagerA: NSObject, CLLocationManagerDelegate {
     func stopUpdatingLocation() {
         locationManager.stopUpdatingLocation()
     }
+    
+    func getCurrentLocation() -> CLLocation? {
+        return locationManager.location
+    }
 
-    // CLLocationManagerDelegate
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         currentLocation = locations.last
     }
 
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        // Handle error
+        print("LocationManger: \(error)")
     }
 }

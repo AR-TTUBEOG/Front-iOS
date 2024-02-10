@@ -23,8 +23,8 @@ class WalkwayViewModel: ObservableObject, ImageHandling, InputAddressProtocol {
     //MARK: - saveTextInputs
     @Published var firstPlaceName: String = ""
     @Published var fourthWalkwayDescription: String = ""
-    @Published var address: String = ""
-    @Published var detailAddress: String = ""
+
+    @Published var currentLocation: CLLocation?
     
     
     //MARK: - ImageFunction
@@ -54,6 +54,8 @@ class WalkwayViewModel: ObservableObject, ImageHandling, InputAddressProtocol {
         }
     }
     
+    /// 저장된 이미지 얻기
+    /// - Returns: 이미지 리턴
     func getImages() -> [UIImage] {
         images
     }
@@ -61,76 +63,23 @@ class WalkwayViewModel: ObservableObject, ImageHandling, InputAddressProtocol {
     //MARK: - currentAddress Function
     
     
-    @Published var currentLocation: CLLocation?
-    @Published var errorMessage: String?
-    let provider = MoyaProvider<NaverReverseGeocodingAPI>()
-    
-    private var locationManger = LocationManagerA.shared
+    @Published var address: String = ""
+    @Published var detailAddress: String = ""
     
     
-    init() {
-        LocationManagerA.shared.requestLocationAuthorization()
-        
-    }
-    
+    /// 현재 버튼을 눌러 위치 활성화하기
     public func searchAddress() {
-        LocationManagerA.shared.startUpdatingLocation()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { // 위치 정보를 받기 위해 약간의 지연을 줍니다.
-            self.currentLocation = LocationManagerA.shared.currentLocation
-            LocationManagerA.shared.stopUpdatingLocation()
-            self.fetchReverseGeocodingData()
-        }
-    }
-    
-    //        private func fetchCurrentLocation() {
-    //            locationManger.getLocation { [weak self] location, error in
-    //                DispatchQueue.main.async {
-    //                    if let location = location {
-    //                        print("주소 값 전환 성공")
-    //                        self?.currentLocation = location
-    //                        self?.fetchReverseGeocodingData()
-    //                    } else if let error = error {
-    //                        self?.errorMessage = error.localizedDescription
-    //                    }
-    //                }
-    //            }
-    //        }
-    //
-    private func fetchReverseGeocodingData() {
-        if let lat = currentLocation?.coordinate.latitude, let lng = currentLocation?.coordinate.longitude {
-            let formattedLat = String(format: "%.8f", lat)
-            let formattedLng = String(format: "%.8f", lng)
-            provider.request(.reverseGeocode(latitude: formattedLat, logitude: formattedLng)) { [weak self] result in
-                switch result {
-                case .success(let response):
-                    do {
-                        print("데이터 포스트 성공")
-                        let decodedData = try JSONDecoder().decode(ReverseGeoCodingData.self, from: response.data)
-                        if let firstResult = decodedData.results.first {
-                            self?.makeroadAddress(from: firstResult)
-                            print("해독 성공")
-                        }
-                    } catch {
-                        print(error)
+        BaseLocationManager.shared.startUpdatingLocation()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            if let currentLocation = BaseLocationManager.shared.getCurrentLocation() {
+                ReverseGeocodingService().fetchReverseGeocodingData(latitude: currentLocation.coordinate.latitude,
+                                                                    longitude: currentLocation.coordinate.longitude) { [weak self] address in
+                    DispatchQueue.main.async {
+                        self?.address = address ?? "주소를 찾을 수 없습니다."
+                        BaseLocationManager.shared.stopUpdatingLocation()
                     }
-                case .failure(let error):
-                    print("네트워크 에러: \(error.localizedDescription)")
                 }
             }
-        }
-    }
-    
-    private func makeroadAddress(from result: ResultData) {
-        let area1 = result.region.area1.name
-        let area2 = result.region.area2.name
-        let area3 = result.region.area3.name
-        let area4 = result.region.area4.name
-        
-        
-        let baseAddress = [area1, area2, area3, area4].joined(separator: " ")
-        
-        DispatchQueue.main.async { [weak self] in
-            self?.address = baseAddress
         }
     }
 }
