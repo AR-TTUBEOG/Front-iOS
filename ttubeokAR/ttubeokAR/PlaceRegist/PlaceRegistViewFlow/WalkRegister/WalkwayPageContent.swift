@@ -35,7 +35,7 @@ struct WalkwayPageContent: View {
         case 0:
             firstView
         case 1:
-            secondeView
+            secondView
         case 2:
             thirdView
         case 3:
@@ -78,7 +78,7 @@ struct WalkwayPageContent: View {
     //MARK: - WalkwaySecondView
     
     /// 두 번째 안내글 뷰
-    private var secondeView: some View {
+    private var secondView: some View {
         VStack(alignment: .leading, spacing: 35) {
             CustomTitleView(titleText: "산책스팟의 위치를 알려주세요",
                             highlightText: ["위치"],

@@ -20,22 +20,6 @@ struct gameButtonView: View {
     
     //MARK: - gameButtonView
     
-    //TODO: - 팁 버튼 추후 생성할 것
-    
-//    private var tipButton: some View {
-//        Button(action: {}, label: {
-//            Text("Tip")
-//                .font(.sandol(type: .regular, size: 12))
-//                .foregroundStyle(Color.white)
-//                .frame(maxWidth: 45, maxHeight: 20)
-//                .background(Color(red: 0.52, green: 0.54, blue: 0.92))
-//                .clipShape(.rect(cornerRadius: 20))
-//        })
-//        .onTapGesture {
-//            tipButtonAction()
-//        }
-//    }
-    
     private var gameButton: some View {
         Button(action: gameButtonAction, label: {
             ZStack(alignment: .center) {

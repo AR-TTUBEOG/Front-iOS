@@ -65,7 +65,7 @@ struct MarketPageContent: View {
             
             CustomTextField(text: $viewModel.firstMarketName,
                             placeholder: "예) 죠스 떡볶이 중앙대점",
-                            maxWidth: 340,
+                            maxWidth: 355,
                             maxHeight: 45,
                             onSearch: {}
             )
@@ -73,43 +73,7 @@ struct MarketPageContent: View {
     }
     
     //MARK: - SecondView
-    
-    /// 두 번째 주소검색 커스텀 텍스트 필드
-    private var secondAddressInputTextField: some View {
-        CustomTextField(text: $viewModel.secondAddressName,
-                        placeholder: "주소를 검색해주세요.",
-                        trailingHorizontalPadding: horizontalPadding + 35,
-                        maxWidth: 275,
-                        maxHeight: 45,
-                        onSearch: {})
-    }
-    
-    /// 두 번째 상세 주소 입력
-    private var secondDetailAddressInputTextField: some View {
-        CustomTextField(text: $viewModel.secondDetailAddress,
-                        placeholder: "상세주소를 입력해주세요.",
-                        trailingHorizontalPadding: horizontalPadding + 35,
-                        maxWidth: 332,
-                        maxHeight: 45,
-                        onSearch: {})
-    }
-    
-    /// 두 번째 뷰 하단 주소 텍스트필드 모음
-    private var secondBottomAddressInputs: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            HStack(alignment: .center, spacing: 8) {
-                secondAddressInputTextField
-                Button(action: {
-                    print("hello")
-                }, label: {
-                    Icon.searchAddress.image
-                        .resizable()
-                        .frame(maxWidth: 48, maxHeight: 45)
-                })
-            }
-            secondDetailAddressInputTextField
-        }
-    }
+
     
     /// 두 번째 뷰
     private var secondView: some View {
@@ -118,11 +82,12 @@ struct MarketPageContent: View {
                             highlightText: ["위치"],
                             subtitleText: "매장의 정확한 위치를 남겨주세요!",
                             titleHeight: 36,
+                            subtitleHeight: 50,
                             textAlignment: .leading,
                             frameAlignment: .topLeading
             )
             
-            secondBottomAddressInputs
+            InputAddressView(viewModel: viewModel)
         }
     }
     
@@ -144,7 +109,7 @@ struct MarketPageContent: View {
         VStack(alignment: .leading, spacing: 13) {
             CustomTextField(text: $viewModel.thirdMarketTypeName,
                             placeholder: "업종을 골라주세요.",
-                            maxWidth: 332,
+                            maxWidth: 355,
                             maxHeight: 45,
                             onSearch: {})
             HStack(spacing: 7) {
@@ -178,7 +143,7 @@ struct MarketPageContent: View {
         CustomTitleView(titleText: "소개와 사진 등 \n매장 정보를 입력해보세요",
                         highlightText: ["정보"],
                         subtitleText: "정보를 입력해야 방문객에게 장소가 보여요",
-                        titleWidth: 351,
+                        titleWidth: 355,
                         titleHeight: 80,
                         textAlignment: .center,
                         frameAlignment: .center)
@@ -205,7 +170,7 @@ struct MarketPageContent: View {
                             leadingHorizontalPadding: fifthHorizontalPadding,
                             trailingHorizontalPadding: fifthHorizontalPadding,
                             verticalPadding: fifthVerticalPadding,
-                            maxWidth: 314,
+                            maxWidth: 355,
                             maxHeight: 102,
                             onSearch: {},
                             alignment: .topLeading,
@@ -235,13 +200,14 @@ struct MarketPageContent: View {
                 .frame(maxWidth: 268, maxHeight: 16, alignment: .leading)
             
         }
-        .frame(maxWidth: 304, maxHeight: 27, alignment: .leading)
+        .frame(maxWidth: 324, maxHeight: 27, alignment: .leading)
     }
     
     /// 다섯 번째 예시 사진
     private var fifthExampleImage: some View {
         Icon.exampleMarket.image
             .resizable()
+            .aspectRatio(contentMode: .fit)
             .frame(maxWidth: 326, maxHeight: 240)
     }
     
