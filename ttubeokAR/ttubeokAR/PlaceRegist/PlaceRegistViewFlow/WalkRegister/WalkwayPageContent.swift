@@ -73,6 +73,7 @@ struct WalkwayPageContent: View {
             )
             firstPlaceInputTextField
         }
+        .frame(maxWidth: 340, maxHeight: 155)
     }
     
     //MARK: - WalkwaySecondView

@@ -13,6 +13,8 @@ struct WalkPlaceRegisterView: View {
     //MARK: - Property
     @StateObject private var viewModel = WalkwayViewModel()
     @Environment(\.presentationMode) var presentationMode
+    @State private var keyboardHeight: CGFloat = 0
+    
     var lastedSelectedTab: Int
     
     //MARK: - Body
@@ -25,18 +27,21 @@ struct WalkPlaceRegisterView: View {
     }
     
     private var allView: some View {
-        GeometryReader { geometry in
             ZStack(alignment: .top) {
                 Color.background.ignoresSafeArea(.all)
                 VStack(alignment: .center, spacing: 35) {
+                    
                     PlaceRegisterNavigation(currentPage: viewModel.currentPageIndex, totalPages: 5, lastedSelectedTab: lastedSelectedTab)
                     WalkwayPageContent(viewModel: viewModel)
+                    
+                    Spacer()
+                    
+                    changeViewButton
+                        .padding(.bottom, 20)
+                        .ignoresSafeArea(.keyboard)
                 }
-                changeViewButton
-                    .position(x: geometry.size.width / 2, y: geometry.size.height * 0.93)
             }
         }
-    }
     
     //MARK: - WalkPlaceRegisterView
     private var changeViewButton: some View {

@@ -23,7 +23,6 @@ class WalkwayViewModel: ObservableObject, ImageHandling, InputAddressProtocol {
     //MARK: - saveTextInputs
     @Published var firstPlaceName: String = ""
     @Published var fourthWalkwayDescription: String = ""
-
     @Published var currentLocation: CLLocation?
     
     
@@ -61,7 +60,6 @@ class WalkwayViewModel: ObservableObject, ImageHandling, InputAddressProtocol {
     }
     
     //MARK: - currentAddress Function
-    
     
     @Published var address: String = ""
     @Published var detailAddress: String = ""
