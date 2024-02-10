@@ -12,6 +12,8 @@ class MarketViewModel: ObservableObject, ImageHandling {
     
     
     
+    
+    
     //MARK: - Property
     @Published var marketModel = MarketModel()
     @Published var currentPageIndext: Int = 5
@@ -51,6 +53,9 @@ class MarketViewModel: ObservableObject, ImageHandling {
         images
     }
     
+    func imageToBase64String(img: UIImage) -> String? {
+        return "test"
+    }
     
 }
 

@@ -9,10 +9,12 @@ import SwiftUI
 
 /// 확인버튼
 //TODO: 뷰 모델 연결하여 API 호출
-struct FinishButton: View {
+struct FinishButton<ViewModel: FinishViewProtocol & ObservableObject>: View {
     
     //MARK: - Property
+    @ObservedObject var viewModel: ViewModel
     @State var lastedSelectedTab: Int
+    
     
     //MARK: - Body
     var body: some View {
@@ -22,6 +24,7 @@ struct FinishButton: View {
     //MARK: - FinishButton View
     private var finishButton: some View {
         Button(action: {
+            viewModel.finishPlaceRegist()
             changeRootViewToMainView(selectedTab: lastedSelectedTab)
         }, label: {
             Text("확인")

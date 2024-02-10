@@ -80,6 +80,8 @@
 		48ADCAA52B6645BD00765EDB /* SharedTabInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48ADCAA42B6645BD00765EDB /* SharedTabInfo.swift */; };
 		48AFE30E2B7705B80032F0CE /* ReverseGeocodingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AFE30D2B7705B80032F0CE /* ReverseGeocodingService.swift */; };
 		48B21D062B771E6600C26317 /* KeyBoardExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B21D052B771E6600C26317 /* KeyBoardExtension.swift */; };
+		48B21D0B2B777C0000C26317 /* WalwayRegistAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B21D0A2B777C0000C26317 /* WalwayRegistAPI.swift */; };
+		48B21D0D2B77953500C26317 /* FinishViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B21D0C2B77953500C26317 /* FinishViewProtocol.swift */; };
 		48B57FBB2B75CB62005965FD /* InputAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B57FBA2B75CB62005965FD /* InputAddressView.swift */; };
 		48B57FBE2B75CCCB005965FD /* InputAddressProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B57FBD2B75CCCB005965FD /* InputAddressProtocol.swift */; };
 		48B57FBF2B75D4EC005965FD /* AccountSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE46B062B680CD20030F323 /* AccountSettingView.swift */; };
@@ -224,6 +226,8 @@
 		48ADCAA42B6645BD00765EDB /* SharedTabInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedTabInfo.swift; sourceTree = "<group>"; };
 		48AFE30D2B7705B80032F0CE /* ReverseGeocodingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReverseGeocodingService.swift; sourceTree = "<group>"; };
 		48B21D052B771E6600C26317 /* KeyBoardExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyBoardExtension.swift; sourceTree = "<group>"; };
+		48B21D0A2B777C0000C26317 /* WalwayRegistAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalwayRegistAPI.swift; sourceTree = "<group>"; };
+		48B21D0C2B77953500C26317 /* FinishViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishViewProtocol.swift; sourceTree = "<group>"; };
 		48B57FBA2B75CB62005965FD /* InputAddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputAddressView.swift; sourceTree = "<group>"; };
 		48B57FBD2B75CCCB005965FD /* InputAddressProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputAddressProtocol.swift; sourceTree = "<group>"; };
 		48B57FC52B75FAE8005965FD /* NaverReverseGeocodingAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverReverseGeocodingAPI.swift; sourceTree = "<group>"; };
@@ -587,6 +591,7 @@
 			isa = PBXGroup;
 			children = (
 				48A59C152B6E1BC5009CF83E /* PlaceRegisterFinishView.swift */,
+				48B21D0C2B77953500C26317 /* FinishViewProtocol.swift */,
 			);
 			path = FinishView;
 			sourceTree = "<group>";
@@ -638,6 +643,7 @@
 				481B90A32B66933400D366A7 /* WalkwayModel.swift */,
 				481B90A52B66940500D366A7 /* WalkwayViewModel.swift */,
 				481B90A92B66A1B800D366A7 /* WalkwayPageContent.swift */,
+				48B21D0A2B777C0000C26317 /* WalwayRegistAPI.swift */,
 			);
 			path = WalkRegister;
 			sourceTree = "<group>";
@@ -1158,6 +1164,7 @@
 				6C0E64A62B73574600A238A7 /* Route.swift in Sources */,
 				483820E62B4BE86200C3FB14 /* MyTicketCommand.swift in Sources */,
 				CAFAE8272B750CF100C20502 /* BookMarkImgProtocol.swift in Sources */,
+				48B21D0B2B777C0000C26317 /* WalwayRegistAPI.swift in Sources */,
 				6CC4DDB72B55512F0080E7E8 /* NavigationBar.swift in Sources */,
 				481EA2712B6F280200BAD5E0 /* SplashScreenView.swift in Sources */,
 				48B70FDF2B733977008F760B /* GameCouponSelect.swift in Sources */,
@@ -1249,6 +1256,7 @@
 				482DB6BB2B541E7E005538DE /* PlaceSettingView.swift in Sources */,
 				4831BEC02B742866006E184C /* SearchAPITarget.swift in Sources */,
 				483BFD202B64A2A200C2AD5B /* PlaceSelect.swift in Sources */,
+				48B21D0D2B77953500C26317 /* FinishViewProtocol.swift in Sources */,
 				483612BA2B4ED14500E0B45A /* MainViewControl.swift in Sources */,
 				6CE46B0D2B6B5A350030F323 /* PlaceViewModel.swift in Sources */,
 				6CC4DE032B5688080080E7E8 /* CouponModel.swift in Sources */,

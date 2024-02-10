@@ -13,6 +13,7 @@ protocol ImageHandling: AnyObject {
     func removeImage(at indext: Int)
     func showImagePicker()
     func getImages() -> [UIImage]
+    func imageToBase64String(img: UIImage) -> String?
     
     var isImagePickerPresented: Bool { get set }
     var selectedImageCount: Int { get }

@@ -8,9 +8,28 @@
 import Foundation
 import SwiftUI
 
-struct WalkwayModel {
-    var name: String = ""
-    var address: String = ""
-    var introduction: String = ""
-    var images: [UIImage] = []
+struct RequestWalwayRegistModel {
+    var name: String?
+    var address: String?
+    var detailAddress: String?
+    var info: String?
+    var latitude: Double?
+    var longitude: Double?
+    var image: [String]?
+    var starts: Float
+}
+
+struct ResponseWalwayRegistModel: Codable {
+    var check: Bool
+    var inforamtion: WalwayRegistInfor
+}
+
+struct WalwayRegistInfor: Codable {
+    var name: String?
+    var address: String?
+    var detailAddress: String?
+    var info: String?
+    var latitude: Double?
+    var longitude: Double?
+    var image: [String]?
 }

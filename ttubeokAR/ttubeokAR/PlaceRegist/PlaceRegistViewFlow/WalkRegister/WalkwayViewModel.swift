@@ -14,11 +14,12 @@ import Moya
 class WalkwayViewModel: ObservableObject, ImageHandling, InputAddressProtocol {
     
     //MARK: - Property
-    @Published var walwayModel = WalkwayModel()
+    @Published var requestWalwayRegistModel: RequestWalwayRegistModel?
     @Published var isImagePickerPresented = false
     @Published var currentPageIndex: Int = 0
     @Published var navigationToNextView = false
     @Published var images: [UIImage] = []
+    var base64Images: [String] = []
     
     //MARK: - saveTextInputs
     @Published var firstPlaceName: String = ""
@@ -33,6 +34,12 @@ class WalkwayViewModel: ObservableObject, ImageHandling, InputAddressProtocol {
         images.count
     }
     
+    public func imageToBase64String(img: UIImage) -> String? {
+        guard let imageData = img.jpegData(compressionQuality: 1.0) ?? img.pngData() else {
+            return nil
+        }
+        return imageData.base64EncodedString()
+    }
     
     /// 앨범에서 선택한 이미지 추가하기
     /// - Parameter newImages: 추가한 이미지 배열에 넣기
@@ -80,4 +87,75 @@ class WalkwayViewModel: ObservableObject, ImageHandling, InputAddressProtocol {
             }
         }
     }
+    
+    //MARK: - WalkwayRegistAPI
+    private let provider = MoyaProvider<WalkwayRegistService>()
+    private let keychainManger = KeyChainManager.stadard
+    
+    /// 토큰 불러오기
+    /// - Returns: 저장된 토큰 불러온다.
+    private func loadAccessToken() -> String? {
+        guard let accessToken = KeyChainManager.stadard.getAccessToken(for: "userSession") else {
+            return "토큰정보 에러"
+        }
+        
+        return accessToken
+    }
+    
+    /// 장소등록에 사용된 데이터 전부 전달
+    private  func sendDataWalkwayInfo() {
+        
+        if let requestWalwayRegistModel = requestWalwayRegistModel {
+            provider.request(.sendWalwayInfo(requestWalwayRegistModel, token: loadAccessToken() ?? "토큰정보 없음")) { result in
+                switch result {
+                case .success(let response):
+                    do {
+                        let decodedData = try JSONDecoder().decode(ResponseWalwayRegistModel.self, from: response.data)
+                        print(decodedData)
+                    } catch {
+                        print("장소 등록 decoded에러 : \(error)")
+                    }
+                case.failure(let error):
+                    print("산책로 등록 error: \(error.localizedDescription)")
+                }
+            }
+        }
+    }
+    //MARK: - WalkwayDataMatching
+    
+    private func createParameters() -> RequestWalwayRegistModel {
+        return RequestWalwayRegistModel(name: self.firstPlaceName,
+                                        address: self.address,
+                                        detailAddress: self.detailAddress,
+                                        info: self.fourthWalkwayDescription,
+                                        latitude: self.currentLocation?.coordinate.latitude,
+                                        longitude: self.currentLocation?.coordinate.longitude,
+                                        image: base64Images,
+                                        starts: 0
+        )
+    }
+    
+    private func saveStringImage() {
+        for image in images {
+            if let base64String = imageToBase64String(img: image) {
+                base64Images.append(base64String)
+            }
+        }
+    }
+    
+    private func matchWalkwayRegisterData() {
+        saveStringImage()
+        self.requestWalwayRegistModel = createParameters()
+    }
+    
+    
+    public func finishPlaceRegist(){
+        matchWalkwayRegisterData()
+        sendDataWalkwayInfo()
+    }
+    
+    
+    
+    
+    
 }
