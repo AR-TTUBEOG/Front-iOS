@@ -20,7 +20,7 @@ struct BasketBallGameBenefitsText: View {
             GameBenefitsTextField(text: $viewModel.benefitsText)
                 .offset(y: 30)
         }
-        .frame(maxWidth: 228, maxHeight: 172)
+        .frame(maxWidth: 260, maxHeight: 172)
     }
     
 }

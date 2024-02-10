@@ -55,8 +55,8 @@ struct GameRulesTextView: View {
                 })
                 
             }
-            .frame(maxWidth: 110, maxHeight: 33)
+            .frame(maxWidth: 130, maxHeight: 33)
         }
-        .frame(maxWidth: 192, maxHeight: 33)
+        .frame(maxWidth: 210, maxHeight: 33)
     }
 }

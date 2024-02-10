@@ -23,11 +23,11 @@ struct GameBenefitsTextField: View {
         ZStack(alignment: .bottomTrailing) {
             CustomTextField(text: $text,
                             placeholder: "혜택 문구를 입력해주세요",
-                            fontSize: 13,
+                            fontSize: 14,
                             leadingHorizontalPadding: 18,
                             trailingHorizontalPadding: 18,
                             verticalPadding: 18,
-                            maxWidth: 228,
+                            maxWidth: 260,
                             maxHeight: 90,
                             onSearch: {},
                             alignment: .topLeading,

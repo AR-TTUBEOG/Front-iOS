@@ -25,7 +25,7 @@ struct BasketBallGameRulesView: View {
             settingGameRules
                 .offset(y: 30)
         }
-        .frame(maxWidth: 228, maxHeight: 172)
+        .frame(maxWidth: 260, maxHeight: 172)
     }
     
  
@@ -59,7 +59,7 @@ struct BasketBallGameRulesView: View {
                               onPlustTapped: { viewModel.increaseSuccessCount() }
             )
         }
-        .frame(maxWidth: 228, maxHeight: 143, alignment: .center)
+        .frame(maxWidth: 270, maxHeight: 143, alignment: .center)
         .background(Color(red: 0.25, green: 0.24, blue: 0.37))
         .clipShape(.rect(cornerRadius: 19))
         .overlay(
