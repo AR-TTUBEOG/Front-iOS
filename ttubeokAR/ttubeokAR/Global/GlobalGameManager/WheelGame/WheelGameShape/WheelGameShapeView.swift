@@ -121,8 +121,10 @@ struct WheelGameShapeView: View {
         withAnimation(.spring(response: 4, dampingFraction: 0.5)) {
             spin += randomSpin
         } completion: {
-            isSpinning = false
-            finishSection()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                isSpinning = false
+                finishSection()
+            }
         }
     }
     
@@ -130,10 +132,11 @@ struct WheelGameShapeView: View {
         let finalAngle = spin.truncatingRemainder(dividingBy: 360)
         let totalSection = viewModel.wheelGameSetting.count
         let sectionAngle = 360.0 / Double(totalSection)
-        let offsetAngle = (finalAngle + sectionAngle / 4).truncatingRemainder(dividingBy: 360)
+        let offsetAngle = (finalAngle + sectionAngle * 2).truncatingRemainder(dividingBy: 360)
         let selectedIndex = Int(offsetAngle / sectionAngle) % totalSection
         selectedValue = getValueForSection(selectedIndex)
         print(selectedValue ?? "x")
+        print(selectedIndex)
     }
     
     private func getValueForSection(_ index: Int) -> String {

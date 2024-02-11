@@ -19,8 +19,8 @@ class WheelGameViewModel: ObservableObject {
         wheelGameSetting = [
             WheelGameSetting(option: "상품"),
             WheelGameSetting(option: "꽝"),
-            WheelGameSetting(option: "꽝"),
-            WheelGameSetting(option: "상품")
+            WheelGameSetting(option: "상품"),
+            WheelGameSetting(option: "꽝")
         ]
         
         
