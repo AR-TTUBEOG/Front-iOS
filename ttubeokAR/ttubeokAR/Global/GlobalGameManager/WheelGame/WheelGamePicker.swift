@@ -17,22 +17,24 @@ struct WheelGamePicker: View {
     }
     
     private var pickerList: some View {
-        LazyVStack {
+        LazyVStack(spacing: 3) {
             ForEach(options, id: \.self) { option in
                 Button(action: {
-                    if let setting = WheelGameSetting(option: option) {
-                        sendAction(setting)
-                    }
+                    let setting = WheelGameSetting(option: option)
+                    sendAction(setting)
                 }, label: {
                     Text(option)
-
-                        .font(.sandol(type: .semiBold, size: 13))
+                        .frame(maxWidth: 30, alignment: .bottom)
+                        .font(.sandol(type: .semiBold, size: 12))
                         .foregroundStyle(Color.white)
                         .padding(.vertical, 2)
                 })
+                if option == "상품" {
+                    Divider().background(Color.white)
+                }
             }
         }
-        .frame(maxWidth: 100, maxHeight: 60)
+        .frame(maxWidth: 60, maxHeight: 60, alignment: .center)
         .background {
             RoundedRectangle(cornerRadius: 20)
                 .fill(

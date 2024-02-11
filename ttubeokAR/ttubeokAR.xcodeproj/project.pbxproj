@@ -87,6 +87,7 @@
 		48B21D192B77B72C00C26317 /* WheelGameRulesSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B21D182B77B72C00C26317 /* WheelGameRulesSettingView.swift */; };
 		48B21D1B2B77D4C400C26317 /* WheelGamePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B21D1A2B77D4C400C26317 /* WheelGamePicker.swift */; };
 		48B21D1D2B77D78D00C26317 /* WheelGamePickerMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B21D1C2B77D78D00C26317 /* WheelGamePickerMenu.swift */; };
+		48B21D1F2B77E91100C26317 /* WheelGameRuleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B21D1E2B77E91000C26317 /* WheelGameRuleView.swift */; };
 		48B57FBB2B75CB62005965FD /* InputAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B57FBA2B75CB62005965FD /* InputAddressView.swift */; };
 		48B57FBE2B75CCCB005965FD /* InputAddressProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B57FBD2B75CCCB005965FD /* InputAddressProtocol.swift */; };
 		48B57FBF2B75D4EC005965FD /* AccountSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE46B062B680CD20030F323 /* AccountSettingView.swift */; };
@@ -238,6 +239,7 @@
 		48B21D182B77B72C00C26317 /* WheelGameRulesSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WheelGameRulesSettingView.swift; sourceTree = "<group>"; };
 		48B21D1A2B77D4C400C26317 /* WheelGamePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WheelGamePicker.swift; sourceTree = "<group>"; };
 		48B21D1C2B77D78D00C26317 /* WheelGamePickerMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WheelGamePickerMenu.swift; sourceTree = "<group>"; };
+		48B21D1E2B77E91000C26317 /* WheelGameRuleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WheelGameRuleView.swift; sourceTree = "<group>"; };
 		48B57FBA2B75CB62005965FD /* InputAddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputAddressView.swift; sourceTree = "<group>"; };
 		48B57FBD2B75CCCB005965FD /* InputAddressProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputAddressProtocol.swift; sourceTree = "<group>"; };
 		48B57FC52B75FAE8005965FD /* NaverReverseGeocodingAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverReverseGeocodingAPI.swift; sourceTree = "<group>"; };
@@ -519,6 +521,7 @@
 				48B21D182B77B72C00C26317 /* WheelGameRulesSettingView.swift */,
 				48B21D1A2B77D4C400C26317 /* WheelGamePicker.swift */,
 				48B21D1C2B77D78D00C26317 /* WheelGamePickerMenu.swift */,
+				48B21D1E2B77E91000C26317 /* WheelGameRuleView.swift */,
 			);
 			path = WheelGame;
 			sourceTree = "<group>";
@@ -1268,6 +1271,7 @@
 				482DB6BB2B541E7E005538DE /* PlaceSettingView.swift in Sources */,
 				4831BEC02B742866006E184C /* SearchAPITarget.swift in Sources */,
 				483BFD202B64A2A200C2AD5B /* PlaceSelect.swift in Sources */,
+				48B21D1F2B77E91100C26317 /* WheelGameRuleView.swift in Sources */,
 				48B21D0D2B77953500C26317 /* FinishViewProtocol.swift in Sources */,
 				483612BA2B4ED14500E0B45A /* MainViewControl.swift in Sources */,
 				6CE46B0D2B6B5A350030F323 /* PlaceViewModel.swift in Sources */,

@@ -12,19 +12,23 @@ struct WheelGameRulesSettingView: View {
     //MARK: - Property
     
     @ObservedObject var viewModel: WheelGameViewModel
-    @State var isPopover: Bool = false
     @State var wheelGameSetting: WheelGameSetting
+    @State var isPopover: Bool = false
+    let index: Int
     
     //MARK: - Body
     
     var body: some View {
-        ZStack {
-            Color(red: 0.25, green: 0.24, blue: 0.37).ignoresSafeArea(.all)
+        ZStack(alignment: .leading) {
             makeComponentWheelGame()
+            
+            if viewModel.activePopoverIndex == index {
+                    showPickerMenu
+            }
         }
+        .frame(maxWidth: 240, maxHeight: 50)
         .onTapGesture {
             self.keyboardResponsive()
-            self.isPopover = false
         }
         
     }
@@ -37,10 +41,6 @@ struct WheelGameRulesSettingView: View {
                 selectBtnView
                 inputGoodsInfo
             }
-            if isPopover {
-                showPickerMenu
-                    
-            }
         }
     }
     
@@ -48,7 +48,11 @@ struct WheelGameRulesSettingView: View {
     private var selectBtnView: some View {
         ZStack {
             Button(action: {
-                isPopover.toggle()
+                if viewModel.activePopoverIndex == index {
+                    viewModel.activePopoverIndex = nil
+                } else {
+                    viewModel.activePopoverIndex = index
+                }
             }, label: {
                 HStack(spacing: 10) {
                     Text(pickerName())
@@ -62,13 +66,11 @@ struct WheelGameRulesSettingView: View {
                         .frame(maxWidth: 15, maxHeight: 19)
                 }
             })
-            
         }
-        
     }
     
     private var inputGoodsInfo: some View {
-        CustomTextField(text: $viewModel.text,
+        CustomTextField(text: $viewModel.texts[index],
                         placeholder: textFieldPlaceholder(),
                         fontSize: 13,
                         leadingHorizontalPadding: 10,
@@ -93,10 +95,10 @@ struct WheelGameRulesSettingView: View {
             WheelGamePicker(sendAction: { option in
                 switch option {
                 case .goods:
-                    self.wheelGameSetting = .goods
+                    wheelGameSetting = .goods
                     isPopover = false
                 case .boom:
-                    self.wheelGameSetting = .boom
+                    wheelGameSetting = .boom
                     isPopover = false
                 }
             })
@@ -139,11 +141,5 @@ struct WheelGameRulesSettingView: View {
         case .boom:
             return Color(red: 0.63, green: 0.62, blue: 0.95).opacity(0.3)
         }
-    }
-}
-
-struct WheelGameRulesSetting_Preview: PreviewProvider {
-    static var previews: some View {
-        WheelGameRulesSettingView(viewModel: WheelGameViewModel(), wheelGameSetting: .goods)
     }
 }

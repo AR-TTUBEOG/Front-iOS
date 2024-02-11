@@ -8,5 +8,18 @@
 import Foundation
 
 class WheelGameViewModel: ObservableObject {
-    @Published var text: String = ""
+    @Published var wheelGameSetting: [WheelGameSetting]
+    @Published var texts: [String] = Array(repeating: "", count: 4)
+    @Published var activePopoverIndex: Int? = nil
+    
+    init() {
+        wheelGameSetting = [
+            WheelGameSetting(option: "상품"),
+            WheelGameSetting(option: "상품"),
+            WheelGameSetting(option: "상품"),
+            WheelGameSetting(option: "꽝")
+        ]
+        
+        
+    }
 }

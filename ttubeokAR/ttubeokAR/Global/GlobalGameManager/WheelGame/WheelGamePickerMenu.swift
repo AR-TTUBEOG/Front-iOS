@@ -11,14 +11,14 @@ enum WheelGameSetting {
     case goods
     case boom
     
-    init?(option: String) {
+    init(option: String) {
         switch option {
         case "상품":
             self = .goods
         case "꽝":
             self = .boom
         default:
-            return nil
+            self = .goods
         }
     }
 }
