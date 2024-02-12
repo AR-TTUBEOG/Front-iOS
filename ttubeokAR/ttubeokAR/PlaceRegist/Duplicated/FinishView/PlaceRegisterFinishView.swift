@@ -24,7 +24,7 @@ struct PlaceRegisterFinishView<ViewModel: FinishViewProtocol & ObservableObject>
             
             Spacer()
             
-            FinishButton(viewModel: viewModel, lastedSelectedTab: lastedSelectedTab)
+            RegistFinishButton(viewModel: viewModel, lastedSelectedTab: lastedSelectedTab)
                 .padding(.bottom, 20)
         }
         .frame(maxWidth: .infinity)

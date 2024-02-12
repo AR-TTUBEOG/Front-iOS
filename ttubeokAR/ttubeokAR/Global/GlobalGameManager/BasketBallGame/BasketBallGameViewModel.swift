@@ -7,7 +7,9 @@
 
 import Foundation
 
-class BasketBallGameViewModel: ObservableObject{
+class BasketBallGameViewModel: ObservableObject, FinishButtonProtocol{
+    
+    
     
     //MARK: - 농구게임 게임 룰 설정
     @Published var timeLimit: Int =  30
@@ -20,39 +22,49 @@ class BasketBallGameViewModel: ObservableObject{
     //MARK: - 농구게임 혜택 쿠폰
     @Published var selectCoupon: Int? = nil
     
-    
     //MARK: - 제한 시간 조절
     public func increaseTime() {
-        self.timeLimit += 1
+        if self.timeLimit < 60{
+            self.timeLimit += 1
+        }
     }
     
     public func decreaseTime() {
-        if timeLimit > 0{
+        if self.timeLimit > 0 {
             self.timeLimit -= 1
         }
     }
     
     //MARK: - 공 개수 조절
     public func increaseBallCount() {
-        self.ballCount += 1
+        if self.ballCount < 5 {
+            self.ballCount += 1
+        }
     }
     
     public func decreaseBallCount() {
-        if ballCount > 0 {
+        if self.ballCount > 1 {
             self.ballCount -= 1
         }
     }
     
     //MARK: - 게임 성공 개수
     public func increaseSuccessCount() {
-        self.successCount += 1
+        if self.successCount < 5 {
+            self.successCount += 1
+        }
     }
     
     public func decreaseSuccessCount() {
-        if successCount > 0 {
+        if self.successCount > 1 {
             self.successCount -= 1
         }
     }
     
     
+    
+    //MARK: - 완료 버튼 API 전송
+    func finishSendAPI() {
+        print("hello")
+    }
 }

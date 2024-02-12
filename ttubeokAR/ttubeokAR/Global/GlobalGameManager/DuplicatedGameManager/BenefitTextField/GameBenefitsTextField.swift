@@ -27,16 +27,18 @@ struct GameBenefitsTextField: View {
                             leadingHorizontalPadding: 18,
                             trailingHorizontalPadding: 18,
                             verticalPadding: 18,
-                            maxWidth: 228,
+                            maxWidth: 260,
                             maxHeight: 90,
                             onSearch: {},
                             alignment: .topLeading,
                             axis: .vertical,
-                            maxLength: 20
+                            maxLength: 20,
+                            lineWidth: 0.5,
+                            lineColor: Color.primary03
             )
             
             Text("\(text.count) / 20")
-                .frame(maxWidth: 39, maxHeight: 14, alignment: .center)
+                .frame(maxWidth: 39, maxHeight: 13, alignment: .center)
                 .font(.sandol(type: .regular, size: 11))
                 .multilineTextAlignment(.center)
                 .foregroundStyle(Color.textPink)

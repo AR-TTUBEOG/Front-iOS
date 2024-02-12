@@ -60,7 +60,7 @@ struct ExploreViewControl: View {
     }
     
     
-    private func centerView(geometry: GeometryProxy)->  some View {
+    private func centerView(geometry: GeometryProxy) -> some View {
         if let information = viewModel.exploreData?.information, !information.isEmpty {
             return AnyView(recommendedSpacesGrid(geometry: geometry))
         } else {

@@ -35,7 +35,6 @@ struct PlaceRegistrationView: View {
         GeometryReader { geometry in
             ZStack(alignment: .top) {
                 backgroundView
-                blackOpacityView
                 NavigationBar(lastedSelectedTab: lastedSelectedTab)
                 CustomTitleView(
                     titleText: "1분만에 장소를 \n 등록해보세요",
@@ -65,15 +64,6 @@ struct PlaceRegistrationView: View {
             .aspectRatio(contentMode: .fill)
             .frame(maxWidth: 375, maxHeight: .infinity)
             .ignoresSafeArea(.all)
-    }
-    
-    /// 배경 화면 위 검은 배경
-    private var blackOpacityView: some View {
-        Rectangle()
-            .foregroundStyle(.clear)
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .ignoresSafeArea(.all)
-            .background(Color(red: 0.09, green: 0.08, blue: 0.12).opacity(0.3))
     }
     
     /// 다음 뷰로 넘어가는 버튼

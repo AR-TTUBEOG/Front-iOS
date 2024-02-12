@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct MarketPageContent: View {
+    
     //MARK: - Propery
     @State private var isSelected: MarketTypeName = .none
-    @ObservedObject var viewModel = MarketViewModel()
+    @ObservedObject var viewModel: MarketViewModel
     
     
     //MARK: - TextFieldShame
@@ -23,7 +24,6 @@ struct MarketPageContent: View {
     //MARK: - Body
     var body: some View {
         ZStack {
-            Color.background.ignoresSafeArea(.all)
             viewFlow
         }
     }
@@ -32,7 +32,7 @@ struct MarketPageContent: View {
     
     @ViewBuilder
     private var viewFlow: some View {
-        switch viewModel.currentPageIndext {
+        switch viewModel.currentPageIndex {
         case 0:
             firstView
         case 1:
@@ -45,6 +45,8 @@ struct MarketPageContent: View {
             fifthView
         case 5:
             sixthView
+        case 6:
+            sevenView
         default:
             EmptyView()
         }
@@ -82,7 +84,7 @@ struct MarketPageContent: View {
                             highlightText: ["위치"],
                             subtitleText: "매장의 정확한 위치를 남겨주세요!",
                             titleHeight: 36,
-                            subtitleHeight: 50,
+                            spacing: 9,
                             textAlignment: .leading,
                             frameAlignment: .topLeading
             )
@@ -277,11 +279,45 @@ struct MarketPageContent: View {
         }
         .frame(maxWidth: 330)
     }
+    
+    //MARK: - sevenView
+    
+    private var sevenTitle: some View {
+        CustomTitleView(titleText: "리워드를 선택해주세요",
+                        highlightText: ["리워드"],
+                        subtitleText: "방문 고객에게 게임을 통해 혜택을 주세요!",
+                        titleHeight: 45,
+                        spacing: 10,
+                        textAlignment: .leading,
+                        frameAlignment: .topLeading
+        )
+    }
+    
+    private var sevenBenefitMethod: some View {
+        VStack(alignment: .leading, spacing: 30, content: {
+            Text("헤택을 제공할 방법을 선택해주세요!")
+                .font(.sandol(type: .bold, size: 16))
+                .foregroundStyle(Color.textPink)
+                .frame(maxWidth: 300, alignment: .leading)
+            
+            GameManagerView()
+        })
+        .frame(width: 320)
+    }
+    
+    private var sevenView: some View {
+        VStack(alignment: .leading, spacing: 35, content: {
+            sevenTitle
+            sevenBenefitMethod
+                .padding(.leading, 15)
+        })
+    }
 }
 
 
 struct MarketPageContent_Preview: PreviewProvider {
     static var previews: some View {
         MarketPageContent(viewModel: MarketViewModel())
+            .previewLayout(.sizeThatFits)
     }
 }
