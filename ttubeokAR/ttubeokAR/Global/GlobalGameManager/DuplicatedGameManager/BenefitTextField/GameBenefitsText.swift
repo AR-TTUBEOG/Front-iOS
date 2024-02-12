@@ -20,7 +20,7 @@ struct GameBenefitsText: View {
             GameBenefitsTextField(text: $text)
                 .offset(y: 30)
         }
-        .frame(maxWidth: 260, maxHeight: 170)
+        .frame(maxWidth: 260, maxHeight: 130, alignment: .top)
     }
     
 }

@@ -25,7 +25,7 @@ struct BasketBallGameRulesView: View {
             settingGameRules
                 .offset(y: 30)
         }
-        .frame(maxWidth: 260, maxHeight: 180)
+        .frame(maxWidth: 260, maxHeight: 180, alignment: .top)
     }
     
  

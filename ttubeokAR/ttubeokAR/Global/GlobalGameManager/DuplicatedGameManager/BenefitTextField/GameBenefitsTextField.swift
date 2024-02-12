@@ -32,7 +32,9 @@ struct GameBenefitsTextField: View {
                             onSearch: {},
                             alignment: .topLeading,
                             axis: .vertical,
-                            maxLength: 20
+                            maxLength: 20,
+                            lineWidth: 0.5,
+                            lineColor: Color.primary03
             )
             
             Text("\(text.count) / 20")

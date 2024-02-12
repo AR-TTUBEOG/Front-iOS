@@ -9,7 +9,7 @@ import SwiftUI
 
 /// 확인버튼
 //TODO: 뷰 모델 연결하여 API 호출
-struct FinishButton<ViewModel: FinishViewProtocol & ObservableObject>: View {
+struct RegistFinishButton<ViewModel: FinishViewProtocol & ObservableObject>: View {
     
     //MARK: - Property
     @ObservedObject var viewModel: ViewModel

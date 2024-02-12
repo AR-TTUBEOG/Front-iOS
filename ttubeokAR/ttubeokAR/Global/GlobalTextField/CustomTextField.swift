@@ -6,8 +6,8 @@
 //
 
 import SwiftUI
-
 struct CustomTextField: View {
+
     
     //MARK: - Property
     @Binding var text: String

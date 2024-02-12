@@ -7,7 +7,7 @@
 
 import Foundation
 
-class BasketBallGameViewModel: ObservableObject{
+class BasketBallGameViewModel: ObservableObject, FinishButtonProtocol{
     
     
     
@@ -62,4 +62,9 @@ class BasketBallGameViewModel: ObservableObject{
     }
     
     
+    
+    //MARK: - 완료 버튼 API 전송
+    func finishSendAPI() {
+        print("hello")
+    }
 }

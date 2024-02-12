@@ -18,6 +18,6 @@ struct GameCouponView: View {
             GameCouponSelect(selectedBtnID: $selectBtn)
                 .offset(y: 30)
         }
-        .frame(maxWidth: 260, maxHeight: 170)
+        .frame(maxWidth: 260, maxHeight: 160, alignment: .top)
     }
 }

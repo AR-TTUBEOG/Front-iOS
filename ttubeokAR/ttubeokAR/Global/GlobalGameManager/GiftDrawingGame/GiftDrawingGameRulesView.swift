@@ -25,7 +25,7 @@ struct GiftDrawingGameRulesView: View {
             settingGameRules
                 .offset(y: 30)
         }
-        .frame(maxWidth: 260, maxHeight: 180)
+        .frame(maxWidth: 260, maxHeight: 130, alignment: .top)
     }
     
  
@@ -49,7 +49,7 @@ struct GiftDrawingGameRulesView: View {
                               onPlustTapped: { viewModel.increaseGifCount() }
             )
         }
-        .frame(maxWidth: 270, maxHeight: 143, alignment: .center)
+        .frame(maxWidth: 270, maxHeight: 100, alignment: .center)
         .background(Color(red: 0.25, green: 0.24, blue: 0.37))
         .clipShape(.rect(cornerRadius: 19))
         .overlay(
