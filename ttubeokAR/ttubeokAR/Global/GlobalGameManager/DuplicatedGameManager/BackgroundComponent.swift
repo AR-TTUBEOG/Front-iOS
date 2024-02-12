@@ -20,9 +20,9 @@ struct BackgroundComponent: View {
     
     init(topTitle: String = "",
          viewWidth: CGFloat = 350,
-         viewHeight: CGFloat = 660,
+         viewHeight: CGFloat = 720,
          secondViewWidth: CGFloat = 300,
-         secondViewHeight: CGFloat = 600,
+         secondViewHeight: CGFloat = 660,
          fontSize: CGFloat = 18,
          cornerSize: CGFloat = 24
     ) {
@@ -76,11 +76,12 @@ struct BackgroundComponent: View {
     
     private var secondBackgroundComponent: some View {
         Rectangle()
-            .fill(Color.primary03)
+            .fill(Color(red: 0.25, green: 0.24, blue: 0.37))
             .clipShape(.rect(cornerRadius: cornerSize))
     }
 }
 
 #Preview {
     BackgroundComponent(topTitle: "농구게임")
+        .previewLayout(.sizeThatFits)
 }

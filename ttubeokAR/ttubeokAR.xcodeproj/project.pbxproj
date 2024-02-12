@@ -47,7 +47,6 @@
 		483820EE2B4BEAFE00C3FB14 /* TtuDotShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483820ED2B4BEAFE00C3FB14 /* TtuDotShape.swift */; };
 		483BFD172B64996400C2AD5B /* WhichSelectPlaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483BFD162B64996400C2AD5B /* WhichSelectPlaceView.swift */; };
 		483BFD202B64A2A200C2AD5B /* PlaceSelect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483BFD1F2B64A2A200C2AD5B /* PlaceSelect.swift */; };
-		483CB95D2B73247D00938224 /* GameRulesTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483CB95C2B73247D00938224 /* GameRulesTextView.swift */; };
 		483CB9602B732DC200938224 /* GameSettingSubTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483CB95F2B732DC200938224 /* GameSettingSubTitle.swift */; };
 		483CB9622B732F4A00938224 /* GameBenefitsTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483CB9612B732F4A00938224 /* GameBenefitsTextField.swift */; };
 		483CB9642B73329700938224 /* GameBenefitsText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483CB9632B73329700938224 /* GameBenefitsText.swift */; };
@@ -69,6 +68,9 @@
 		488365F62B6FE24200F4E397 /* ImageHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488365F52B6FE24200F4E397 /* ImageHandling.swift */; };
 		488373C92B66B79D0036C0FD /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488373C82B66B79D0036C0FD /* CustomTextField.swift */; };
 		488DE8142B7998A700EE4E2B /* BackgroundComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488DE8132B7998A700EE4E2B /* BackgroundComponent.swift */; };
+		488DE8162B799FAB00EE4E2B /* BasketBallGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488DE8152B799FAB00EE4E2B /* BasketBallGameView.swift */; };
+		488DE81A2B79A22C00EE4E2B /* GameRulesTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488DE8192B79A22C00EE4E2B /* GameRulesTextView.swift */; };
+		488DE81D2B79A27500EE4E2B /* GameCouponView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488DE81C2B79A27500EE4E2B /* GameCouponView.swift */; };
 		488E25462B4D4E1C005D8D52 /* FontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488E25452B4D4E1C005D8D52 /* FontExtension.swift */; };
 		488FA7102B650FAD0030CE66 /* WalkSelectButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488FA70F2B650FAD0030CE66 /* WalkSelectButton.swift */; };
 		488FA7122B6510890030CE66 /* MarketSelectButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488FA7112B6510890030CE66 /* MarketSelectButton.swift */; };
@@ -207,7 +209,6 @@
 		483BFD162B64996400C2AD5B /* WhichSelectPlaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhichSelectPlaceView.swift; sourceTree = "<group>"; };
 		483BFD192B649CD000C2AD5B /* CustomTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTitleView.swift; sourceTree = "<group>"; };
 		483BFD1F2B64A2A200C2AD5B /* PlaceSelect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceSelect.swift; sourceTree = "<group>"; };
-		483CB95C2B73247D00938224 /* GameRulesTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameRulesTextView.swift; sourceTree = "<group>"; };
 		483CB95F2B732DC200938224 /* GameSettingSubTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSettingSubTitle.swift; sourceTree = "<group>"; };
 		483CB9612B732F4A00938224 /* GameBenefitsTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBenefitsTextField.swift; sourceTree = "<group>"; };
 		483CB9632B73329700938224 /* GameBenefitsText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBenefitsText.swift; sourceTree = "<group>"; };
@@ -224,6 +225,9 @@
 		488365F52B6FE24200F4E397 /* ImageHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageHandling.swift; sourceTree = "<group>"; };
 		488373C82B66B79D0036C0FD /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		488DE8132B7998A700EE4E2B /* BackgroundComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundComponent.swift; sourceTree = "<group>"; };
+		488DE8152B799FAB00EE4E2B /* BasketBallGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketBallGameView.swift; sourceTree = "<group>"; };
+		488DE8192B79A22C00EE4E2B /* GameRulesTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameRulesTextView.swift; sourceTree = "<group>"; };
+		488DE81C2B79A27500EE4E2B /* GameCouponView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCouponView.swift; sourceTree = "<group>"; };
 		488E25452B4D4E1C005D8D52 /* FontExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontExtension.swift; sourceTree = "<group>"; };
 		488FA70F2B650FAD0030CE66 /* WalkSelectButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkSelectButton.swift; sourceTree = "<group>"; };
 		488FA7112B6510890030CE66 /* MarketSelectButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketSelectButton.swift; sourceTree = "<group>"; };
@@ -500,12 +504,11 @@
 		483CB9592B73244A00938224 /* DuplicatedGameManager */ = {
 			isa = PBXGroup;
 			children = (
+				488DE81B2B79A25900EE4E2B /* SelectCouponRadio */,
+				488DE8172B79A18F00EE4E2B /* BenefitTextField */,
 				488DE8132B7998A700EE4E2B /* BackgroundComponent.swift */,
-				483CB95C2B73247D00938224 /* GameRulesTextView.swift */,
+				488DE8192B79A22C00EE4E2B /* GameRulesTextView.swift */,
 				483CB95F2B732DC200938224 /* GameSettingSubTitle.swift */,
-				483CB9612B732F4A00938224 /* GameBenefitsTextField.swift */,
-				48B70FDE2B733977008F760B /* GameCouponSelect.swift */,
-				483CB9632B73329700938224 /* GameBenefitsText.swift */,
 			);
 			path = DuplicatedGameManager;
 			sourceTree = "<group>";
@@ -527,6 +530,7 @@
 			children = (
 				48E10EDB2B725B1600D6EECB /* BasketBallGameViewModel.swift */,
 				48E10ED22B72578E00D6EECB /* BasketBallGameRulesView.swift */,
+				488DE8152B799FAB00EE4E2B /* BasketBallGameView.swift */,
 			);
 			path = BasketBallGame;
 			sourceTree = "<group>";
@@ -579,6 +583,24 @@
 				6C7239F02B5C11430082F12D /* GlobalToggle */,
 			);
 			path = GlobalImagePicker;
+			sourceTree = "<group>";
+		};
+		488DE8172B79A18F00EE4E2B /* BenefitTextField */ = {
+			isa = PBXGroup;
+			children = (
+				483CB9632B73329700938224 /* GameBenefitsText.swift */,
+				483CB9612B732F4A00938224 /* GameBenefitsTextField.swift */,
+			);
+			path = BenefitTextField;
+			sourceTree = "<group>";
+		};
+		488DE81B2B79A25900EE4E2B /* SelectCouponRadio */ = {
+			isa = PBXGroup;
+			children = (
+				48B70FDE2B733977008F760B /* GameCouponSelect.swift */,
+				488DE81C2B79A27500EE4E2B /* GameCouponView.swift */,
+			);
+			path = SelectCouponRadio;
 			sourceTree = "<group>";
 		};
 		488FA70E2B650F900030CE66 /* ButtonType */ = {
@@ -1166,6 +1188,7 @@
 				4850B00F2B766FAB00F8CD90 /* BaseLocationManager.swift in Sources */,
 				48B57FC02B75D4F0005965FD /* PopupModifier.swift in Sources */,
 				48B57FBF2B75D4EC005965FD /* AccountSettingView.swift in Sources */,
+				488DE81D2B79A27500EE4E2B /* GameCouponView.swift in Sources */,
 				48249D962B7527B5002849B3 /* SettingViewModel.swift in Sources */,
 				48249D952B7527B2002849B3 /* PlaceListViewModel.swift in Sources */,
 				481EA2732B6F339C00BAD5E0 /* WalkPlaceRegisterView.swift in Sources */,
@@ -1176,6 +1199,7 @@
 				487E38492B5AE04A0026599D /* KakaoLoginManager.swift in Sources */,
 				48CC6BCD2B6526560032A5E2 /* MarketPlaceRegister.swift in Sources */,
 				6C0E64AC2B73577800A238A7 /* RouteService.swift in Sources */,
+				488DE81A2B79A22C00EE4E2B /* GameRulesTextView.swift in Sources */,
 				6C76E8F92B73643500B42A65 /* TestMap.swift in Sources */,
 				6CAF06D32B5903B300526BC8 /* Coordinator.swift in Sources */,
 				CAFAE8252B750B5100C20502 /* BookMarkViewModel.swift in Sources */,
@@ -1272,6 +1296,7 @@
 				48FF93932B43BA0600202F45 /* AppDelegate.swift in Sources */,
 				48FD30942B6F5F4C00FB7E60 /* MarketViewModel.swift in Sources */,
 				488DE8142B7998A700EE4E2B /* BackgroundComponent.swift in Sources */,
+				488DE8162B799FAB00EE4E2B /* BasketBallGameView.swift in Sources */,
 				489BD8F12B4A40EE003382AE /* SearchButtonModel.swift in Sources */,
 				CA2513072B629144006D2EDF /* GuestBookCard.swift in Sources */,
 				488FA7122B6510890030CE66 /* MarketSelectButton.swift in Sources */,
@@ -1293,7 +1318,6 @@
 				48CC6BD02B652B940032A5E2 /* PlaceselectType.swift in Sources */,
 				6C7239E82B5BA7BA0082F12D /* NotiOption.swift in Sources */,
 				483699E82B78C8340046A2E8 /* WheelGameShapeView.swift in Sources */,
-				483CB95D2B73247D00938224 /* GameRulesTextView.swift in Sources */,
 				48D88C2C2B5C24A400A1B09E /* LoginServerResponse.swift in Sources */,
 				48B57FBB2B75CB62005965FD /* InputAddressView.swift in Sources */,
 				482DB6BB2B541E7E005538DE /* PlaceSettingView.swift in Sources */,
