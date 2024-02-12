@@ -30,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Create the SwiftUI view that provides the window contents.
         //MainViewControl().environmentObject(SharedTabInfo())
         //WalkwayPageContent(viewModel: WalkwayViewModel())
-        let contentView = LoginViewCycle()
+        let contentView = MainViewControl().environmentObject(SharedTabInfo())
         // Use a UIHostingController as window root view controller.
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.rootViewController = UIHostingController(rootView: contentView)

@@ -130,6 +130,7 @@ enum Icon: String {
     case whiteRest = "whiteRest"
     case exampleMarket = "exampleMarket"
     case exampleMarket2 = "exampleMarket2"
+    case lightRegisterBackground2 = "lightRegisterBackground2"
     
     
     //MARK: - Game

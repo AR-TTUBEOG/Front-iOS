@@ -24,7 +24,6 @@ struct MarketPageContent: View {
     //MARK: - Body
     var body: some View {
         ZStack {
-            Color.background.ignoresSafeArea(.all)
             viewFlow
         }
     }
@@ -33,7 +32,7 @@ struct MarketPageContent: View {
     
     @ViewBuilder
     private var viewFlow: some View {
-        switch viewModel.currentPageIndext {
+        switch viewModel.currentPageIndex {
         case 0:
             firstView
         case 1:
@@ -85,7 +84,7 @@ struct MarketPageContent: View {
                             highlightText: ["위치"],
                             subtitleText: "매장의 정확한 위치를 남겨주세요!",
                             titleHeight: 36,
-                            subtitleHeight: 50,
+                            spacing: 9,
                             textAlignment: .leading,
                             frameAlignment: .topLeading
             )
@@ -303,7 +302,7 @@ struct MarketPageContent: View {
             
             GameManagerView()
         })
-        .frame(width: 320, height: .infinity)
+        .frame(width: 320)
     }
     
     private var sevenView: some View {

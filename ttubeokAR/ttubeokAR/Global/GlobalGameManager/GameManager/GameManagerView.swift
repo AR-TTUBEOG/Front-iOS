@@ -31,7 +31,6 @@ struct GameManagerView: View {
                 
                 if showBasketBallGameSetting {
                     BasketBallGameView(viewModel: basketViewModel)
-                        .frame(height: .infinity)
                 }
                 
                 GameButtonView(title: "선물 뽑기",
@@ -39,7 +38,6 @@ struct GameManagerView: View {
                 
                 if showGiftDrawingGameSetting {
                     GiftDrawingGameView(viewModel: giftDrawingViewModel)
-                        .frame(height: .infinity)
                 }
                 
                 GameButtonView(title: "돌림판 게임",
@@ -47,12 +45,11 @@ struct GameManagerView: View {
                 
                 if showWhellGameSetting {
                     WheelGameView(viewModel: wheelGameViewModel)
-                        .frame(height: .infinity)
                 }
             }
         }
         .scrollIndicators(.hidden)
-        .frame(height: .infinity)
+        .frame(height: 510)
     }
 }
 

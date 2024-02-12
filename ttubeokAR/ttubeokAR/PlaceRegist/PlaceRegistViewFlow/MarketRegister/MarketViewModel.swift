@@ -27,8 +27,9 @@ class MarketViewModel: ObservableObject, ImageHandling, InputAddressProtocol, Fi
     
     //MARK: - Property
     @Published var marketModel = MarketModel()
-    @Published var currentPageIndext: Int = 6
+    @Published var currentPageIndex: Int = 0
     @Published var isImagePickerPresented = false
+    @Published var navigationToNextView = false
     @Published var images: [UIImage] = []
     
     
