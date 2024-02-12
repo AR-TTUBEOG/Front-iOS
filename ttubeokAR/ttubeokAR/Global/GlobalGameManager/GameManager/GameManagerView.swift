@@ -8,11 +8,14 @@
 import SwiftUI
 
 struct GameManagerView: View {
-    
     //MARK: - Property
     @State private var showBasketBallGameSetting = false
     @State private var showGiftDrawingGameSetting = false
     @State private var showWhellGameSetting = false
+    
+    @ObservedObject private var basketViewModel = BasketBallGameViewModel()
+    @ObservedObject private var giftDrawingViewModel = GiftDrawingGameViewModel()
+    @ObservedObject private var wheelGameViewModel = WheelGameViewModel()
     
     //MARK: Body
     var body: some View {
@@ -21,17 +24,41 @@ struct GameManagerView: View {
     
     //MARK: - GameManagerView
     private var allView: some View {
-        VStack(alignment: .center, spacing: 15) {
-            GameButtonView(title: "농구 게임",
-                           gameButtonAction: { showBasketBallGameSetting = true } )
-            GameButtonView(title: "선물 뽑기",
-                           gameButtonAction: { showGiftDrawingGameSetting = true })
-            GameButtonView(title: "돌림판 게임",
-                           gameButtonAction: { showWhellGameSetting = true })
+        ScrollView {
+            VStack(alignment: .center, spacing: 15) {
+                GameButtonView(title: "농구 게임",
+                               gameButtonAction: { showBasketBallGameSetting.toggle() } )
+                
+                if showBasketBallGameSetting {
+                    BasketBallGameView(viewModel: basketViewModel)
+                        .frame(height: .infinity)
+                }
+                
+                GameButtonView(title: "선물 뽑기",
+                               gameButtonAction: { showGiftDrawingGameSetting.toggle() })
+                
+                if showGiftDrawingGameSetting {
+                    GiftDrawingGameView(viewModel: giftDrawingViewModel)
+                        .frame(height: .infinity)
+                }
+                
+                GameButtonView(title: "돌림판 게임",
+                               gameButtonAction: { showWhellGameSetting.toggle() })
+                
+                if showWhellGameSetting {
+                    WheelGameView(viewModel: wheelGameViewModel)
+                        .frame(height: .infinity)
+                }
+            }
         }
+        .scrollIndicators(.hidden)
+        .frame(height: .infinity)
     }
 }
 
-#Preview {
-    GameManagerView()
+struct GameManager_Preview: PreviewProvider {
+    static var previews: some View {
+        GameManagerView()
+            .previewLayout(.sizeThatFits)
+    }
 }

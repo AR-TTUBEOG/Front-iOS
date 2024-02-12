@@ -38,7 +38,7 @@ struct BackgroundComponent: View {
             topTitleComponent
             Spacer()
         }
-        .frame(maxWidth: 330, maxHeight: 680)
+        .frame(width: 330, height: 690)
         .background(gradient)
     }
     

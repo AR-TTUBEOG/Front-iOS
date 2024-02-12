@@ -27,7 +27,7 @@ struct WheelGameView: View {
     //MARK: - BasketBallGameView
     
     private var gameStack: some View {
-        ScrollView(showsIndicators: false) {
+        ScrollView {
             VStack(spacing: 50) {
                 WheelGameRuleView(viewModel: viewModel)
                 WheelGameShapeView(viewModel: viewModel)
@@ -37,10 +37,11 @@ struct WheelGameView: View {
             }
             .padding(.top, 20)
         }
-        .frame(maxWidth: 300, maxHeight: 600)
+        .frame(width: 300, height: 620)
         .background(Color(red: 0.25, green: 0.24, blue: 0.37))
         .clipShape(.rect(cornerRadius: 24))
         .offset(y: 20)
+        .scrollIndicators(.hidden)
     }
 }
 

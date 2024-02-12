@@ -32,10 +32,10 @@ struct BasketBallGameView: View {
             GameCouponView(selectBtn: $viewModel.selectCoupon)
             GameSettingFinishButton(viewModel: viewModel)
         })
-        .frame(maxWidth: 300, maxHeight: 600)
+        .frame(width: 300, height: 600)
         .background(Color(red: 0.25, green: 0.24, blue: 0.37))
         .clipShape(.rect(cornerRadius: 24))
-        .padding(.top, 30)
+        .padding(.top, 10)
     }
 }
 

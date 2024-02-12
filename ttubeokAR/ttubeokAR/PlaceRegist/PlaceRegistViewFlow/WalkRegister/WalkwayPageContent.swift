@@ -10,7 +10,7 @@ import PopupView
 
 struct WalkwayPageContent: View {
     //MARK: - Property
-    @ObservedObject var viewModel = WalkwayViewModel()
+    @ObservedObject var viewModel: WalkwayViewModel
     @State private var walkWayName = ""
     
     //MARK: - TextFieldShame
