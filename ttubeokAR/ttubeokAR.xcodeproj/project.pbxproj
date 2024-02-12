@@ -68,6 +68,7 @@
 		488365F32B6FDFA100F4E397 /* MarketModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488365F22B6FDFA100F4E397 /* MarketModel.swift */; };
 		488365F62B6FE24200F4E397 /* ImageHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488365F52B6FE24200F4E397 /* ImageHandling.swift */; };
 		488373C92B66B79D0036C0FD /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488373C82B66B79D0036C0FD /* CustomTextField.swift */; };
+		488DE8142B7998A700EE4E2B /* BackgroundComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488DE8132B7998A700EE4E2B /* BackgroundComponent.swift */; };
 		488E25462B4D4E1C005D8D52 /* FontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488E25452B4D4E1C005D8D52 /* FontExtension.swift */; };
 		488FA7102B650FAD0030CE66 /* WalkSelectButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488FA70F2B650FAD0030CE66 /* WalkSelectButton.swift */; };
 		488FA7122B6510890030CE66 /* MarketSelectButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488FA7112B6510890030CE66 /* MarketSelectButton.swift */; };
@@ -222,6 +223,7 @@
 		488365F22B6FDFA100F4E397 /* MarketModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketModel.swift; sourceTree = "<group>"; };
 		488365F52B6FE24200F4E397 /* ImageHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageHandling.swift; sourceTree = "<group>"; };
 		488373C82B66B79D0036C0FD /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		488DE8132B7998A700EE4E2B /* BackgroundComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundComponent.swift; sourceTree = "<group>"; };
 		488E25452B4D4E1C005D8D52 /* FontExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontExtension.swift; sourceTree = "<group>"; };
 		488FA70F2B650FAD0030CE66 /* WalkSelectButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkSelectButton.swift; sourceTree = "<group>"; };
 		488FA7112B6510890030CE66 /* MarketSelectButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketSelectButton.swift; sourceTree = "<group>"; };
@@ -498,6 +500,7 @@
 		483CB9592B73244A00938224 /* DuplicatedGameManager */ = {
 			isa = PBXGroup;
 			children = (
+				488DE8132B7998A700EE4E2B /* BackgroundComponent.swift */,
 				483CB95C2B73247D00938224 /* GameRulesTextView.swift */,
 				483CB95F2B732DC200938224 /* GameSettingSubTitle.swift */,
 				483CB9612B732F4A00938224 /* GameBenefitsTextField.swift */,
@@ -1268,6 +1271,7 @@
 				6C7748022B74F8D800D26F22 /* AnnoButtonView.swift in Sources */,
 				48FF93932B43BA0600202F45 /* AppDelegate.swift in Sources */,
 				48FD30942B6F5F4C00FB7E60 /* MarketViewModel.swift in Sources */,
+				488DE8142B7998A700EE4E2B /* BackgroundComponent.swift in Sources */,
 				489BD8F12B4A40EE003382AE /* SearchButtonModel.swift in Sources */,
 				CA2513072B629144006D2EDF /* GuestBookCard.swift in Sources */,
 				488FA7122B6510890030CE66 /* MarketSelectButton.swift in Sources */,
