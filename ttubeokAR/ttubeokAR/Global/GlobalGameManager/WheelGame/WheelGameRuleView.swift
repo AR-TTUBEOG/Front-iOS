@@ -9,16 +9,16 @@ import SwiftUI
 
 struct WheelGameRuleView: View {
     
-    @ObservedObject var viewModel = WheelGameViewModel()
+    @ObservedObject var viewModel: WheelGameViewModel
     
     var body: some View {
-        ZStack {
-            Color(red: 0.25, green: 0.24, blue: 0.37).ignoresSafeArea(.all)
+        ZStack(alignment: .topLeading) {
+            GameSettingSubTitle(title: "게임 규칙")
+                .offset(x: 13)
             rulesView
+                .offset(y: 30)
         }
-        .onTapGesture {
-            viewModel.activePopoverIndex = nil
-        }
+        .frame(width: 280, height: 160, alignment: .top)
     }
     
     //MARK: - WheelGameRuleView
@@ -26,13 +26,23 @@ struct WheelGameRuleView: View {
     private var rulesView: some View {
         VStack(alignment: .leading, spacing: 2) {
             ForEach(0..<viewModel.texts.count, id: \.self) { index in
-                WheelGameRulesSettingView(viewModel: viewModel, wheelGameSetting: viewModel.wheelGameSetting[index], index: index)
+                WheelGameRulesSettingView(viewModel: viewModel, index: index)
             }
         }
-        
+        .frame(width: 280, height: 200)
+        .background(Color(red: 0.25, green: 0.24, blue: 0.37))
+        .clipShape(.rect(cornerRadius: 19))
+        .overlay(
+            RoundedRectangle(cornerRadius: 19)
+                .inset(by: 0.5)
+                .stroke(Color.primary03, lineWidth: 0.5)
+        )
     }
 }
 
-#Preview {
-    WheelGameRuleView()
+struct WheelGameRulesView_Previews: PreviewProvider {
+    static var previews: some View {
+        WheelGameRuleView(viewModel: WheelGameViewModel())
+            .previewLayout(.sizeThatFits)
+    }
 }

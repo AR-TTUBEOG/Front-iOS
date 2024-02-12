@@ -34,7 +34,7 @@ struct WheelGamePicker: View {
                 }
             }
         }
-        .frame(maxWidth: 60, maxHeight: 60, alignment: .center)
+        .frame(maxWidth: 80, maxHeight: 80, alignment: .center)
         .background {
             RoundedRectangle(cornerRadius: 20)
                 .fill(

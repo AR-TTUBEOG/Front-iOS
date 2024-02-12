@@ -35,7 +35,7 @@ struct BasketBallGameView: View {
         .frame(maxWidth: 300, maxHeight: 600)
         .background(Color(red: 0.25, green: 0.24, blue: 0.37))
         .clipShape(.rect(cornerRadius: 24))
-        .offset(y: 20)
+        .padding(.top, 30)
     }
 }
 

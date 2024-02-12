@@ -1,5 +1,5 @@
 //
-//  BasketBallGameView.swift
+//  GiftDrawingGameView.swift
 //  ttubeokAR
 //
 //  Created by 정의찬 on 2/12/24.
@@ -35,7 +35,7 @@ struct GiftDrawingGameView: View {
         .frame(maxWidth: 300, maxHeight: 580)
         .background(Color(red: 0.25, green: 0.24, blue: 0.37))
         .clipShape(.rect(cornerRadius: 24))
-        .offset(y: 20)
+        .padding(.top, 20)
     }
 }
 

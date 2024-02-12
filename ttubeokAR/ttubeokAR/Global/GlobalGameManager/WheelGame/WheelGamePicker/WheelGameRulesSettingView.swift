@@ -12,8 +12,6 @@ struct WheelGameRulesSettingView: View {
     //MARK: - Property
     
     @ObservedObject var viewModel: WheelGameViewModel
-    @State var wheelGameSetting: WheelGameSetting
-    @State var isPopover: Bool = false
     let index: Int
     
     //MARK: - Body
@@ -26,7 +24,7 @@ struct WheelGameRulesSettingView: View {
                     showPickerMenu
             }
         }
-        .frame(maxWidth: 240, maxHeight: 50)
+        .frame(maxWidth: 240, maxHeight: 120)
         .onTapGesture {
             self.keyboardResponsive()
         }
@@ -84,7 +82,7 @@ struct WheelGameRulesSettingView: View {
                         backgroundColor: textFieldBackground(),
                         lineColor: textFieldLineColor()
         )
-        .disabled(wheelGameSetting == .boom)
+        .disabled(viewModel.wheelGameSetting[index] == .boom)
     }
     
     private var showPickerMenu: some View {
@@ -95,18 +93,18 @@ struct WheelGameRulesSettingView: View {
             WheelGamePicker(sendAction: { option in
                 switch option {
                 case .goods:
-                    wheelGameSetting = .goods
-                    isPopover = false
+                    viewModel.wheelGameSetting[index] = .goods
+                    viewModel.activePopoverIndex = nil
                 case .boom:
-                    wheelGameSetting = .boom
-                    isPopover = false
+                    viewModel.wheelGameSetting[index] = .boom
+                    viewModel.activePopoverIndex = nil
                 }
             })
         }
     }
     
     private func pickerName() -> String {
-        switch wheelGameSetting {
+        switch viewModel.wheelGameSetting[index] {
         case .goods:
             return "상품"
         case .boom:
@@ -115,7 +113,7 @@ struct WheelGameRulesSettingView: View {
     }
     
     private func textFieldPlaceholder() -> String {
-        switch wheelGameSetting {
+        switch viewModel.wheelGameSetting[index] {
         case .goods:
             return "상품 내용을 입력하세요"
         case .boom:
@@ -125,7 +123,7 @@ struct WheelGameRulesSettingView: View {
     
     
     private func textFieldBackground() -> Color {
-        switch wheelGameSetting {
+        switch viewModel.wheelGameSetting[index] {
         case .goods:
             return Color(red: 0.25, green: 0.24, blue: 0.37)
         case .boom:
@@ -135,7 +133,7 @@ struct WheelGameRulesSettingView: View {
     
     
     private func textFieldLineColor() -> Color {
-        switch wheelGameSetting {
+        switch viewModel.wheelGameSetting[index] {
         case .goods:
             return Color.primary01
         case .boom:

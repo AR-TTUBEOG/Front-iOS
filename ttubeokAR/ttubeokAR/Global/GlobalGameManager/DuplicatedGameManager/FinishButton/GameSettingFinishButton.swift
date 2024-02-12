@@ -16,7 +16,7 @@ struct GameSettingFinishButton<ViewModel: ObservableObject & FinishButtonProtoco
             viewModel.finishSendAPI()
         }, label: {
             Text("설정완료")
-                .frame(maxWidth: 100, maxHeight: 40)
+                .frame(width: 100, height: 40)
                 .font(.sandol(type: .medium, size: 16))
                 .foregroundStyle(Color.white)
                 .background(Color(red: 0.44, green: 0.40, blue: 0.89))

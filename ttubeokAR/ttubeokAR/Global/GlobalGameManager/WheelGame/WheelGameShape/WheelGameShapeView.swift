@@ -13,21 +13,9 @@ struct WheelGameShapeView: View {
     @State private var isSpinning = false
     @State private var selectedValue: String?
     
-    let wheelSize: CGFloat
-    let fontSize: CGFloat
-    let arrowSize: CGFloat
-    
-    init(viewModel: WheelGameViewModel = WheelGameViewModel(),
-         wheelSize: CGFloat = 260,
-         fontSize: CGFloat = 16,
-         arrowSize: CGFloat = 40
-    ) {
-        self.viewModel = viewModel
-        self.wheelSize = wheelSize
-        self.fontSize = fontSize
-        self.arrowSize = arrowSize
-    }
-   
+    let wheelSize: CGFloat = 260
+    let fontSize: CGFloat = 16
+    let arrowSize: CGFloat = 40
     
     
     var body: some View {
@@ -44,6 +32,7 @@ struct WheelGameShapeView: View {
                 .frame(maxWidth: arrowSize, maxHeight: arrowSize)
                 .aspectRatio(contentMode: .fit)
         }
+        .frame(width: 250, height: 300,alignment: .top)
         
     }
     
@@ -154,7 +143,9 @@ struct WheelGameShapeView: View {
 
 
 
-#Preview {
-    WheelGameShapeView(viewModel: WheelGameViewModel.share)
-        .previewLayout(.sizeThatFits)
+struct WheelGameShapeView_Previews: PreviewProvider {
+    static var previews: some View {
+        WheelGameShapeView(viewModel: WheelGameViewModel())
+            .previewLayout(.sizeThatFits)
+    }
 }

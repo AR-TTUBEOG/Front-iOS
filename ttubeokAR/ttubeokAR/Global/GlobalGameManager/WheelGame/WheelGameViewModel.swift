@@ -7,13 +7,17 @@
 
 import Foundation
 
-class WheelGameViewModel: ObservableObject {
+class WheelGameViewModel: ObservableObject, FinishButtonProtocol {
     
     static let share = WheelGameViewModel()
     
+    //MARK: - 원판 상품 설정
     @Published var wheelGameSetting: [WheelGameSetting]
-    @Published var texts: [String] = Array(repeating: "하하호호", count: 4)
+    @Published var texts: [String] = Array(repeating: "", count: 4)
     @Published var activePopoverIndex: Int? = nil
+    
+    //MARK: - 혜택 쿠폰 선택
+    @Published var selectCoupon: Int? = nil
     
     init() {
         wheelGameSetting = [
@@ -22,7 +26,10 @@ class WheelGameViewModel: ObservableObject {
             WheelGameSetting(option: "상품"),
             WheelGameSetting(option: "꽝")
         ]
-        
-        
+    }
+    
+    //MARK: - API 전달
+    func finishSendAPI() {
+        print("hello")
     }
 }

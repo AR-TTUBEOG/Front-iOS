@@ -67,6 +67,7 @@
 		487E38472B5ADE7A0026599D /* KakaoSDKCommon in Frameworks */ = {isa = PBXBuildFile; productRef = 487E38462B5ADE7A0026599D /* KakaoSDKCommon */; };
 		487E38492B5AE04A0026599D /* KakaoLoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487E38482B5AE04A0026599D /* KakaoLoginManager.swift */; };
 		488342FE2B7A155D007A16AD /* GiftDrawingGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488342FD2B7A155D007A16AD /* GiftDrawingGameView.swift */; };
+		488343002B7A1D57007A16AD /* WheelGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488342FF2B7A1D56007A16AD /* WheelGameView.swift */; };
 		488365F32B6FDFA100F4E397 /* MarketModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488365F22B6FDFA100F4E397 /* MarketModel.swift */; };
 		488365F62B6FE24200F4E397 /* ImageHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488365F52B6FE24200F4E397 /* ImageHandling.swift */; };
 		488373C92B66B79D0036C0FD /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488373C82B66B79D0036C0FD /* CustomTextField.swift */; };
@@ -227,6 +228,7 @@
 		486C2FEC2B592A8D00C88B04 /* NicknameSettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameSettingViewModel.swift; sourceTree = "<group>"; };
 		487E38482B5AE04A0026599D /* KakaoLoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoLoginManager.swift; sourceTree = "<group>"; };
 		488342FD2B7A155D007A16AD /* GiftDrawingGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiftDrawingGameView.swift; sourceTree = "<group>"; };
+		488342FF2B7A1D56007A16AD /* WheelGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WheelGameView.swift; sourceTree = "<group>"; };
 		488365F22B6FDFA100F4E397 /* MarketModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketModel.swift; sourceTree = "<group>"; };
 		488365F52B6FE24200F4E397 /* ImageHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageHandling.swift; sourceTree = "<group>"; };
 		488373C82B66B79D0036C0FD /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
@@ -568,6 +570,7 @@
 				481E74BF2B78A33000A50846 /* WheelGamePicker */,
 				48B21D162B77B6FD00C26317 /* WheelGameViewModel.swift */,
 				48B21D1E2B77E91000C26317 /* WheelGameRuleView.swift */,
+				488342FF2B7A1D56007A16AD /* WheelGameView.swift */,
 			);
 			path = WheelGame;
 			sourceTree = "<group>";
@@ -1273,6 +1276,7 @@
 				486C2FEB2B592A4B00C88B04 /* NicknameSettingLogin.swift in Sources */,
 				488365F32B6FDFA100F4E397 /* MarketModel.swift in Sources */,
 				48B21D1D2B77D78D00C26317 /* WheelGamePickerMenu.swift in Sources */,
+				488343002B7A1D57007A16AD /* WheelGameView.swift in Sources */,
 				CA2513032B6290DC006D2EDF /* DetailDataModel.swift in Sources */,
 				48ADCAA52B6645BD00765EDB /* SharedTabInfo.swift in Sources */,
 				CA3DFFF12B6E42AE0007D2E6 /* DetailExploreAPITarget.swift in Sources */,
