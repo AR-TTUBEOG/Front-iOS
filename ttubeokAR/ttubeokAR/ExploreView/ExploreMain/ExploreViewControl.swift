@@ -14,25 +14,31 @@ struct ExploreViewControl: View {
     @StateObject var viewModel:  ExploreViewModel
     @StateObject var detailViewModel = DetailViewModel()
     @State private var showDetail = false
+    @State private var keyboardVisible = false
     
     // MARK: - Body
     var body: some View {
         NavigationStack {
             allView
-                
+                .onAppear {
+                    observeKeyboard()
+                }
         }
     }
     
     // MARK: - Explore View
     
     private var allView: some View {
-        GeometryReader { geometry in
-            ZStack(alignment:.top){
+        ZStack(alignment:.top){
+            GeometryReader { geometry in
                 Color.background.ignoresSafeArea()
                 VStack(spacing:20){
-                    mainImage
+                    if !keyboardVisible {
+                        mainImage
+                    }
                     centerView(geometry: geometry)
                         .onAppear {
+                            print("--------------MainViewControll 초기 호출--------------")
                             viewModel.fetchDataSearch(viewModel.currentSearchType, page: 1)
                         }
                 }
@@ -41,19 +47,18 @@ struct ExploreViewControl: View {
         }
     }
     
-    private var imgBackground: some View {
+    private func imgBackground(geometry: GeometryProxy) -> some View {
         Icon.backgroundLogo.image
-            .resizable()
-            .frame(maxWidth: 287, maxHeight: 418)
-            .aspectRatio(contentMode: .fill)
-            .padding(.top, 10)
+            .fixedSize()
+            .aspectRatio(contentMode: .fit)
+            .position(x: geometry.size.width / 2, y: geometry.size.height * 0.32)
     }
     
     //뚜벅 메인페이지 슬로건
     private var mainImage: some View {
         Image("banner")
             .resizable()
-            .frame(minWidth: 0, maxWidth: .infinity)
+            .frame(maxWidth: .infinity, maxHeight: 90)
             .aspectRatio(contentMode: .fit)
             .padding(.horizontal, 20)
         
@@ -64,7 +69,7 @@ struct ExploreViewControl: View {
         if let information = viewModel.exploreData?.information, !information.isEmpty {
             return AnyView(recommendedSpacesGrid(geometry: geometry))
         } else {
-            return AnyView(imgBackground)
+            return AnyView(imgBackground(geometry: geometry))
         }
     }
     
@@ -76,6 +81,7 @@ struct ExploreViewControl: View {
                     RecommendedSpaceCard(viewModel: viewModel, exploreDataInfor: place)
                         .frame(minWidth: 0, maxWidth: .infinity)
                         .onAppear {
+                            print("--------------LazyGrid 마지막 페이지 호출--------------")
                             if place == self.viewModel.exploreData?.information.last {
                                 viewModel.fetchDataSearch(viewModel.currentSearchType, page: viewModel.curretnPage + 1)
                             }
@@ -93,7 +99,24 @@ struct ExploreViewControl: View {
             .frame(maxWidth: .infinity)
         }
         .refreshable {
+            print("--------------refresh 호출--------------")
             viewModel.fetchDataSearch(viewModel.currentSearchType, page: 1)
+        }
+    }
+    
+    private func observeKeyboard() {
+        NotificationCenter.default.addObserver(
+            forName: UIResponder.keyboardWillShowNotification,
+            object: nil, queue: .main
+        ) { _ in
+            keyboardVisible = true
+        }
+        
+        NotificationCenter.default.addObserver(
+            forName: UIResponder.keyboardWillHideNotification,
+            object: nil, queue: .main
+        ) { _ in
+            keyboardVisible = false
         }
     }
 }

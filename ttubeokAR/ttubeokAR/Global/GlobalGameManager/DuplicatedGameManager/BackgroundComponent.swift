@@ -10,6 +10,7 @@ import SwiftUI
 struct BackgroundComponent: View {
     //MARK: - Property
     
+    
     let gradient = LinearGradient(
         gradient: Gradient(
             colors: [
@@ -22,12 +23,18 @@ struct BackgroundComponent: View {
     )
     
     
+    let width: CGFloat
+    let height: CGFloat
     let topTitle: String
     let fontSize: CGFloat
     
-    init(topTitle: String = "",
+    init(width: CGFloat = 360,
+         height: CGFloat = 690,
+         topTitle: String = "",
          fontSize: CGFloat = 18
     ) {
+        self.width = width
+        self.height = height
         self.topTitle = topTitle
         self.fontSize = fontSize
     }
@@ -38,7 +45,7 @@ struct BackgroundComponent: View {
             topTitleComponent
             Spacer()
         }
-        .frame(width: 330, height: 690)
+        .frame(width: width, height: height)
         .background(gradient)
     }
     

@@ -39,7 +39,9 @@ struct WalkwayPageContent: View {
         case 2:
             thirdView
         case 3:
-            fourthView
+            ScrollView {
+                fourthView
+            }
         case 4:
             fifthView
         case 5:
@@ -55,8 +57,8 @@ struct WalkwayPageContent: View {
     private var firstPlaceInputTextField: some View {
         CustomTextField(text: $viewModel.firstPlaceName,
                         placeholder: "예) 낙산공원",
-                        maxWidth: 355,
-                        maxHeight: 45,
+                        maxWidth: 320,
+                        maxHeight: 38,
                         onSearch: {})
     }
     
@@ -73,13 +75,14 @@ struct WalkwayPageContent: View {
             )
             firstPlaceInputTextField
         }
+        .frame(width: 360, alignment: .center)
     }
     
     //MARK: - WalkwaySecondView
     
     /// 두 번째 안내글 뷰
     private var secondView: some View {
-        VStack(alignment: .leading, spacing: 35) {
+        VStack(alignment: .leading, spacing: 15) {
             CustomTitleView(titleText: "산책스팟의 위치를 알려주세요",
                             highlightText: ["위치"],
                             subtitleText: "산책로 중에 특정 위치의 주소를 입력해주세요 \n어디든 괜찮아요." ,
@@ -91,6 +94,7 @@ struct WalkwayPageContent: View {
             
             InputAddressView(viewModel: viewModel)
         }
+        .frame(width: 360, alignment: .center)
         
     }
     
@@ -102,6 +106,7 @@ struct WalkwayPageContent: View {
                         highlightText: ["정보"],
                         subtitleText: "정보를 입력해야 방문객에게 장소가 보여요.",
                         titleHeight: 80,
+                        spacing: 1,
                         textAlignment: .center,
                         frameAlignment: .center
         )
@@ -118,8 +123,8 @@ struct WalkwayPageContent: View {
                             leadingHorizontalPadding: fourthHorizontalPadding,
                             trailingHorizontalPadding: fourthHorizontalPadding,
                             verticalPadding: fourthVerticalPadding,
-                            maxWidth: 339,
-                            maxHeight: 102,
+                            maxWidth: 300,
+                            maxHeight: 90,
                             onSearch: {},
                             alignment: .topLeading,
                             axis: .vertical,
@@ -127,11 +132,10 @@ struct WalkwayPageContent: View {
             )
             
             Text("\(viewModel.fourthWalkwayDescription.count) / 50")
-                .frame(maxWidth: 48, maxHeight: 30, alignment: .center)
+                .frame(width: 48, height: 30, alignment: .center)
                 .font(.sandol(type: .regular, size: 11))
                 .multilineTextAlignment(.center)
                 .foregroundStyle(Color.textPink)
-                .padding([.trailing, .bottom], 5)
         }
     }
     
@@ -155,14 +159,13 @@ struct WalkwayPageContent: View {
     private var fourthExampleImage: some View {
         Icon.examplePlace.image
             .resizable()
-            .aspectRatio(contentMode: .fit)
-            .frame(maxWidth: 326, maxHeight: 240)
+            .frame(width: 340, height: 280)
     }
     
-    /// 네 번째 안내글 뷰
+    /// 네 번째 뷰
     private var fourthView: some View {
-        VStack(spacing: 5) {
-            VStack(alignment: .leading, spacing: 20) {
+        VStack(alignment: .leading, spacing: 20) {
+            
                 CustomTitleView(titleText: "산책스팟을 소개해주세요",
                                 highlightText: ["소개"],
                                 subtitleText: "나중에 언제든지 변경할 수 있으니, 걱정하지 마세요",
@@ -170,17 +173,18 @@ struct WalkwayPageContent: View {
                                 textAlignment: .leading,
                                 frameAlignment: .topLeading
                 )
-                
+            
+            VStack(alignment: .leading, spacing: 30) {
                 fourthWalkwayDescription
+                
                 
                 VStack(alignment: .leading, spacing: 24) {
                     fourthInformationNotice
                     fourthExampleImage
                 }
-                .frame(maxWidth: 334, maxHeight: 263)
             }
         }
-        .frame(maxWidth: 330)
+        .frame(width: 360, alignment: .center)
     }
     
     //MARK: - fifthView
@@ -191,21 +195,21 @@ struct WalkwayPageContent: View {
             Icon.lightOn.image
                 .resizable()
                 .aspectRatio(contentMode: .fill)
-                .frame(maxWidth: 27, maxHeight: 27)
+                .frame(width: 27, height: 27)
             Text("등록된 사진은 이렇게 보여요.")
                 .font(.sandol(type: .medium, size: 12))
                 .foregroundStyle(.textPink)
-                .frame(maxWidth: 268, maxHeight: 16, alignment: .leading)
+                .frame(width: 268, height: 16, alignment: .leading)
             
         }
-        .frame(maxWidth: 304, maxHeight: 27, alignment: .leading)
+        .frame(width: 304, height: 27)
     }
     
     /// 다섯 번째 예시 사진
     private var fifththExampleImage: some View {
         Icon.examplePlace2.image
             .resizable()
-            .frame(maxWidth: 326, maxHeight: 260)
+            .frame(width: 340, height: 280)
     }
     
     /// 다섯 번째 뷰
@@ -215,10 +219,13 @@ struct WalkwayPageContent: View {
                 CustomTitleView(titleText: "배경사진을 등록해주세요",
                                 highlightText: ["사진", "등록"],
                                 subtitleText: "방문객은 배경 사진을 보고 산책로를 파악해요. \n사진은 이후 변경할 수 있지만 한 장은 필수 등록이에요!",
+                                titleWidth: 330,
                                 titleHeight: 36,
+                                subtitleWidth: 330,
                                 subtitleHeight: 60,
                                 textAlignment: .leading,
                                 frameAlignment: .topLeading)
+                
                 ImageSelectionButton(viewModel: viewModel)
             }
             VStack(alignment: .leading, spacing: 14) {
@@ -226,12 +233,14 @@ struct WalkwayPageContent: View {
                 fifththExampleImage
             }
         }
-        .frame(maxWidth: 330)
+        .frame(maxWidth: 360)
+        .padding(.leading, -10)
     }
 }
 
 struct WalkwalyPageContent_Preview: PreviewProvider {
     static var previews: some View {
         WalkwayPageContent(viewModel: WalkwayViewModel())
+            .previewLayout(.sizeThatFits)
     }
 }

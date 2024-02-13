@@ -19,7 +19,8 @@ struct WalkPlaceRegisterView: View {
     
     //MARK: - Body
     var body: some View {
-        allView
+            allView
+            .ignoresSafeArea(.keyboard)
             .navigationBarBackButtonHidden(true)
             .navigationDestination(isPresented: $viewModel.navigationToNextView) {
                 PlaceRegisterFinishView(viewModel: viewModel, lastedSelectedTab: lastedSelectedTab)

@@ -25,7 +25,7 @@ struct GiftDrawingGameRulesView: View {
             settingGameRules
                 .offset(y: 30)
         }
-        .frame(maxWidth: 260, maxHeight: 130, alignment: .top)
+        .frame(width: 310, height: 140, alignment: .top)
     }
     
  
@@ -41,7 +41,7 @@ struct GiftDrawingGameRulesView: View {
             
             Divider()
                 .background(Color(red: 0.63, green: 0.62, blue: 0.95))
-                .frame(maxHeight: 0.5)
+                .frame(height: 0.5)
             
             GameRulesTextView(label: "선물 개수",
                               onMinusTapped: { viewModel.decreaseGiftCount() },
@@ -49,7 +49,7 @@ struct GiftDrawingGameRulesView: View {
                               onPlustTapped: { viewModel.increaseGifCount() }
             )
         }
-        .frame(maxWidth: 270, maxHeight: 100, alignment: .center)
+        .frame(width: 280, height: 100, alignment: .center)
         .background(Color(red: 0.25, green: 0.24, blue: 0.37))
         .clipShape(.rect(cornerRadius: 19))
         .overlay(

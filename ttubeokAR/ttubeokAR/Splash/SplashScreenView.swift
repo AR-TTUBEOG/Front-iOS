@@ -6,9 +6,39 @@
 //
 
 import SwiftUI
+import Combine
+import CoreLocation
+import AVFoundation
+import Photos
 
 struct SplashScreenView: View {
     //MARK: Property
+    
+    @State private var isLocationPermissionOfGPS = false
+    @State private var isLocationPermissionOfCamera = false
+    @State private var isLocationPermissionOfLibrary = false
+    
+    @State private var showingLocationServiceDisabledAlert = false
+    @State private var showingCameraAccessAlert = false
+    @State private var showingPhotoLibraryAccessAlert = false
+    
+    @ObservedObject private var loginViewModel = LoginViewModel()
+    @State private var currentState: AppState = .login
+    
+    
+    //MARK: Authorization Text
+    
+    let gpsAlertTitle: String = "위치 정보 이용"
+    let gpsAlertMessage: String = "위치 서비스를 사용할 수 없습니다. \n디바이스의 '설정 > 개인정보 보호'에서 위치 서비스를 켜주세요."
+    
+    let cameraAlertTitle: String = "카메라 접근 허용"
+    let cameraAlertMessage: String = "카메라를 사용할 수 없습니다. \n디바이스의 '설정 > 개인정보 보호'에서 카메라 서비스를 켜주세요."
+    
+    let libraryAlertTitle: String = "앨범 접근 허용"
+    let libraryAlertMessage: String = "앨범 사용할 수 없습니다. \n디바이스의 '설정 > 개인정보 보호'에서 앨범 서비스를 켜주세요."
+    
+    
+    //MARK: Body
     
     //MARK: Body
     var body: some View {
@@ -18,9 +48,59 @@ struct SplashScreenView: View {
             centerLogo
         }
         .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.7) {
-                self.changeToLoginView()
+            requestCameraPermission()
+            requestPhotoLibraryPermission()
+            requestLocationPermission()
+            checkUser()
+        }
+        
+        .onReceive(Just(isLocationPermissionOfGPS)) { _ in
+            proceedChangeView()
+        }
+        
+        .onReceive(Just(isLocationPermissionOfCamera)) { _ in
+            proceedChangeView()
+        }
+        
+        .onReceive(Just(isLocationPermissionOfLibrary)) { _ in
+            proceedChangeView()
+        }
+        
+        .alert(cameraAlertTitle,
+               isPresented: $showingCameraAccessAlert) {
+            Button("설정으로 이동") {
+                if let appSetting = URL(string: UIApplication.openSettingsURLString) {
+                    UIApplication.shared.open(appSetting)
+                }
             }
+            Button("취소", role: .cancel) {}
+        } message: {
+            Text(cameraAlertMessage)
+        }
+        
+        .alert(libraryAlertTitle,
+               isPresented: $showingPhotoLibraryAccessAlert) {
+            Button("설정으로 이동") {
+                if let appSetting = URL(string: UIApplication.openSettingsURLString) {
+                    UIApplication.shared.open(appSetting)
+                }
+            }
+            Button("취소", role: .cancel) {}
+        } message: {
+            Text(libraryAlertMessage)
+        }
+        
+        
+        .alert(gpsAlertTitle,
+               isPresented: $showingLocationServiceDisabledAlert) {
+            Button("설정으로 이동") {
+                if let appSetting = URL(string: UIApplication.openSettingsURLString) {
+                    UIApplication.shared.open(appSetting)
+                }
+            }
+            Button("취소", role: .cancel) {}
+        } message: {
+            Text(gpsAlertMessage)
         }
     }
     
@@ -54,9 +134,92 @@ struct SplashScreenView: View {
     
     private func changeToLoginView() {
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
-            let newRootView = UIHostingController(rootView: LoginViewCycle())
+            let newRootView = UIHostingController(rootView: LoginViewCycle(currentState: currentState, loginViewModel: loginViewModel))
             appDelegate.changeRootSplashView(newRootView, animated: true)
         }
+    }
+    
+    //MARK: - 유효성 검사
+    private func checkUser() {
+        print("유효성 검사 시작함")
+        loginViewModel.checkLoginStatus()
+        currentState = loginViewModel.savedLoginToken ? .mainView : .login
+    }
+    
+    
+    //MARK: - Location 설정
+    
+    private func requestLocationPermission() {
+        DispatchQueue.global().async {
+            if CLLocationManager.locationServicesEnabled() {
+                DispatchQueue.main.async {
+                    BaseLocationManager.shared.onAuthorizationChanged = { status in
+                        switch status {
+                            
+                        case .notDetermined:
+                            BaseLocationManager.shared.requestLocationAuthorization()
+                        case .authorizedWhenInUse, .authorizedAlways:
+                            self.isLocationPermissionOfGPS = true
+                            proceedChangeView()
+                        case .denied, .restricted:
+                            self.isLocationPermissionOfGPS = false
+                            self.showingLocationServiceDisabledAlert = true
+                        default:
+                            break
+                        }
+                    }
+                }
+            }
+            else {
+                showingLocationServiceDisabledAlert = true
+            }
+        }
+    }
+    
+    //MARK: - 카메라 설정
+    private func requestCameraPermission() {
+        switch AVCaptureDevice.authorizationStatus(for: .video) {
+        case .notDetermined:
+            AVCaptureDevice.requestAccess(for: .video) { granted in
+                DispatchQueue.main.async {
+                    self.showingCameraAccessAlert = !granted
+                    self.isLocationPermissionOfCamera = granted
+                }
+            }
+        case .denied, .restricted:
+            self.showingCameraAccessAlert = true
+            self.isLocationPermissionOfCamera = false
+        case .authorized:
+            self.isLocationPermissionOfCamera = true
+        default:
+            break
+        }
+    }
+
+    //MARK: - 앨범 설정
+    private func requestPhotoLibraryPermission() {
+        switch PHPhotoLibrary.authorizationStatus() {
+        case .notDetermined:
+            PHPhotoLibrary.requestAuthorization { status in
+                DispatchQueue.main.async {
+                    self.isLocationPermissionOfLibrary = status == .authorized
+                    self.showingPhotoLibraryAccessAlert = status != .authorized
+                }
+            }
+        case .denied, .restricted:
+            self.showingPhotoLibraryAccessAlert = true
+            self.isLocationPermissionOfLibrary = false
+        case .authorized, .limited:
+            self.isLocationPermissionOfLibrary = true
+        default:
+            break
+        }
+    }
+    
+    private func proceedChangeView() {
+        if isLocationPermissionOfGPS, isLocationPermissionOfCamera, isLocationPermissionOfLibrary {
+                self.changeToLoginView()
+            }
     }
 }
 

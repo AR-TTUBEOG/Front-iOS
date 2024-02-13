@@ -19,7 +19,7 @@ struct GameCouponSelect: View {
             makeCheckBtn(name: "무료 쿠폰", img: Icon.gameBox.image, id: 3)
         }
         .padding(.leading, 20)
-        .frame(maxWidth: 260, maxHeight: 130, alignment: .leading)
+        .frame(width: 273, height: 130, alignment: .leading)
         .background(Color(red: 0.25, green: 0.24, blue: 0.37))
         .clipShape(.rect(cornerRadius: 19))
         .overlay(
@@ -47,12 +47,12 @@ struct GameCouponSelect: View {
                     Icon.checkCircle.image
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .frame(maxWidth: 20, maxHeight: 20)
+                        .frame(width: 20, height: 20)
                     
                 } else {
                     Circle()
                         .fill(Color(red: 0.92, green: 0.90, blue: 0.97).opacity(0.30))
-                        .frame(maxWidth: 20, maxHeight: 20)
+                        .frame(width: 20, height: 20)
                         .overlay(
                             Circle()
                                 .inset(by: 0.50)
@@ -62,17 +62,17 @@ struct GameCouponSelect: View {
             })
             
             Text(title)
-                .frame(maxWidth: 70, maxHeight: 20, alignment: .bottom)
+                .frame(width: 70, height: 20, alignment: .bottom)
                 .font(.sandol(type: .bold, size: 13))
                 .foregroundStyle(Color.textPink)
             
             image
                 .resizable()
-                .frame(maxWidth: 20, maxHeight: 20)
+                .frame(width: 20, height: 20)
                 .aspectRatio(contentMode: .fit)
             
         }
-        .frame(maxWidth: 140, maxHeight: 25)
+        .frame(width: 140, height: 25)
     }
 }
 

@@ -18,7 +18,7 @@ struct WheelGameRuleView: View {
             rulesView
                 .offset(y: 30)
         }
-        .frame(width: 280, height: 160, alignment: .top)
+        .frame(width: 320, height: 265, alignment: .top)
     }
     
     //MARK: - WheelGameRuleView
@@ -29,7 +29,7 @@ struct WheelGameRuleView: View {
                 WheelGameRulesSettingView(viewModel: viewModel, index: index)
             }
         }
-        .frame(width: 280, height: 200)
+        .frame(width: 300, height: 230)
         .background(Color(red: 0.25, green: 0.24, blue: 0.37))
         .clipShape(.rect(cornerRadius: 19))
         .overlay(

@@ -13,8 +13,8 @@ import SwiftUI
 struct LoginViewCycle: View {
     
     //MARK: - Property
-    @State private var currentState: AppState = .login
-    @StateObject private var loginViewModel = LoginViewModel()
+    @State var currentState: AppState
+    @StateObject var loginViewModel: LoginViewModel
     
     //MARK: - Body
     var body: some View {
@@ -26,14 +26,9 @@ struct LoginViewCycle: View {
                 NicknameSettingLogin(transitionToNext: { withAnimation {currentState = .mainView} }, viewModel: NicknameSettingViewModel())
                     .transition(.opacity)
             case .mainView:
-                MainViewControl()
+                MainViewControl().environmentObject(SharedTabInfo())
                     .transition(.opacity)
             }
-        }
-        .onAppear {
-            print("유효성 검사 시작함")
-            loginViewModel.checkLoginStatus()
-            currentState = loginViewModel.savedLoginToken ? .mainView : .login
         }
     }
 }
@@ -43,10 +38,4 @@ enum AppState {
     case login
     case nicknameSetting
     case mainView
-}
-
-struct LoginViewCycle_Preview: PreviewProvider {
-    static var previews: some View {
-        LoginViewCycle()
-    }
 }

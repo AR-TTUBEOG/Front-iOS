@@ -10,6 +10,7 @@ import SwiftUI
 import UIKit
 import PhotosUI
 import Moya
+import CoreLocation
 
 class WalkwayViewModel: ObservableObject, ImageHandling, InputAddressProtocol, FinishViewProtocol {
     
@@ -85,6 +86,7 @@ class WalkwayViewModel: ObservableObject, ImageHandling, InputAddressProtocol, F
                                                                     longitude: currentLocation.coordinate.longitude) { [weak self] address in
                     DispatchQueue.main.async {
                         self?.address = address ?? "주소를 찾을 수 없습니다."
+                        self?.currentLocation = currentLocation
                         BaseLocationManager.shared.stopUpdatingLocation()
                     }
                 }

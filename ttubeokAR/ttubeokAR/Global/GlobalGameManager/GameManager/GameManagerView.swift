@@ -49,7 +49,7 @@ struct GameManagerView: View {
             }
         }
         .scrollIndicators(.hidden)
-        .frame(height: 510)
+        .frame(width: 360, height: 510)
     }
 }
 

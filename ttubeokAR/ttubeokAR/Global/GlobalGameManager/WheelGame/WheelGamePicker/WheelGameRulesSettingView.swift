@@ -24,7 +24,7 @@ struct WheelGameRulesSettingView: View {
                     showPickerMenu
             }
         }
-        .frame(maxWidth: 240, maxHeight: 120)
+        .frame(width: 270, height: 55)
         .onTapGesture {
             self.keyboardResponsive()
         }
@@ -54,14 +54,14 @@ struct WheelGameRulesSettingView: View {
             }, label: {
                 HStack(spacing: 10) {
                     Text(pickerName())
-                        .frame(maxWidth: 32, maxHeight: 20, alignment: .trailing)
+                        .frame(width: 32, height: 20, alignment: .trailing)
                         .foregroundStyle(Color.textPink)
                         .font(.sandol(type: .regular, size: 16))
                     
                     Icon.pickerBtn.image
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .frame(maxWidth: 15, maxHeight: 19)
+                        .frame(width: 15, height: 19)
                 }
             })
         }

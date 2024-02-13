@@ -10,6 +10,7 @@ import Moya
 
 /// 닉네임 중복검사 뷰에서 활용하는 뷰모델
 class NicknameSettingViewModel: ObservableObject {
+    
     @Published var nickname: String = "" {
         didSet {
             checkNicknameLength()

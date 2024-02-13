@@ -42,11 +42,15 @@ struct MarketPageContent: View {
         case 3:
             fourthTitleView
         case 4:
-            fifthView
+            ScrollView {
+                fifthView
+            }
         case 5:
             sixthView
         case 6:
-            sevenView
+            ScrollView {
+                sevenView
+            }
         default:
             EmptyView()
         }
@@ -56,7 +60,7 @@ struct MarketPageContent: View {
     
     /// 첫 번째 뷰
     private var firstView: some View {
-        VStack(alignment: .leading, spacing: 35) {
+        VStack(alignment: .leading, spacing: 20) {
             CustomTitleView(titleText: "업체의 이름을 알려주세요",
                             highlightText: ["이름"],
                             subtitleText: "지도에 등록되는 매장의 이름이에요!",
@@ -67,11 +71,12 @@ struct MarketPageContent: View {
             
             CustomTextField(text: $viewModel.firstMarketName,
                             placeholder: "예) 죠스 떡볶이 중앙대점",
-                            maxWidth: 355,
-                            maxHeight: 45,
+                            maxWidth: 320,
+                            maxHeight: 38,
                             onSearch: {}
             )
         }
+        .frame(width: 360)
     }
     
     //MARK: - SecondView
@@ -79,7 +84,7 @@ struct MarketPageContent: View {
     
     /// 두 번째 뷰
     private var secondView: some View {
-        VStack(alignment: .leading, spacing: 35) {
+        VStack(alignment: .leading, spacing: 20) {
             CustomTitleView(titleText: "업체의 위치를 알려주세요",
                             highlightText: ["위치"],
                             subtitleText: "매장의 정확한 위치를 남겨주세요!",
@@ -91,6 +96,7 @@ struct MarketPageContent: View {
             
             InputAddressView(viewModel: viewModel)
         }
+        .frame(width: 360)
     }
     
     //MARK: - thirdView
@@ -111,8 +117,8 @@ struct MarketPageContent: View {
         VStack(alignment: .leading, spacing: 13) {
             CustomTextField(text: $viewModel.thirdMarketTypeName,
                             placeholder: "업종을 골라주세요.",
-                            maxWidth: 355,
-                            maxHeight: 45,
+                            maxWidth: 320,
+                            maxHeight: 38,
                             onSearch: {})
             HStack(spacing: 7) {
                 SelectMarketType(marketType: .restaurant,
@@ -133,10 +139,11 @@ struct MarketPageContent: View {
     
     /// 세 번째 뷰
     private var thirdView:some View {
-        VStack(alignment: .leading, spacing: 35) {
+        VStack(alignment: .leading, spacing: 20) {
             thirdTitleView
             choicMarketType
         }
+        .frame(width: 360)
     }
     
     //MARK: - fourthView
@@ -172,8 +179,8 @@ struct MarketPageContent: View {
                             leadingHorizontalPadding: fifthHorizontalPadding,
                             trailingHorizontalPadding: fifthHorizontalPadding,
                             verticalPadding: fifthVerticalPadding,
-                            maxWidth: 355,
-                            maxHeight: 102,
+                            maxWidth: 300,
+                            maxHeight: 90,
                             onSearch: {},
                             alignment: .topLeading,
                             axis: .vertical,
@@ -181,11 +188,10 @@ struct MarketPageContent: View {
             )
             
             Text("\(viewModel.fifthMarketDescription.count) / 50")
-                .frame(maxWidth: 48, maxHeight: 30, alignment: .center)
+                .frame(width: 48, height: 30, alignment: .center)
                 .font(.sandol(type: .regular, size: 11))
                 .multilineTextAlignment(.center)
                 .foregroundStyle(Color.textPink)
-                .padding([.trailing, .bottom], 5)
         }
     }
     
@@ -195,14 +201,14 @@ struct MarketPageContent: View {
             Icon.lightOn.image
                 .resizable()
                 .aspectRatio(contentMode: .fill)
-                .frame(maxWidth: 27, maxHeight: 27)
+                .frame(width: 27, height: 27)
             Text("입력한 정보는 이렇게 화면에 나와요.")
                 .font(.sandol(type: .medium, size: 12))
                 .foregroundStyle(.textPink)
-                .frame(maxWidth: 268, maxHeight: 16, alignment: .leading)
+                .frame(width: 268, height: 16, alignment: .leading)
             
         }
-        .frame(maxWidth: 324, maxHeight: 27, alignment: .leading)
+        .frame(width: 324, height: 27, alignment: .leading)
     }
     
     /// 다섯 번째 예시 사진
@@ -210,12 +216,12 @@ struct MarketPageContent: View {
         Icon.exampleMarket.image
             .resizable()
             .aspectRatio(contentMode: .fit)
-            .frame(maxWidth: 326, maxHeight: 240)
+            .frame(width: 340, height: 280)
     }
     
     /// 다섯 번째 뷰
     private var fifthView: some View {
-        VStack(spacing: 5) {
+        VStack(alignment: .leading, spacing: 5) {
             VStack(alignment: .leading, spacing: 20) {
                 fifthTitleView
                 fifthMarketDescription
@@ -226,7 +232,7 @@ struct MarketPageContent: View {
                 }
             }
         }
-        .frame(maxWidth: 330)
+        .frame(maxWidth: 360)
     }
     
     //MARK: - sixthView
@@ -251,7 +257,7 @@ struct MarketPageContent: View {
     private var sixthExampleImage: some View {
         Icon.exampleMarket2.image
             .resizable()
-            .frame(maxWidth: 326, maxHeight: 260)
+            .frame(width: 340, height: 280)
     }
     
     private var sixthTitle: some View {
@@ -267,7 +273,7 @@ struct MarketPageContent: View {
     
     /// 여섯 번째 뷰
     private var sixthView: some View {
-        VStack(alignment: .center, spacing: 30) {
+        VStack(alignment: .leading, spacing: 30) {
             VStack(alignment: .leading, spacing: 2) {
                 sixthTitle
                 ImageSelectionButton(viewModel: viewModel)
@@ -277,7 +283,7 @@ struct MarketPageContent: View {
                 sixthExampleImage
             }
         }
-        .frame(maxWidth: 330)
+        .frame(width: 360)
     }
     
     //MARK: - sevenView
@@ -311,6 +317,7 @@ struct MarketPageContent: View {
             sevenBenefitMethod
                 .padding(.leading, 15)
         })
+        .frame(width: 360)
     }
 }
 
