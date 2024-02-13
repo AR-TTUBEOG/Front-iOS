@@ -11,11 +11,11 @@ import MapKit
 struct TestMap: View {
     
     @StateObject private var routeViewModel = RouteViewModel()
-    @StateObject private var locationManger = LocationManager()
+//    @StateObject private var locationManger = LocationManager()
     @StateObject private var annoViewModel = AnnoViewModel()
     
     /// 사용자 현재 위치
-    let location = CLLocationCoordinate2D(latitude: 37.254611, longitude: 127.065993)
+    let location = CLLocationCoordinate2D(latitude: BaseLocationManager.shared.currentLocation?.coordinate.latitude ?? 0.0, longitude: BaseLocationManager.shared.currentLocation?.coordinate.longitude ?? 0.0)
     /// 지도 확대 비율
     let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
     
@@ -23,15 +23,26 @@ struct TestMap: View {
     
     /// 최단 경로 coordinates 값 저장
     @State private var routes: [CLLocationCoordinate2D] = []
-    @State private var selectedId: String? = nil
+    @State private var selectedId: Int? = nil
+    @State private var selectedAnno: Anno? = nil
+    
+    /// 카메라 구도
+    @State private var position: MapCameraPosition = .camera(
+        MapCamera(
+            centerCoordinate: CLLocationCoordinate2D(latitude: BaseLocationManager.shared.getCurrentLocation()?.coordinate.latitude ?? 0.0, longitude: BaseLocationManager.shared.getCurrentLocation()?.coordinate.longitude ?? 0.0), distance: 980,
+            pitch: 60
+        )
+    )
+    
+    /// 유저 어노테이션 방향 계산
+    @State private var heading: Double = 0
 
-                            
-//    MapCamearPosition(ce)
     
     var body: some View {
         ZStack {
-            Map(bounds: .init(centerCoordinateBounds: .init(center: location, span: span))) {
-                    if !routes.isEmpty {
+            Map(position: $position, bounds: .init(centerCoordinateBounds: .init(center: location, span: span))) {
+                    if routes.isEmpty {
+                        
                         MapPolyline(coordinates: routes)
                             .stroke(.blue, lineWidth: 2.0)
                     }
@@ -40,15 +51,24 @@ struct TestMap: View {
                                coordinate: .init(latitude: anno.latitude, longitude: anno.longitude),
                                anchor: .bottom
                     ) {
-                        if !isSelectedTotal || selectedId != anno.id.uuidString {
-                            AnnoButtonView(type: .cafe, selectedId: $selectedId, isSelectedTotal: $isSelectedTotal, isSelected: false, id: anno.id.uuidString)
+                        if !isSelectedTotal || selectedId != anno.storeId {
+                            AnnoButtonView(type: .cafe, selectedId: $selectedId, isSelectedTotal: $isSelectedTotal, selectedAnno: $selectedAnno, isSelected: false, id: anno.storeId)
                         }
                         
-                        if selectedId == anno.id.uuidString {
-                            AnnoButtonView(type: .cafe, selectedId: $selectedId, isSelectedTotal: $isSelectedTotal, isSelected: true, id: anno.id.uuidString)
+                        if selectedId == anno.storeId {
+                            AnnoButtonView(type: .cafe, selectedId: $selectedId, isSelectedTotal: $isSelectedTotal, selectedAnno: $selectedAnno, isSelected: true, id: anno.storeId)
                         }
                     }
                 }
+                UserAnnotation {
+                    Image("trailMap")
+                }
+            }
+            .onMapCameraChange(frequency: .continuous) { context in
+                heading = context.camera.heading
+            }
+            .customPopup(isPresented: $isSelectedTotal) {
+                DetailPlaceView(anno: $selectedAnno)
             }
             
             Button {
@@ -60,8 +80,9 @@ struct TestMap: View {
             }
                     
         }
+        
         .task {
-            routeViewModel.routeResponse(origin_lon: 127.06586387017393, origin_lat: 37.2548934785234, dest_lon: 127.064556, dest_lat: 37.256406)
+            routeViewModel.routeResponse(origin_lon: BaseLocationManager.shared.currentLocation?.coordinate.longitude ?? 0.0, origin_lat: BaseLocationManager.shared.currentLocation?.coordinate.latitude ?? 0.0, dest_lon: 127.064556, dest_lat: 37.256406)
         }
         }
     }

@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct MarketPageContent: View {
+    
     //MARK: - Propery
     @State private var isSelected: MarketTypeName = .none
-    @ObservedObject var viewModel = MarketViewModel()
+    @ObservedObject var viewModel: MarketViewModel
     
     
     //MARK: - TextFieldShame
@@ -23,7 +24,6 @@ struct MarketPageContent: View {
     //MARK: - Body
     var body: some View {
         ZStack {
-            Color.background.ignoresSafeArea(.all)
             viewFlow
         }
     }
@@ -32,7 +32,7 @@ struct MarketPageContent: View {
     
     @ViewBuilder
     private var viewFlow: some View {
-        switch viewModel.currentPageIndext {
+        switch viewModel.currentPageIndex {
         case 0:
             firstView
         case 1:
@@ -42,9 +42,15 @@ struct MarketPageContent: View {
         case 3:
             fourthTitleView
         case 4:
-            fifthView
+            ScrollView {
+                fifthView
+            }
         case 5:
             sixthView
+        case 6:
+            ScrollView {
+                sevenView
+            }
         default:
             EmptyView()
         }
@@ -54,7 +60,7 @@ struct MarketPageContent: View {
     
     /// 첫 번째 뷰
     private var firstView: some View {
-        VStack(alignment: .leading, spacing: 35) {
+        VStack(alignment: .leading, spacing: 20) {
             CustomTitleView(titleText: "업체의 이름을 알려주세요",
                             highlightText: ["이름"],
                             subtitleText: "지도에 등록되는 매장의 이름이에요!",
@@ -65,65 +71,32 @@ struct MarketPageContent: View {
             
             CustomTextField(text: $viewModel.firstMarketName,
                             placeholder: "예) 죠스 떡볶이 중앙대점",
-                            maxWidth: 340,
-                            maxHeight: 45,
+                            maxWidth: 320,
+                            maxHeight: 38,
                             onSearch: {}
             )
         }
+        .frame(width: 360)
     }
     
     //MARK: - SecondView
-    
-    /// 두 번째 주소검색 커스텀 텍스트 필드
-    private var secondAddressInputTextField: some View {
-        CustomTextField(text: $viewModel.secondAddressName,
-                        placeholder: "주소를 검색해주세요.",
-                        trailingHorizontalPadding: horizontalPadding + 35,
-                        maxWidth: 275,
-                        maxHeight: 45,
-                        onSearch: {})
-    }
-    
-    /// 두 번째 상세 주소 입력
-    private var secondDetailAddressInputTextField: some View {
-        CustomTextField(text: $viewModel.secondDetailAddress,
-                        placeholder: "상세주소를 입력해주세요.",
-                        trailingHorizontalPadding: horizontalPadding + 35,
-                        maxWidth: 332,
-                        maxHeight: 45,
-                        onSearch: {})
-    }
-    
-    /// 두 번째 뷰 하단 주소 텍스트필드 모음
-    private var secondBottomAddressInputs: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            HStack(alignment: .center, spacing: 8) {
-                secondAddressInputTextField
-                Button(action: {
-                    print("hello")
-                }, label: {
-                    Icon.searchAddress.image
-                        .resizable()
-                        .frame(maxWidth: 48, maxHeight: 45)
-                })
-            }
-            secondDetailAddressInputTextField
-        }
-    }
+
     
     /// 두 번째 뷰
     private var secondView: some View {
-        VStack(alignment: .leading, spacing: 35) {
+        VStack(alignment: .leading, spacing: 20) {
             CustomTitleView(titleText: "업체의 위치를 알려주세요",
                             highlightText: ["위치"],
                             subtitleText: "매장의 정확한 위치를 남겨주세요!",
                             titleHeight: 36,
+                            spacing: 9,
                             textAlignment: .leading,
                             frameAlignment: .topLeading
             )
             
-            secondBottomAddressInputs
+            InputAddressView(viewModel: viewModel)
         }
+        .frame(width: 360)
     }
     
     //MARK: - thirdView
@@ -144,8 +117,8 @@ struct MarketPageContent: View {
         VStack(alignment: .leading, spacing: 13) {
             CustomTextField(text: $viewModel.thirdMarketTypeName,
                             placeholder: "업종을 골라주세요.",
-                            maxWidth: 332,
-                            maxHeight: 45,
+                            maxWidth: 320,
+                            maxHeight: 38,
                             onSearch: {})
             HStack(spacing: 7) {
                 SelectMarketType(marketType: .restaurant,
@@ -166,10 +139,11 @@ struct MarketPageContent: View {
     
     /// 세 번째 뷰
     private var thirdView:some View {
-        VStack(alignment: .leading, spacing: 35) {
+        VStack(alignment: .leading, spacing: 20) {
             thirdTitleView
             choicMarketType
         }
+        .frame(width: 360)
     }
     
     //MARK: - fourthView
@@ -178,7 +152,7 @@ struct MarketPageContent: View {
         CustomTitleView(titleText: "소개와 사진 등 \n매장 정보를 입력해보세요",
                         highlightText: ["정보"],
                         subtitleText: "정보를 입력해야 방문객에게 장소가 보여요",
-                        titleWidth: 351,
+                        titleWidth: 355,
                         titleHeight: 80,
                         textAlignment: .center,
                         frameAlignment: .center)
@@ -205,8 +179,8 @@ struct MarketPageContent: View {
                             leadingHorizontalPadding: fifthHorizontalPadding,
                             trailingHorizontalPadding: fifthHorizontalPadding,
                             verticalPadding: fifthVerticalPadding,
-                            maxWidth: 314,
-                            maxHeight: 102,
+                            maxWidth: 300,
+                            maxHeight: 90,
                             onSearch: {},
                             alignment: .topLeading,
                             axis: .vertical,
@@ -214,11 +188,10 @@ struct MarketPageContent: View {
             )
             
             Text("\(viewModel.fifthMarketDescription.count) / 50")
-                .frame(maxWidth: 48, maxHeight: 30, alignment: .center)
+                .frame(width: 48, height: 30, alignment: .center)
                 .font(.sandol(type: .regular, size: 11))
                 .multilineTextAlignment(.center)
                 .foregroundStyle(Color.textPink)
-                .padding([.trailing, .bottom], 5)
         }
     }
     
@@ -228,26 +201,27 @@ struct MarketPageContent: View {
             Icon.lightOn.image
                 .resizable()
                 .aspectRatio(contentMode: .fill)
-                .frame(maxWidth: 27, maxHeight: 27)
+                .frame(width: 27, height: 27)
             Text("입력한 정보는 이렇게 화면에 나와요.")
                 .font(.sandol(type: .medium, size: 12))
                 .foregroundStyle(.textPink)
-                .frame(maxWidth: 268, maxHeight: 16, alignment: .leading)
+                .frame(width: 268, height: 16, alignment: .leading)
             
         }
-        .frame(maxWidth: 304, maxHeight: 27, alignment: .leading)
+        .frame(width: 324, height: 27, alignment: .leading)
     }
     
     /// 다섯 번째 예시 사진
     private var fifthExampleImage: some View {
         Icon.exampleMarket.image
             .resizable()
-            .frame(maxWidth: 326, maxHeight: 240)
+            .aspectRatio(contentMode: .fit)
+            .frame(width: 340, height: 280)
     }
     
     /// 다섯 번째 뷰
     private var fifthView: some View {
-        VStack(spacing: 5) {
+        VStack(alignment: .leading, spacing: 5) {
             VStack(alignment: .leading, spacing: 20) {
                 fifthTitleView
                 fifthMarketDescription
@@ -258,7 +232,7 @@ struct MarketPageContent: View {
                 }
             }
         }
-        .frame(maxWidth: 330)
+        .frame(maxWidth: 360)
     }
     
     //MARK: - sixthView
@@ -283,7 +257,7 @@ struct MarketPageContent: View {
     private var sixthExampleImage: some View {
         Icon.exampleMarket2.image
             .resizable()
-            .frame(maxWidth: 326, maxHeight: 260)
+            .frame(width: 340, height: 280)
     }
     
     private var sixthTitle: some View {
@@ -299,7 +273,7 @@ struct MarketPageContent: View {
     
     /// 여섯 번째 뷰
     private var sixthView: some View {
-        VStack(alignment: .center, spacing: 30) {
+        VStack(alignment: .leading, spacing: 30) {
             VStack(alignment: .leading, spacing: 2) {
                 sixthTitle
                 ImageSelectionButton(viewModel: viewModel)
@@ -309,7 +283,41 @@ struct MarketPageContent: View {
                 sixthExampleImage
             }
         }
-        .frame(maxWidth: 330)
+        .frame(width: 360)
+    }
+    
+    //MARK: - sevenView
+    
+    private var sevenTitle: some View {
+        CustomTitleView(titleText: "리워드를 선택해주세요",
+                        highlightText: ["리워드"],
+                        subtitleText: "방문 고객에게 게임을 통해 혜택을 주세요!",
+                        titleHeight: 45,
+                        spacing: 10,
+                        textAlignment: .leading,
+                        frameAlignment: .topLeading
+        )
+    }
+    
+    private var sevenBenefitMethod: some View {
+        VStack(alignment: .leading, spacing: 30, content: {
+            Text("헤택을 제공할 방법을 선택해주세요!")
+                .font(.sandol(type: .bold, size: 16))
+                .foregroundStyle(Color.textPink)
+                .frame(maxWidth: 300, alignment: .leading)
+            
+            GameManagerView()
+        })
+        .frame(width: 320)
+    }
+    
+    private var sevenView: some View {
+        VStack(alignment: .leading, spacing: 35, content: {
+            sevenTitle
+            sevenBenefitMethod
+                .padding(.leading, 15)
+        })
+        .frame(width: 360)
     }
 }
 
@@ -317,5 +325,6 @@ struct MarketPageContent: View {
 struct MarketPageContent_Preview: PreviewProvider {
     static var previews: some View {
         MarketPageContent(viewModel: MarketViewModel())
+            .previewLayout(.sizeThatFits)
     }
 }

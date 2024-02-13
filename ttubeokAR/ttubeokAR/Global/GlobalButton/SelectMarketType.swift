@@ -24,9 +24,10 @@ struct SelectMarketType: View {
         Button(action: {
             self.isSelected.toggle()
             self.selectedMarketType = marketTypeName(type: marketType)
+            print(self.selectedMarketType)
         }, label: {
             groupView
-            .frame(maxWidth: 75, maxHeight: 32, alignment: .center)
+            .frame(width: 90, height: 40, alignment: .center)
             .background(isSelected ? Color(red: 0.63, green: 0.62, blue: 0.95).opacity(0.60) : Color(red: 0.92, green: 0.90, blue: 0.97))
             .clipShape(.rect(cornerRadius: 24))
             .overlay(
@@ -45,15 +46,15 @@ struct SelectMarketType: View {
         HStack(alignment: .center, spacing: 2) {
             (isSelected ? selectedMarketTypeImage(type: marketType) : notSelectedMarketTypeImage(type: marketType))
                 .resizable()
-                .frame(maxWidth: 10, maxHeight: 17)
+                .frame(width: 14, height: 23)
                 .aspectRatio(contentMode: .fill)
             
             Text(marketTypeName(type: marketType))
-                .font(.sandol(type: .regular, size: 14))
+                .font(.sandol(type: .regular, size: 16))
                 .foregroundStyle(isSelected ? Color.white : Color.primary03)
-                .frame(maxWidth: 37, maxHeight: 20, alignment: .bottom)
+                .frame(width: 45, height: 24, alignment: .bottom)
         }
-        .frame(maxWidth: 55, maxHeight: 22, alignment: .center)
+        .frame(width: 70, height: 25, alignment: .center)
         .padding(.leading, 2)
     }
     

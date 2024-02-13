@@ -45,11 +45,16 @@ struct MainViewControl: View {
         .customPopup(isPresented: $showSearchOptionButton, content: {
             PlaceSettingView()
         })
-        .onAppear {
-            searchViewModel.searchTypeChanged = { newType in
-                exploreViewModel.resetPage()
-                exploreViewModel.decisionSearchType(newType)
-            }
+        
+        //TODO: - 작동 안함(?)
+//        .onAppear {
+//            searchViewModel.searchTypeChanged = { newType in
+//                exploreViewModel.resetPage()
+//                exploreViewModel.decisionSearchType(newType)
+//            }
+//        }
+        .onTapGesture {
+            keyboardResponsive()
         }
     }
     
@@ -60,7 +65,6 @@ struct MainViewControl: View {
         ZStack(alignment: .center) {
             if selectedTab == 1 {
                 ExploreViewControl(viewModel: exploreViewModel)
-                EmptyView()
             } else if selectedTab == 2 {
                 EmptyView()
             }

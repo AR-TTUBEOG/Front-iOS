@@ -20,7 +20,7 @@ struct ImageSelectionButton<ViewModel: ObservableObject & ImageHandling>: View {
         ZStack(alignment: .center) {
             RoundedRectangle(cornerRadius: 19)
                 .foregroundStyle(Color.clear)
-                .frame(maxWidth: 80, maxHeight: 80)
+                .frame(width: 80, height: 80)
                 .background(Color.textPink)
                 .overlay(
                     RoundedRectangle(cornerRadius: 19)
@@ -31,11 +31,11 @@ struct ImageSelectionButton<ViewModel: ObservableObject & ImageHandling>: View {
             {
                 Icon.camera.image
                     .resizable()
-                    .frame(maxWidth: 42, maxHeight: 31)
+                    .frame(width: 42, height: 31)
                 Text("\(viewModel.selectedImageCount) / 10")
                     .font(.sandol(type: .medium, size: 11))
                     .foregroundStyle(Color.primary03)
-                    .frame(maxWidth: 28, maxHeight: 18, alignment: .center)
+                    .frame(width: 28, height: 18, alignment: .center)
             }
             .frame(alignment: .bottom)
             .offset(y: 5)
@@ -64,7 +64,7 @@ struct ImageSelectionButton<ViewModel: ObservableObject & ImageHandling>: View {
         ZStack(alignment: .topTrailing){
             Image(uiImage: image)
                 .resizable()
-                .frame(maxWidth: 80, maxHeight: 80)
+                .frame(width: 80, height: 80)
                 .clipShape(.rect(cornerRadius: 19))
             
             Button(action: {
@@ -73,7 +73,7 @@ struct ImageSelectionButton<ViewModel: ObservableObject & ImageHandling>: View {
                 Icon.xButton.image
                     .resizable()
                     .aspectRatio(contentMode: .fill)
-                    .frame(maxWidth: 22, maxHeight: 22)
+                    .frame(width: 22, height: 22)
                     .padding([.horizontal, .vertical], -3)
             }
         }
@@ -94,6 +94,6 @@ struct ImageSelectionButton<ViewModel: ObservableObject & ImageHandling>: View {
             }
             showImages
         }
-        .frame(maxHeight: 95)
+        .frame(width: 330,height: 95)
     }
 }

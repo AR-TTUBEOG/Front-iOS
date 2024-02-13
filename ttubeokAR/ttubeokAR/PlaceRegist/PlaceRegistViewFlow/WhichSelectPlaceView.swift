@@ -22,7 +22,7 @@ struct WhichSelectPlaceView: View {
                 if isWalkChecked {
                     WalkPlaceRegisterView(lastedSelectedTab: lastedSelectedTab)
                 } else if isMarketChecked {
-                    MarketPlaceRegister()
+                    MarketPlaceRegister(lastedSelectedTab: lastedSelectedTab)
                 }
             }
             .navigationBarBackButtonHidden(true)
@@ -36,15 +36,18 @@ struct WhichSelectPlaceView: View {
                 blackOpacityView
                 NavigationBar(lastedSelectedTab: lastedSelectedTab)
                 centerChoicePlace
-                changeViewButton
-                    .position(x: geometry.size.width / 2, y: geometry.size.height * 0.93)
+                VStack() {
+                    Spacer()
+                    changeViewButton
+                        .padding(.bottom, 20)
+                }
             }
         }
     }
     
     /// 배경 화면 설정
     private var backgroundView: some View {
-        Icon.PlaceBackground.image
+        Icon.lightRegisterBackground2.image
             .resizable()
             .aspectRatio(contentMode: .fill)
             .frame(maxWidth: 375, maxHeight: .infinity)
@@ -57,7 +60,7 @@ struct WhichSelectPlaceView: View {
             .foregroundStyle(.clear)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .ignoresSafeArea(.all)
-            .background(Color(red: 0.09, green: 0.08, blue: 0.12).opacity(0.3))
+            .background(Color(red: 0.09, green: 0.08, blue: 0.12).opacity(0.1))
     }
     
     /// 화면 가운데 표시될 뷰로써, 장소 선택 버튼이 주어진다.
@@ -65,6 +68,7 @@ struct WhichSelectPlaceView: View {
         VStack(alignment: .center, spacing: 39) {
             CustomTitleView(
                 titleText: "어떤 장소를 \n 등록하시겠어요 ?",
+                titleRangeColor: Color.textBlue,
                 highlightText: ["등록"],
                 subtitleText: nil,
                 subtitleSize: nil,

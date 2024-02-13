@@ -7,15 +7,28 @@
 
 import Foundation
 import SwiftUI
+import Moya
+import UIKit
+import CoreLocation
 
-class MarketViewModel: ObservableObject, ImageHandling {
+
+class MarketViewModel: ObservableObject, ImageHandling, InputAddressProtocol, FinishViewProtocol {
     
     
+    
+    
+    
+    func finishPlaceRegist() {
+        print("hello")
+    }
+    
+
     
     //MARK: - Property
     @Published var marketModel = MarketModel()
-    @Published var currentPageIndext: Int = 5
+    @Published var currentPageIndex: Int = 0
     @Published var isImagePickerPresented = false
+    @Published var navigationToNextView = false
     @Published var images: [UIImage] = []
     
     
@@ -25,6 +38,10 @@ class MarketViewModel: ObservableObject, ImageHandling {
     @Published var secondDetailAddress: String = ""
     @Published var thirdMarketTypeName: String = ""
     @Published var fifthMarketDescription: String = ""
+    
+    var titleText: String = "매장 등록이 \n완료되었습니다."
+    
+    var highlightText: String = "매장"
     
     //MARK: - Protocol
     
@@ -51,6 +68,33 @@ class MarketViewModel: ObservableObject, ImageHandling {
         images
     }
     
+    func imageToBase64String(img: UIImage) -> String? {
+        return "test"
+    }
+    
+    
+    //MARK: - CurrentAddress
+    
+    
+    @Published var address: String = ""
+    @Published var detailAddress: String = ""
+    @Published var currentLocation: CLLocation?
+    
+    public func searchAddress() {
+        BaseLocationManager.shared.startUpdatingLocation()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            if let currentLocation = BaseLocationManager.shared.getCurrentLocation() {
+                ReverseGeocodingService().fetchReverseGeocodingData(latitude: currentLocation.coordinate.latitude,
+                                                                    longitude: currentLocation.coordinate.longitude) { [weak self] address in
+                    DispatchQueue.main.async {
+                        self?.address = address ?? "주소를 찾을 수 없습니다."
+                        self?.currentLocation = currentLocation
+                        BaseLocationManager.shared.stopUpdatingLocation()
+                    }
+                }
+            }
+        }
+    }
     
 }
 

@@ -7,8 +7,9 @@
 
 import SwiftUI
 
-struct PlaceRegisterFinishView: View {
+struct PlaceRegisterFinishView<ViewModel: FinishViewProtocol & ObservableObject> : View {
     
+    @ObservedObject var viewModel: ViewModel
     let lastedSelectedTab: Int
     
     var body: some View {
@@ -17,15 +18,17 @@ struct PlaceRegisterFinishView: View {
     }
     
     private var allView: some View {
-        GeometryReader { geometry in
-            ZStack(alignment: .top) {
-                Color.background.ignoresSafeArea(.all)
-                finishTitle
-                    .padding(.top, 100)
-                FinishButton(lastedSelectedTab: lastedSelectedTab)
-                    .position(x: geometry.size.width/2, y: geometry.size.height * 0.93)
-            }
+        VStack {
+            finishTitle
+                .padding(.top, 100)
+            
+            Spacer()
+            
+            RegistFinishButton(viewModel: viewModel, lastedSelectedTab: lastedSelectedTab)
+                .padding(.bottom, 20)
         }
+        .frame(maxWidth: .infinity)
+        .background(Color.background.ignoresSafeArea(.all))
     }
     
     private var finishTitle: some View {
@@ -33,10 +36,10 @@ struct PlaceRegisterFinishView: View {
             Icon.placeFinish.image
                 .resizable()
                 .frame(maxWidth: 247, maxHeight: 90)
-            CustomTitleView(titleText: "산책스팟 등록이 \n완료되었습니다 !",
-                            highlightText: ["산책스팟"],
+            CustomTitleView(titleText: viewModel.titleText,
+                            highlightText: [viewModel.highlightText],
                             subtitleText: "",
-                            titleWidth: 278,
+                            titleWidth: 300,
                             titleHeight: 100,
                             spacing: 40,
                             textAlignment: .center,
@@ -48,6 +51,8 @@ struct PlaceRegisterFinishView: View {
     }
 }
 
-#Preview {
-    PlaceRegisterFinishView(lastedSelectedTab: 1)
+struct PlaceRegisterFinishView_Previews: PreviewProvider {
+    static var previews: some View {
+        PlaceRegisterFinishView(viewModel: WalkwayViewModel(), lastedSelectedTab: 1)
+    }
 }

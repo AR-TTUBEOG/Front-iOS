@@ -21,8 +21,8 @@ struct GameRulesTextView: View {
     private func makeText() -> some View {
         HStack(spacing: 35) {
             Text(self.label)
-                .font(.sandol(type: .regular, size: 12))
-                .frame(maxWidth: 58, maxHeight: 16, alignment: .center)
+                .font(.sandol(type: .regular, size: 13))
+                .frame(width: 58, height: 16, alignment: .center)
                 .foregroundStyle(Color.textPink)
             
             HStack(spacing: 2) {
@@ -30,7 +30,7 @@ struct GameRulesTextView: View {
                     self.onMinusTapped()
                 }, label: {
                     Image(systemName: "minus")
-                        .frame(maxWidth: 25, maxHeight: 25)
+                        .frame(width: 25, height: 25)
                         .foregroundStyle(Color.white)
                         .background(Color.primary03)
                         .clipShape(Circle())
@@ -38,8 +38,8 @@ struct GameRulesTextView: View {
                 
                 
                 Text(valueLabel)
-                    .frame(maxWidth: 70, maxHeight: 25)
-                    .font(.sandol(type: .regular, size: 12))
+                    .frame(width: 70, height: 25)
+                    .font(.sandol(type: .regular, size: 13))
                     .foregroundStyle(Color.textPink)
                     
                 
@@ -48,15 +48,15 @@ struct GameRulesTextView: View {
                     self.onPlustTapped()
                 }, label: {
                     Image(systemName: "plus")
-                        .frame(maxWidth: 25, maxHeight: 25)
+                        .frame(width: 25, height: 25)
                         .foregroundStyle(Color.white)
                         .background(Color.primary03)
                         .clipShape(Circle())
                 })
                 
             }
-            .frame(maxWidth: 110, maxHeight: 33)
+            .frame(width: 130, height: 33)
         }
-        .frame(maxWidth: 192, maxHeight: 33)
+        .frame(width: 210, height: 33)
     }
 }

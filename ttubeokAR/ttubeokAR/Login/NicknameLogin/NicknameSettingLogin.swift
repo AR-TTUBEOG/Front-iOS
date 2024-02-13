@@ -19,6 +19,9 @@ struct NicknameSettingLogin: View {
         ZStack(alignment: .center) {
             allView
         }
+        .onTapGesture {
+            keyboardResponsive()
+        }
     }
     
     //MARK: - Nickname View
@@ -37,7 +40,7 @@ struct NicknameSettingLogin: View {
                         .frame(maxHeight: 270)
                     checkButton
                 }
-                .position(x: geometry.size.width / 2, y: geometry.size.height * 0.58)
+                .position(x: geometry.size.width / 2, y: geometry.size.height * 0.65)
             }
         }
     }
@@ -79,6 +82,9 @@ struct NicknameSettingLogin: View {
                           ,prompt: Text("닉네임을 적어주세요")
                     .foregroundStyle(Color.white)
                     .font(.sandol(type: .light, size: 15)))
+                .onChange(of: viewModel.nickname) { new, old in
+                    viewModel.isNicknameAvailable = nil
+                }
                 .foregroundStyle(Color.white)
                 .font(.sandol(type: .light, size: 15))
                 .background(Color.clear)
@@ -138,7 +144,7 @@ struct NicknameSettingLogin: View {
                 }
             }
             
-            if let isAvailable = viewModel.isNicknameAvailable, isAvailable {
+            if let isAvailable = viewModel.isNicknameAvailable, isAvailable, viewModel.isNicknameValid {
                 HStack(spacing: 3) {
                     Icon.nameCheck.image
                         .resizable()
@@ -159,7 +165,7 @@ struct NicknameSettingLogin: View {
         Button(action: {
             if viewModel.isNicknameValid, viewModel.isNicknameAvailable == true {
                 transitionToNext()
-                saveNickname(newNickname: viewModel.nickname)
+                viewModel.saveNickname(newNickname: viewModel.nickname)
             }
         }) {
             Text("시작하기")
@@ -171,16 +177,6 @@ struct NicknameSettingLogin: View {
                 .multilineTextAlignment(.center)
                 .clipShape(.rect(cornerRadius: 19))
                 .shadow(color: .black.opacity(0.25), radius: 10, x: 0, y: 4)
-        }
-    }
-    
-    private func saveNickname(newNickname: String) {
-        if var session = keyChainManager.loadSession(for: "userSession") {
-            session.nickname = newNickname
-            let saved = keyChainManager.saveSession(session, for: "userSession")
-            if !saved {
-                print("닉네임 세션 실패")
-            }
         }
     }
 }

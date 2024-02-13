@@ -10,15 +10,15 @@ import PopupView
 
 struct DetailPlaceView: View {
     
-//    @Binding var anno: Anno
+    @Binding var anno: Anno?
     // 지점에 대한 경로들
-    private var routes: [String]? = ["스티브", "숩", "으찮"]
+    var routes: [String]? = ["스티브", "숩", "으찮"]
     
     var body: some View {
         ZStack {
             Color.background.ignoresSafeArea(.all)
             VStack {
-                infoView()
+                infoView(selectedAnno: $anno)
                 
                 Spacer()
                     .frame(height: 50)
@@ -33,10 +33,17 @@ struct DetailPlaceView: View {
                 walkBtnView()
             }
         }
-//        .frame(height: 150)
+        .frame(height: 400)
     }
     
     private struct infoView: View {
+        
+        @Binding var selectedAnno: Anno?
+        
+//        init(selectedAnno: Anno? = nil) {
+//            self.selectedAnno = selectedAnno
+//        }
+        
         fileprivate var body: some View {
             VStack {
                 Image(.mapPlaceExample)
@@ -46,7 +53,7 @@ struct DetailPlaceView: View {
                     .clipShape(RoundedRectangle(cornerRadius: 16))
                 HStack {
                     VStack(alignment: .leading) {
-                        Text("종로 스타벅스")
+                        Text(selectedAnno?.name ?? "이름없음")
                             .foregroundStyle(.white)
                         Text("농구 게임을 통한 할인권 증정")
                             .foregroundStyle(.gray)
@@ -64,6 +71,7 @@ struct DetailPlaceView: View {
             }
             .padding(.horizontal, 15)
         }
+        
     }
     
     private struct routeChooseBtnView: View {
@@ -107,5 +115,5 @@ struct DetailPlaceView: View {
 }
 
 #Preview {
-    DetailPlaceView()
+    DetailPlaceView(anno: .constant(.init(storeId: 1, dongareaId: 1, name: "카페", info: "분위기 좋은 카페", latitude: 37.547889, longitude: 126.915158, image: "exampleMarket", type: "cafe")))
 }

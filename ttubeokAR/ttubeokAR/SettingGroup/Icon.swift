@@ -130,6 +130,7 @@ enum Icon: String {
     case whiteRest = "whiteRest"
     case exampleMarket = "exampleMarket"
     case exampleMarket2 = "exampleMarket2"
+    case lightRegisterBackground2 = "lightRegisterBackground2"
     
     
     //MARK: - Game
@@ -137,6 +138,8 @@ enum Icon: String {
     case gameBox = "gameBox"
     case gameCoupon = "gameCoupon"
     case gameOnePlus = "gameOnePlus"
+    case pickerBtn = "pickerBtn"
+    case wheelArrow = "wheelArrow"
     
     var image: Image {
         return Image(self.rawValue)

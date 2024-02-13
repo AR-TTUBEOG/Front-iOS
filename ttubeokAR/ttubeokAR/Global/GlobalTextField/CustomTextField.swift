@@ -6,8 +6,8 @@
 //
 
 import SwiftUI
-
 struct CustomTextField: View {
+
     
     //MARK: - Property
     @Binding var text: String
@@ -31,6 +31,7 @@ struct CustomTextField: View {
     var backgroundColor: Color
     var fontColor: Color
     var lineWidth: CGFloat
+    var lineColor: Color
     //MARK: - init
     
     /// 커스텀 텍스트 필드 init 값 지정
@@ -67,7 +68,8 @@ struct CustomTextField: View {
          maxLength: Int? = nil,
          backgroundColor: Color = Color(red: 0.25, green: 0.24, blue: 0.37),
          fontColor: Color = Color.textPink,
-         lineWidth: CGFloat = 1
+         lineWidth: CGFloat = 1,
+         lineColor: Color = Color.primary01
         ) {
             self._text = text
             self.placeholder = placeholder
@@ -86,11 +88,15 @@ struct CustomTextField: View {
             self.backgroundColor = backgroundColor
             self.fontColor = fontColor
             self.lineWidth = lineWidth
+            self.lineColor = lineColor
     }
     
     //MARK: - Body
     var body: some View {
         inputOneLineTextField
+            .onTapGesture {
+                isTextFocused = false
+            }
     }
     
     //MARK: - CustomOneLineTextFieldView
@@ -98,9 +104,9 @@ struct CustomTextField: View {
     private var inputOneLineTextField: some View {
         ZStack(alignment: alignment) {
             TextField("", text: $text, axis: axis)
+                .frame(width: maxWidth, height: maxHeight, alignment: alignment)
                 .font(.sandol(type: .regular, size: fontSize))
                 .foregroundStyle(fontColor)
-                .frame(maxWidth: maxWidth, maxHeight: maxHeight, alignment: alignment)
                 .focused($isTextFocused)
                 .padding(.leading, leadingHorizontalPadding)
                 .padding(.trailing, trailingHorizontalPadding)
@@ -111,7 +117,7 @@ struct CustomTextField: View {
                 .overlay(
                     RoundedRectangle(cornerRadius: cornerSize)
                         .inset(by: 0.5)
-                        .stroke(Color.primary01, lineWidth: lineWidth)
+                        .stroke(lineColor, lineWidth: lineWidth)
                 )
                 .onChange(of: text) { oldText, newText in
                     if let maxLength = maxLength, newText.count > maxLength {
@@ -120,7 +126,6 @@ struct CustomTextField: View {
                 }
             inputTextFieldPlaceholder
         }
-        .frame(maxWidth: maxWidth, maxHeight: maxHeight)
     }
     
     /// 텍스트 필드 내 Plceholder 생성
@@ -129,8 +134,10 @@ struct CustomTextField: View {
             if text.isEmpty && !isTextFocused {
                 Text(placeholder)
                     .font(.sandol(type: .regular, size: fontSize))
-                    .foregroundStyle(Color.textPink)
+                    .frame(width: maxWidth, height: maxHeight, alignment: alignment)
+                    .foregroundStyle((Color(red: 0.92, green: 0.90, blue: 0.97).opacity(0.50)))
                     .padding(.leading, leadingHorizontalPadding)
+                    .padding(.trailing, trailingHorizontalPadding)
                     .padding(.top, verticalPadding)
                     .allowsHitTesting(false)
             }
@@ -144,7 +151,7 @@ struct CustomTextField: View {
                         Icon.search.image
                             .resizable()
                             .aspectRatio(contentMode: .fill)
-                            .frame(maxWidth: 20, maxHeight: 27)
+                            .frame(width: 20, height: 27)
                             .foregroundStyle(Color.textPink)
                             .padding(3)
                     })

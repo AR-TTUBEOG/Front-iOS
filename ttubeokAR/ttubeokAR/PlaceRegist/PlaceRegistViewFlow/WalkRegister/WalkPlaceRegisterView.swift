@@ -12,33 +12,45 @@ struct WalkPlaceRegisterView: View {
     
     //MARK: - Property
     @StateObject private var viewModel = WalkwayViewModel()
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.dismiss) var dismiss
+    @State private var keyboardVisible = false
+    
     var lastedSelectedTab: Int
     
     //MARK: - Body
     var body: some View {
-        allView
+            allView
+            .ignoresSafeArea(.keyboard)
             .navigationBarBackButtonHidden(true)
             .navigationDestination(isPresented: $viewModel.navigationToNextView) {
-                PlaceRegisterFinishView(lastedSelectedTab: lastedSelectedTab)
+                PlaceRegisterFinishView(viewModel: viewModel, lastedSelectedTab: lastedSelectedTab)
             }
-    }
-    
-    private var allView: some View {
-        GeometryReader { geometry in
-            ZStack(alignment: .top) {
-                Color.background.ignoresSafeArea(.all)
-                VStack(alignment: .center, spacing: 35) {
-                    PlaceRegisterNavigation(currentPage: viewModel.currentPageIndex, totalPages: 5, lastedSelectedTab: lastedSelectedTab)
-                    WalkwayPageContent(viewModel: viewModel)
-                }
-                changeViewButton
-                    .position(x: geometry.size.width / 2, y: geometry.size.height * 0.93)
+            .onAppear{
+                observeKeyboard()
             }
-        }
     }
     
     //MARK: - WalkPlaceRegisterView
+    
+    private var allView: some View {
+        VStack(alignment: .center, spacing: 35) {
+            
+            PlaceRegisterNavigation(currentPage: viewModel.currentPageIndex, totalPages: 5, lastedSelectedTab: lastedSelectedTab)
+            WalkwayPageContent(viewModel: viewModel)
+            
+            Spacer()
+            
+            if !keyboardVisible {
+                changeViewButton
+                    .padding(.bottom, 20)
+            }
+        }
+        .background(Color.background.ignoresSafeArea(.all))
+        .onTapGesture {
+            self.keyboardResponsive()
+        }
+    }
+    
     private var changeViewButton: some View {
         HStack(alignment: .bottom, spacing: 18) {
             Button(action: {
@@ -47,7 +59,7 @@ struct WalkPlaceRegisterView: View {
                         viewModel.currentPageIndex -= 1
                     }
                     else if viewModel.currentPageIndex == 0 {
-                        presentationMode.wrappedValue.dismiss()
+                        dismiss()
                     }
                 }
             }) {
@@ -83,12 +95,28 @@ struct WalkPlaceRegisterView: View {
             }
         }
     }
+    
+    private func observeKeyboard() {
+            NotificationCenter.default.addObserver(
+                forName: UIResponder.keyboardWillShowNotification,
+                object: nil, queue: .main
+            ) { _ in
+                keyboardVisible = true
+            }
+
+            NotificationCenter.default.addObserver(
+                forName: UIResponder.keyboardWillHideNotification,
+                object: nil, queue: .main
+            ) { _ in
+                keyboardVisible = false
+            }
+        }
 }
 
 struct WalkPlaceRegisterView_Previews: PreviewProvider {
-    static var previews: some View { 
+    static var previews: some View {
         WalkPlaceRegisterView(lastedSelectedTab: 1)
     }
 }
 
-                
+
