@@ -112,6 +112,7 @@ struct SearchControl: View {
             .background((Color(red: 0.16, green: 0.16, blue: 0.23)))
             .foregroundStyle(Color(red: 0.52, green: 0.53, blue: 0.6))
             .frame(minWidth: 0, maxWidth: 239)
+            //TODO: - 위도 경도 값 얻어와서 출력하기
             .onSubmit {
                 print(viewModel.getTextFieldValue())
             }
@@ -121,6 +122,7 @@ struct SearchControl: View {
                     viewModel.searchText = ""
                 }) {
                     Image(systemName: "xmark.circle.fill")
+                        .foregroundStyle(Color.gray)
                         .padding(5)
                 }
             }

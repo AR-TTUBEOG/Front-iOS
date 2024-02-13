@@ -13,11 +13,20 @@ class BaseLocationManager: NSObject, CLLocationManagerDelegate {
 
     private let locationManager = CLLocationManager()
     var currentLocation: CLLocation?
+    var onAuthorizationChanged: ((CLAuthorizationStatus) -> Void)?
 
     override init() {
         super.init()
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
+    }
+    
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        let status = manager.authorizationStatus
+        onAuthorizationChanged?(status)
+    }
+    
+    func requestLocationAuthorization() {
         locationManager.requestWhenInUseAuthorization()
     }
 

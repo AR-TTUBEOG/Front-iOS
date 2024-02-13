@@ -6,9 +6,15 @@
 //
 
 import SwiftUI
+import CoreLocation
 
 struct SplashScreenView: View {
     //MARK: Property
+    @State private var isLocationPermission = false
+    @State private var showingLocationServiceDisabledAlert = false
+    
+    let alertTitle: String = "위치 정보 이용"
+    let alertMessage: String = "위치 서비스를 사용할 수 없습니다.\n디바이스의 '설정 > 개인정보 보호'에서 위치 서비스를 켜주세요."
     
     //MARK: Body
     var body: some View {
@@ -18,9 +24,18 @@ struct SplashScreenView: View {
             centerLogo
         }
         .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.7) {
-                self.changeToLoginView()
+            requestLocationPermission()
+        }
+        .alert(alertTitle,
+               isPresented: $showingLocationServiceDisabledAlert) {
+            Button("설정으로 이동") {
+                if let appSetting = URL(string: UIApplication.openSettingsURLString) {
+                    UIApplication.shared.open(appSetting)
+                }
             }
+            Button("취소", role: .cancel) {}
+        } message: {
+            Text(alertMessage)
         }
     }
     
@@ -57,6 +72,40 @@ struct SplashScreenView: View {
             let newRootView = UIHostingController(rootView: LoginViewCycle())
             appDelegate.changeRootSplashView(newRootView, animated: true)
         }
+    }
+    
+    //MARK: - Location 설정
+    
+    private func requestLocationPermission() {
+        DispatchQueue.global().async {
+            if CLLocationManager.locationServicesEnabled() {
+                DispatchQueue.main.async {
+                    BaseLocationManager.shared.requestLocationAuthorization()
+                    
+                    BaseLocationManager.shared.onAuthorizationChanged = { status in
+                        switch status {
+                        case .authorizedWhenInUse, .authorizedAlways:
+                            self.isLocationPermission = true
+                            proceedChangeView()
+                        case .denied, .restricted, .notDetermined:
+                            self.isLocationPermission = false
+                            self.showingLocationServiceDisabledAlert = true
+                        default:
+                            break
+                        }
+                    }
+                }
+            }
+            else {
+                showingLocationServiceDisabledAlert = true
+            }
+        }
+    }
+    
+    private func proceedChangeView() {
+            if isLocationPermission {
+                self.changeToLoginView()
+            }
     }
 }
 
