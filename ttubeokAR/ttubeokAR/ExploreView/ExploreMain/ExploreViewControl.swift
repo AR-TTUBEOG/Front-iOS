@@ -48,10 +48,9 @@ struct ExploreViewControl: View {
     
     private func imgBackground(geometry: GeometryProxy) -> some View {
         Icon.backgroundLogo.image
-            .resizable()
-            .frame(maxWidth: 295, maxHeight: 430)
+            .fixedSize()
             .aspectRatio(contentMode: .fit)
-            .position(x: geometry.size.width / 2, y: geometry.size.height * 0.35)
+            .position(x: geometry.size.width / 2, y: geometry.size.height * 0.32)
     }
     
     //뚜벅 메인페이지 슬로건

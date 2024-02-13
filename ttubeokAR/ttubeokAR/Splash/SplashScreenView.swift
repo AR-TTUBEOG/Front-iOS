@@ -25,13 +25,13 @@ struct SplashScreenView: View {
     //MARK: Authorization Text
     
     let gpsAlertTitle: String = "위치 정보 이용"
-    let gpsAlertMessage: String = "위치 서비스를 사용할 수 없습니다.\n디바이스의 '설정 > 개인정보 보호'에서 위치 서비스를 켜주세요."
+    let gpsAlertMessage: String = "위치 서비스를 사용할 수 없습니다. \n디바이스의 '설정 > 개인정보 보호'에서 위치 서비스를 켜주세요."
     
     let cameraAlertTitle: String = "카메라 접근 허용"
-    let cameraAlertMessage: String = "카메라를 사용할 수 없습니다.\n디바이스의 '설정 > 개인정보 보호'에서 카메라 서비스를 켜주세요."
+    let cameraAlertMessage: String = "카메라를 사용할 수 없습니다. \n디바이스의 '설정 > 개인정보 보호'에서 카메라 서비스를 켜주세요."
     
     let libraryAlertTitle: String = "앨범 접근 허용"
-    let libraryAlertMessage: String = "앨범 사용할 수 없습니다.\n디바이스의 '설정 > 개인정보 보호'에서 앨범 서비스를 켜주세요."
+    let libraryAlertMessage: String = "앨범 사용할 수 없습니다. \n디바이스의 '설정 > 개인정보 보호'에서 앨범 서비스를 켜주세요."
     
     
     //MARK: Body
@@ -82,7 +82,7 @@ struct SplashScreenView: View {
             }
             Button("취소", role: .cancel) {}
         } message: {
-            Text(libraryAlertTitle)
+            Text(libraryAlertMessage)
         }
         
         
