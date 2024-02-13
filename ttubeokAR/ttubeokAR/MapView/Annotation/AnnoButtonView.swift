@@ -9,10 +9,11 @@ import SwiftUI
 
 struct AnnoButtonView: View {
     var type: AnnoType
-    @Binding var selectedId: String?
+    @Binding var selectedId: Int?
     @Binding var isSelectedTotal: Bool
+    @Binding var selectedAnno: Anno?
     @State var isSelected: Bool
-    @State var id: String
+    @State var id: Int
 
 
     var body: some View {
@@ -86,6 +87,6 @@ struct AnnoButtonView: View {
     }
 }
 
-#Preview {
-    AnnoButtonView(type: .cafe, selectedId: .constant(""), isSelectedTotal: .constant(false), isSelected: true, id: "")
-}
+//#Preview {
+//    AnnoButtonView(type: .cafe, selectedId: .constant(""), isSelectedTotal: .constant(false), selectedAnno: .constant(.init(latitude: 37.256406, longitude: 127.064556, type: .cafe, image: "mapPlaceExample", isSelected: false)), isSelected: true, id: "")
+//}
