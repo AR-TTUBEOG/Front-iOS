@@ -9,19 +9,14 @@ import Foundation
 import SwiftUI
 
 struct Anno : Hashable {
-    var id: UUID = UUID()
+    var storeId: Int
+    var dongareaId: Int
+    var name: String
+    var info: String
     var latitude: Double
     var longitude: Double
-//    var location: CLLocationCoordinate2D
-    var type: AnnoType
     var image: String
-    var isSelected: Bool
+    var type: String
 }
 
 
-
-enum AnnoType {
-    case cafe
-    case restaurant
-    case route
-}
