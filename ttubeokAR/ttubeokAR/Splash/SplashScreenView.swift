@@ -22,6 +22,10 @@ struct SplashScreenView: View {
     @State private var showingCameraAccessAlert = false
     @State private var showingPhotoLibraryAccessAlert = false
     
+    @ObservedObject private var loginViewModel = LoginViewModel()
+    @State private var currentState: AppState = .login
+    
+    
     //MARK: Authorization Text
     
     let gpsAlertTitle: String = "위치 정보 이용"
@@ -47,6 +51,7 @@ struct SplashScreenView: View {
             requestCameraPermission()
             requestPhotoLibraryPermission()
             requestLocationPermission()
+            checkUser()
         }
         
         .onReceive(Just(isLocationPermissionOfGPS)) { _ in
@@ -129,10 +134,18 @@ struct SplashScreenView: View {
     
     private func changeToLoginView() {
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
-            let newRootView = UIHostingController(rootView: LoginViewCycle())
+            let newRootView = UIHostingController(rootView: LoginViewCycle(currentState: currentState, loginViewModel: loginViewModel))
             appDelegate.changeRootSplashView(newRootView, animated: true)
         }
     }
+    
+    //MARK: - 유효성 검사
+    private func checkUser() {
+        print("유효성 검사 시작함")
+        loginViewModel.checkLoginStatus()
+        currentState = loginViewModel.savedLoginToken ? .mainView : .login
+    }
+    
     
     //MARK: - Location 설정
     

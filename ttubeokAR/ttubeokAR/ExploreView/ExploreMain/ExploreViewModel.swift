@@ -135,6 +135,7 @@ class ExploreViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
     }
     
     public func fetchExploreDataAll(page: Int) {
+        print("전체 선택 API 호출")
         searchProvider.request(.searchAll(page: page)) { [weak self] result in
             switch result {
             case .success(let response):
@@ -149,7 +150,9 @@ class ExploreViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
                         self?.curretnPage = page
                     }
                 } catch {
-                    print("전체선택 error: \(error.localizedDescription)")
+                    if let rawResponse = String(data: response.data, encoding: .utf8) {
+                        print("Raw JSON response: \(rawResponse)")
+                    }
                 }
             case .failure(let error):
                 print("전체 선택네트워크 error \(error.localizedDescription)")
@@ -158,6 +161,7 @@ class ExploreViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
     }
     
     public func fetchExploreDataLatest(page: Int) {
+        print("최신순 선택 API 호출")
         searchProvider.request(.searchLatest(page: page)) { [weak self] result in
             switch result {
             case .success(let response):
@@ -181,6 +185,7 @@ class ExploreViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
     }
     
     public func fetchExploreDataDistance(page: Int) {
+        print("거리순 선택 API 호출")
         searchProvider.request(.searchDistance(page: page)) { [weak self] result in
             switch result {
             case .success(let response):
@@ -204,6 +209,7 @@ class ExploreViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
     }
     
     public func fetchExploreDataRecommend(page: Int) {
+        print("추천순 선택 API 호출")
         searchProvider.request(.searchRecommend(page: page)) { [weak self] result in
             switch result {
             case .success(let response):

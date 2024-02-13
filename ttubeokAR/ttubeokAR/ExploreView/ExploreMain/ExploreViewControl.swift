@@ -38,6 +38,7 @@ struct ExploreViewControl: View {
                     }
                     centerView(geometry: geometry)
                         .onAppear {
+                            print("--------------MainViewControll 초기 호출--------------")
                             viewModel.fetchDataSearch(viewModel.currentSearchType, page: 1)
                         }
                 }
@@ -80,6 +81,7 @@ struct ExploreViewControl: View {
                     RecommendedSpaceCard(viewModel: viewModel, exploreDataInfor: place)
                         .frame(minWidth: 0, maxWidth: .infinity)
                         .onAppear {
+                            print("--------------LazyGrid 마지막 페이지 호출--------------")
                             if place == self.viewModel.exploreData?.information.last {
                                 viewModel.fetchDataSearch(viewModel.currentSearchType, page: viewModel.curretnPage + 1)
                             }
@@ -97,6 +99,7 @@ struct ExploreViewControl: View {
             .frame(maxWidth: .infinity)
         }
         .refreshable {
+            print("--------------refresh 호출--------------")
             viewModel.fetchDataSearch(viewModel.currentSearchType, page: 1)
         }
     }
