@@ -14,7 +14,7 @@ struct BasketBallGameView: View {
     //MARK: - Body
     var body: some View {
         ZStack(alignment: .center) {
-            BackgroundComponent(topTitle: "농구 게임")
+            BackgroundComponent(height: 720, topTitle: "농구 게임")
             gameStack
         }
         .clipShape(.rect(cornerRadius: 24))
@@ -32,7 +32,7 @@ struct BasketBallGameView: View {
             GameCouponView(selectBtn: $viewModel.selectCoupon)
             GameSettingFinishButton(viewModel: viewModel)
         })
-        .frame(width: 300, height: 600)
+        .frame(width: 320, height: 630)
         .background(Color(red: 0.25, green: 0.24, blue: 0.37))
         .clipShape(.rect(cornerRadius: 24))
         .padding(.top, 10)

@@ -14,7 +14,7 @@ struct WheelGameView: View {
     //MARK: - Body
     var body: some View {
         ZStack(alignment: .center) {
-            BackgroundComponent(topTitle: "선물 뽑기")
+            BackgroundComponent(height: 1020, topTitle: "선물 뽑기")
             gameStack
         }
         .clipShape(.rect(cornerRadius: 24))
@@ -27,21 +27,18 @@ struct WheelGameView: View {
     //MARK: - BasketBallGameView
     
     private var gameStack: some View {
-        ScrollView {
-            VStack(spacing: 50) {
+            VStack(spacing: 30) {
                 WheelGameRuleView(viewModel: viewModel)
                 WheelGameShapeView(viewModel: viewModel)
-                    .offset(y: 50)
+                    .offset(y: 20)
                 GameCouponView(selectBtn: $viewModel.selectCoupon)
                 GameSettingFinishButton(viewModel: viewModel)
             }
-            .padding(.top, 20)
-        }
-        .frame(width: 300, height: 620)
-        .background(Color(red: 0.25, green: 0.24, blue: 0.37))
-        .clipShape(.rect(cornerRadius: 24))
-        .offset(y: 20)
-        .scrollIndicators(.hidden)
+            .padding(.top, 5)
+            .frame(width: 330, height: 930)
+            .background(Color(red: 0.25, green: 0.24, blue: 0.37))
+            .clipShape(.rect(cornerRadius: 24))
+            .scrollIndicators(.hidden)
     }
 }
 

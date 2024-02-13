@@ -24,8 +24,8 @@ struct InputAddressView<ViewModel: InputAddressProtocol & ObservableObject>: Vie
                         placeholder: "주소를 검색해주세요.",
                         fontSize: 20,
                         trailingHorizontalPadding: horizontalPadding,
-                        maxWidth: 295,
-                        maxHeight: 45,
+                        maxWidth: 270,
+                        maxHeight: 38,
                         onSearch: {}
         )
         .disabled(true)
@@ -36,16 +36,16 @@ struct InputAddressView<ViewModel: InputAddressProtocol & ObservableObject>: Vie
         CustomTextField(text: $viewModel.detailAddress,
                         placeholder: "상세주소를 입력해주세요.",
                         trailingHorizontalPadding: horizontalPadding,
-                        maxWidth: 355,
-                        maxHeight: 45,
+                        maxWidth: 320,
+                        maxHeight: 38,
                         onSearch: {}
         )
     }
     
     //TODO: - 버튼 처리 로직 필요
     private var groupAddressInputs: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            HStack(alignment: .center, spacing: 8) {
+        VStack(alignment: .leading, spacing: 8) {
+            HStack(alignment: .center, spacing: 3) {
                 addressInputTextField
                 Button(action: {
                     viewModel.searchAddress()
@@ -53,7 +53,7 @@ struct InputAddressView<ViewModel: InputAddressProtocol & ObservableObject>: Vie
                        label: {
                     Icon.searchAddress.image
                         .resizable()
-                        .frame(maxWidth: 48, maxHeight: 45)
+                        .frame(width: 50, height: 50)
                 })
             }
             detailAddressInputTextField

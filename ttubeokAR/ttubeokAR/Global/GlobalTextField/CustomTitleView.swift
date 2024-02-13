@@ -76,7 +76,7 @@ struct CustomTitleView: View {
         VStack(alignment: .center, spacing: spacing) {
             Text(customAttributedSting(for: titleText, highlights: highlightText))
                 .font(.sandol(type: .bold, size: 30))
-                .frame(maxWidth: titleWidth, maxHeight: titleHeight, alignment: frameAlignment)
+                .frame(width: titleWidth, height: titleHeight, alignment: frameAlignment)
                 .foregroundStyle(Color.textPink)
                 .multilineTextAlignment(textAlignment)
                 .lineSpacing(2)
@@ -85,7 +85,7 @@ struct CustomTitleView: View {
                 Text(subtitle)
                     .font(.sandol(type: .light, size: subtitleSize ?? 0))
                     .lineSpacing(1.5)
-                    .frame(maxWidth: subtitleWidth ?? 0, maxHeight: subtitleHeight ?? 0, alignment: frameAlignment)
+                    .frame(width: subtitleWidth ?? 0, height: subtitleHeight ?? 0, alignment: frameAlignment)
                     .foregroundStyle(Color.textPink)
                     .multilineTextAlignment(textAlignment)
             }
