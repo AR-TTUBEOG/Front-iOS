@@ -150,4 +150,5 @@ enum Icon: String {
     case StarFilled = "StarFilled"
     case emptyStar = "emptyStar"
     case CommentIcon = "CommentIcon"
+    case ARBookMarktest = "ARBookMarktest" //test용
 }

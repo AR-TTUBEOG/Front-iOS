@@ -9,7 +9,6 @@ import Foundation
 import Moya
 
 enum ExploreAPITarget {
-    case fetchExploreData
     case createBookMark(id : Int, memberId: Int, content: String, star: Float,image : String)
     case likeWalkWay(spotId: Int)
     case likeStoreData(storeId: Int)
@@ -22,8 +21,6 @@ extension ExploreAPITarget: TargetType {
     
     var path: String {
         switch self {
-        case .fetchExploreData:
-              return "/explore/data"
         case .createBookMark:
             return "/bookMark/create"
         case .likeWalkWay(let spotId):
@@ -35,8 +32,6 @@ extension ExploreAPITarget: TargetType {
     
     var method: Moya.Method {
         switch self {
-        case .fetchExploreData:
-            return .get
         case .createBookMark:
             return .post
         case .likeWalkWay:
@@ -48,8 +43,6 @@ extension ExploreAPITarget: TargetType {
     
     var task: Moya.Task {
         switch self {
-        case .fetchExploreData:
-            return .requestPlain
         case let .createBookMark(id, memberId, content, star, image):
             return .requestParameters(parameters: ["id":id,"memberId":memberId,"content":content,"star":star,"image":image], encoding: JSONEncoding.default)
         case .likeWalkWay(let spotId):
