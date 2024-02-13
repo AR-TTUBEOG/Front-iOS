@@ -26,7 +26,7 @@ struct LoginViewCycle: View {
                 NicknameSettingLogin(transitionToNext: { withAnimation {currentState = .mainView} }, viewModel: NicknameSettingViewModel())
                     .transition(.opacity)
             case .mainView:
-                MainViewControl()
+                MainViewControl().environmentObject(SharedTabInfo())
                     .transition(.opacity)
             }
         }
