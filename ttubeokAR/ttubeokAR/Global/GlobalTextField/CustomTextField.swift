@@ -26,6 +26,7 @@ struct CustomTextField: View {
     var showSearchIcon: Bool
     var onSearch: () -> Void
     var alignment: Alignment
+    var textAlignment: TextAlignment
     var axis: Axis
     var maxLength: Int?
     var backgroundColor: Color
@@ -49,8 +50,14 @@ struct CustomTextField: View {
     ///   - showSearchIcon: 돋보기 아이콘 보기 위한 Bool 값 지정
     ///   - onSearch: 텍스트 필드가 수행해야 할 function 지정
     ///   - alignment:스택 및 frame 정렬 값
+    ///   - textAlignment: 텍스트 필드 내 정렬
     ///   - axis: 텍스트 필드의 자동 줄 생성 축 지정
     ///   - maxLength: 텍스트 필드의 최대 글자 수 지정
+    ///   - backgroundColor: 텍스트필드 백그라운드 컬러
+    ///   - fontColor: 텍스트 필드 내 텍스트 색상
+    ///   - lineWidth: 텍스트 필드 내 라인 굵기
+    ///   - lineColor: 텍스트 필드 내 라인 색상
+    
     init(text: Binding<String>,
          isTextFocused: Bool = false,
          placeholder: String,
@@ -64,6 +71,7 @@ struct CustomTextField: View {
          showSearchIcon: Bool = false,
          onSearch: @escaping () -> Void,
          alignment: Alignment = .leading,
+         textAlignment: TextAlignment = .leading,
          axis: Axis = .horizontal,
          maxLength: Int? = nil,
          backgroundColor: Color = Color(red: 0.25, green: 0.24, blue: 0.37),
@@ -83,6 +91,7 @@ struct CustomTextField: View {
             self.showSearchIcon = showSearchIcon
             self.onSearch = onSearch
             self.alignment = alignment
+            self.textAlignment = textAlignment
             self.axis = axis
             self.maxLength = maxLength
             self.backgroundColor = backgroundColor
@@ -105,6 +114,7 @@ struct CustomTextField: View {
         ZStack(alignment: alignment) {
             TextField("", text: $text, axis: axis)
                 .frame(width: maxWidth, height: maxHeight, alignment: alignment)
+                .multilineTextAlignment(textAlignment)
                 .font(.sandol(type: .regular, size: fontSize))
                 .foregroundStyle(fontColor)
                 .focused($isTextFocused)

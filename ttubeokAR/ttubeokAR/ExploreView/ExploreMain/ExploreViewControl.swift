@@ -22,6 +22,8 @@ struct ExploreViewControl: View {
             allView
                 .onAppear {
                     observeKeyboard()
+                    print("--------------MainViewControll 초기 호출--------------")
+                    viewModel.fetchDataSearch(viewModel.currentSearchType, page: 1)
                 }
         }
     }
@@ -37,10 +39,6 @@ struct ExploreViewControl: View {
                         mainImage
                     }
                     centerView(geometry: geometry)
-                        .onAppear {
-                            print("--------------MainViewControll 초기 호출--------------")
-                            viewModel.fetchDataSearch(viewModel.currentSearchType, page: 1)
-                        }
                 }
                 .padding(.top,108.6)
             }
@@ -78,7 +76,7 @@ struct ExploreViewControl: View {
         ScrollView(.vertical) {
             LazyVGrid(columns: [GridItem(.flexible(minimum: 150), spacing: -8), GridItem(.flexible(minimum: 150), spacing: 15)], spacing: 25) {
                 ForEach(self.viewModel.exploreData?.information ?? [], id: \.self) { place in
-                    RecommendedSpaceCard(viewModel: viewModel, exploreDataInfor: place)
+                    RecommendedSpaceCard(viewModel: RecommendedSpaceCardViewModel(exploreDetailInfor: place))
                         .frame(minWidth: 0, maxWidth: .infinity)
                         .onAppear {
                             print("--------------LazyGrid 마지막 페이지 호출--------------")

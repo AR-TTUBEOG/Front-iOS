@@ -77,14 +77,12 @@ class MarketViewModel: ObservableObject, ImageHandling, InputAddressProtocol, Fi
     public func searchAddress() {
         if let lat = locatoinManager.currentLocation?.coordinate.latitude,
            let lng = locatoinManager.currentLocation?.coordinate.longitude {
-            ReverseGeocodingService().fetchReverseGeocodingData(latitude: lat,
-                                                                longitude: lng) { [weak self] address in
+            ReverseGeocodingService().fetchReverseGeocodingData(latitude: lat, longitude: lng) { [weak self] address in
                 DispatchQueue.main.async {
                     self?.address = address ?? "주소를 찾을 수 없습니다."
                 }
             }
         }
     }
-    
 }
 

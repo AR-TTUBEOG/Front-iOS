@@ -10,7 +10,7 @@ import SwiftUI
 struct MarketPlaceRegister: View {
     //MARK: - Property
     @StateObject private var viewModel = MarketViewModel()
-//    @Environment(\.dismiss) var dismiss
+    @Environment(\.dismiss) var dismiss
     @State private var keyboardVisible = false
     
     var lastedSelectedTab: Int
@@ -61,8 +61,7 @@ struct MarketPlaceRegister: View {
                         viewModel.currentPageIndex -= 1
                     }
                     else if viewModel.currentPageIndex == 0 {
-//                        dismiss()
-                        print("hello")
+                        dismiss()
                     }
                 }
             }) {
