@@ -14,8 +14,8 @@ struct RecommendedSpaceCard: View {
     @State var baseImage: Image?
     @State var placeTypeText: Text?
     
-    let viewModel: ExploreViewModel
     let exploreDataInfor: ExploreDetailInfor?
+    let viewModel = RecommendedSpaceCardViewModel()
     
     
     // 장소 타입 저장할 변수 필요
@@ -101,7 +101,7 @@ struct RecommendedSpaceCard: View {
             changePlaceType()
             DispatchQueue.main.async {
                 viewModel.isFavorited.toggle()
-//                viewModel.checkLike()
+                self.checkLike()
             }
         }) {
             Image(viewModel.favoriteImageName)
@@ -118,6 +118,26 @@ struct RecommendedSpaceCard: View {
                 viewModel.placeType = .store
             }
         }
+    
+    private func checkLike() {
+        if self.isFavorited {
+            sendLike()
+        }
+    }
+    
+    private func sendLike() {
+        
+        guard let detailInfo = exploreDataInfor else { return }
+        
+        switch viewModel.placeType {
+        case .spot:
+            viewModel.likeWalkWay(spotId: detailInfo.id)
+        case .store:
+            viewModel.likeStore(storeId: detailInfo.id)
+        case .none:
+            print("error")
+        }
+    }
         
         // MARK: - 장소 간단 정보
         // 별점

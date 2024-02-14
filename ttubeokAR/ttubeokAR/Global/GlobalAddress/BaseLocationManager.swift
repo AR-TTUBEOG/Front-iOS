@@ -14,6 +14,8 @@ class BaseLocationManager: NSObject, CLLocationManagerDelegate, ObservableObject
     private let locationManager = CLLocationManager()
     var onAuthorizationChanged: ((CLAuthorizationStatus) -> Void)?
     @Published var currentLocation: CLLocation?
+    @Published var estimatedTime: TimeInterval = 0
+    @Published var distance: CLLocationDistance = 0
 
     override init() {
         super.init()

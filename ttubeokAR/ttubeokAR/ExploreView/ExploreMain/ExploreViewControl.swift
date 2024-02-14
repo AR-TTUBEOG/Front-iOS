@@ -78,7 +78,7 @@ struct ExploreViewControl: View {
         ScrollView(.vertical) {
             LazyVGrid(columns: [GridItem(.flexible(minimum: 150), spacing: -8), GridItem(.flexible(minimum: 150), spacing: 15)], spacing: 25) {
                 ForEach(self.viewModel.exploreData?.information ?? [], id: \.self) { place in
-                    RecommendedSpaceCard(viewModel: viewModel, exploreDataInfor: place)
+                    RecommendedSpaceCard(exploreDataInfor: place)
                         .frame(minWidth: 0, maxWidth: .infinity)
                         .onAppear {
                             print("--------------LazyGrid 마지막 페이지 호출--------------")

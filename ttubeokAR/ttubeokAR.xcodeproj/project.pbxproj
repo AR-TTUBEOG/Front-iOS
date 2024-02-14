@@ -35,6 +35,7 @@
 		483513882B5A603D0072ADFE /* AppleLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483513872B5A603D0072ADFE /* AppleLogin.swift */; };
 		4835138A2B5A605F0072ADFE /* AppleLoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483513892B5A605F0072ADFE /* AppleLoginManager.swift */; };
 		4835138D2B5A60D00072ADFE /* AppleUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4835138C2B5A60D00072ADFE /* AppleUserData.swift */; };
+		483567702B7D20B200C8BA04 /* RecommendedSpaceCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4835676F2B7D20B200C8BA04 /* RecommendedSpaceCardViewModel.swift */; };
 		4835C7F72B53B2CB00E40EAD /* ColorAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4835C7F62B53B2CB00E40EAD /* ColorAssets.xcassets */; };
 		483612B32B4ED00100E0B45A /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483612B22B4ED00100E0B45A /* TestView.swift */; };
 		483612B62B4ED09000E0B45A /* TabBarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483612B52B4ED09000E0B45A /* TabBarModel.swift */; };
@@ -203,6 +204,7 @@
 		483513872B5A603D0072ADFE /* AppleLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLogin.swift; sourceTree = "<group>"; };
 		483513892B5A605F0072ADFE /* AppleLoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginManager.swift; sourceTree = "<group>"; };
 		4835138C2B5A60D00072ADFE /* AppleUserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleUserData.swift; sourceTree = "<group>"; };
+		4835676F2B7D20B200C8BA04 /* RecommendedSpaceCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedSpaceCardViewModel.swift; sourceTree = "<group>"; };
 		4835C7F62B53B2CB00E40EAD /* ColorAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ColorAssets.xcassets; sourceTree = "<group>"; };
 		483612B22B4ED00100E0B45A /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		483612B52B4ED09000E0B45A /* TabBarModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarModel.swift; sourceTree = "<group>"; };
@@ -464,6 +466,15 @@
 				487E38482B5AE04A0026599D /* KakaoLoginManager.swift */,
 			);
 			path = Kakao;
+			sourceTree = "<group>";
+		};
+		4835676E2B7D209300C8BA04 /* SpaceCard */ = {
+			isa = PBXGroup;
+			children = (
+				CA3A39192B55753800BEB7DE /* RecommendedSpaceCard.swift */,
+				4835676F2B7D20B200C8BA04 /* RecommendedSpaceCardViewModel.swift */,
+			);
+			path = SpaceCard;
 			sourceTree = "<group>";
 		};
 		483612B42B4ED04C00E0B45A /* GlobalTabBar */ = {
@@ -1021,10 +1032,10 @@
 		CA2513002B6286C1006D2EDF /* ExploreMain */ = {
 			isa = PBXGroup;
 			children = (
+				4835676E2B7D209300C8BA04 /* SpaceCard */,
 				CAB9FA1D2B551B3E00F0046A /* ExploreViewModel.swift */,
 				CAB9FA1B2B551B1500F0046A /* ExploreViewControl.swift */,
 				CAB9FA1F2B55443700F0046A /* ExploreDataModel.swift */,
-				CA3A39192B55753800BEB7DE /* RecommendedSpaceCard.swift */,
 			);
 			path = ExploreMain;
 			sourceTree = "<group>";
@@ -1227,6 +1238,7 @@
 				4850B00F2B766FAB00F8CD90 /* BaseLocationManager.swift in Sources */,
 				4831B8E62B79AB1900337654 /* GameSettingFinishButton.swift in Sources */,
 				48B57FC02B75D4F0005965FD /* PopupModifier.swift in Sources */,
+				483567702B7D20B200C8BA04 /* RecommendedSpaceCardViewModel.swift in Sources */,
 				48B57FBF2B75D4EC005965FD /* AccountSettingView.swift in Sources */,
 				488DE81D2B79A27500EE4E2B /* GameCouponView.swift in Sources */,
 				48249D962B7527B5002849B3 /* SettingViewModel.swift in Sources */,
