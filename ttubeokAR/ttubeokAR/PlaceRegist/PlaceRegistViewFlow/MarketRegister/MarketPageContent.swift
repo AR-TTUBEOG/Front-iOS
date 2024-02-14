@@ -110,6 +110,7 @@ struct MarketPageContent: View {
                         textAlignment: .leading,
                         frameAlignment: .leading
         )
+        .disabled(false)
     }
     
     /// 세 번째 뷰 장소 선택 버튼

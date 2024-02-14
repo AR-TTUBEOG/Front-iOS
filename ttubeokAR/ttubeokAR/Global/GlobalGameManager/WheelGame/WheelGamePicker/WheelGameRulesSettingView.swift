@@ -78,6 +78,7 @@ struct WheelGameRulesSettingView: View {
                         maxHeight: 30,
                         onSearch: {},
                         alignment: .center,
+                        textAlignment: .center,
                         maxLength: 12,
                         backgroundColor: textFieldBackground(),
                         lineColor: textFieldLineColor()
