@@ -14,15 +14,9 @@ import CoreLocation
 
 class MarketViewModel: ObservableObject, ImageHandling, InputAddressProtocol, FinishViewProtocol {
     
-    
-    
-    
-    
     func finishPlaceRegist() {
         print("hello")
     }
-    
-
     
     //MARK: - Property
     @Published var marketModel = MarketModel()
@@ -78,19 +72,15 @@ class MarketViewModel: ObservableObject, ImageHandling, InputAddressProtocol, Fi
     
     @Published var address: String = ""
     @Published var detailAddress: String = ""
-    @Published var currentLocation: CLLocation?
+    @Published var locatoinManager = BaseLocationManager.shared
     
     public func searchAddress() {
-        BaseLocationManager.shared.startUpdatingLocation()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            if let currentLocation = BaseLocationManager.shared.getCurrentLocation() {
-                ReverseGeocodingService().fetchReverseGeocodingData(latitude: currentLocation.coordinate.latitude,
-                                                                    longitude: currentLocation.coordinate.longitude) { [weak self] address in
-                    DispatchQueue.main.async {
-                        self?.address = address ?? "주소를 찾을 수 없습니다."
-                        self?.currentLocation = currentLocation
-                        BaseLocationManager.shared.stopUpdatingLocation()
-                    }
+        if let lat = locatoinManager.currentLocation?.coordinate.latitude,
+           let lng = locatoinManager.currentLocation?.coordinate.longitude {
+            ReverseGeocodingService().fetchReverseGeocodingData(latitude: lat,
+                                                                longitude: lng) { [weak self] address in
+                DispatchQueue.main.async {
+                    self?.address = address ?? "주소를 찾을 수 없습니다."
                 }
             }
         }

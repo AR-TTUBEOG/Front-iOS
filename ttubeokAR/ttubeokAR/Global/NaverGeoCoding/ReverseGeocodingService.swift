@@ -13,16 +13,17 @@ class ReverseGeocodingService {
     let provider = MoyaProvider<NaverReverseGeocodingAPI>()
     
     public func fetchReverseGeocodingData(latitude: Double, longitude: Double, completion: @escaping (String?) -> Void) {
-        let formattedLat = String(format: "%.8f", latitude)
-        let formattedLng = String(format: "%.8f", longitude)
+        let formattedLat = String(format: "%.12f", latitude)
+        let formattedLng = String(format: "%.12f", longitude)
         provider.request(.reverseGeocode(latitude: formattedLat, logitude: formattedLng)) { result in
             switch result {
             case .success(let response):
                 do {
-                    print(response.description)
+                    print("성공 \(response.description)")
                     let decodedData = try JSONDecoder().decode(ReverseGeoCodingData.self, from: response.data)
                     if let firstResult = decodedData.results.first {
                         let address = self.makeroadAddress(from: firstResult)
+                        print(address)
                         completion(address)
                     }
                 } catch {

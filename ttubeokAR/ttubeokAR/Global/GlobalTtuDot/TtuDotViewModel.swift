@@ -21,7 +21,7 @@ class TtuDotViewModel: ObservableObject {
         sections = [
             TtuDotSection(command: AddLocationCommand(sharedTabInfo: sharedTabInfo), title: "장소 추가", imageName: "AddLocation"),
             TtuDotSection(command: ARCommand(), title: "AR 보기", imageName: "ARBtn"),
-            TtuDotSection(command: MyTicketCommand(), title: "내 쿠폰", imageName: "MyTicket"),
+            TtuDotSection(command: MyTicketCommand(sharedTabInfo: sharedTabInfo), title: "내 쿠폰", imageName: "MyTicket"),
             TtuDotSection(command: SettingsCommand(), title: "마이 페이지", imageName: "myPage"),
             TtuDotSection(command: SettingsCommand(), title: "환경 설정", imageName: "OptionBtn")
         ]

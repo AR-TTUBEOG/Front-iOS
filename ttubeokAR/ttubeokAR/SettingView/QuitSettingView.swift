@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct QuitSettingView: View {
+    
     var body: some View {
         ZStack {
             Color.background.ignoresSafeArea(.all)

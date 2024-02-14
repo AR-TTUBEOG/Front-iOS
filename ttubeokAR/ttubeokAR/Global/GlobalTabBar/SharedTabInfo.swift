@@ -9,5 +9,9 @@ import Foundation
 import SwiftUI
 
 class SharedTabInfo: ObservableObject {
-    @Published var currentTab: Int = 1
+    @Published var currentTab: Int
+    
+    init(currentTab: Int = 1) {
+        self.currentTab = currentTab
+    }
 }

@@ -25,7 +25,6 @@ class WalkwayViewModel: ObservableObject, ImageHandling, InputAddressProtocol, F
     //MARK: - saveTextInputs
     @Published var firstPlaceName: String = ""
     @Published var fourthWalkwayDescription: String = ""
-    @Published var currentLocation: CLLocation?
     
     var titleText: String = "산책스팟 등록이 \n완료되었습니다."
     
@@ -75,21 +74,16 @@ class WalkwayViewModel: ObservableObject, ImageHandling, InputAddressProtocol, F
     
     @Published var address: String = ""
     @Published var detailAddress: String = ""
+    @Published var locationManager = BaseLocationManager.shared
     
     
     /// 현재 버튼을 눌러 위치 활성화하기
     public func searchAddress() {
-        BaseLocationManager.shared.startUpdatingLocation()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            if let currentLocation = BaseLocationManager.shared.getCurrentLocation() {
-                ReverseGeocodingService().fetchReverseGeocodingData(latitude: currentLocation.coordinate.latitude,
-                                                                    longitude: currentLocation.coordinate.longitude) { [weak self] address in
-                    DispatchQueue.main.async {
-                        self?.address = address ?? "주소를 찾을 수 없습니다."
-                        self?.currentLocation = currentLocation
-                        BaseLocationManager.shared.stopUpdatingLocation()
-                    }
-                }
+        if let lat = locationManager.currentLocation?.coordinate.latitude,
+           let lng = locationManager.currentLocation?.coordinate.longitude {
+            ReverseGeocodingService().fetchReverseGeocodingData(latitude: lat,
+                                                                longitude: lng) { [weak self] address in
+                self?.address = address ?? "주소를 찾을 수 없습니다."
             }
         }
     }
@@ -134,8 +128,8 @@ class WalkwayViewModel: ObservableObject, ImageHandling, InputAddressProtocol, F
                                         address: self.address,
                                         detailAddress: self.detailAddress,
                                         info: self.fourthWalkwayDescription,
-                                        latitude: self.currentLocation?.coordinate.latitude,
-                                        longitude: self.currentLocation?.coordinate.longitude,
+                                        latitude: self.locationManager.currentLocation?.coordinate.latitude ?? 0.0,
+                                        longitude: self.locationManager.currentLocation?.coordinate.longitude ?? 0.0,
                                         image: base64Images,
                                         starts: 0
         )

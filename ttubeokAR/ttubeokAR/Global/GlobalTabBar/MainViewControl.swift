@@ -24,7 +24,7 @@ struct MainViewControl: View {
     @State private var selectedTab: Int
     @State private var showTtuDotButton = false
     @State private var changeTabView = true
-    @State private var showSearchOptionButton = false
+    @State private var showSearchOptionButton = false 
     @State private var isSliderActive = false
     @State private var ttuDotButtonAngle: Double = -90
     @EnvironmentObject var sharedTabInfo: SharedTabInfo
@@ -66,7 +66,7 @@ struct MainViewControl: View {
             if selectedTab == 1 {
                 ExploreViewControl(viewModel: exploreViewModel)
             } else if selectedTab == 2 {
-                EmptyView()
+                Text("11")
             }
         }
     }

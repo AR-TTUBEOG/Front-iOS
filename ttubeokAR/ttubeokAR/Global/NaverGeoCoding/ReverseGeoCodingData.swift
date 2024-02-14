@@ -22,7 +22,6 @@ struct ResultData: Codable {
     let name: String
     let code: Code
     let region: Region
-    let land: Land
 }
 
 struct Code: Codable {
@@ -53,23 +52,4 @@ struct Area: Codable {
         let x: Float
         let y: Float
     }
-}
-
-struct Land: Codable {
-    let type: String
-    let number1: String
-    let number2: String
-    let addition0: Addition?
-    let addition1: Addition?
-    let addition2: Addition?
-    let addition3: Addition?
-    let addition4: Addition?
-    let name: String
-    let coords: Area.Coords
-}
-
-
-struct Addition: Codable {
-    let type: String
-    let value: String
 }

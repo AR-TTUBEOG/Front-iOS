@@ -40,7 +40,7 @@ struct RegistFinishButton<ViewModel: FinishViewProtocol & ObservableObject>: Vie
     /// - Parameter selectedTab: 기존의 선택된 루트뷰의 선택된 탭
     private func changeRootViewToMainView(selectedTab: Int) {
         let appDelegate = UIApplication.shared.delegate as? AppDelegate
-        appDelegate?.changeRootViewController(UIHostingController(rootView: MainViewControl(selectedTab: selectedTab).environmentObject(SharedTabInfo())),animated: true)
+        appDelegate?.changeRootViewController(UIHostingController(rootView: MainViewControl(selectedTab: lastedSelectedTab).environmentObject(SharedTabInfo(currentTab: lastedSelectedTab))),animated: true)
     }
     
 }
