@@ -28,6 +28,9 @@ struct RecommendedSpaceCard: View {
             .background(Color.btnBackground)
             .clipShape(.rect(cornerRadius: 19))
             .shadow(radius: 5)
+            .onReceive(BaseLocationManager.shared.$currentLocation) { _ in
+                viewModel.updateDistanceAndTIme()
+            }
     }
     
     //MARK: - ViewSetting

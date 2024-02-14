@@ -100,4 +100,21 @@ class RecommendedSpaceCardViewModel: NSObject, ObservableObject, CLLocationManag
     @Published var estimatedTime: TimeInterval = 0
     
     
+    public func updateDistanceAndTIme() {
+        guard let currentLocation = BaseLocationManager.shared.currentLocation,
+              let destinationLat = exploreDetailInfor?.latitude,
+              let destinationLng = exploreDetailInfor?.longtitude else {
+            return
+        }
+        
+        let destinationLocation = CLLocation(latitude: destinationLat, longitude: destinationLng)
+        let distance = currentLocation.distance(from: destinationLocation)
+        self.distance = distance
+        
+        let averageSpeed = 5.0
+        let estimatedTime = distance / (averageSpeed * 1000) * 3600
+        self.estimatedTime = estimatedTime
+    }
+    
+    
 }
