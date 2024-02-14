@@ -22,6 +22,8 @@ struct ExploreViewControl: View {
             allView
                 .onAppear {
                     observeKeyboard()
+                    print("--------------MainViewControll 초기 호출--------------")
+                    viewModel.fetchDataSearch(viewModel.currentSearchType, page: 1)
                 }
         }
     }
@@ -37,10 +39,6 @@ struct ExploreViewControl: View {
                         mainImage
                     }
                     centerView(geometry: geometry)
-                        .onAppear {
-                            print("--------------MainViewControll 초기 호출--------------")
-                            viewModel.fetchDataSearch(viewModel.currentSearchType, page: 1)
-                        }
                 }
                 .padding(.top,108.6)
             }

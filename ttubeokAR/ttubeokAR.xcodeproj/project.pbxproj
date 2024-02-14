@@ -36,6 +36,7 @@
 		4835138A2B5A605F0072ADFE /* AppleLoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483513892B5A605F0072ADFE /* AppleLoginManager.swift */; };
 		4835138D2B5A60D00072ADFE /* AppleUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4835138C2B5A60D00072ADFE /* AppleUserData.swift */; };
 		483567702B7D20B200C8BA04 /* RecommendedSpaceCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4835676F2B7D20B200C8BA04 /* RecommendedSpaceCardViewModel.swift */; };
+		483567722B7D3BAD00C8BA04 /* PermissionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483567712B7D3BAD00C8BA04 /* PermissionViewModel.swift */; };
 		4835C7F72B53B2CB00E40EAD /* ColorAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4835C7F62B53B2CB00E40EAD /* ColorAssets.xcassets */; };
 		483612B32B4ED00100E0B45A /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483612B22B4ED00100E0B45A /* TestView.swift */; };
 		483612B62B4ED09000E0B45A /* TabBarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483612B52B4ED09000E0B45A /* TabBarModel.swift */; };
@@ -205,6 +206,7 @@
 		483513892B5A605F0072ADFE /* AppleLoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginManager.swift; sourceTree = "<group>"; };
 		4835138C2B5A60D00072ADFE /* AppleUserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleUserData.swift; sourceTree = "<group>"; };
 		4835676F2B7D20B200C8BA04 /* RecommendedSpaceCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedSpaceCardViewModel.swift; sourceTree = "<group>"; };
+		483567712B7D3BAD00C8BA04 /* PermissionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionViewModel.swift; sourceTree = "<group>"; };
 		4835C7F62B53B2CB00E40EAD /* ColorAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ColorAssets.xcassets; sourceTree = "<group>"; };
 		483612B22B4ED00100E0B45A /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		483612B52B4ED09000E0B45A /* TabBarModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarModel.swift; sourceTree = "<group>"; };
@@ -403,6 +405,7 @@
 			isa = PBXGroup;
 			children = (
 				481EA2702B6F280200BAD5E0 /* SplashScreenView.swift */,
+				483567712B7D3BAD00C8BA04 /* PermissionViewModel.swift */,
 			);
 			path = Splash;
 			sourceTree = "<group>";
@@ -1371,6 +1374,7 @@
 				483CB9642B73329700938224 /* GameBenefitsText.swift in Sources */,
 				481B90AA2B66A1B800D366A7 /* WalkwayPageContent.swift in Sources */,
 				485C83A22B70E3E6009D9B54 /* GameButtonView.swift in Sources */,
+				483567722B7D3BAD00C8BA04 /* PermissionViewModel.swift in Sources */,
 				488FA7102B650FAD0030CE66 /* WalkSelectButton.swift in Sources */,
 				6C7239EA2B5BA86A0082F12D /* NotiSettingView.swift in Sources */,
 				6C712DE32B7B284A0096775D /* RoadListViewModel.swift in Sources */,
