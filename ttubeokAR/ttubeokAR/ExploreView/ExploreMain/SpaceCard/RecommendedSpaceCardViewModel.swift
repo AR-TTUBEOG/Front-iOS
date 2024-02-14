@@ -9,14 +9,48 @@ import Foundation
 import CoreLocation
 import Moya
 
-class RecommendedSpaceCardViewModel: NSObject, ObservableObject {
+class RecommendedSpaceCardViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     //MARK: - API
     private let provider = MoyaProvider<ExploreAPITarget>()
+    var exploreDetailInfor: ExploreDetailInfor?
+    init(exploreDetailInfor: ExploreDetailInfor) {
+        self.exploreDetailInfor = exploreDetailInfor
+    }
     
     //MARK: - 이미지 좋아요
     @Published var isFavorited: Bool = false
     @Published var placeType: PlaceTypeValue? = nil
+    
+    
+    public func changePlaceType() {
+        if (self.exploreDetailInfor?.placeType.spot) != nil {
+            self.placeType = .spot
+        } else if (self.exploreDetailInfor?.placeType.store) != nil {
+                self.placeType = .store
+            }
+        }
+    
+    public func checkLike() {
+        if self.isFavorited {
+            sendLike()
+        }
+    }
+    
+    public func sendLike() {
+        
+        guard let detailInfo = self.exploreDetailInfor else { return }
+        
+        switch self.placeType {
+        case .spot:
+            self.likeWalkWay(spotId: detailInfo.id)
+        case .store:
+            self.likeStore(storeId: detailInfo.id)
+        case .none:
+            print("error")
+        }
+    }
+    
     
     var favoriteImageName: String {
         return isFavorited ? "checkHeart" : "unCheckHeart"
@@ -64,4 +98,6 @@ class RecommendedSpaceCardViewModel: NSObject, ObservableObject {
     
     @Published var distance: CLLocationDistance = 0
     @Published var estimatedTime: TimeInterval = 0
+    
+    
 }

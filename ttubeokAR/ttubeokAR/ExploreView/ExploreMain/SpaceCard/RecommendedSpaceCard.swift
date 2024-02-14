@@ -14,8 +14,7 @@ struct RecommendedSpaceCard: View {
     @State var baseImage: Image?
     @State var placeTypeText: Text?
     
-    let exploreDataInfor: ExploreDetailInfor?
-    let viewModel = RecommendedSpaceCardViewModel()
+    let viewModel: RecommendedSpaceCardViewModel
     
     
     // 장소 타입 저장할 변수 필요
@@ -79,7 +78,7 @@ struct RecommendedSpaceCard: View {
     // MARK: - 장소 이미지 및 이름
     //장소 이미지
     private var spaceImage : some View {
-        Image(self.exploreDataInfor?.image ?? "")
+        Image(viewModel.exploreDetailInfor?.image ?? "")
             .resizable()
             .aspectRatio(contentMode: .fill)
             .frame(maxWidth: 150, maxHeight: 80)
@@ -89,7 +88,7 @@ struct RecommendedSpaceCard: View {
     
     //장소 이름
     private var spaceName : some View {
-        Text(self.exploreDataInfor?.name ?? "")
+        Text(viewModel.exploreDetailInfor?.name ?? "")
             .font(.sandol(type: .regular, size: 15))
             .foregroundColor(Color.textPink)
             .frame(maxWidth: 130, maxHeight: 19, alignment: .center)
@@ -98,44 +97,16 @@ struct RecommendedSpaceCard: View {
     //장소 좋아요
     private var spaceLiked: some View {
         Button(action: {
-            changePlaceType()
+            viewModel.changePlaceType()
             DispatchQueue.main.async {
                 viewModel.isFavorited.toggle()
-                self.checkLike()
+                viewModel.checkLike()
             }
         }) {
             Image(viewModel.favoriteImageName)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 20, height: 20)
-        }
-    }
-    
-    private func changePlaceType() {
-        if (self.exploreDataInfor?.placeType.spot) != nil {
-            viewModel.placeType = .spot
-        } else if (self.exploreDataInfor?.placeType.store) != nil {
-                viewModel.placeType = .store
-            }
-        }
-    
-    private func checkLike() {
-        if self.isFavorited {
-            sendLike()
-        }
-    }
-    
-    private func sendLike() {
-        
-        guard let detailInfo = exploreDataInfor else { return }
-        
-        switch viewModel.placeType {
-        case .spot:
-            viewModel.likeWalkWay(spotId: detailInfo.id)
-        case .store:
-            viewModel.likeStore(storeId: detailInfo.id)
-        case .none:
-            print("error")
         }
     }
         
@@ -148,7 +119,7 @@ struct RecommendedSpaceCard: View {
                     .aspectRatio(contentMode: .fill)
                     .frame(maxWidth: 13, maxHeight: 13)
                 
-                Text(String(self.exploreDataInfor?.stars ?? 0.0))
+                Text(String(viewModel.exploreDetailInfor?.stars ?? 0.0))
                     .frame(maxWidth: 15, maxHeight: 15)
                     .font(.sandol(type: .regular, size: 11))
                     .foregroundColor(Color.textPink)
@@ -222,7 +193,7 @@ struct RecommendedSpaceCard: View {
                     .aspectRatio(contentMode: .fit)
                     .frame(maxWidth: 9, maxHeight: 9)
                 offset(x: 4, y: 0)
-                Text(viewModel.formattedReviewCount(self.exploreDataInfor?.guestbookCount ?? 0))
+                Text(viewModel.formattedReviewCount(viewModel.exploreDetailInfor?.guestbookCount ?? 0))
                     .font(.sandol(type: .bold, size: 7))
                     .foregroundStyle(Color(red: 36 / 255, green: 88 / 255, blue: 139 / 255))
                     .offset(x:13, y:0)
@@ -235,13 +206,13 @@ struct RecommendedSpaceCard: View {
             ZStack(alignment: .center) {
                 Rectangle()
                     .frame(maxWidth: 36, maxHeight: 13)
-                    .foregroundStyle(getColor(for: self.exploreDataInfor?.placeType))
+                    .foregroundStyle(getColor(for: viewModel.exploreDetailInfor?.placeType))
                     .clipShape(.rect(cornerRadius: 19))
-                Text(getPlaceTypeText(for: self.exploreDataInfor?.placeType))
+                Text(getPlaceTypeText(for: viewModel.exploreDetailInfor?.placeType))
                     .font(.sandol(type: .bold, size: 7))
-                    .foregroundStyle(getPlaceTypeTextColor(for: self.exploreDataInfor?.placeType))
+                    .foregroundStyle(getPlaceTypeTextColor(for: viewModel.exploreDetailInfor?.placeType))
                     .offset(x: 4, y: -13)
-                getImage(for: self.exploreDataInfor?.placeType)
+                getImage(for: viewModel.exploreDetailInfor?.placeType)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(maxWidth: 9, maxHeight: 9)
