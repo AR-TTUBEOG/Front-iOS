@@ -23,9 +23,7 @@ struct MarketPageContent: View {
     
     //MARK: - Body
     var body: some View {
-        ZStack {
             viewFlow
-        }
     }
     
     //MARK: - MarketPageContent
@@ -40,17 +38,22 @@ struct MarketPageContent: View {
         case 2:
             thirdView
         case 3:
-            fourthTitleView
+            ScrollView {
+                fourthTitleView
+            }
+            .scrollIndicators(.hidden)
         case 4:
             ScrollView {
                 fifthView
             }
+            .scrollIndicators(.hidden)
         case 5:
             sixthView
         case 6:
             ScrollView {
                 sevenView
             }
+            .scrollIndicators(.hidden)
         default:
             EmptyView()
         }
@@ -80,7 +83,7 @@ struct MarketPageContent: View {
     }
     
     //MARK: - SecondView
-
+    
     
     /// 두 번째 뷰
     private var secondView: some View {
@@ -89,7 +92,7 @@ struct MarketPageContent: View {
                             highlightText: ["위치"],
                             subtitleText: "매장의 정확한 위치를 남겨주세요!",
                             titleHeight: 36,
-                            spacing: 9,
+                            spacing: 12,
                             textAlignment: .leading,
                             frameAlignment: .topLeading
             )
@@ -110,7 +113,7 @@ struct MarketPageContent: View {
                         textAlignment: .leading,
                         frameAlignment: .leading
         )
-        .disabled(false)
+        .disabled(true)
     }
     
     /// 세 번째 뷰 장소 선택 버튼
@@ -132,7 +135,7 @@ struct MarketPageContent: View {
                                  isSelected: Binding(
                                     get : { self.isSelected == .cafe },
                                     set : { if $0 { self.isSelected = .cafe }}
-                                    ),
+                                 ),
                                  selectedMarketType: $viewModel.thirdMarketTypeName)
             }
         }
@@ -305,7 +308,7 @@ struct MarketPageContent: View {
             Text("헤택을 제공할 방법을 선택해주세요!")
                 .font(.sandol(type: .bold, size: 16))
                 .foregroundStyle(Color.textPink)
-                .frame(maxWidth: 300, alignment: .leading)
+                .frame(width: 300, alignment: .leading)
             
             GameManagerView()
         })
@@ -318,7 +321,7 @@ struct MarketPageContent: View {
             sevenBenefitMethod
                 .padding(.leading, 15)
         })
-        .frame(width: 360)
+        .frame(width: 370)
     }
 }
 
