@@ -261,7 +261,7 @@ struct MarketPageContent: View {
     private var sixthExampleImage: some View {
         Icon.exampleMarket2.image
             .resizable()
-            .frame(width: 340, height: 280)
+            .frame(width: 340, height: 240)
     }
     
     private var sixthTitle: some View {
