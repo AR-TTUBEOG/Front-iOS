@@ -98,7 +98,11 @@ enum Icon: String {
     
     // MARK: - Setting
     case chevronRight = "chevronRight"
-    
+    case nicknameChange = "nicknameChange"
+    case logout = "logout"
+    case deleteBtn = "deleteBtn"
+    case accountBtn = "accountBtn"
+
     // MARK: - Tab Button
     case ExploreTabButton = "ExploreTabButton"
     case mapTabButton = "mapTabButton"

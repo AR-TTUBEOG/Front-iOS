@@ -16,7 +16,7 @@ struct CommentViewControl : View {
     // MARK: - Body
     var body: some View {
         ZStack(alignment:.top){
-            VStack(alignment: .trailing, spacing: 25){
+            VStack(alignment: .trailing, spacing: 18){
                 topBar
                 textFieldView
                 bottomBar
@@ -55,6 +55,7 @@ struct CommentViewControl : View {
             }
         }
         .frame(maxWidth: 173, maxHeight: 25)
+        .padding(.trailing, 10)
     }
     
     /// 댓글을 작성하는 텍스트 필드
@@ -62,12 +63,12 @@ struct CommentViewControl : View {
         ZStack(alignment: .bottomTrailing) {
             CustomTextField(text: $viewModel.commentText,
                             placeholder: "남기고 싶은 댓글을 남겨주세요.",
-                            fontSize: 14,
+                            fontSize: 16,
                             cornerSize: 25,
                             leadingHorizontalPadding: 29,
                             trailingHorizontalPadding: 29,
                             verticalPadding: 19,
-                            maxWidth: 283,
+                            maxWidth: 240,
                             maxHeight: 190,
                             onSearch: {},
                             alignment: .topLeading,
@@ -91,6 +92,7 @@ struct CommentViewControl : View {
             cancel
             recording
         }
+        .frame(width: 295, alignment: .center)
     }
     
     
