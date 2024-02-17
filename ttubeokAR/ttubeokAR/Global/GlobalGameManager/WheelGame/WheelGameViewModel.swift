@@ -8,11 +8,14 @@
 import Foundation
 import Moya
 
-class WheelGameViewModel: ObservableObject, FinishButtonProtocol {
+class WheelGameViewModel: ObservableObject {
     
-//    static let share = WheelGameViewModel()
-    let provider = MoyaProvider<GameManagerService>()
+    //MARK: - API Target
+    private let authPlugin: AuthPlugin
+    let provider: MoyaProvider<GameManagerService>
+
     var wheelModel: RouletteModel?
+    @Published var storeId: Int = 0
     
     //MARK: - 원판 상품 설정
     @Published var wheelGameSetting: [WheelGameSetting]
@@ -23,6 +26,10 @@ class WheelGameViewModel: ObservableObject, FinishButtonProtocol {
     @Published var selectCoupon: Int? = nil
     
     init() {
+        
+        self.authPlugin = AuthPlugin(provider: MoyaProvider<MultiTarget>())
+        self.provider = MoyaProvider<GameManagerService>(plugins: [authPlugin])
+        
         wheelGameSetting = [
             WheelGameSetting(option: "상품"),
             WheelGameSetting(option: "꽝"),
@@ -61,19 +68,21 @@ class WheelGameViewModel: ObservableObject, FinishButtonProtocol {
                 case .success(let response):
                     do {
                         let decodedData = try JSONDecoder().decode(ResponseRouletteModel.self, from: response.data)
-                        print(decodedData)
+                        print("회전판 게임 정보 전달 성공 : \(decodedData)")
                     } catch {
                         print("돌림판 게임 반응 error : \(error)")
                     }
                 case .failure(let error):
-                    print("요청 error : \(error)")
+                    print("돌림판 요청 error : \(error)")
                 }
             }
         }
     }
     
     func finishSendAPI() {
+        print("----------회전판 정보 전달---------")
         matchData()
         sendData()
+        print("------------------------======---")
     }
 }

@@ -8,15 +8,23 @@
 import Foundation
 import Moya
 
-class GiftDrawingGameViewModel: ObservableObject, FinishButtonProtocol {
+class GiftDrawingGameViewModel: ObservableObject {
     
     
     //MARK: - API Target
-    let provider = MoyaProvider<GameManagerService>(plugins: [NetworkLoggerPlugin()])
-    var giftModel: GifttModel?
     
+    private let authPlugin: AuthPlugin
+    let provider: MoyaProvider<GameManagerService>
+    
+    init() {
+        self.authPlugin = AuthPlugin(provider: MoyaProvider<MultiTarget>())
+        self.provider = MoyaProvider<GameManagerService>(plugins: [authPlugin])
+    }
+    
+    var giftModel: GifttModel?
+    @Published var storeId: Int = 0
     //MARK: 농구게임 게임 룰 설정
-    @Published var timeLimit: TimeInterval = 0
+    @Published var timeLimit: TimeInterval = 30
     @Published var giftCount: Int = 5
     
     //MARK: - 선물뽑기 혜택 문구 텍스트 길이
@@ -53,6 +61,9 @@ class GiftDrawingGameViewModel: ObservableObject, FinishButtonProtocol {
     
     //MARK: - 데이터 전달
     
+    /// 시간 초 단위로 변경
+    /// - Parameter timeInterval: 변경 하고자 하는 시간 단위
+    /// - Returns: 시간단위 값
     private func formatTimeInterval(_ timeInterval: TimeInterval) -> String {
         let hours = Int(timeInterval) / 3600
         let minutes = Int(timeInterval) / 60 % 60
@@ -63,6 +74,7 @@ class GiftDrawingGameViewModel: ObservableObject, FinishButtonProtocol {
     private func matchData() {
         
         let timeString = formatTimeInterval(self.timeLimit)
+        print("선물게임 storeId: \(storeId)")
 
         
         giftModel = GifttModel(timeLimit: timeString, giftCount: self.giftCount, benefitContent: self.benefitsText, benefitType: {
@@ -93,26 +105,23 @@ class GiftDrawingGameViewModel: ObservableObject, FinishButtonProtocol {
                 case .success(let response):
                     print(String(data: response.data, encoding: .utf8) ?? "Invalid response")
                     do {
-                        let decodeedData = try JSONDecoder().decode(ResponseGiftModel.self, from: response.data)
-                        print(decodeedData)
+                        let decodedData = try JSONDecoder().decode(ResponseGiftModel.self, from: response.data)
+                        print("농구 게임 정보 전달 성공 : \(decodedData)")
                     } catch {
                         print("선물뽑기 반응 error : \(error)")
-                      print(response.data)
                     }
                 case .failure(let error):
-                    print("요청 error : \(error)")
+                    print("선물뽑기 요청 error : \(error)")
                 }
             }
         }
     }
     
-
-
-
-    
     func finishSendAPI() {
+        print("----------선물게임 정보 전달---------")
         matchData()
         sendData()
+        print("------------------------======---")
     }
     
 }

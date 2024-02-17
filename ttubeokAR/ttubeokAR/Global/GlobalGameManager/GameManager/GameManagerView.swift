@@ -13,9 +13,9 @@ struct GameManagerView: View {
     @State private var showGiftDrawingGameSetting = false
     @State private var showWhellGameSetting = false
     
-    @ObservedObject private var basketViewModel = BasketBallGameViewModel()
-    @ObservedObject private var giftDrawingViewModel = GiftDrawingGameViewModel()
-    @ObservedObject private var wheelGameViewModel = WheelGameViewModel()
+    @ObservedObject var basketViewModel: BasketBallGameViewModel
+    @ObservedObject var giftDrawingViewModel: GiftDrawingGameViewModel
+    @ObservedObject var wheelGameViewModel: WheelGameViewModel
     
     //MARK: Body
     var body: some View {
@@ -50,12 +50,5 @@ struct GameManagerView: View {
         }
         .scrollIndicators(.hidden)
         .frame(width: 360)
-    }
-}
-
-struct GameManager_Preview: PreviewProvider {
-    static var previews: some View {
-        GameManagerView()
-            .previewLayout(.sizeThatFits)
     }
 }

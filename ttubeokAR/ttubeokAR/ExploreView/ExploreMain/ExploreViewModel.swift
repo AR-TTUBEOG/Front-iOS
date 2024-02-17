@@ -113,7 +113,6 @@ class ExploreViewModel: ObservableObject {
                         if page == 0 {
                             self?.exploreData = decodedData
                             print("8: 최신순 1페이지 디코드 완료")
-                            print(self?.exploreData)
                         } else {
                             self?.exploreData?.information.append(contentsOf: decodedData.information)
                             print("8: 최신순 조회 추가 페이지 디코드 완료")

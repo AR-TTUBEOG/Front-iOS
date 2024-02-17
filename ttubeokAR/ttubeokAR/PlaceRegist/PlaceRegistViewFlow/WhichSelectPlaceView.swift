@@ -12,6 +12,7 @@ struct WhichSelectPlaceView: View {
     @State private var nextView = false
     @State private var isWalkChecked = false
     @State private var isMarketChecked = false
+    
     @Environment(\.presentationMode) var presentationMode
     var lastedSelectedTab: Int
     

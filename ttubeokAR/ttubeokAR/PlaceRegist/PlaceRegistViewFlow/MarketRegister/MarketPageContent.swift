@@ -11,9 +11,9 @@ struct MarketPageContent: View {
     
     //MARK: - Propery
     @State private var isSelected: MarketTypeName = .none
+    
+    //MARK: - ViewModel
     @ObservedObject var viewModel: MarketViewModel
-    
-    
     //MARK: - TextFieldShame
     private let horizontalPadding: CGFloat = 15
     
@@ -310,7 +310,7 @@ struct MarketPageContent: View {
                 .foregroundStyle(Color.textPink)
                 .frame(width: 300, alignment: .leading)
             
-            GameManagerView()
+            GameManagerView(basketViewModel: viewModel.basketBallViewModel, giftDrawingViewModel: viewModel.giftViewModel, wheelGameViewModel: viewModel.wheelGameViewModel)
         })
         .frame(width: 320)
     }
@@ -322,13 +322,5 @@ struct MarketPageContent: View {
                 .padding(.leading, 15)
         })
         .frame(width: 370)
-    }
-}
-
-
-struct MarketPageContent_Preview: PreviewProvider {
-    static var previews: some View {
-        MarketPageContent(viewModel: MarketViewModel())
-            .previewLayout(.sizeThatFits)
     }
 }

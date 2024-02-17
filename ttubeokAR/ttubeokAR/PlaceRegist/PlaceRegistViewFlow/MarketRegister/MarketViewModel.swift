@@ -15,12 +15,32 @@ import PhotosUI
 
 class MarketViewModel: ObservableObject, ImageHandling, InputAddressProtocol, FinishViewProtocol {
     
-    func finishPlaceRegist() {
-        print("hello")
+    
+    //MARK: - API
+    private let authPlugin: AuthPlugin
+    private let provider: MoyaProvider<PlaceRegistService>
+    
+    init() {
+        self.authPlugin = AuthPlugin(provider: MoyaProvider<MultiTarget>())
+        self.provider = MoyaProvider<PlaceRegistService>(plugins: [authPlugin])
     }
+    
+    @Published var storeId: Int = 0 {
+            didSet {
+                basketBallViewModel.storeId = storeId
+                giftViewModel.storeId = storeId
+                wheelGameViewModel.storeId = storeId
+            }
+        }
+    
+    //MARK: - ViewModel
+    @Published public var basketBallViewModel = BasketBallGameViewModel()
+    @Published public var giftViewModel = GiftDrawingGameViewModel()
+    @Published public var wheelGameViewModel = WheelGameViewModel()
     
     //MARK: - Property
     @Published var marketModel = MarketModel()
+    @Published var requestStoreRegistModel: RequestMarketRegistModel?
     @Published var currentPageIndex: Int = 0
     @Published var isImagePickerPresented = false
     @Published var navigationToNextView = false
@@ -91,6 +111,8 @@ class MarketViewModel: ObservableObject, ImageHandling, InputAddressProtocol, Fi
     }
     
     //MARK: - 토큰 불러오기
+    /// 액세스 토큰 불러오기
+    /// - Returns: 햔재 액세스 토큰
     private func loadAccessToken() -> String? {
         guard let accessToken = KeyChainManager.stadard.getAccessToken(for: "userSession") else {
             return "토큰 정보 에러"
@@ -98,9 +120,68 @@ class MarketViewModel: ObservableObject, ImageHandling, InputAddressProtocol, Fi
         
         return accessToken
     }
-
+    
     //MARK: - 장소등록 API
     
+    /// 이미지 base64로 전환하기
+    private func saveStringImage() {
+        for image in images {
+            if let base64String = imageToBase64String(img: image) {
+                base64Images.append(base64String)
+            }
+        }
+    }
     
+    private func sendDataMarketInfo() {
+        
+        if let requestStoreRegistModel = requestStoreRegistModel {
+            provider.request(.sendStoreInfo(requestStoreRegistModel, token: loadAccessToken() ?? "토큰 정보 없음")) { result in
+                switch result {
+                case .success(let response):
+                    do {
+                        let decodedData = try JSONDecoder().decode(ResponseMarketRegistModel.self, from: response.data)
+                        self.storeId = decodedData.information.storeId ?? 0
+                        print("마켓 등록 완료 : \(decodedData)")
+                    } catch {
+                        print("마켓 등록 decoded 에러 : \(error)")
+                    }
+                case .failure(let error):
+                    print("산책로 네트워크 error: \(error)")
+                }
+            }
+        }
+    }
+    
+    
+    private func creatParameters() -> RequestMarketRegistModel {
+        return RequestMarketRegistModel(name: self.firstMarketName,
+                                        info: self.fifthMarketDescription,
+                                        dongAreaId: self.address,
+                                        detailAddress: self.detailAddress,
+                                        latitude: self.locatoinManager.currentLocation?.coordinate.latitude ?? 0.0,
+                                        longitude: self.locatoinManager.currentLocation?.coordinate.longitude ?? 0.0,
+                                        image: base64Images
+
+        )
+    }
+    
+    /// 데이터 매칭
+    private func mathStoreRegistData() {
+        saveStringImage()
+        self.requestStoreRegistModel = creatParameters()
+        print("장소 등록 match")
+    }
+    
+    /// 마켓 등록 최종 버튼(게임 등록)
+    public func finishPlaceRegist() {
+        self.basketBallViewModel.finishSendAPI()
+        self.giftViewModel.finishSendAPI()
+        self.wheelGameViewModel.finishSendAPI()
+    }
+    
+    public func saveInfoMarket() {
+        mathStoreRegistData()
+        sendDataMarketInfo()
+    }
 }
 

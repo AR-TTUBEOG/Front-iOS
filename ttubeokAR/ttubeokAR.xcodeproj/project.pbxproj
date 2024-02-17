@@ -30,8 +30,6 @@
 		482DB6B72B5416FF005538DE /* PlaceSettingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482DB6B62B5416FF005538DE /* PlaceSettingModel.swift */; };
 		482DB6B92B541797005538DE /* PlaceSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482DB6B82B541797005538DE /* PlaceSettingsViewModel.swift */; };
 		482DB6BB2B541E7E005538DE /* PlaceSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482DB6BA2B541E7E005538DE /* PlaceSettingView.swift */; };
-		4831B8E42B79AAF100337654 /* FinishButtonProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4831B8E32B79AAF100337654 /* FinishButtonProtocol.swift */; };
-		4831B8E62B79AB1900337654 /* GameSettingFinishButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4831B8E52B79AB1900337654 /* GameSettingFinishButton.swift */; };
 		4831BEC02B742866006E184C /* SearchAPITarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4831BEBF2B742866006E184C /* SearchAPITarget.swift */; };
 		483513842B5A60150072ADFE /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483513832B5A60150072ADFE /* LoginView.swift */; };
 		483513862B5A602C0072ADFE /* KakaoLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483513852B5A602C0072ADFE /* KakaoLogin.swift */; };
@@ -68,6 +66,7 @@
 		4861FF242B54E35C00DC6E2D /* CustomSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4861FF232B54E35C00DC6E2D /* CustomSlider.swift */; };
 		486C2FEB2B592A4B00C88B04 /* NicknameSettingLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486C2FEA2B592A4B00C88B04 /* NicknameSettingLogin.swift */; };
 		486C2FED2B592A8D00C88B04 /* NicknameSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486C2FEC2B592A8D00C88B04 /* NicknameSettingViewModel.swift */; };
+		487122712B80D02900B6E2CA /* BaseImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487122702B80D02900B6E2CA /* BaseImage.swift */; };
 		48719EBC2B7EF72A00310A1E /* ResetTokenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48719EBB2B7EF72A00310A1E /* ResetTokenModel.swift */; };
 		48719EBF2B7F52EE00310A1E /* GiftBox.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 48719EBE2B7F52EE00310A1E /* GiftBox.usdz */; };
 		48719EC42B7F55D100310A1E /* basketballstand.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 48719EC32B7F55D100310A1E /* basketballstand.usdz */; };
@@ -211,8 +210,6 @@
 		482DB6B62B5416FF005538DE /* PlaceSettingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceSettingModel.swift; sourceTree = "<group>"; };
 		482DB6B82B541797005538DE /* PlaceSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceSettingsViewModel.swift; sourceTree = "<group>"; };
 		482DB6BA2B541E7E005538DE /* PlaceSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceSettingView.swift; sourceTree = "<group>"; };
-		4831B8E32B79AAF100337654 /* FinishButtonProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishButtonProtocol.swift; sourceTree = "<group>"; };
-		4831B8E52B79AB1900337654 /* GameSettingFinishButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSettingFinishButton.swift; sourceTree = "<group>"; };
 		4831BEBF2B742866006E184C /* SearchAPITarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAPITarget.swift; sourceTree = "<group>"; };
 		483513832B5A60150072ADFE /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		483513852B5A602C0072ADFE /* KakaoLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoLogin.swift; sourceTree = "<group>"; };
@@ -250,6 +247,7 @@
 		4861FF232B54E35C00DC6E2D /* CustomSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSlider.swift; sourceTree = "<group>"; };
 		486C2FEA2B592A4B00C88B04 /* NicknameSettingLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameSettingLogin.swift; sourceTree = "<group>"; };
 		486C2FEC2B592A8D00C88B04 /* NicknameSettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameSettingViewModel.swift; sourceTree = "<group>"; };
+		487122702B80D02900B6E2CA /* BaseImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseImage.swift; sourceTree = "<group>"; };
 		48719EBB2B7EF72A00310A1E /* ResetTokenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetTokenModel.swift; sourceTree = "<group>"; };
 		48719EBE2B7F52EE00310A1E /* GiftBox.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = GiftBox.usdz; sourceTree = "<group>"; };
 		48719EC32B7F55D100310A1E /* basketballstand.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = basketballstand.usdz; sourceTree = "<group>"; };
@@ -453,15 +451,6 @@
 			path = SearchBar;
 			sourceTree = "<group>";
 		};
-		4831B8E22B79AADF00337654 /* FinishButton */ = {
-			isa = PBXGroup;
-			children = (
-				4831B8E32B79AAF100337654 /* FinishButtonProtocol.swift */,
-				4831B8E52B79AB1900337654 /* GameSettingFinishButton.swift */,
-			);
-			path = FinishButton;
-			sourceTree = "<group>";
-		};
 		483513802B5A5FF80072ADFE /* SocialLogin */ = {
 			isa = PBXGroup;
 			children = (
@@ -515,6 +504,7 @@
 		483820DA2B4BE5A900C3FB14 /* Global */ = {
 			isa = PBXGroup;
 			children = (
+				4871226F2B80D01800B6E2CA /* ImageEnDecode */,
 				48AFE30A2B77024B0032F0CE /* NaverGeoCoding */,
 				48B57FBC2B75CC9C005965FD /* GlobalAddress */,
 				485B30E92B70A9C900023785 /* GlobalGameManager */,
@@ -566,7 +556,6 @@
 		483CB9592B73244A00938224 /* DuplicatedGameManager */ = {
 			isa = PBXGroup;
 			children = (
-				4831B8E22B79AADF00337654 /* FinishButton */,
 				488DE81B2B79A25900EE4E2B /* SelectCouponRadio */,
 				488DE8172B79A18F00EE4E2B /* BenefitTextField */,
 				488DE8132B7998A700EE4E2B /* BackgroundComponent.swift */,
@@ -637,6 +626,14 @@
 				486C2FEC2B592A8D00C88B04 /* NicknameSettingViewModel.swift */,
 			);
 			path = NicknameLogin;
+			sourceTree = "<group>";
+		};
+		4871226F2B80D01800B6E2CA /* ImageEnDecode */ = {
+			isa = PBXGroup;
+			children = (
+				487122702B80D02900B6E2CA /* BaseImage.swift */,
+			);
+			path = ImageEnDecode;
 			sourceTree = "<group>";
 		};
 		48719EBA2B7EF70500310A1E /* accessTokenReset */ = {
@@ -1307,7 +1304,6 @@
 			files = (
 				48B57FC12B75D506005965FD /* ExploreDataModel.swift in Sources */,
 				4850B00F2B766FAB00F8CD90 /* BaseLocationManager.swift in Sources */,
-				4831B8E62B79AB1900337654 /* GameSettingFinishButton.swift in Sources */,
 				48B57FC02B75D4F0005965FD /* PopupModifier.swift in Sources */,
 				484C16AF2B7ED7EA00257229 /* RefreshService.swift in Sources */,
 				483567702B7D20B200C8BA04 /* RecommendedSpaceCardViewModel.swift in Sources */,
@@ -1361,6 +1357,7 @@
 				485B30EB2B70A9E300023785 /* GameManagerView.swift in Sources */,
 				48719EC92B7F591E00310A1E /* BasketClassCoordinate.swift in Sources */,
 				48D88C2F2B5C259300A1B09E /* LoginTarget.swift in Sources */,
+				487122712B80D02900B6E2CA /* BaseImage.swift in Sources */,
 				483820EE2B4BEAFE00C3FB14 /* TtuDotShape.swift in Sources */,
 				481B90A22B668CEA00D366A7 /* LinearProgressViewStyle.swift in Sources */,
 				4835138D2B5A60D00072ADFE /* AppleUserData.swift in Sources */,
@@ -1370,7 +1367,6 @@
 				483820E22B4BE7C100C3FB14 /* ARCommand.swift in Sources */,
 				CAFAE81F2B750A4800C20502 /* BookMarkImageAdd.swift in Sources */,
 				CA3DFFED2B6CE7C90007D2E6 /* ExploreAPITarget.swift in Sources */,
-				4831B8E42B79AAF100337654 /* FinishButtonProtocol.swift in Sources */,
 				CA3A391A2B55753800BEB7DE /* RecommendedSpaceCard.swift in Sources */,
 				CA82A9882B72705B004E7683 /* BookMarkDataModel.swift in Sources */,
 				CAFAE8302B756F2D00C20502 /* CommentViewModel.swift in Sources */,

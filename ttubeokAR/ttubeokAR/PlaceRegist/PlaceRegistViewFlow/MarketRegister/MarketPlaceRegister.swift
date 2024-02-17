@@ -7,9 +7,13 @@
 
 import SwiftUI
 
+
 struct MarketPlaceRegister: View {
-    //MARK: - Property
+    
+    //MARK: - ViewModel
     @StateObject private var viewModel = MarketViewModel()
+    
+    //MARK: - Property
     @Environment(\.dismiss) var dismiss
     @State private var keyboardVisible = false
     
@@ -95,6 +99,7 @@ struct MarketPlaceRegister: View {
                     withAnimation {
                         if viewModel.currentPageIndex == 6 {
                             viewModel.navigationToNextView = true
+                            viewModel.saveInfoMarket()
                         } else {
                             viewModel.currentPageIndex += 1
                         }

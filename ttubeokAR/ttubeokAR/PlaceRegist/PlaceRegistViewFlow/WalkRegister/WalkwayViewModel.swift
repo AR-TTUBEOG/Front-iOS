@@ -14,6 +14,16 @@ import CoreLocation
 
 class WalkwayViewModel: ObservableObject, ImageHandling, InputAddressProtocol, FinishViewProtocol {
     
+    
+    //MARK: - API
+    private let authPlugin: AuthPlugin
+    private let provider: MoyaProvider<PlaceRegistService>
+    
+    init() {
+        self.authPlugin = AuthPlugin(provider: MoyaProvider<MultiTarget>())
+        self.provider = MoyaProvider<PlaceRegistService>(plugins: [authPlugin])
+    }
+    
     //MARK: - Property
     @Published var requestWalwayRegistModel: RequestWalwayRegistModel?
     @Published var isImagePickerPresented = false
@@ -89,8 +99,6 @@ class WalkwayViewModel: ObservableObject, ImageHandling, InputAddressProtocol, F
     }
     
     //MARK: - WalkwayRegistAPI
-    private let provider = MoyaProvider<PlaceRegistService>()
-    private let keychainManger = KeyChainManager.stadard
     
     /// 토큰 불러오기
     /// - Returns: 저장된 토큰 불러온다.
@@ -103,20 +111,20 @@ class WalkwayViewModel: ObservableObject, ImageHandling, InputAddressProtocol, F
     }
     
     /// 장소등록에 사용된 데이터 전부 전달
-    private  func sendDataWalkwayInfo() {
+    private func sendDataWalkwayInfo() {
         
         if let requestWalwayRegistModel = requestWalwayRegistModel {
             provider.request(.sendWalwayInfo(requestWalwayRegistModel, token: loadAccessToken() ?? "토큰정보 없음")) { result in
                 switch result {
                 case .success(let response):
                     do {
-                        let decodedData = try JSONDecoder().decode(ResponseWalwayRegistModel.self, from: response.data)
-                        print("산책로 등록 완료 후 해독 완료: decodedData")
+                        let decodedData = try JSONDecoder().decode(ResponseWalkwayRegistModel.self, from: response.data)
+                        print("산책로 등록 완료 후 해독 완료: \(decodedData)")
                     } catch {
-                        print("산책로 등록 decoded에러 : \(error)")
+                        print("산책로 등록 decoded 에러 : \(error)")
                     }
                 case.failure(let error):
-                    print("산책로 네트워크 error: \(error.localizedDescription)")
+                    print("산책로 네트워크 error: \(error)")
                 }
             }
         }
@@ -125,7 +133,7 @@ class WalkwayViewModel: ObservableObject, ImageHandling, InputAddressProtocol, F
     
     private func createParameters() -> RequestWalwayRegistModel {
         return RequestWalwayRegistModel(name: self.firstPlaceName,
-                                        address: self.address,
+                                        dongAreaId: self.address,
                                         detailAddress: self.detailAddress,
                                         info: self.fourthWalkwayDescription,
                                         latitude: self.locationManager.currentLocation?.coordinate.latitude ?? 0.0,
@@ -150,6 +158,7 @@ class WalkwayViewModel: ObservableObject, ImageHandling, InputAddressProtocol, F
     }
     
     
+    /// 산책로 버튼
     public func finishPlaceRegist(){
         matchWalkwayRegisterData()
         sendDataWalkwayInfo()

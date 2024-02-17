@@ -25,9 +25,6 @@ struct ExploreViewControl: View {
                     print("-------------- 7: MainViewControll 초기 호출--------------")
                     viewModel.fetchDataSearch(viewModel.currentSearchType, page: 0)
                 }
-                .onTapGesture {
-                    print(viewModel.exploreData)
-                }
         }
     }
     

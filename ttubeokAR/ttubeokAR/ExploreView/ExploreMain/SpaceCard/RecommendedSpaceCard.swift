@@ -252,7 +252,6 @@ struct RecommendedSpaceCard: View {
     
     func getPlaceTypeText(for PlacePurpose: PlaceType?) -> String {
         guard let PlacePurpose = PlacePurpose else {
-            // placeType이 nil
             return "산책"
         }
         if (PlacePurpose.spot) {

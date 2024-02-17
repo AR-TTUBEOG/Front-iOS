@@ -8,14 +8,22 @@
 import Foundation
 import Moya
 
-class BasketBallGameViewModel: ObservableObject, FinishButtonProtocol{
+class BasketBallGameViewModel: ObservableObject {
     
     //MARK: - API Target
-    let provider = MoyaProvider<GameManagerService>()
+    private let authPlugin: AuthPlugin
+    private let provider: MoyaProvider<GameManagerService>
+    
+    init() {
+        self.authPlugin = AuthPlugin(provider: MoyaProvider<MultiTarget>())
+        self.provider = MoyaProvider<GameManagerService>(plugins: [authPlugin])
+    }
+    
     var basketBallModel: BasketBallModel?
+    @Published var storeId: Int = 0
     
     //MARK: - 농구게임 게임 룰 설정
-    @Published var timeLimit: Int =  30
+    @Published var timeLimit: TimeInterval =  30
     @Published var ballCount: Int = 5
     @Published var successCount: Int = 3
     
@@ -66,23 +74,36 @@ class BasketBallGameViewModel: ObservableObject, FinishButtonProtocol{
     
     //MARK: - 데이터 전달
     
+    private func formatTimeInterval(_ timeInterval: TimeInterval) -> String {
+        let hours = Int(timeInterval) / 3600
+        let minutes = Int(timeInterval) / 60 % 60
+        let seconds = Int(timeInterval) % 60
+        return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+    }
+    
+    
     private func matchData() {
-        basketBallModel = BasketBallModel(timeLimit: self.timeLimit,
-                                              ballCount: self.ballCount,
-                                              successCount: self.successCount,
-                                              benefitContent: self.benefitsText,
-                                              benefitType: {
-                                                        switch selectCoupon {
-                                                        case 1:
-                                                            return "SALE"
-                                                        case 2:
-                                                            return "PLUS"
-                                                        case 3:
-                                                            return "GIFT"
-                                                        default:
-                                                            return "NONE"
-                                                        }
-                                                    }()
+        
+        let timeString = formatTimeInterval(self.timeLimit)
+        print("농구게임 storeId: \(storeId)")
+        
+        basketBallModel = BasketBallModel(storeId: self.storeId,
+                                          timeLimit: timeString,
+                                          ballCount: self.ballCount,
+                                          successCount: self.successCount,
+                                          benefitContent: self.benefitsText,
+                                          benefitType: {
+            switch selectCoupon {
+            case 1:
+                return "SALE"
+            case 2:
+                return "PLUS"
+            case 3:
+                return "GIFT"
+            default:
+                return "NONE"
+            }
+        }()
         )
     }
     
@@ -98,12 +119,12 @@ class BasketBallGameViewModel: ObservableObject, FinishButtonProtocol{
                 case .success(let response):
                     do {
                         let decodedData = try JSONDecoder().decode(ResponseBasketBallModel.self, from: response.data)
-                        print(decodedData)
+                        print("농구 게임 정보 전달 성공 : \(decodedData)")
                     } catch {
                         print("농구 게임 반응 error : \(error)")
                     }
                 case .failure(let error):
-                    print("요청 error : \(error)")
+                    print("농구게임 요청 error : \(error)")
                 }
             }
         }
@@ -111,7 +132,9 @@ class BasketBallGameViewModel: ObservableObject, FinishButtonProtocol{
     
     //MARK: - 완료 버튼 API 전송
     public func finishSendAPI() {
+        print("----------농구게임 정보 전달---------")
         matchData()
         sendData()
+        print("------------------------======---")
     }
 }

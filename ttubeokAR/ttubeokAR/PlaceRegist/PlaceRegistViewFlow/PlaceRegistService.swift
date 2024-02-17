@@ -10,6 +10,7 @@ import Moya
 
 enum PlaceRegistService {
     case sendWalwayInfo(RequestWalwayRegistModel, token: String)
+    case sendStoreInfo(RequestMarketRegistModel, token: String)
 }
 
 extension PlaceRegistService: TargetType {
@@ -22,6 +23,8 @@ extension PlaceRegistService: TargetType {
         switch self {
         case .sendWalwayInfo:
             return "/api/v1/spot"
+        case .sendStoreInfo:
+            return "/api/v1/store"
         }
     }
     
@@ -29,29 +32,28 @@ extension PlaceRegistService: TargetType {
         switch self {
         case .sendWalwayInfo:
             return .post
+        case .sendStoreInfo:
+            return .post
         }
     }
     
-    //TODO: - 스웨거랑 모델 데이터 다름 (Address부분 다르다)
     var task: Task {
         switch self {
         case .sendWalwayInfo(let parameters, _):
-            let param: [String: Any] = [
-                "name": parameters.name ?? "",
-                "address": parameters.address ?? "",
-                "detailAddress": parameters.detailAddress ?? "",
-                "info": parameters.info ?? "",
-                "latitude": parameters.latitude ?? 0.0,
-                "longitude": parameters.longitude ?? 0.0,
-                "image": parameters.image ?? []
-            ]
-            return .requestParameters(parameters: param, encoding: JSONEncoding.default)
+            return .requestJSONEncodable(parameters)
+        case .sendStoreInfo(let parameters, _):
+            return .requestJSONEncodable(parameters)
         }
     }
     
     var headers: [String : String]? {
         switch self {
         case .sendWalwayInfo(_, let token):
+            return [
+                "Content-type": "application/json",
+                "Authorization": "Bearer \(token)"
+            ]
+        case .sendStoreInfo(_, let token):
             return [
                 "Content-type": "application/json",
                 "Authorization": "Bearer \(token)"

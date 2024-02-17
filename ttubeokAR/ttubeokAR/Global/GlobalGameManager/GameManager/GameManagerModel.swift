@@ -9,9 +9,11 @@ import Foundation
 
 
 struct RouletteModel: Codable {
+    var storeId: Int
     var benefitType: String
     var options: [String]
 }
+
 
 struct ResponseRouletteModel: Codable {
     var check: Bool
@@ -32,14 +34,15 @@ struct Benefit: Codable {
     var type: String
 }
 
+
 //MARK: - 선물
 
 struct GifttModel: Codable {
+    var storeId: Int
     var timeLimit: String
     var giftCount: Int
     var benefitContent: String
     var benefitType: String
-
 }
 
 struct ResponseGiftModel: Codable {
@@ -59,7 +62,8 @@ struct GiftCheckInfor: Codable {
 //MARK: - 농구
 
 struct BasketBallModel: Codable {
-    var timeLimit: Int
+    var storeId: Int
+    var timeLimit: String
     var ballCount: Int
     var successCount: Int
     var benefitContent: String
@@ -75,7 +79,7 @@ struct BasketBallCheckInfor: Codable {
     var gameId: Int
     var benefitId: Int
     var storeId: Int
-    var timeLimit: Int
+    var timeLimit: String
     var ballCount: Int
     var successCount: Int
     var benefitContent: String

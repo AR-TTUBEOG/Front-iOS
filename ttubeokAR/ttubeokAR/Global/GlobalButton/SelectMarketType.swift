@@ -64,9 +64,9 @@ struct SelectMarketType: View {
     private func marketTypeName(type: MarketTypeName) -> String {
         switch type {
         case .restaurant:
-            return "음식점"
+            return "RESTAURANT"
         case .cafe:
-            return "카페"
+            return "CAFE"
         case .none:
             return "X"
         }
