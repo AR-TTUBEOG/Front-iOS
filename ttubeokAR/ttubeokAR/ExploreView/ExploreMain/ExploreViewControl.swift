@@ -11,7 +11,7 @@ import SwiftUI
 struct ExploreViewControl: View {
     
     // MARK: - Property
-    @StateObject var viewModel:  ExploreViewModel
+    @StateObject var viewModel: ExploreViewModel
     @StateObject var detailViewModel = DetailViewModel()
     @State private var showDetail = false
     @State private var keyboardVisible = false
@@ -22,8 +22,11 @@ struct ExploreViewControl: View {
             allView
                 .onAppear {
                     observeKeyboard()
-                    print("--------------MainViewControll 초기 호출--------------")
-                    viewModel.fetchDataSearch(viewModel.currentSearchType, page: 1)
+                    print("-------------- 7: MainViewControll 초기 호출--------------")
+                    viewModel.fetchDataSearch(viewModel.currentSearchType, page: 0)
+                }
+                .onTapGesture {
+                    print(viewModel.exploreData)
                 }
         }
     }
@@ -65,19 +68,19 @@ struct ExploreViewControl: View {
     
     private func centerView(geometry: GeometryProxy) -> some View {
         if let information = viewModel.exploreData?.information, !information.isEmpty {
-            return AnyView(recommendedSpacesGrid(geometry: geometry))
+            return AnyView(recommendedSpacesGrid)
         } else {
             return AnyView(imgBackground(geometry: geometry))
         }
     }
     
-    // 추천 장소
-    private func recommendedSpacesGrid(geometry: GeometryProxy) -> some View {
+    private var recommendedSpacesGrid: some View {
         ScrollView(.vertical) {
             LazyVGrid(columns: [GridItem(.flexible(minimum: 150), spacing: -8), GridItem(.flexible(minimum: 150), spacing: 15)], spacing: 25) {
                 ForEach(self.viewModel.exploreData?.information ?? [], id: \.self) { place in
                     RecommendedSpaceCard(viewModel: RecommendedSpaceCardViewModel(exploreDetailInfor: place))
                         .frame(minWidth: 0, maxWidth: .infinity)
+                    
                         .onAppear {
                             print("--------------LazyGrid 마지막 페이지 호출--------------")
                             if place == self.viewModel.exploreData?.information.last {
@@ -93,28 +96,33 @@ struct ExploreViewControl: View {
                         }
                 }
             }
+            
             .padding()
             .frame(maxWidth: .infinity)
-        }
-        .refreshable {
-            print("--------------refresh 호출--------------")
-            viewModel.fetchDataSearch(viewModel.currentSearchType, page: 1)
-        }
-    }
-    
-    private func observeKeyboard() {
-        NotificationCenter.default.addObserver(
-            forName: UIResponder.keyboardWillShowNotification,
-            object: nil, queue: .main
-        ) { _ in
-            keyboardVisible = true
+            
         }
         
-        NotificationCenter.default.addObserver(
-            forName: UIResponder.keyboardWillHideNotification,
-            object: nil, queue: .main
-        ) { _ in
-            keyboardVisible = false
+        .refreshable {
+            print("--------------refresh 호출--------------")
+            viewModel.fetchDataSearch(viewModel.currentSearchType, page: 0)
         }
+        
+        
     }
+
+private func observeKeyboard() {
+    NotificationCenter.default.addObserver(
+        forName: UIResponder.keyboardWillShowNotification,
+        object: nil, queue: .main
+    ) { _ in
+        keyboardVisible = true
+    }
+    
+    NotificationCenter.default.addObserver(
+        forName: UIResponder.keyboardWillHideNotification,
+        object: nil, queue: .main
+    ) { _ in
+        keyboardVisible = false
+    }
+}
 }

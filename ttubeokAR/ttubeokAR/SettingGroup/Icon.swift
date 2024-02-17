@@ -74,6 +74,8 @@ enum Icon: String {
     case unTime = "unTime"
     case unOnePlus = "unOnePlus"
     case unDistance = "unDistance"
+    case checkHeart = "checkHeart"
+    case unCheckHeart = "unCheckHeart"
     
     // MARK: - DetailExploreView
     case checkGift = "checkGift"

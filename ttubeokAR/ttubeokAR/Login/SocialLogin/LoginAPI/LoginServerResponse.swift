@@ -14,5 +14,5 @@ import Foundation
 struct LoginServerResponse: Codable {
     var accessToken: String?
     var refreshToken: String?
-    var isRegistered: Bool
+    var isRegistered: Bool?
 }

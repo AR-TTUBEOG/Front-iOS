@@ -138,7 +138,7 @@ struct SplashScreenView: View {
                 DispatchQueue.main.async {
                     self.currentState = success ? .mainView : .login
                     print("3: 뷰 전환 시작 전 : \(success) ")
-                    DispatchQueue.main.asyncAfter(deadline: .now()+0.8) {
+                    DispatchQueue.main.asyncAfter(deadline: .now()+1.3) {
                         proceedChangeView()
                     }
                 }

@@ -8,30 +8,38 @@
 import Foundation
 import CoreLocation
 import Moya
+import SwiftUI
 
 class RecommendedSpaceCardViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     
+    
+    
     //MARK: - API
-    private let provider = MoyaProvider<ExploreAPITarget>()
+    private let authPlugin: AuthPlugin
+    private let provider: MoyaProvider<ExploreAPITarget>
+    
     var exploreDetailInfor: ExploreDetailInfor?
+    
     init(exploreDetailInfor: ExploreDetailInfor) {
         self.exploreDetailInfor = exploreDetailInfor
+        self.authPlugin = AuthPlugin(provider: MoyaProvider<MultiTarget>())
+        self.provider = MoyaProvider<ExploreAPITarget>(plugins: [authPlugin])
     }
     
     //MARK: - 이미지 좋아요
-    @Published var isFavorited: Bool = false
+    @State var isFavorited: Bool = false
     @Published var placeType: PlaceTypeValue? = nil
-    
     
     public func changePlaceType() {
         if (self.exploreDetailInfor?.placeType.spot) != nil {
             self.placeType = .spot
         } else if (self.exploreDetailInfor?.placeType.store) != nil {
-                self.placeType = .store
-            }
+            self.placeType = .store
         }
+    }
     
     public func checkLike() {
+        isFavorited.toggle()
         if self.isFavorited {
             sendLike()
         }
@@ -39,30 +47,23 @@ class RecommendedSpaceCardViewModel: NSObject, ObservableObject, CLLocationManag
     
     public func sendLike() {
         
-        guard let detailInfo = self.exploreDetailInfor else { return }
         
-        switch self.placeType {
-        case .spot:
-            self.likeWalkWay(spotId: detailInfo.id)
-        case .store:
-            self.likeStore(storeId: detailInfo.id)
-        case .none:
-            print("error")
+        if (self.exploreDetailInfor?.placeType.spot ?? false) {
+            self.likeWalkWay(spotId: self.exploreDetailInfor?.placeId ?? 0)
+        } else if (self.exploreDetailInfor?.placeType.store ?? false) {
+            self.likeStore(storeId: self.exploreDetailInfor?.placeId ?? 0)
         }
     }
-    
-    
-    var favoriteImageName: String {
-        return isFavorited ? "checkHeart" : "unCheckHeart"
-    }
-    
     public func likeWalkWay(spotId: Int) {
-        provider.request(.likeWalkWay(spotId: spotId)) { result in
+        
+        guard let accessToken = KeyChainManager.stadard.getAccessToken(for: "userSession") else { return }
+        
+        provider.request(.likeWalkWay(spotId: spotId, token: accessToken)) { result in
             switch result {
             case .success(let response):
                 do {
                     let decodedResponse = try JSONDecoder().decode(WalkWayLikeModel.self, from: response.data)
-                    print(decodedResponse)
+                    print("산책로 좋아요 누름 : \(decodedResponse.information.message)")
                 } catch {
                     print("산책로 error")
                 }
@@ -73,14 +74,17 @@ class RecommendedSpaceCardViewModel: NSObject, ObservableObject, CLLocationManag
     }
     
     public func likeStore(storeId: Int) {
-        provider.request(.likeStoreData(storeId: storeId)) { result in
+        
+        guard let accessToken = KeyChainManager.stadard.getAccessToken(for: "userSession") else { return }
+        
+        provider.request(.likeStoreData(storeId: storeId, token: accessToken)) { result in
             switch result {
             case .success(let response):
                 do {
                     let decodedResponse = try JSONDecoder().decode(StoreLikeModel.self, from: response.data)
-                    print(decodedResponse)
+                    print("매장 좋아요 누름 : \(decodedResponse.information.message)")
                 } catch {
-                    print("매장 error")
+                    print("매장 error : \(error)")
                 }
             case .failure(let error):
                 print("매장 error: \(error)")
@@ -89,10 +93,6 @@ class RecommendedSpaceCardViewModel: NSObject, ObservableObject, CLLocationManag
     }
     
     //MARK: - 리뷰 카운트
-    
-    public func formattedReviewCount(_ count: Int) -> String {
-        return count > 999 ? "999+" : "\(count)"
-    }
     
     //MARK: - 거리 및 시간 계산
     
@@ -103,7 +103,7 @@ class RecommendedSpaceCardViewModel: NSObject, ObservableObject, CLLocationManag
     public func updateDistanceAndTIme() {
         guard let currentLocation = BaseLocationManager.shared.currentLocation,
               let destinationLat = exploreDetailInfor?.latitude,
-              let destinationLng = exploreDetailInfor?.longtitude else {
+              let destinationLng = exploreDetailInfor?.longitude else {
             return
         }
         
@@ -115,6 +115,4 @@ class RecommendedSpaceCardViewModel: NSObject, ObservableObject, CLLocationManag
         let estimatedTime = distance / (averageSpeed * 1000) * 3600
         self.estimatedTime = estimatedTime
     }
-    
-    
 }

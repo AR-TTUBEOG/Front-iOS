@@ -14,6 +14,7 @@ class LoginViewModel: ObservableObject {
     private let authPlugin: AuthPlugin
     private let provider: MoyaProvider<ServerAPI>
     private let keyChainManger = KeyChainManager.stadard
+    var loginRegist: Bool = false
     @Published var savedLoginToken = false
     
     init() {
@@ -31,10 +32,13 @@ class LoginViewModel: ObservableObject {
             case .success(let response):
                 do {
                     let serverResponse = try JSONDecoder().decode(LoginServerResponse.self, from: response.data)
-                    print("서버 응답 : \(serverResponse)") // 추후 삭제 할 것!
+                    print("서버 응답 : \(serverResponse)")
                     if let accessToken = serverResponse.accessToken,
-                       let refreshToken = serverResponse.refreshToken {
+                       let refreshToken = serverResponse.refreshToken,
+                       let isRegist = serverResponse.isRegistered {
                         self.saveSession(accessToken: accessToken, refreshToken: refreshToken)
+                        self.loginRegist = isRegist
+                        print("2-0-1: 카카오톡 관련 정보 저장 완료")
                     }
                 } catch {
                     print("응답 실패: \(error)") // 추후 삭제 할 것!
@@ -54,9 +58,12 @@ class LoginViewModel: ObservableObject {
                 do {
                     let serverResponse = try JSONDecoder().decode(LoginServerResponse.self, from: response.data)
                     print("4. 애플 로그인 서버 응답: \(serverResponse)")
+                    
                     if let accessToken = serverResponse.accessToken,
-                       let refreshToken = serverResponse.refreshToken {
+                       let refreshToken = serverResponse.refreshToken,
+                        let isRegist = serverResponse.isRegistered {
                         self.saveSession(accessToken: accessToken, refreshToken: refreshToken)
+                        self.loginRegist = isRegist
                     }
                 } catch {
                     print("응답 실패 : \(error.localizedDescription)")
@@ -93,7 +100,7 @@ class LoginViewModel: ObservableObject {
     }
     
     private func refreshToken(completion: @escaping (Bool) -> Void) {
-        guard let refreshToken = keyChainManger.getAccessToken(for: "userSession") else {
+        guard let refreshToken = keyChainManger.getRefreshToken(for: "userSession") else {
             completion(false)
             return
         }
@@ -105,7 +112,7 @@ class LoginViewModel: ObservableObject {
                 do {
                     let tokenResponse = try JSONDecoder().decode(TokenResponse.self, from: response.data)
                     print("새로 받아온 토큰 : \(tokenResponse)")
-                    self?.saveSession(accessToken: tokenResponse.accessToken ?? "", refreshToken: tokenResponse.refreshToken ?? "")
+                    self?.saveSession(accessToken: tokenResponse.information.accessToken ?? "", refreshToken: tokenResponse.information.refreshToken ?? "")
                     completion(true)
                     
                 } catch {

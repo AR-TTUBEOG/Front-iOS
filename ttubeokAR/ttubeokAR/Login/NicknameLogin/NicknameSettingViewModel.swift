@@ -60,7 +60,11 @@ class NicknameSettingViewModel: ObservableObject {
             case .success(let response):
                 do {
                     let nicknameRedundancy = try JSONDecoder().decode(NicknameInformation.self, from: response.data)
-                    print("5. 닉네임 정보 전달 완료 : nicknameRedundancy")
+                    print("5. 닉네임 정보 전달 완료 : \(nicknameRedundancy)")
+                    
+                //TODO: - 닉네임 수정 사항
+//                    saveNickname(newNickname: nicknameRedundancy.nickname)
+                    
                 } catch {
                     print("5-1 : 닉네임 정보 전달 후 디코드 반응 error : \(error)")
                 }
@@ -75,7 +79,7 @@ class NicknameSettingViewModel: ObservableObject {
         if var session = KeyChainManager.stadard.loadSession(for: "userSession") {
             session.nickname = newNickname
             let saved = KeyChainManager.stadard.saveSession(session, for: "userSession")
-            print("닉네임 키체인 저장 완료 : \(saved)")
+            print("6. 닉네임 키체인 저장 완료 : \(session)")
             if !saved {
                 print("닉네임 세션 실패")
             }

@@ -7,7 +7,12 @@
 
 import Foundation
 
-struct TokenResponse: Decodable {
+struct TokenResponse: Codable {
+    var check: Bool
+    var information: TokenResponseInfo
+}
+
+struct TokenResponseInfo: Codable {
     var accessToken: String?
     var refreshToken: String?
     var isRegistered: Bool?

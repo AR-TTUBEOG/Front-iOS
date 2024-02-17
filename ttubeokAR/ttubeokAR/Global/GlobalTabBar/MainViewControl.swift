@@ -45,14 +45,6 @@ struct MainViewControl: View {
         .customPopup(isPresented: $showSearchOptionButton, content: {
             PlaceSettingView()
         })
-        
-        //TODO: - 작동 안함(?)
-//        .onAppear {
-//            searchViewModel.searchTypeChanged = { newType in
-//                exploreViewModel.resetPage()
-//                exploreViewModel.decisionSearchType(newType)
-//            }
-//        }
         .onTapGesture {
             keyboardResponsive()
         }

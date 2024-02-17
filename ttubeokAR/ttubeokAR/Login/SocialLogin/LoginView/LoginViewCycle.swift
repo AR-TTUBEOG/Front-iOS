@@ -24,8 +24,7 @@ struct LoginViewCycle: View {
                 LoginView(transitionToNext: {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                         withAnimation {
-//                            currentState = loginViewModel.isRegistered ? .mainView : .nicknameSetting
-                            currentState = .nicknameSetting
+                            currentState = loginViewModel.loginRegist ? .mainView : .nicknameSetting
                         }
                     }
                 },  viewModel: loginViewModel

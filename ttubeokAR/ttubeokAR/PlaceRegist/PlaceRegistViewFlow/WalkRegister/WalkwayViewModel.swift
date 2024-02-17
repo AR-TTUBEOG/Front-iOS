@@ -111,12 +111,12 @@ class WalkwayViewModel: ObservableObject, ImageHandling, InputAddressProtocol, F
                 case .success(let response):
                     do {
                         let decodedData = try JSONDecoder().decode(ResponseWalwayRegistModel.self, from: response.data)
-                        print(decodedData)
+                        print("산책로 등록 완료 후 해독 완료: decodedData")
                     } catch {
-                        print("장소 등록 decoded에러 : \(error)")
+                        print("산책로 등록 decoded에러 : \(error)")
                     }
                 case.failure(let error):
-                    print("산책로 등록 error: \(error.localizedDescription)")
+                    print("산책로 네트워크 error: \(error.localizedDescription)")
                 }
             }
         }

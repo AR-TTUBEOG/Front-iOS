@@ -45,39 +45,41 @@ class DetailViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
     }
     
     private func walkWayGet(get place: ExploreDetailInfor) {
-        provider.request(.fetchWalkWayDetail(spotId: place.id)) { [weak self] result in
-            switch result {
-            case .success(let response):
-                do {
-                    let decodedData = try JSONDecoder().decode(WalkwayDetailDataModel.self, from: response.data)
-                    DispatchQueue.main.async {
-                        self?.walkwayDetailDataModel = decodedData
+            
+            provider.request(.fetchWalkWayDetail(spotId: place.placeId)) { [weak self] result in
+                switch result {
+                case .success(let response):
+                    do {
+                        let decodedData = try JSONDecoder().decode(WalkwayDetailDataModel.self, from: response.data)
+                        DispatchQueue.main.async {
+                            self?.walkwayDetailDataModel = decodedData
+                        }
+                    } catch {
+                        print("산책로 등록 디코드 에러")
                     }
-                } catch {
-                    print("산책로 등록 디코드 에러")
+                case.failure(let error):
+                    print("산책로 네트워크 오류 : \(error.localizedDescription)")
                 }
-            case.failure(let error):
-                print("산책로 네트워크 오류 : \(error.localizedDescription)")
             }
-        }
     }
     
     private func storeGet(get place: ExploreDetailInfor) {
-        provider.request(.fetchStoreDetail(storeId: place.id)) { [weak self] result in
-            switch result {
-            case .success(let response):
-                do {
-                    let decodedData = try JSONDecoder().decode(StoreDetailDataModel.self, from: response.data)
-                    DispatchQueue.main.async {
-                        self?.storeDetailDataModel = decodedData
+            
+            provider.request(.fetchStoreDetail(storeId: place.placeId)) { [weak self] result in
+                switch result {
+                case .success(let response):
+                    do {
+                        let decodedData = try JSONDecoder().decode(StoreDetailDataModel.self, from: response.data)
+                        DispatchQueue.main.async {
+                            self?.storeDetailDataModel = decodedData
+                        }
+                    } catch {
+                        print("매장 등록 디코드 에러 : \(error)")
                     }
-                } catch {
-                    print("매장 등록 디코드 에러")
+                case .failure(let error):
+                    print("매장 네트워크 오류: \(error.localizedDescription)")
                 }
-            case .failure(let error):
-                print("매장 네트워크 오류: \(error.localizedDescription)")
             }
-        }
     }
     
     // MARK: - 방문하기 버튼
@@ -160,7 +162,10 @@ class DetailViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
     }
     
     private func likeWalkWay(spotId: Int) {
-        likeProvider.request(.likeWalkWay(spotId: spotId)) { result in
+        
+        guard let accessToken = KeyChainManager.stadard.getAccessToken(for: "userSession") else { return }
+        
+        likeProvider.request(.likeWalkWay(spotId: spotId, token: accessToken)) { result in
             switch result {
             case .success(let response):
                 do {
@@ -176,7 +181,10 @@ class DetailViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
     }
     
     private func likeStore(storeId: Int) {
-        likeProvider.request(.likeStoreData(storeId: storeId)) { result in
+        
+        guard let accessToken = KeyChainManager.stadard.getAccessToken(for: "userSession") else { return }
+        
+        likeProvider.request(.likeStoreData(storeId: storeId, token: accessToken)) { result in
             switch result {
             case .success(let response):
                 do {
