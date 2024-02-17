@@ -30,7 +30,7 @@ class WalkwayViewModel: ObservableObject, ImageHandling, InputAddressProtocol, F
     @Published var currentPageIndex: Int = 0
     @Published var navigationToNextView = false
     @Published var images: [UIImage] = []
-    var base64Images: [String] = []
+    @Published var base64Images: [String] = []
     
     //MARK: - saveTextInputs
     @Published var firstPlaceName: String = ""
@@ -49,7 +49,7 @@ class WalkwayViewModel: ObservableObject, ImageHandling, InputAddressProtocol, F
     }
     
     public func imageToBase64String(img: UIImage) -> String? {
-        guard let imageData = img.jpegData(compressionQuality: 1.0) ?? img.pngData() else {
+        guard let imageData = img.jpegData(compressionQuality: 1.0) else {
             return nil
         }
         return imageData.base64EncodedString()
@@ -57,8 +57,8 @@ class WalkwayViewModel: ObservableObject, ImageHandling, InputAddressProtocol, F
     
     /// 앨범에서 선택한 이미지 추가하기
     /// - Parameter newImages: 추가한 이미지 배열에 넣기
-    public func addImage(_ newImages: [UIImage]) {
-        images.append(contentsOf: newImages)
+    public func addImage(_ newImages: UIImage) {
+        images.append(newImages)
     }
     
     /// 앨범 띄우기
@@ -138,8 +138,7 @@ class WalkwayViewModel: ObservableObject, ImageHandling, InputAddressProtocol, F
                                         info: self.fourthWalkwayDescription,
                                         latitude: self.locationManager.currentLocation?.coordinate.latitude ?? 0.0,
                                         longitude: self.locationManager.currentLocation?.coordinate.longitude ?? 0.0,
-                                        image: base64Images,
-                                        starts: 0
+                                        image: ["xxxx"]
         )
     }
     
@@ -154,13 +153,15 @@ class WalkwayViewModel: ObservableObject, ImageHandling, InputAddressProtocol, F
     private func matchWalkwayRegisterData() {
         saveStringImage()
         self.requestWalwayRegistModel = createParameters()
-        print("match완료")
+        
     }
     
     
     /// 산책로 버튼
     public func finishPlaceRegist(){
         matchWalkwayRegisterData()
-        sendDataWalkwayInfo()
+        DispatchQueue.main.asyncAfter(deadline: .now()+1){
+            self.sendDataWalkwayInfo()
+        }
     }
 }

@@ -11,7 +11,7 @@ import Moya
 enum SearchAPITarget {
     case searchAll(page: Int, size: Int, token: String)
     case searchLatest(page: Int, size: Int, token: String)
-    case searchDistance(page: Int, size: Int, token: String)
+    case searchDistance(latitude: Double, longitude: Double, page: Int, size: Int, token: String)
     case searchRecommend(page: Int, size: Int, token: String)
 }
 
@@ -50,8 +50,8 @@ extension SearchAPITarget: TargetType {
             return .requestParameters(parameters: ["page": page, "size:": size], encoding: URLEncoding.queryString)
         case .searchLatest(let page, let size, _):
             return .requestParameters(parameters: ["page": page, "size:": size], encoding: URLEncoding.queryString)
-        case .searchDistance(let page, let size, _):
-            return .requestParameters(parameters: ["page": page, "size:": size], encoding: URLEncoding.queryString)
+        case .searchDistance(let lat, let lng, let page, let size, _):
+            return .requestParameters(parameters: ["latitude": lat, "longitude": lng  ,"page": page, "size:": size], encoding: URLEncoding.queryString)
         case .searchRecommend(let page, let size, _):
             return .requestParameters(parameters: ["page": page, "size:": size], encoding: URLEncoding.queryString)
         }
@@ -60,7 +60,7 @@ extension SearchAPITarget: TargetType {
     var headers: [String : String]? {
         let token: String
         switch self {
-        case .searchAll(_, _, let tokenValue), .searchLatest(_, _, let tokenValue), .searchDistance(_, _, let tokenValue), .searchRecommend(_, _, let tokenValue):
+        case .searchAll(_, _, let tokenValue), .searchLatest(_, _, let tokenValue), .searchDistance(_, _, _, _, let tokenValue), .searchRecommend(_, _, let tokenValue):
             token = tokenValue
         }
         return [

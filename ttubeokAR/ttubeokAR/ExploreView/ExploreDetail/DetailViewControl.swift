@@ -41,7 +41,7 @@ struct DetailViewControl: View {
     /// 장소  사진  및 찜하기 버튼
     private var topImageAndBookmarked: some View {
         ZStack(alignment: .topTrailing) {
-            spaceImage
+//            spaceImage
             spaceLiked
                 .padding(.vertical, 10)
                 .padding(.horizontal, 20)
@@ -51,23 +51,23 @@ struct DetailViewControl: View {
     
     
     //MARK: - 장소 사진 설정
-    //장소 사진
-    private var spaceImage: some View {
-        Image(viewModel.images[viewModel.currentImageIndex])
-            .resizable()
-            .frame(maxWidth: .infinity, maxHeight: 252)
-            .aspectRatio(contentMode: .fill)
-            .gesture(
-                DragGesture()
-                    .onEnded{ value in
-                        if value.translation.width < 0 {
-                            viewModel.nextImage()
-                        } else if value.translation.width > 0 {
-                            viewModel.previousImage()
-                        }
-                    }
-            )
-    }
+//    //장소 사진
+//    private var spaceImage: some View {
+//        Image(viewModel.images[viewModel.currentImageIndex])
+//            .resizable()
+//            .frame(maxWidth: .infinity, maxHeight: 252)
+//            .aspectRatio(contentMode: .fill)
+//            .gesture(
+//                DragGesture()
+//                    .onEnded{ value in
+//                        if value.translation.width < 0 {
+//                            viewModel.nextImage()
+//                        } else if value.translation.width > 0 {
+//                            viewModel.previousImage()
+//                        }
+//                    }
+//            )
+//    }
     
     //MARK: - 장소 좋아요 버튼
     private var spaceLiked: some View {

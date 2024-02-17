@@ -16,7 +16,6 @@ struct RequestWalwayRegistModel: Codable {
     var latitude: Double?
     var longitude: Double?
     var image: [String]?
-    var starts: Float
 }
 
 struct ResponseWalkwayRegistModel: Codable {
@@ -25,12 +24,15 @@ struct ResponseWalkwayRegistModel: Codable {
 }
 
 struct WalwayRegistInfor: Codable {
+    var id: Int?
     var name: String?
     var dongAreaId: String?
     var detailAddress: String?
+    var memberId: Int?
     var info: String?
     var latitude: Double?
     var longitude: Double?
     var image: [String]?
+    var stars: Double?
 }
 

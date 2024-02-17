@@ -23,7 +23,6 @@ class ExploreViewModel: ObservableObject {
     
     @Published var exploreData: ExploreDataModel?
     @Published var currentSearchType: SearchType = .all
-    
     var curretnPage = 0
   
     // MARK: - 페이징
@@ -131,12 +130,12 @@ class ExploreViewModel: ObservableObject {
     public func fetchExploreDataDistance(page: Int) {
         print("거리순 선택 API 호출")
         
-        guard let accssToken = KeyChainManager.stadard.getAccessToken(for: "userSession") else {
+        guard let accssToken = KeyChainManager.stadard.getAccessToken(for: "userSession"), let location = BaseLocationManager.shared.currentLocation?.coordinate else {
             print("거리순 중 액세스 토큰 가져오기 오류")
             return
         }
         
-        searchProvider.request(.searchDistance(page: page, size: 9, token: accssToken)) { [weak self] result in
+        searchProvider.request(.searchDistance(latitude: location.latitude, longitude: location.longitude, page: page, size: 9, token: accssToken)) { [weak self] result in
             switch result {
             case .success(let response):
                 do {

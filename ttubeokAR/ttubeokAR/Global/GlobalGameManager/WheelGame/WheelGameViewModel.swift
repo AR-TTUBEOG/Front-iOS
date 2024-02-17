@@ -41,7 +41,8 @@ class WheelGameViewModel: ObservableObject {
     //MARK: - API 전달
     
     private func matchData() {
-        wheelModel = RouletteModel(benefitType: {
+        wheelModel = RouletteModel(storeId: self.storeId,
+                                   benefitType: {
                                     switch selectCoupon {
                                     case 1:
                                         return "SALE"

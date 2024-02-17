@@ -77,7 +77,7 @@ class GiftDrawingGameViewModel: ObservableObject {
         print("선물게임 storeId: \(storeId)")
 
         
-        giftModel = GifttModel(timeLimit: timeString, giftCount: self.giftCount, benefitContent: self.benefitsText, benefitType: {
+        giftModel = GifttModel(storeId: self.storeId ,timeLimit: timeString, giftCount: self.giftCount, benefitContent: self.benefitsText, benefitType: {
             switch selectCoupon {
             case 1:
                 return "SALE"

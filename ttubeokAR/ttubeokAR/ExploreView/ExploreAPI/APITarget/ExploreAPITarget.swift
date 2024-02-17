@@ -35,9 +35,9 @@ extension ExploreAPITarget: TargetType {
         case .createBookMark:
             return .post
         case .likeWalkWay:
-            return .patch
+            return .post
         case .likeStoreData:
-            return .patch
+            return .post
         }
     }
     

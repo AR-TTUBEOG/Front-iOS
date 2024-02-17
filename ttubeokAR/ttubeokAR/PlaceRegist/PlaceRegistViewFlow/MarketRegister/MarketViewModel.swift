@@ -16,6 +16,7 @@ import PhotosUI
 class MarketViewModel: ObservableObject, ImageHandling, InputAddressProtocol, FinishViewProtocol {
     
     
+    
     //MARK: - API
     private let authPlugin: AuthPlugin
     private let provider: MoyaProvider<PlaceRegistService>
@@ -65,17 +66,8 @@ class MarketViewModel: ObservableObject, ImageHandling, InputAddressProtocol, Fi
         images.count
     }
     
-    public func imageToBase64String(img: UIImage) -> String? {
-        guard let imageData = img.jpegData(compressionQuality: 1.0) ?? img.pngData() else {
-            return nil
-        }
-        
-        return imageData.base64EncodedString()
-    }
-    
-    
-    public func addImage(_ newImages: [UIImage]) {
-        images.append(contentsOf: newImages)
+    public func addImage(_ newImages: UIImage) {
+        images.append(newImages)
     }
     
     public func showImagePicker() {
@@ -130,6 +122,13 @@ class MarketViewModel: ObservableObject, ImageHandling, InputAddressProtocol, Fi
                 base64Images.append(base64String)
             }
         }
+    }
+    
+    public func imageToBase64String(img: UIImage) -> String? {
+        guard let imageData = img.jpegData(compressionQuality: 1.0) ?? img.pngData() else {
+            return nil
+        }
+        return imageData.base64EncodedString()
     }
     
     private func sendDataMarketInfo() {

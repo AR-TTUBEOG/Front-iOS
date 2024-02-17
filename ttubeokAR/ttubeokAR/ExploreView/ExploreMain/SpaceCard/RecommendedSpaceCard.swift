@@ -13,8 +13,7 @@ struct RecommendedSpaceCard: View {
     @State var placeTypeColor: Color?
     @State var baseImage: Image?
     @State var placeTypeText: Text?
-    
-    let viewModel: RecommendedSpaceCardViewModel
+    @StateObject var viewModel: RecommendedSpaceCardViewModel
     
     
     // 장소 타입 저장할 변수 필요
@@ -23,13 +22,13 @@ struct RecommendedSpaceCard: View {
     
     var body: some View {
         allView
-            .frame(width: 150, height: 177)
+            .frame(width: 175, height: 190)
             .background(Color(red: 0.25, green: 0.24, blue: 0.37))
             .clipShape(.rect(cornerRadius: 19))
             .shadow(radius: 5)
-            .onReceive(BaseLocationManager.shared.$currentLocation) { _ in
-                viewModel.updateDistanceAndTIme()
-            }
+//            .onReceive(BaseLocationManager.shared.$currentLocation) { _ in
+//                viewModel.updateDistanceAndTIme()
+//            }
     }
     
     //MARK: - ViewSetting
@@ -73,19 +72,21 @@ struct RecommendedSpaceCard: View {
             spaceReviewCount
             spaceSpotType
             Spacer()
+                .frame(height: 2)
         }
-        .padding(.top, 5)
+        .padding(.top, 7)
     }
     
     
     //    // MARK: - 장소 이미지 및 이름
     //장소 이미지
     private var spaceImage : some View {
-        Image(viewModel.exploreDetailInfor?.image ?? "")
+        Image(base64String: viewModel.exploreDetailInfor?.image ?? "")
             .resizable()
             .aspectRatio(contentMode: .fill)
-            .frame(width: 143, height: 94)
+            .frame(width: 150, height: 94)
             .roundedCorner(19, corners: [.topLeft, .topRight])
+            .padding(.top, 5)
     }
     
     //장소 이름
@@ -99,9 +100,15 @@ struct RecommendedSpaceCard: View {
     //    //장소 좋아요
     private var spaceLiked: some View {
         Button(action: {
-                viewModel.checkLike()
+            self.isFavorited.toggle()
+            print("좋아요 상태 : \(isFavorited)")
+            
+            if isFavorited {
+                viewModel.sendLike()
+            }
+            
         }) {
-            Image(viewModel.isFavorited ? "checkHeart" : "unCheckHeart")
+            Image(self.isFavorited ? "checkHeart" : "unCheckHeart")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 20, height: 20)
@@ -175,8 +182,7 @@ struct RecommendedSpaceCard: View {
             return "약 \(minutes)분"
         }
     }
-    //
-    //
+    
     //        //MARK: - 방명록 수 및 타입 이미지
     //
     //리뷰 개수

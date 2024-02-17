@@ -27,26 +27,10 @@ class RecommendedSpaceCardViewModel: NSObject, ObservableObject, CLLocationManag
     }
     
     //MARK: - 이미지 좋아요
-    @State var isFavorited: Bool = false
     @Published var placeType: PlaceTypeValue? = nil
     
-    public func changePlaceType() {
-        if (self.exploreDetailInfor?.placeType.spot) != nil {
-            self.placeType = .spot
-        } else if (self.exploreDetailInfor?.placeType.store) != nil {
-            self.placeType = .store
-        }
-    }
-    
-    public func checkLike() {
-        isFavorited.toggle()
-        if self.isFavorited {
-            sendLike()
-        }
-    }
     
     public func sendLike() {
-        
         
         if (self.exploreDetailInfor?.placeType.spot ?? false) {
             self.likeWalkWay(spotId: self.exploreDetailInfor?.placeId ?? 0)
@@ -54,6 +38,7 @@ class RecommendedSpaceCardViewModel: NSObject, ObservableObject, CLLocationManag
             self.likeStore(storeId: self.exploreDetailInfor?.placeId ?? 0)
         }
     }
+    
     public func likeWalkWay(spotId: Int) {
         
         guard let accessToken = KeyChainManager.stadard.getAccessToken(for: "userSession") else { return }
@@ -92,8 +77,6 @@ class RecommendedSpaceCardViewModel: NSObject, ObservableObject, CLLocationManag
         }
     }
     
-    //MARK: - 리뷰 카운트
-    
     //MARK: - 거리 및 시간 계산
     
     @Published var distance: CLLocationDistance = 0
@@ -114,5 +97,7 @@ class RecommendedSpaceCardViewModel: NSObject, ObservableObject, CLLocationManag
         let averageSpeed = 5.0
         let estimatedTime = distance / (averageSpeed * 1000) * 3600
         self.estimatedTime = estimatedTime
+        
+        print("현재 거리 차이 : \(distance)")
     }
 }
