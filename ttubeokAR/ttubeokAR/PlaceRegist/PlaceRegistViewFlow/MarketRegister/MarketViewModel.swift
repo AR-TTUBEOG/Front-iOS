@@ -10,6 +10,7 @@ import SwiftUI
 import Moya
 import UIKit
 import CoreLocation
+import PhotosUI
 
 
 class MarketViewModel: ObservableObject, ImageHandling, InputAddressProtocol, FinishViewProtocol {
@@ -24,6 +25,7 @@ class MarketViewModel: ObservableObject, ImageHandling, InputAddressProtocol, Fi
     @Published var isImagePickerPresented = false
     @Published var navigationToNextView = false
     @Published var images: [UIImage] = []
+    var base64Images: [String] = []
     
     
     //MARK: - saveTextInputs
@@ -41,6 +43,14 @@ class MarketViewModel: ObservableObject, ImageHandling, InputAddressProtocol, Fi
     
     var selectedImageCount: Int {
         images.count
+    }
+    
+    public func imageToBase64String(img: UIImage) -> String? {
+        guard let imageData = img.jpegData(compressionQuality: 1.0) ?? img.pngData() else {
+            return nil
+        }
+        
+        return imageData.base64EncodedString()
     }
     
     
@@ -62,13 +72,8 @@ class MarketViewModel: ObservableObject, ImageHandling, InputAddressProtocol, Fi
         images
     }
     
-    func imageToBase64String(img: UIImage) -> String? {
-        return "test"
-    }
-    
     
     //MARK: - CurrentAddress
-    
     
     @Published var address: String = ""
     @Published var detailAddress: String = ""
@@ -84,5 +89,18 @@ class MarketViewModel: ObservableObject, ImageHandling, InputAddressProtocol, Fi
             }
         }
     }
+    
+    //MARK: - 토큰 불러오기
+    private func loadAccessToken() -> String? {
+        guard let accessToken = KeyChainManager.stadard.getAccessToken(for: "userSession") else {
+            return "토큰 정보 에러"
+        }
+        
+        return accessToken
+    }
+
+    //MARK: - 장소등록 API
+    
+    
 }
 

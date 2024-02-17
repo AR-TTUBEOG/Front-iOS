@@ -16,35 +16,35 @@ struct NicknameSettingLogin: View {
     
     //MARK: - Body
     var body: some View {
-        ZStack(alignment: .center) {
             allView
-        }
-        .onTapGesture {
-            keyboardResponsive()
-        }
+            .onTapGesture {
+                keyboardResponsive()
+            }
     }
     
     //MARK: - Nickname View
     /// 설정된 모든 뷰 보기
     private var allView: some View {
-        
-        ZStack(alignment: .center) {
-            backgroundImageView
-            blackOpacity
-            GeometryReader { geometry in
+        GeometryReader { geometry in
+            ZStack(alignment: .center) {
+                backgroundImageView
+                blackOpacity
                 VStack(alignment: .center) {
-                    nicknameInput
-                        .padding(.top, 0)
-                    checkingNickname
+                    VStack {
+                        nicknameInput
+                            .padding(.top, 0)
+                        checkingNickname
+                    }
+                    .frame(maxHeight: 150,alignment: .top)
                     Spacer()
-                        .frame(maxHeight: 270)
+                        .frame(height: 260)
                     checkButton
                 }
-                .position(x: geometry.size.width / 2, y: geometry.size.height * 0.65)
+                .frame(minHeight: 500, maxHeight: 620, alignment: .bottom)
             }
+            .frame(height: geometry.size.height)
         }
     }
-    
     /// 닉네임 배경 사진
     private var backgroundImageView: some View {
         Icon.loginBackground.image
@@ -57,18 +57,17 @@ struct NicknameSettingLogin: View {
         RoundedRectangle(cornerRadius: 24)
             .foregroundStyle(Color.clear)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .ignoresSafeArea(.all)
             .background(Color(red: 0.09, green: 0.08, blue: 0.12).opacity(0.8))
             .shadow(color: .white.opacity(0.25), radius: 100, x: 0, y: 4)
     }
     
     /// 닉넨임 입력 스택
     private var nicknameInput: some View {
-        VStack(alignment: .leading, spacing: 10) {
+        VStack(alignment: .leading, spacing: 5) {
             Text("Name")
                 .font(.sandol(type: .semiBold, size: 15))
                 .foregroundStyle(Color.white)
-                .frame(maxWidth: 303, maxHeight: 39, alignment: .leading)
+                .frame(width: 303, height: 39, alignment: .leading)
             
             inputNickname
         }
@@ -76,7 +75,7 @@ struct NicknameSettingLogin: View {
     
     /// 닉네임 입렵 텍스트 필드
     private var inputNickname: some View {
-        VStack(alignment: .leading, spacing: 15) {
+        VStack(alignment: .leading, spacing: 10) {
             HStack(alignment: .center){
                 TextField("", text: $viewModel.nickname
                           ,prompt: Text("닉네임을 적어주세요")
@@ -88,17 +87,17 @@ struct NicknameSettingLogin: View {
                 .foregroundStyle(Color.white)
                 .font(.sandol(type: .light, size: 15))
                 .background(Color.clear)
-                .frame(maxWidth: 230, alignment: .center)
+                .frame(width: 230, height: 40, alignment: .center)
                 
                 Button(action: {
-                    if viewModel.isNicknameValid{
+                    if viewModel.isNicknameValid {
                         viewModel.checkNicknameAvailability()
                     }
                 })
                 {
                     Text("중복확인")
                         .font(.sandol(type: .light, size: 14))
-                        .frame(maxWidth: 70, maxHeight: 24)
+                        .frame(width: 70, height: 24)
                         .foregroundStyle(Color.white)
                         .background((RoundedRectangle(cornerRadius: 19).fill(Color.clear)))
                         .overlay(
@@ -108,9 +107,11 @@ struct NicknameSettingLogin: View {
                 }
                 
             }
+            .frame(maxHeight: 40, alignment: .bottom)
+            
             Rectangle()
                 .fill(Color.white)
-                .frame(maxWidth: 310, maxHeight: 1)
+                .frame(width: 310, height: 1)
         }
     }
     
@@ -121,7 +122,7 @@ struct NicknameSettingLogin: View {
                 HStack(spacing: 3) {
                     Icon.warning.image
                         .resizable()
-                        .frame(maxWidth: 20, maxHeight: 20)
+                        .frame(width: 20, height: 20)
                         .aspectRatio(contentMode: .fit)
                         .padding(.bottom, 2)
                     Text("2자 이상 ~ 10자 이하로 입력해주세요.")
@@ -134,13 +135,13 @@ struct NicknameSettingLogin: View {
                 HStack(spacing: 3) {
                     Icon.warning.image
                         .resizable()
-                        .frame(maxWidth: 20, maxHeight: 20)
+                        .frame(width: 20, height: 20)
                         .aspectRatio(contentMode: .fit)
                         .padding(.bottom, 2)
                     Text("이미 사용중인 닉네임입니다.")
                         .font(.sandol(type: .regular, size: 15))
                         .foregroundColor(Color(red: 0.95, green: 0.62, blue: 0.62))
-                        .frame(maxWidth: 285, maxHeight: 30, alignment: .leading)
+                        .frame(width: 285, height: 30, alignment: .leading)
                 }
             }
             
@@ -148,13 +149,13 @@ struct NicknameSettingLogin: View {
                 HStack(spacing: 3) {
                     Icon.nameCheck.image
                         .resizable()
-                        .frame(maxWidth: 20, maxHeight: 20)
+                        .frame(width: 20, height: 20)
                         .aspectRatio(contentMode: .fit)
                         .padding(.bottom, 2)
                     Text("사용 가능한 닉네임입니다.")
                         .font(.sandol(type: .regular, size: 15))
                         .foregroundColor(Color(red: 0.68, green: 1, blue: 0.65).opacity(0.80))
-                        .frame(maxWidth: 285, maxHeight: 30, alignment: .leading)
+                        .frame(width: 285, height: 30, alignment: .leading)
                 }
             }
         }
@@ -164,12 +165,13 @@ struct NicknameSettingLogin: View {
     private var checkButton: some View {
         Button(action: {
             if viewModel.isNicknameValid, viewModel.isNicknameAvailable == true {
-                transitionToNext()
+                viewModel.sendNickname()
                 viewModel.saveNickname(newNickname: viewModel.nickname)
+                transitionToNext()
             }
         }) {
             Text("시작하기")
-                .frame(maxWidth: 305, maxHeight: 55)
+                .frame(width: 305, height: 55)
                 .background((viewModel.isNicknameValid && (viewModel.isNicknameAvailable == true)) ? Color.primary03 : Color(red: 0.25, green: 0.24, blue: 0.37))
                 .contentShape(RoundedRectangle(cornerRadius: 19))
                 .foregroundStyle(Color.white)

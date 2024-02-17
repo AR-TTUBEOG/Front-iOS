@@ -17,6 +17,8 @@
 		481B90A82B669B1A00D366A7 /* PlaceRegistImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481B90A72B669B1A00D366A7 /* PlaceRegistImagePicker.swift */; };
 		481B90AA2B66A1B800D366A7 /* WalkwayPageContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481B90A92B66A1B800D366A7 /* WalkwayPageContent.swift */; };
 		481CD1EC2B7E34CB00477DDF /* MySettingCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481CD1EB2B7E34CB00477DDF /* MySettingCommand.swift */; };
+		481CD1EE2B7E487200477DDF /* GameManagerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481CD1ED2B7E487200477DDF /* GameManagerService.swift */; };
+		481CD1F02B7E49F000477DDF /* GameManagerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481CD1EF2B7E49F000477DDF /* GameManagerModel.swift */; };
 		481E74C32B78A36900A50846 /* WheelGameShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481E74C22B78A36900A50846 /* WheelGameShape.swift */; };
 		481EA2712B6F280200BAD5E0 /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481EA2702B6F280200BAD5E0 /* SplashScreenView.swift */; };
 		481EA2722B6F339700BAD5E0 /* CustomTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483BFD192B649CD000C2AD5B /* CustomTitleView.swift */; };
@@ -57,6 +59,8 @@
 		483CB9622B732F4A00938224 /* GameBenefitsTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483CB9612B732F4A00938224 /* GameBenefitsTextField.swift */; };
 		483CB9642B73329700938224 /* GameBenefitsText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483CB9632B73329700938224 /* GameBenefitsText.swift */; };
 		4844E13F2B5A243700E6619C /* Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4844E13E2B5A243700E6619C /* Icon.swift */; };
+		484C16AD2B7ED4CE00257229 /* AuthPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484C16AC2B7ED4CE00257229 /* AuthPlugin.swift */; };
+		484C16AF2B7ED7EA00257229 /* RefreshService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484C16AE2B7ED7EA00257229 /* RefreshService.swift */; };
 		4850B00F2B766FAB00F8CD90 /* BaseLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4850B00E2B766FAB00F8CD90 /* BaseLocationManager.swift */; };
 		485B30E62B709BF500023785 /* ImageSelectionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485B30E52B709BF500023785 /* ImageSelectionButton.swift */; };
 		485B30EB2B70A9E300023785 /* GameManagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485B30EA2B70A9E300023785 /* GameManagerView.swift */; };
@@ -64,6 +68,12 @@
 		4861FF242B54E35C00DC6E2D /* CustomSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4861FF232B54E35C00DC6E2D /* CustomSlider.swift */; };
 		486C2FEB2B592A4B00C88B04 /* NicknameSettingLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486C2FEA2B592A4B00C88B04 /* NicknameSettingLogin.swift */; };
 		486C2FED2B592A8D00C88B04 /* NicknameSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486C2FEC2B592A8D00C88B04 /* NicknameSettingViewModel.swift */; };
+		48719EBC2B7EF72A00310A1E /* ResetTokenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48719EBB2B7EF72A00310A1E /* ResetTokenModel.swift */; };
+		48719EBF2B7F52EE00310A1E /* GiftBox.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 48719EBE2B7F52EE00310A1E /* GiftBox.usdz */; };
+		48719EC42B7F55D100310A1E /* basketballstand.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 48719EC32B7F55D100310A1E /* basketballstand.usdz */; };
+		48719EC72B7F562D00310A1E /* ARGameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48719EC62B7F562D00310A1E /* ARGameViewModel.swift */; };
+		48719EC92B7F591E00310A1E /* BasketClassCoordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48719EC82B7F591E00310A1E /* BasketClassCoordinate.swift */; };
+		48719ECF2B7F635A00310A1E /* basketBall.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 48719ECE2B7F635A00310A1E /* basketBall.usdz */; };
 		487E383F2B5ADE7A0026599D /* KakaoSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 487E383E2B5ADE7A0026599D /* KakaoSDK */; };
 		487E38412B5ADE7A0026599D /* KakaoSDKAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 487E38402B5ADE7A0026599D /* KakaoSDKAuth */; };
 		487E38432B5ADE7A0026599D /* KakaoSDKCert in Frameworks */ = {isa = PBXBuildFile; productRef = 487E38422B5ADE7A0026599D /* KakaoSDKCert */; };
@@ -93,7 +103,7 @@
 		48ADCAA52B6645BD00765EDB /* SharedTabInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48ADCAA42B6645BD00765EDB /* SharedTabInfo.swift */; };
 		48AFE30E2B7705B80032F0CE /* ReverseGeocodingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AFE30D2B7705B80032F0CE /* ReverseGeocodingService.swift */; };
 		48B21D062B771E6600C26317 /* KeyBoardExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B21D052B771E6600C26317 /* KeyBoardExtension.swift */; };
-		48B21D0B2B777C0000C26317 /* WalwayRegistAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B21D0A2B777C0000C26317 /* WalwayRegistAPI.swift */; };
+		48B21D0B2B777C0000C26317 /* PlaceRegistService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B21D0A2B777C0000C26317 /* PlaceRegistService.swift */; };
 		48B21D0D2B77953500C26317 /* FinishViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B21D0C2B77953500C26317 /* FinishViewProtocol.swift */; };
 		48B21D152B77B5EF00C26317 /* GiftDrawingGameRulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B21D142B77B5EF00C26317 /* GiftDrawingGameRulesView.swift */; };
 		48B21D172B77B6FD00C26317 /* WheelGameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B21D162B77B6FD00C26317 /* WheelGameViewModel.swift */; };
@@ -194,6 +204,8 @@
 		481B90A72B669B1A00D366A7 /* PlaceRegistImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceRegistImagePicker.swift; sourceTree = "<group>"; };
 		481B90A92B66A1B800D366A7 /* WalkwayPageContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkwayPageContent.swift; sourceTree = "<group>"; };
 		481CD1EB2B7E34CB00477DDF /* MySettingCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySettingCommand.swift; sourceTree = "<group>"; };
+		481CD1ED2B7E487200477DDF /* GameManagerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManagerService.swift; sourceTree = "<group>"; };
+		481CD1EF2B7E49F000477DDF /* GameManagerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManagerModel.swift; sourceTree = "<group>"; };
 		481E74C22B78A36900A50846 /* WheelGameShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WheelGameShape.swift; sourceTree = "<group>"; };
 		481EA2702B6F280200BAD5E0 /* SplashScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenView.swift; sourceTree = "<group>"; };
 		482DB6B62B5416FF005538DE /* PlaceSettingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceSettingModel.swift; sourceTree = "<group>"; };
@@ -229,6 +241,8 @@
 		483CB9612B732F4A00938224 /* GameBenefitsTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBenefitsTextField.swift; sourceTree = "<group>"; };
 		483CB9632B73329700938224 /* GameBenefitsText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBenefitsText.swift; sourceTree = "<group>"; };
 		4844E13E2B5A243700E6619C /* Icon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icon.swift; sourceTree = "<group>"; };
+		484C16AC2B7ED4CE00257229 /* AuthPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthPlugin.swift; sourceTree = "<group>"; };
+		484C16AE2B7ED7EA00257229 /* RefreshService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshService.swift; sourceTree = "<group>"; };
 		4850B00E2B766FAB00F8CD90 /* BaseLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseLocationManager.swift; sourceTree = "<group>"; };
 		485B30E52B709BF500023785 /* ImageSelectionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSelectionButton.swift; sourceTree = "<group>"; };
 		485B30EA2B70A9E300023785 /* GameManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManagerView.swift; sourceTree = "<group>"; };
@@ -236,6 +250,12 @@
 		4861FF232B54E35C00DC6E2D /* CustomSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSlider.swift; sourceTree = "<group>"; };
 		486C2FEA2B592A4B00C88B04 /* NicknameSettingLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameSettingLogin.swift; sourceTree = "<group>"; };
 		486C2FEC2B592A8D00C88B04 /* NicknameSettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameSettingViewModel.swift; sourceTree = "<group>"; };
+		48719EBB2B7EF72A00310A1E /* ResetTokenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetTokenModel.swift; sourceTree = "<group>"; };
+		48719EBE2B7F52EE00310A1E /* GiftBox.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = GiftBox.usdz; sourceTree = "<group>"; };
+		48719EC32B7F55D100310A1E /* basketballstand.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = basketballstand.usdz; sourceTree = "<group>"; };
+		48719EC62B7F562D00310A1E /* ARGameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARGameViewModel.swift; sourceTree = "<group>"; };
+		48719EC82B7F591E00310A1E /* BasketClassCoordinate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketClassCoordinate.swift; sourceTree = "<group>"; };
+		48719ECE2B7F635A00310A1E /* basketBall.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = basketBall.usdz; sourceTree = "<group>"; };
 		487E38482B5AE04A0026599D /* KakaoLoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoLoginManager.swift; sourceTree = "<group>"; };
 		488342FD2B7A155D007A16AD /* GiftDrawingGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiftDrawingGameView.swift; sourceTree = "<group>"; };
 		488342FF2B7A1D56007A16AD /* WheelGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WheelGameView.swift; sourceTree = "<group>"; };
@@ -260,7 +280,7 @@
 		48ADCAA42B6645BD00765EDB /* SharedTabInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedTabInfo.swift; sourceTree = "<group>"; };
 		48AFE30D2B7705B80032F0CE /* ReverseGeocodingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReverseGeocodingService.swift; sourceTree = "<group>"; };
 		48B21D052B771E6600C26317 /* KeyBoardExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyBoardExtension.swift; sourceTree = "<group>"; };
-		48B21D0A2B777C0000C26317 /* WalwayRegistAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalwayRegistAPI.swift; sourceTree = "<group>"; };
+		48B21D0A2B777C0000C26317 /* PlaceRegistService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceRegistService.swift; sourceTree = "<group>"; };
 		48B21D0C2B77953500C26317 /* FinishViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishViewProtocol.swift; sourceTree = "<group>"; };
 		48B21D142B77B5EF00C26317 /* GiftDrawingGameRulesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiftDrawingGameRulesView.swift; sourceTree = "<group>"; };
 		48B21D162B77B6FD00C26317 /* WheelGameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WheelGameViewModel.swift; sourceTree = "<group>"; };
@@ -619,6 +639,42 @@
 			path = NicknameLogin;
 			sourceTree = "<group>";
 		};
+		48719EBA2B7EF70500310A1E /* accessTokenReset */ = {
+			isa = PBXGroup;
+			children = (
+				484C16AE2B7ED7EA00257229 /* RefreshService.swift */,
+				484C16AC2B7ED4CE00257229 /* AuthPlugin.swift */,
+				48719EBB2B7EF72A00310A1E /* ResetTokenModel.swift */,
+			);
+			path = accessTokenReset;
+			sourceTree = "<group>";
+		};
+		48719EBD2B7F52DD00310A1E /* USDZ */ = {
+			isa = PBXGroup;
+			children = (
+				48719EC32B7F55D100310A1E /* basketballstand.usdz */,
+				48719ECE2B7F635A00310A1E /* basketBall.usdz */,
+				48719EBE2B7F52EE00310A1E /* GiftBox.usdz */,
+			);
+			path = USDZ;
+			sourceTree = "<group>";
+		};
+		48719EC02B7F531600310A1E /* GiftGame */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = GiftGame;
+			sourceTree = "<group>";
+		};
+		48719EC52B7F55DD00310A1E /* BasketBallGame */ = {
+			isa = PBXGroup;
+			children = (
+				48719EC62B7F562D00310A1E /* ARGameViewModel.swift */,
+				48719EC82B7F591E00310A1E /* BasketClassCoordinate.swift */,
+			);
+			path = BasketBallGame;
+			sourceTree = "<group>";
+		};
 		488365F42B6FE22B00F4E397 /* GlobalImagePicker */ = {
 			isa = PBXGroup;
 			children = (
@@ -664,6 +720,7 @@
 			children = (
 				483BFD162B64996400C2AD5B /* WhichSelectPlaceView.swift */,
 				48D1CFF12B63FB5900CCD9E5 /* PlaceRegistrationView.swift */,
+				48B21D0A2B777C0000C26317 /* PlaceRegistService.swift */,
 				48CC6BC62B6524DA0032A5E2 /* MarketRegister */,
 				48CC6BC72B6524EC0032A5E2 /* WalkRegister */,
 			);
@@ -754,7 +811,6 @@
 				481B90A32B66933400D366A7 /* WalkwayModel.swift */,
 				481B90A52B66940500D366A7 /* WalkwayViewModel.swift */,
 				481B90A92B66A1B800D366A7 /* WalkwayPageContent.swift */,
-				48B21D0A2B777C0000C26317 /* WalwayRegistAPI.swift */,
 			);
 			path = WalkRegister;
 			sourceTree = "<group>";
@@ -799,6 +855,7 @@
 		48D88C2D2B5C255400A1B09E /* LoginAPI */ = {
 			isa = PBXGroup;
 			children = (
+				48719EBA2B7EF70500310A1E /* accessTokenReset */,
 				48D88C2B2B5C24A400A1B09E /* LoginServerResponse.swift */,
 				48D88C2E2B5C259300A1B09E /* LoginTarget.swift */,
 				48D88C302B5C288600A1B09E /* LoginViewModel.swift */,
@@ -811,6 +868,8 @@
 			children = (
 				485B30EA2B70A9E300023785 /* GameManagerView.swift */,
 				485C83A12B70E3E6009D9B54 /* GameButtonView.swift */,
+				481CD1ED2B7E487200477DDF /* GameManagerService.swift */,
+				481CD1EF2B7E49F000477DDF /* GameManagerModel.swift */,
 			);
 			path = GameManager;
 			sourceTree = "<group>";
@@ -876,6 +935,9 @@
 		48FF93A12B43BA3800202F45 /* ARView */ = {
 			isa = PBXGroup;
 			children = (
+				48719EC52B7F55DD00310A1E /* BasketBallGame */,
+				48719EC02B7F531600310A1E /* GiftGame */,
+				48719EBD2B7F52DD00310A1E /* USDZ */,
 				CA6993C62B77AF6400CF1D33 /* ARBookMarkView */,
 				CAFAE8312B75763300C20502 /* Commentview */,
 				48FF93942B43BA0600202F45 /* ContentView.swift */,
@@ -1185,9 +1247,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48719ECF2B7F635A00310A1E /* basketBall.usdz in Resources */,
 				48FF939A2B43BA0700202F45 /* Preview Assets.xcassets in Resources */,
 				4835C7F72B53B2CB00E40EAD /* ColorAssets.xcassets in Resources */,
 				48FF93972B43BA0700202F45 /* Assets.xcassets in Resources */,
+				48719EBF2B7F52EE00310A1E /* GiftBox.usdz in Resources */,
+				48719EC42B7F55D100310A1E /* basketballstand.usdz in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1244,6 +1309,7 @@
 				4850B00F2B766FAB00F8CD90 /* BaseLocationManager.swift in Sources */,
 				4831B8E62B79AB1900337654 /* GameSettingFinishButton.swift in Sources */,
 				48B57FC02B75D4F0005965FD /* PopupModifier.swift in Sources */,
+				484C16AF2B7ED7EA00257229 /* RefreshService.swift in Sources */,
 				483567702B7D20B200C8BA04 /* RecommendedSpaceCardViewModel.swift in Sources */,
 				48B57FBF2B75D4EC005965FD /* AccountSettingView.swift in Sources */,
 				488DE81D2B79A27500EE4E2B /* GameCouponView.swift in Sources */,
@@ -1283,7 +1349,7 @@
 				6C0E64A62B73574600A238A7 /* Route.swift in Sources */,
 				483820E62B4BE86200C3FB14 /* MyTicketCommand.swift in Sources */,
 				CAFAE8272B750CF100C20502 /* BookMarkImgProtocol.swift in Sources */,
-				48B21D0B2B777C0000C26317 /* WalwayRegistAPI.swift in Sources */,
+				48B21D0B2B777C0000C26317 /* PlaceRegistService.swift in Sources */,
 				6CC4DDB72B55512F0080E7E8 /* NavigationBar.swift in Sources */,
 				481EA2712B6F280200BAD5E0 /* SplashScreenView.swift in Sources */,
 				48B70FDF2B733977008F760B /* GameCouponSelect.swift in Sources */,
@@ -1293,6 +1359,7 @@
 				48A12C202B5CF78E00E51200 /* NicknameRedundancyModel.swift in Sources */,
 				481B90A62B66940500D366A7 /* WalkwayViewModel.swift in Sources */,
 				485B30EB2B70A9E300023785 /* GameManagerView.swift in Sources */,
+				48719EC92B7F591E00310A1E /* BasketClassCoordinate.swift in Sources */,
 				48D88C2F2B5C259300A1B09E /* LoginTarget.swift in Sources */,
 				483820EE2B4BEAFE00C3FB14 /* TtuDotShape.swift in Sources */,
 				481B90A22B668CEA00D366A7 /* LinearProgressViewStyle.swift in Sources */,
@@ -1316,7 +1383,9 @@
 				488365F32B6FDFA100F4E397 /* MarketModel.swift in Sources */,
 				48B21D1D2B77D78D00C26317 /* WheelGamePickerMenu.swift in Sources */,
 				488343002B7A1D57007A16AD /* WheelGameView.swift in Sources */,
+				481CD1F02B7E49F000477DDF /* GameManagerModel.swift in Sources */,
 				CA2513032B6290DC006D2EDF /* DetailDataModel.swift in Sources */,
+				481CD1EE2B7E487200477DDF /* GameManagerService.swift in Sources */,
 				48ADCAA52B6645BD00765EDB /* SharedTabInfo.swift in Sources */,
 				CA3DFFF12B6E42AE0007D2E6 /* DetailExploreAPITarget.swift in Sources */,
 				488342FE2B7A155D007A16AD /* GiftDrawingGameView.swift in Sources */,
@@ -1330,6 +1399,7 @@
 				48FD30962B6F684F00FB7E60 /* SelectMarketType.swift in Sources */,
 				483BFD172B64996400C2AD5B /* WhichSelectPlaceView.swift in Sources */,
 				48B57FBE2B75CCCB005965FD /* InputAddressProtocol.swift in Sources */,
+				48719EBC2B7EF72A00310A1E /* ResetTokenModel.swift in Sources */,
 				483612B62B4ED09000E0B45A /* TabBarModel.swift in Sources */,
 				483820EC2B4BE97300C3FB14 /* TtuDotViewModel.swift in Sources */,
 				6C7239F82B5C2AE10082F12D /* Place.swift in Sources */,
@@ -1350,6 +1420,7 @@
 				48A59C162B6E1BC5009CF83E /* PlaceRegisterFinishView.swift in Sources */,
 				488365F62B6FE24200F4E397 /* ImageHandling.swift in Sources */,
 				6CC4DE012B5687FB0080E7E8 /* CouponViewModel.swift in Sources */,
+				484C16AD2B7ED4CE00257229 /* AuthPlugin.swift in Sources */,
 				6CE46B092B69304C0030F323 /* QuitSettingView.swift in Sources */,
 				48D1CFF22B63FB5900CCD9E5 /* PlaceRegistrationView.swift in Sources */,
 				48CC73222B6E990D0055C278 /* UserSession.swift in Sources */,
@@ -1398,6 +1469,7 @@
 				6CE46B0D2B6B5A350030F323 /* PlaceViewModel.swift in Sources */,
 				CA6993C82B77AFA000CF1D33 /* ARBookMarkViewControl.swift in Sources */,
 				6CC4DE032B5688080080E7E8 /* CouponModel.swift in Sources */,
+				48719EC72B7F562D00310A1E /* ARGameViewModel.swift in Sources */,
 				CA2513052B629109006D2EDF /* DetailViewControl.swift in Sources */,
 				CAB9FA1C2B551B1500F0046A /* ExploreViewControl.swift in Sources */,
 				483CB9622B732F4A00938224 /* GameBenefitsTextField.swift in Sources */,

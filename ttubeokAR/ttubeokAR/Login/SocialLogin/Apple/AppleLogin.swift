@@ -13,7 +13,7 @@ struct AppleLogin: View {
     //MARK: - Property
     var transitionToNext: () -> Void
     @ObservedObject var appleLogionManager = AppleLoginManager()
-    
+    @StateObject var loginViewModel: LoginViewModel
     //MARK: - Body
     var body: some View {
         appleLoginBtn
@@ -22,6 +22,9 @@ struct AppleLogin: View {
                 if newValue {
                     transitionToNext()
                 }
+            }
+            .onAppear{
+                appleLogionManager.loginViewModel = loginViewModel
             }
     }
     

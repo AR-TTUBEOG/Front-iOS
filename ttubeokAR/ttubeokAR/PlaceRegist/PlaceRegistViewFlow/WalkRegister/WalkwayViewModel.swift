@@ -89,7 +89,7 @@ class WalkwayViewModel: ObservableObject, ImageHandling, InputAddressProtocol, F
     }
     
     //MARK: - WalkwayRegistAPI
-    private let provider = MoyaProvider<WalkwayRegistService>()
+    private let provider = MoyaProvider<PlaceRegistService>()
     private let keychainManger = KeyChainManager.stadard
     
     /// 토큰 불러오기

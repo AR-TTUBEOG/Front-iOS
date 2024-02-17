@@ -6,10 +6,13 @@
 //
 
 import Foundation
+import Moya
 
 class BasketBallGameViewModel: ObservableObject, FinishButtonProtocol{
     
-    
+    //MARK: - API Target
+    let provider = MoyaProvider<GameManagerService>()
+    var basketBallModel: BasketBallModel?
     
     //MARK: - 농구게임 게임 룰 설정
     @Published var timeLimit: Int =  30
@@ -30,7 +33,7 @@ class BasketBallGameViewModel: ObservableObject, FinishButtonProtocol{
     }
     
     public func decreaseTime() {
-        if self.timeLimit > 0 {
+        if self.timeLimit > 15 {
             self.timeLimit -= 1
         }
     }
@@ -61,10 +64,54 @@ class BasketBallGameViewModel: ObservableObject, FinishButtonProtocol{
         }
     }
     
+    //MARK: - 데이터 전달
     
+    private func matchData() {
+        basketBallModel = BasketBallModel(timeLimit: self.timeLimit,
+                                              ballCount: self.ballCount,
+                                              successCount: self.successCount,
+                                              benefitContent: self.benefitsText,
+                                              benefitType: {
+                                                        switch selectCoupon {
+                                                        case 1:
+                                                            return "SALE"
+                                                        case 2:
+                                                            return "PLUS"
+                                                        case 3:
+                                                            return "GIFT"
+                                                        default:
+                                                            return "NONE"
+                                                        }
+                                                    }()
+        )
+    }
+    
+    private func sendData() {
+        guard let accessToken = KeyChainManager.stadard.getAccessToken(for: "userSession") else {
+            print("accessToken")
+            return
+        }
+        
+        if let basketBallModel = basketBallModel {
+            provider.request(.basketBall(benefitRequest: basketBallModel, token: accessToken)) { result in
+                switch result {
+                case .success(let response):
+                    do {
+                        let decodedData = try JSONDecoder().decode(ResponseBasketBallModel.self, from: response.data)
+                        print(decodedData)
+                    } catch {
+                        print("농구 게임 반응 error : \(error)")
+                    }
+                case .failure(let error):
+                    print("요청 error : \(error)")
+                }
+            }
+        }
+    }
     
     //MARK: - 완료 버튼 API 전송
-    func finishSendAPI() {
-        print("hello")
+    public func finishSendAPI() {
+        matchData()
+        sendData()
     }
 }

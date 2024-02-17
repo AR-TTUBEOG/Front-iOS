@@ -9,12 +9,11 @@ import Foundation
 
 struct NicknameRedundancyModel: Codable {
     var check: Bool
-    var information: NicnameInformation
+    var information: String
 }
 
-struct NicnameInformation: Codable {
-    var id: Int
-    var name: String
-    var platform: String
-    var isUsed: Bool
+struct NicknameInformation: Codable {
+    var id: Int?
+    var nickname: String?
+    var nicknameChanged: Bool?
 }
