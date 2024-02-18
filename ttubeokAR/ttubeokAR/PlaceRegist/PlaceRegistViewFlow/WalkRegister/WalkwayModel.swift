@@ -8,28 +8,31 @@
 import Foundation
 import SwiftUI
 
-struct RequestWalwayRegistModel {
+struct RequestWalwayRegistModel: Codable {
     var name: String?
-    var address: String?
+    var dongAreaId: String?
     var detailAddress: String?
     var info: String?
     var latitude: Double?
     var longitude: Double?
     var image: [String]?
-    var starts: Float
 }
 
-struct ResponseWalwayRegistModel: Codable {
+struct ResponseWalkwayRegistModel: Codable {
     var check: Bool
     var information: WalwayRegistInfor
 }
 
 struct WalwayRegistInfor: Codable {
+    var id: Int?
     var name: String?
-    var address: String?
+    var dongAreaId: String?
     var detailAddress: String?
+    var memberId: Int?
     var info: String?
     var latitude: Double?
     var longitude: Double?
     var image: [String]?
+    var stars: Double?
 }
+

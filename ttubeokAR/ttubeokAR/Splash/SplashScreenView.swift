@@ -50,12 +50,11 @@ struct SplashScreenView: View {
             requestCameraPermission()
             requestPhotoLibraryPermission()
             requestLocationPermission()
-            checkUser()
         }
         
         .onReceive(permissionsVM.allPermissionsGranted, perform: { allGranted in
             if allGranted {
-                proceedChangeView()
+                checkUser()
             }
         })
         
@@ -134,9 +133,16 @@ struct SplashScreenView: View {
     
     //MARK: - 유효성 검사
     private func checkUser() {
-        print("유효성 검사 시작함")
-        loginViewModel.checkLoginStatus()
-        currentState = loginViewModel.savedLoginToken ? .mainView : .login
+        print("1. 유효성 검사 시작함")
+        loginViewModel.checkLoginStatus { success in
+                DispatchQueue.main.async {
+                    self.currentState = success ? .mainView : .login
+                    print("3: 뷰 전환 시작 전 : \(success) ")
+                    DispatchQueue.main.asyncAfter(deadline: .now()+1.3) {
+                        proceedChangeView()
+                    }
+                }
+        }
     }
     
     

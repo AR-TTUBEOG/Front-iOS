@@ -6,32 +6,24 @@
 //
 
 import Foundation
-import CoreLocation
 import Moya
 import Combine
 
-class ExploreViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
+class ExploreViewModel: ObservableObject {
     //MARK: - API
     
-    private let searchProvider = MoyaProvider<SearchAPITarget>()
+    private let authPlugin: AuthPlugin
+    private let searchProvider: MoyaProvider<SearchAPITarget>
     
+    init() {
+        self.authPlugin = AuthPlugin(provider: MoyaProvider<MultiTarget>())
+        self.searchProvider = MoyaProvider<SearchAPITarget>(plugins: [authPlugin])
+    }
     //MARK: - Moodel
     
-    var exploreData: ExploreDataModel?
-    
+    @Published var exploreData: ExploreDataModel?
     @Published var currentSearchType: SearchType = .all
-    var curretnPage = 1
-    
-    
-    /// 장소 타입에 따른 API 호출
-    
-    
-    /// 장소 타입에 따라 좋아요 버튼 작동
-   
-    
-    
-    /// 산책로 좋아요 버튼 API 호출
-    /// - Parameter spotId: 산책로 아이디 제공할 것
+    var curretnPage = 0
   
     // MARK: - 페이징
     
@@ -65,27 +57,36 @@ class ExploreViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
     //MARK: - 검색 타입에 따른 API 호출 함수
     
     public func resetPage() {
-        curretnPage = 1
+        curretnPage = 0
     }
     
     public func fetchExploreDataAll(page: Int) {
-        print("전체 선택 API 호출")
-        searchProvider.request(.searchAll(page: page)) { [weak self] result in
+        print("8 :전체 선택 API 호출")
+        
+        guard let accssToken = KeyChainManager.stadard.getAccessToken(for: "userSession") else {
+            print("전체 검색 중 액세스 토큰 가져오기 오류")
+            return
+        }
+        
+        searchProvider.request(.searchAll(page: page, size: 9, token: accssToken)) { [weak self] result in
             switch result {
             case .success(let response):
                 do {
+                    print("사용 액세스 토큰 : \(accssToken)")
                     let decodedData = try JSONDecoder().decode(ExploreDataModel.self, from: response.data)
                     DispatchQueue.main.async {
-                        if page == 1 {
+                        if page == 0 {
                             self?.exploreData = decodedData
+                            print("8: 전체조회 1페이지 디코드 완료")
                         } else {
                             self?.exploreData?.information.append(contentsOf: decodedData.information)
+                            print("8: 전체 조회 추가 페이지 디코드 완료")
                         }
                         self?.curretnPage = page
                     }
                 } catch {
                     if let rawResponse = String(data: response.data, encoding: .utf8) {
-                        print("Raw JSON response: \(rawResponse)")
+                        print("전체 조회 response: \(rawResponse)")
                     }
                 }
             case .failure(let error):
@@ -96,21 +97,29 @@ class ExploreViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
     
     public func fetchExploreDataLatest(page: Int) {
         print("최신순 선택 API 호출")
-        searchProvider.request(.searchLatest(page: page)) { [weak self] result in
+        
+        guard let accssToken = KeyChainManager.stadard.getAccessToken(for: "userSession") else {
+            print("최신순 중 액세스 토큰 가져오기 오류")
+            return
+        }
+        
+        searchProvider.request(.searchLatest(page: page, size: 9, token: accssToken)) { [weak self] result in
             switch result {
             case .success(let response):
                 do {
                     let decodedData = try JSONDecoder().decode(ExploreDataModel.self, from: response.data)
                     DispatchQueue.main.async {
-                        if page == 1 {
+                        if page == 0 {
                             self?.exploreData = decodedData
+                            print("8: 최신순 1페이지 디코드 완료")
                         } else {
                             self?.exploreData?.information.append(contentsOf: decodedData.information)
+                            print("8: 최신순 조회 추가 페이지 디코드 완료")
                         }
                         self?.curretnPage = page
                     }
                 } catch {
-                    print("최신순 error: \(error.localizedDescription)")
+                    print("최신순 error: \(error)")
                 }
             case .failure(let error):
                 print("최신순 네트워크 error \(error.localizedDescription)")
@@ -120,21 +129,29 @@ class ExploreViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
     
     public func fetchExploreDataDistance(page: Int) {
         print("거리순 선택 API 호출")
-        searchProvider.request(.searchDistance(page: page)) { [weak self] result in
+        
+        guard let accssToken = KeyChainManager.stadard.getAccessToken(for: "userSession"), let location = BaseLocationManager.shared.currentLocation?.coordinate else {
+            print("거리순 중 액세스 토큰 가져오기 오류")
+            return
+        }
+        
+        searchProvider.request(.searchDistance(latitude: location.latitude, longitude: location.longitude, page: page, size: 9, token: accssToken)) { [weak self] result in
             switch result {
             case .success(let response):
                 do {
                     let decodedData = try JSONDecoder().decode(ExploreDataModel.self, from: response.data)
                     DispatchQueue.main.async {
-                        if page == 1 {
+                        if page == 0 {
                             self?.exploreData = decodedData
+                            print("8: 거리순 1페이지 디코드 완료")
                         } else {
                             self?.exploreData?.information.append(contentsOf: decodedData.information)
+                            print("8: 거리순 조회 추가 페이지 디코드 완료")
                         }
                         self?.curretnPage = page
                     }
                 } catch {
-                    print("거리순 error: \(error.localizedDescription)")
+                    print("거리순 error: \(error)")
                 }
             case .failure(let error):
                 print("거리순 네트워크 error \(error.localizedDescription)")
@@ -144,21 +161,29 @@ class ExploreViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
     
     public func fetchExploreDataRecommend(page: Int) {
         print("추천순 선택 API 호출")
-        searchProvider.request(.searchRecommend(page: page)) { [weak self] result in
+        
+        guard let accssToken = KeyChainManager.stadard.getAccessToken(for: "userSession") else {
+            print("추천순 중 액세스 토큰 가져오기 오류")
+            return
+        }
+        
+        searchProvider.request(.searchRecommend(page: page, size: 9, token: accssToken)) { [weak self] result in
             switch result {
             case .success(let response):
                 do {
                     let decodedData = try JSONDecoder().decode(ExploreDataModel.self, from: response.data)
                     DispatchQueue.main.async {
-                        if page == 1 {
+                        if page == 0 {
                             self?.exploreData = decodedData
+                            print("8: 추천순 1페이지 디코드 완료")
                         } else {
                             self?.exploreData?.information.append(contentsOf: decodedData.information)
+                            print("8: 추천순 조회 추가 페이지 디코드 완료")
                         }
                         self?.curretnPage = page
                     }
                 } catch {
-                    print("추천순 error: \(error.localizedDescription)")
+                    print("추천순 error: \(error)")
                 }
             case .failure(let error):
                 print("추천순 네트워크 error \(error.localizedDescription)")

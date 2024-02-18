@@ -14,7 +14,7 @@ struct KakaoLogin: View {
     //MARK: - Property
     var transitionToNext: () -> Void
     @ObservedObject var kakaoLoginManager = KakaoLoginManager()
-    
+    @StateObject var loginViewModel: LoginViewModel
     //MARK: - Body
     var body: some View {
         kakaoBtn
@@ -23,6 +23,9 @@ struct KakaoLogin: View {
                 if newValue {
                     transitionToNext()
                 }
+            }
+            .onAppear{
+                kakaoLoginManager.loginViewModel = loginViewModel
             }
     }
     //MARK: - KakaoLoginView

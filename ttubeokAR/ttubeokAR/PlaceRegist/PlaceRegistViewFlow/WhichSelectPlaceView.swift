@@ -12,6 +12,7 @@ struct WhichSelectPlaceView: View {
     @State private var nextView = false
     @State private var isWalkChecked = false
     @State private var isMarketChecked = false
+    
     @Environment(\.presentationMode) var presentationMode
     var lastedSelectedTab: Int
     
@@ -35,12 +36,13 @@ struct WhichSelectPlaceView: View {
                 backgroundView
                 blackOpacityView
                 NavigationBar(lastedSelectedTab: lastedSelectedTab)
-                centerChoicePlace
                 VStack() {
+                    centerChoicePlace
                     Spacer()
                     changeViewButton
                         .padding(.bottom, 20)
                 }
+                .frame(maxWidth: geometry.size.width, maxHeight: geometry.size.height)
             }
         }
     }

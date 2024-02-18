@@ -42,6 +42,7 @@ struct WalkwayPageContent: View {
             ScrollView {
                 fourthView
             }
+            .scrollIndicators(.hidden)
         case 4:
             fifthView
         case 5:
@@ -65,7 +66,7 @@ struct WalkwayPageContent: View {
     
     /// 첫 번째 안내글 뷰
     private var firstView: some View {
-        VStack(alignment: .leading, spacing: 35) {
+        VStack(alignment: .leading, spacing: 20) {
             CustomTitleView(titleText: "산책스팟의 이름을 알려주세요",
                             highlightText: ["이름"],
                             subtitleText: "지도에 등록되는 산책로의 이름이에요!",

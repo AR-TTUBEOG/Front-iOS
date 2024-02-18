@@ -35,7 +35,7 @@ struct BasketBallGameRulesView: View {
         VStack(alignment: .center, spacing: 8) {
             GameRulesTextView(label: "제한시간",
                               onMinusTapped: { viewModel.decreaseTime() },
-                              valueLabel: "\(viewModel.timeLimit)초",
+                              valueLabel: "\(Int(viewModel.timeLimit)) 초",
                               onPlustTapped: { viewModel.increaseTime() }
             )
             

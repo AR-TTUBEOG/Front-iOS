@@ -30,7 +30,6 @@ struct GiftDrawingGameView: View {
             GiftDrawingGameRulesView(viewModel: viewModel)
             GameBenefitsText(text: $viewModel.benefitsText)
             GameCouponView(selectBtn: $viewModel.selectCoupon)
-            GameSettingFinishButton(viewModel: viewModel)
         })
         .frame(maxWidth: 330, maxHeight: 600)
         .background(Color(red: 0.25, green: 0.24, blue: 0.37))

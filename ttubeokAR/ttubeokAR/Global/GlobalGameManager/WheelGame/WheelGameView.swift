@@ -32,7 +32,6 @@ struct WheelGameView: View {
                 WheelGameShapeView(viewModel: viewModel)
                     .offset(y: 20)
                 GameCouponView(selectBtn: $viewModel.selectCoupon)
-                GameSettingFinishButton(viewModel: viewModel)
             }
             .padding(.top, 5)
             .frame(width: 330, height: 930)

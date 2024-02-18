@@ -19,7 +19,7 @@ struct WalkPlaceRegisterView: View {
     
     //MARK: - Body
     var body: some View {
-            allView
+        allView
             .ignoresSafeArea(.keyboard)
             .navigationBarBackButtonHidden(true)
             .navigationDestination(isPresented: $viewModel.navigationToNextView) {
@@ -28,27 +28,45 @@ struct WalkPlaceRegisterView: View {
             .onAppear{
                 observeKeyboard()
             }
+            .ignoresSafeArea(.keyboard)
     }
     
     //MARK: - WalkPlaceRegisterView
     
     private var allView: some View {
-        VStack(alignment: .center, spacing: 35) {
-            
-            PlaceRegisterNavigation(currentPage: viewModel.currentPageIndex, totalPages: 5, lastedSelectedTab: lastedSelectedTab)
-            WalkwayPageContent(viewModel: viewModel)
-            
-            Spacer()
-            
-            if !keyboardVisible {
-                changeViewButton
-                    .padding(.bottom, 20)
+        GeometryReader { geometry in
+            ScrollView {
+                ZStack(alignment: .center) {
+                    backgroundImage
+                        .padding(.top, 100)
+                        VStack(alignment: .center, spacing: 35) {
+                            
+                            PlaceRegisterNavigation(currentPage: viewModel.currentPageIndex, totalPages: 5, lastedSelectedTab: lastedSelectedTab)
+                            WalkwayPageContent(viewModel: viewModel)
+                            
+                            Spacer()
+                            
+                            if !keyboardVisible {
+                                changeViewButton
+                                    .padding(.bottom, 20)
+                            }
+                        }
+                        .frame(height: geometry.size.height)
+                    }
+                .onTapGesture {
+                    self.keyboardResponsive()
+                }
             }
+            .scrollIndicators(.hidden)
         }
-        .background(Color.background.ignoresSafeArea(.all))
-        .onTapGesture {
-            self.keyboardResponsive()
-        }
+        .background(Color.background)
+    }
+    
+    
+    private var backgroundImage: some View {
+        Icon.backgroundLogo.image
+            .fixedSize()
+            .aspectRatio(contentMode: .fit)
     }
     
     private var changeViewButton: some View {
@@ -97,20 +115,20 @@ struct WalkPlaceRegisterView: View {
     }
     
     private func observeKeyboard() {
-            NotificationCenter.default.addObserver(
-                forName: UIResponder.keyboardWillShowNotification,
-                object: nil, queue: .main
-            ) { _ in
-                keyboardVisible = true
-            }
-
-            NotificationCenter.default.addObserver(
-                forName: UIResponder.keyboardWillHideNotification,
-                object: nil, queue: .main
-            ) { _ in
-                keyboardVisible = false
-            }
+        NotificationCenter.default.addObserver(
+            forName: UIResponder.keyboardWillShowNotification,
+            object: nil, queue: .main
+        ) { _ in
+            keyboardVisible = true
         }
+        
+        NotificationCenter.default.addObserver(
+            forName: UIResponder.keyboardWillHideNotification,
+            object: nil, queue: .main
+        ) { _ in
+            keyboardVisible = false
+        }
+    }
 }
 
 struct WalkPlaceRegisterView_Previews: PreviewProvider {

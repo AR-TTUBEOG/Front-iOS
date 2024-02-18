@@ -13,7 +13,7 @@ class AppleLoginManager: NSObject, ObservableObject {
     //MARK: - Property
     @Published var userData: AppleUserData?
     @Published var isLoggedIn = false
-    private var loginViewModel = LoginViewModel()
+    var loginViewModel: LoginViewModel?
     
     //MARK: - AppleLoginManagerFunction
     /// 애플로 로그인 시도 응답 데이터 : 풀네임, 이메일
@@ -43,7 +43,7 @@ extension AppleLoginManager: ASAuthorizationControllerDelegate {
                     authorizationCode: String(data: appleIDCredential.authorizationCode ?? Data(), encoding: .utf8),
                     identityToken: String(data: appleIDCredential.identityToken ?? Data(), encoding: .utf8)
                    )
-                   self.loginViewModel.sendAppleToken(userData: userData)
+                   self.loginViewModel?.sendAppleToken(userData: userData)
                    self.isLoggedIn = true
                    print("authorizationCode : \(userData.authorizationCode ?? "")")
                    print("identityToken : \(userData.identityToken ?? "")")

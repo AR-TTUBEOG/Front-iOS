@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 protocol ImageHandling: AnyObject {
-    func addImage(_ images: [UIImage])
+    func addImage(_ images: UIImage)
     func removeImage(at indext: Int)
     func showImagePicker()
     func getImages() -> [UIImage]

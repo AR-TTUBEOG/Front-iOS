@@ -83,4 +83,9 @@ class KeyChainManager {
         guard let session = loadSession(for: key) else { return nil }
         return session.accessToken
     }
+    
+    public func getRefreshToken(for key: String) -> String? {
+        guard let session = loadSession(for: key) else { return nil }
+        return session.refreshToken
+    }
 }

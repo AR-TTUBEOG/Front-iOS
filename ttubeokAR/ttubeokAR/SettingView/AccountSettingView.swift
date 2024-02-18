@@ -10,13 +10,14 @@ import SwiftUI
 struct AccountSettingView: View {
     
     @State var showingPopup: Bool = false
+    let lastedTab: Int
 
     
     var body: some View {
         ZStack {
             Color.background.ignoresSafeArea(.all)
             VStack {
-                NavigationBar(isDisplayLeadingBtn: true, title: "계정관리")
+                NavigationBar(isDisplayLeadingBtn: true, title: "계정관리", lastedSelectedTab: lastedTab)
                 nickNameBtn(showingPopup: $showingPopup)
 
                 logoutBtn()
@@ -195,8 +196,4 @@ struct AccountSettingView: View {
                 .padding(.horizontal, 25)
         }
     }
-}
-
-#Preview {
-    AccountSettingView()
 }

@@ -14,13 +14,23 @@ import CoreLocation
 
 class WalkwayViewModel: ObservableObject, ImageHandling, InputAddressProtocol, FinishViewProtocol {
     
+    
+    //MARK: - API
+    private let authPlugin: AuthPlugin
+    private let provider: MoyaProvider<PlaceRegistService>
+    
+    init() {
+        self.authPlugin = AuthPlugin(provider: MoyaProvider<MultiTarget>())
+        self.provider = MoyaProvider<PlaceRegistService>(plugins: [authPlugin])
+    }
+    
     //MARK: - Property
     @Published var requestWalwayRegistModel: RequestWalwayRegistModel?
     @Published var isImagePickerPresented = false
     @Published var currentPageIndex: Int = 0
     @Published var navigationToNextView = false
     @Published var images: [UIImage] = []
-    var base64Images: [String] = []
+    @Published var base64Images: [String] = []
     
     //MARK: - saveTextInputs
     @Published var firstPlaceName: String = ""
@@ -39,7 +49,7 @@ class WalkwayViewModel: ObservableObject, ImageHandling, InputAddressProtocol, F
     }
     
     public func imageToBase64String(img: UIImage) -> String? {
-        guard let imageData = img.jpegData(compressionQuality: 1.0) ?? img.pngData() else {
+        guard let imageData = img.jpegData(compressionQuality: 1.0) else {
             return nil
         }
         return imageData.base64EncodedString()
@@ -47,8 +57,8 @@ class WalkwayViewModel: ObservableObject, ImageHandling, InputAddressProtocol, F
     
     /// 앨범에서 선택한 이미지 추가하기
     /// - Parameter newImages: 추가한 이미지 배열에 넣기
-    public func addImage(_ newImages: [UIImage]) {
-        images.append(contentsOf: newImages)
+    public func addImage(_ newImages: UIImage) {
+        images.append(newImages)
     }
     
     /// 앨범 띄우기
@@ -89,8 +99,6 @@ class WalkwayViewModel: ObservableObject, ImageHandling, InputAddressProtocol, F
     }
     
     //MARK: - WalkwayRegistAPI
-    private let provider = MoyaProvider<WalkwayRegistService>()
-    private let keychainManger = KeyChainManager.stadard
     
     /// 토큰 불러오기
     /// - Returns: 저장된 토큰 불러온다.
@@ -103,20 +111,20 @@ class WalkwayViewModel: ObservableObject, ImageHandling, InputAddressProtocol, F
     }
     
     /// 장소등록에 사용된 데이터 전부 전달
-    private  func sendDataWalkwayInfo() {
+    private func sendDataWalkwayInfo() {
         
         if let requestWalwayRegistModel = requestWalwayRegistModel {
             provider.request(.sendWalwayInfo(requestWalwayRegistModel, token: loadAccessToken() ?? "토큰정보 없음")) { result in
                 switch result {
                 case .success(let response):
                     do {
-                        let decodedData = try JSONDecoder().decode(ResponseWalwayRegistModel.self, from: response.data)
-                        print(decodedData)
+                        let decodedData = try JSONDecoder().decode(ResponseWalkwayRegistModel.self, from: response.data)
+                        print("산책로 등록 완료 후 해독 완료: \(decodedData)")
                     } catch {
-                        print("장소 등록 decoded에러 : \(error)")
+                        print("산책로 등록 decoded 에러 : \(error)")
                     }
                 case.failure(let error):
-                    print("산책로 등록 error: \(error.localizedDescription)")
+                    print("산책로 네트워크 error: \(error)")
                 }
             }
         }
@@ -125,13 +133,12 @@ class WalkwayViewModel: ObservableObject, ImageHandling, InputAddressProtocol, F
     
     private func createParameters() -> RequestWalwayRegistModel {
         return RequestWalwayRegistModel(name: self.firstPlaceName,
-                                        address: self.address,
+                                        dongAreaId: self.address,
                                         detailAddress: self.detailAddress,
                                         info: self.fourthWalkwayDescription,
                                         latitude: self.locationManager.currentLocation?.coordinate.latitude ?? 0.0,
                                         longitude: self.locationManager.currentLocation?.coordinate.longitude ?? 0.0,
-                                        image: base64Images,
-                                        starts: 0
+                                        image: ["xxxx"]
         )
     }
     
@@ -146,12 +153,15 @@ class WalkwayViewModel: ObservableObject, ImageHandling, InputAddressProtocol, F
     private func matchWalkwayRegisterData() {
         saveStringImage()
         self.requestWalwayRegistModel = createParameters()
-        print("match완료")
+        
     }
     
     
+    /// 산책로 버튼
     public func finishPlaceRegist(){
         matchWalkwayRegisterData()
-        sendDataWalkwayInfo()
+        DispatchQueue.main.asyncAfter(deadline: .now()+1){
+            self.sendDataWalkwayInfo()
+        }
     }
 }

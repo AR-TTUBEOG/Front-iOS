@@ -10,9 +10,7 @@
 //struct GuestBookCard : View {
 //    
 //    // MARK: - Property
-//    var viewModel : DetailViewModel
-//    let GuestBookModel : GuestBookModel
-//    let StoreInformation : StoreInformation
+//    let guestBookModelInfor: GuestBookModelInfor?
 //    
 //    // 이미지 탭 여부 추적 변수
 //    @State private var isImageTapped = false
@@ -22,16 +20,6 @@
 //    
 //    var body: some View {
 //        allView
-//            .onAppear{
-//                viewModel.fetchExploreDetail(storeId: GuestBookModel.storeId) { result in
-//                               switch result {
-//                               case .success(let detailDataModel):
-//                                   print("성공: \(detailDataModel)")
-//                               case .failure(let error):
-//                                   print("오류: \(error.localizedDescription)")
-//                               }
-//                           }
-//                       }
 //    }
 //    
 //    
@@ -52,7 +40,7 @@
 //                                   }
 //                                   .sheet(isPresented: $isImageTapped) {
 //                                       // 전체 화면으로 이미지를 보여주는 뷰
-//                                       Image(GuestBookModel.image)
+//                                       Image(guestBookModel?.image ?? "")
 //                                           .resizable()
 //                                           .scaledToFit()
 //                                           .frame(maxWidth: 315, maxHeight: 330)
@@ -96,7 +84,7 @@
 //    }
 //    
 //    private var nickName : some View{
-//        Text(GuestBookModel.userName)
+//        Text(guestBookModelInfor.name)
 //            .font(.sandol(type: .bold, size: 11))
 //            .multilineTextAlignment(.center)
 //            .foregroundStyle(Color(red: 0.91, green: 0.95, blue: 1))
@@ -115,7 +103,7 @@
 //    }
 //    
 //    private var contentsDescript : some View{
-//        Text(GuestBookModel.content)
+//        Text(guestBookModelInfor.content)
 //            .font(.sandol(type: .regular, size: 11))
 //            .multilineTextAlignment(.center)
 //            .foregroundStyle(Color(red: 0.91, green: 0.95, blue: 1))
@@ -124,13 +112,11 @@
 //    
 //    private var stars: some View {
 //        HStack(spacing: 0) {
-//            let starCount = Int(GuestBookModel.stars) ?? 0
+//            let starCount = Int(guestBookModelInfor.stars) ?? 0
 //            ForEach(0..<starCount, id: \.self) { _ in
-//                Icon.star2.image
+//                Icon.checkStart.image
 //                    .frame(maxWidth: 13, maxHeight: 12)
-//                        }
+//            }
 //        }
 //    }
-//    
-//    
 //}

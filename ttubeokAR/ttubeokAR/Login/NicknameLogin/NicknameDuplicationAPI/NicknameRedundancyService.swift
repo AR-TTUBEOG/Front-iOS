@@ -14,6 +14,7 @@ import Moya
 
 enum NicknameRedundancyService {
     case checkNickname(String, token: String)
+    case finishNickname(String, token: String)
 }
 
 //TODO: - API 설정하기
@@ -25,6 +26,8 @@ extension NicknameRedundancyService: TargetType {
     var path: String {
         switch self {
         case .checkNickname:
+            return "/api/v1/member/nickname/check"
+        case .finishNickname:
             return "/api/v1/member/nickname"
         }
     }
@@ -38,12 +41,20 @@ extension NicknameRedundancyService: TargetType {
         switch self {
         case .checkNickname(let nickname, _):
             return .requestParameters(parameters: ["nickname": nickname], encoding: JSONEncoding.default)
+        case .finishNickname(let nickname, _):
+            return .requestParameters(parameters: ["nickname": nickname], encoding: JSONEncoding.default)
         }
     }
     
     var headers: [String: String]? {
         switch self {
         case .checkNickname(_, let token):
+            return [
+                "Content-type": "application/json",
+                "Authorization": "Bearer \(token)"
+            ]
+            
+        case .finishNickname(_, let token):
             return [
                 "Content-type": "application/json",
                 "Authorization": "Bearer \(token)"
