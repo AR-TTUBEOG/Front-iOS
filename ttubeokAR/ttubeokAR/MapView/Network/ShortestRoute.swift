@@ -8,14 +8,14 @@
 import Foundation
 
 // MARK: - Welcome
-struct RouteResponse: Codable {
+struct ShortestRouteResponse: Codable {
     let code: String
-    let routes: [Route]
+    let routes: [ShortestRoute]
 //    let waypoints: [Waypoint]
 }
 
 // MARK: - Route
-struct Route: Codable {
+struct ShortestRoute: Codable {
     let geometry: Geometry
     let legs: [Leg]
     let weightName: String

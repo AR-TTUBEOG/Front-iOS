@@ -15,13 +15,13 @@ enum NetworkError: Error {
     case decodingError
 }
 
-enum RouteService {
+enum ShortestRouteService {
     case getRoute(origin_lon: Double, origin_lat: Double, dest_lon: Double, dest_lat: Double)
 }
 
-extension RouteService: TargetType {
+extension ShortestRouteService: TargetType {
     var baseURL: URL {
-        return URL(string: RouteAPI.baseUrl)!
+        return URL(string: ShortestRouteAPI.baseUrl)!
     }
     
     var path: String {
@@ -38,7 +38,7 @@ extension RouteService: TargetType {
         }
     }
     
-    var task: Task {
+    var task: Moya.Task {
         switch self {
         case .getRoute(let origin_lon, let origin_lat, let dest_lon, let dest_lat):
 //            let parameters : [String : Any] = [

@@ -11,13 +11,13 @@ import CombineMoya
 import Moya
 import SwiftUI
 
-class RouteViewModel: ObservableObject {
+class ShortestRouteViewModel: ObservableObject {
     
-    @Published var routeModel: RouteResponse?
+    @Published var routeModel: ShortestRouteResponse?
     
     var routeCancellable: AnyCancellable?
     
-    func getRouteToViewModel(_ list: RouteResponse) {
+    func getRouteToViewModel(_ list: ShortestRouteResponse) {
         self.routeModel = list
     }
     
@@ -26,12 +26,12 @@ class RouteViewModel: ObservableObject {
             cancellable.cancel()
         }
         
-        let provider = MoyaProvider<RouteService>()
+        let provider = MoyaProvider<ShortestRouteService>()
     //http://router.project-osrm.org/route/v1/foot/127.105399,37.3595704;127.108081,37.363186?overview=false&steps=true
         routeCancellable = provider.requestPublisher(.getRoute(origin_lon: origin_lon, origin_lat: origin_lat, dest_lon: dest_lon, dest_lat: dest_lat))
             .compactMap { $0.data }
             .receive(on: DispatchQueue.main)
-            .decode(type: RouteResponse.self, decoder: JSONDecoder())
+            .decode(type: ShortestRouteResponse.self, decoder: JSONDecoder())
             .sink(receiveCompletion: { [weak self] result in
                 switch result {
                 case .finished:
