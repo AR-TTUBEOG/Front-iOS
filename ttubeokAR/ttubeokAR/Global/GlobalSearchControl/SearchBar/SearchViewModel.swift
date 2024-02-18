@@ -21,7 +21,7 @@ class SearchViewModel: ObservableObject {
             setupButton()
         }
     }
-    var exploreViewModel: ExploreViewModel?
+     var exploreViewModel: ExploreViewModel?
     
     // MARK: - ChangeMainView
     var logoImage: Image {
@@ -108,22 +108,22 @@ class SearchViewModel: ObservableObject {
     
     public func selectAll(){
         exploreViewModel?.currentSearchType = .all
-        print("전체 검색 버튼 누름")
+        exploreViewModel?.fetchDataSearch(.all, page: 0)
     }
     
     public func sortByLatest(){
         exploreViewModel?.currentSearchType = .latest
-        print("최근 검색 버튼 누름")
+        exploreViewModel?.fetchDataSearch(.latest, page: 0)
     }
     
     public func sortByDistance(){
         exploreViewModel?.currentSearchType = .distance
-        print("거리순 검색 버튼 누름")
+        exploreViewModel?.fetchDataSearch(.distance, page: 0)
     }
     
     public func sortByRecommendation(){
         exploreViewModel?.currentSearchType = .recommended
-        print("추천순 검색 버튼 누름")
+        exploreViewModel?.fetchDataSearch(.recommended, page: 0)
     }
     
     //MARK: - MapView 간편 검색 버튼

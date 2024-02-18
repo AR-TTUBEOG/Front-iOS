@@ -7,13 +7,25 @@
 
 import Foundation
 
-struct GuestBookModel: Codable {
-    var guestbookId: Int
-    var storeId: Int
-    var userId: Int
-    var content: String
-    var stars: String
-    var image: String
-    var userName : String
+
+struct GuestBookModel: Codable, Hashable {
+    var check: Bool
+    var information: [GuestBookModelInfor]
 }
 
+struct GuestBookModelInfor: Codable, Hashable {
+    var id: Int
+    var memberId: Int
+    var guestBookType: String
+    var spotId: Int
+    var storeId: Int
+    var content: String
+    var star : Int
+}
+
+struct MemeberCheck: Codable {
+    var id: Int
+    var name: String
+    var platform: String
+    var isChanged: Bool
+}

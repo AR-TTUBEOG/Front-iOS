@@ -83,9 +83,4 @@ class KeyChainManager {
         guard let session = loadSession(for: key) else { return nil }
         return session.accessToken
     }
-    
-    public func getNickname(for key: String) -> String? {
-        guard let session = loadSession(for: key) else { return nil }
-        return session.nickname
-    }
 }

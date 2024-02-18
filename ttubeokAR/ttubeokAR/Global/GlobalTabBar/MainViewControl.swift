@@ -24,7 +24,7 @@ struct MainViewControl: View {
     @State private var selectedTab: Int
     @State private var showTtuDotButton = false
     @State private var changeTabView = true
-    @State private var showSearchOptionButton = false
+    @State private var showSearchOptionButton = false 
     @State private var isSliderActive = false
     @State private var ttuDotButtonAngle: Double = -90
     @EnvironmentObject var sharedTabInfo: SharedTabInfo
@@ -37,27 +37,20 @@ struct MainViewControl: View {
     
     //MARK: Body
     var body: some View {
-        ZStack {
-            mainTabView
-            searchControl
-            tabBarButton
-        }
-        .customPopup(isPresented: $showSearchOptionButton, content: {
-            PlaceSettingView()
-        })
-        
-        //TODO: - 작동 안함(?)
-//        .onAppear {
-//            searchViewModel.searchTypeChanged = { newType in
-//                exploreViewModel.resetPage()
-//                exploreViewModel.decisionSearchType(newType)
-//            }
-//        }
-        .onTapGesture {
-            keyboardResponsive()
+        NavigationStack {
+            ZStack {
+                mainTabView
+                searchControl
+                tabBarButton
+            }
+            .customPopup(isPresented: $showSearchOptionButton, content: {
+                PlaceSettingView()
+            })
+            .onTapGesture {
+                keyboardResponsive()
+            }
         }
     }
-    
     //MARK: - Tab View
     
     /// 메인뷰의 변화를 위함 :: ExploreView, MainView의 전환
@@ -66,7 +59,7 @@ struct MainViewControl: View {
             if selectedTab == 1 {
                 ExploreViewControl(viewModel: exploreViewModel)
             } else if selectedTab == 2 {
-                EmptyView()
+                Text("11")
             }
         }
     }

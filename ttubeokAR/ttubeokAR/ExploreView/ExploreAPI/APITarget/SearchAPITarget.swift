@@ -9,10 +9,10 @@ import Foundation
 import Moya
 
 enum SearchAPITarget {
-    case searchAll(page: Int)
-    case searchLatest(page: Int)
-    case searchDistance(page: Int)
-    case searchRecommend(page: Int)
+    case searchAll(page: Int, size: Int, token: String)
+    case searchLatest(page: Int, size: Int, token: String)
+    case searchDistance(latitude: Double, longitude: Double, page: Int, size: Int, token: String)
+    case searchRecommend(page: Int, size: Int, token: String)
 }
 
 extension SearchAPITarget: TargetType {
@@ -46,20 +46,26 @@ extension SearchAPITarget: TargetType {
     
     var task: Task {
         switch self {
-        case .searchAll(let page):
-            return .requestParameters(parameters: ["page": page], encoding: URLEncoding.queryString)
-        case .searchLatest(let page):
-            return .requestParameters(parameters: ["page": page], encoding: URLEncoding.queryString)
-        case .searchDistance(let page):
-            return .requestParameters(parameters: ["page": page], encoding: URLEncoding.queryString)
-        case .searchRecommend(let page):
-            return .requestParameters(parameters: ["page": page], encoding: URLEncoding.queryString)
+        case .searchAll(let page, let size, _):
+            return .requestParameters(parameters: ["page": page, "size:": size], encoding: URLEncoding.queryString)
+        case .searchLatest(let page, let size, _):
+            return .requestParameters(parameters: ["page": page, "size:": size], encoding: URLEncoding.queryString)
+        case .searchDistance(let lat, let lng, let page, let size, _):
+            return .requestParameters(parameters: ["latitude": lat, "longitude": lng  ,"page": page, "size:": size], encoding: URLEncoding.queryString)
+        case .searchRecommend(let page, let size, _):
+            return .requestParameters(parameters: ["page": page, "size:": size], encoding: URLEncoding.queryString)
         }
     }
     
     var headers: [String : String]? {
+        let token: String
+        switch self {
+        case .searchAll(_, _, let tokenValue), .searchLatest(_, _, let tokenValue), .searchDistance(_, _, _, _, let tokenValue), .searchRecommend(_, _, let tokenValue):
+            token = tokenValue
+        }
         return [
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "Authorization": "Bearer \(token)"
         ]
     }
 }

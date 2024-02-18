@@ -7,40 +7,36 @@
 
 import SwiftUI
 import RealityKit
+import ARKit
 
 struct ContentView : View {
+    @StateObject var arViewModel = ARViModel()
+    
     var body: some View {
-        ARViewContainer().edgesIgnoringSafeArea(.all)
+        ARViewContainer(arViewModel: arViewModel)
+            .ignoresSafeArea(.all)
+            .onTapGesture {
+                self.arViewModel.handleTap()
+            }
     }
 }
 
 struct ARViewContainer: UIViewRepresentable {
+    @ObservedObject var arViewModel: ARViModel
+
     
-    func makeUIView(context: Context) -> ARView {
-        
-        let arView = ARView(frame: .zero)
-
-        // Create a cube model
-        let mesh = MeshResource.generateBox(size: 0.1, cornerRadius: 0.005)
-        let material = SimpleMaterial(color: .gray, roughness: 0.15, isMetallic: true)
-        let model = ModelEntity(mesh: mesh, materials: [material])
-        model.transform.translation.y = 0.05
-
-        // Create horizontal plane anchor for the content
-        let anchor = AnchorEntity(.plane(.horizontal, classification: .any, minimumBounds: SIMD2<Float>(0.2, 0.2)))
-        anchor.children.append(model)
-
-        // Add the horizontal plane anchor to the scene
-        arView.scene.anchors.append(anchor)
-
-        return arView
-        
+    func makeUIView(context: Context) -> ARSCNView {
+       let view = ARSCNView()
+        view.session.run(ARWorldTrackingConfiguration())
+        return view
     }
     
-    func updateUIView(_ uiView: ARView, context: Context) {}
+    func updateUIView(_ uiView: ARSCNView, context: Context) {}
     
+    func makeCoordinator() -> Coordinator {
+        Coordinator() 
+    }
 }
-
 #Preview {
     ContentView()
 }

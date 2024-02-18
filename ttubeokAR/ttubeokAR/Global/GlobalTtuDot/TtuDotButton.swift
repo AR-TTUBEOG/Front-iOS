@@ -22,7 +22,7 @@ struct TtuDotButton: View {
     /// - Parameter sharedTabInfo: 선택된 탭 번호 앱 사이클에 공유하기 위한 클래스
     init(sharedTabInfo : SharedTabInfo) {
         self.sharedTabInfo = sharedTabInfo
-        self.viewModel = TtuDotViewModel(sharedTabInfo: sharedTabInfo)
+        self.viewModel = TtuDotViewModel(sharedTabInfo: self.sharedTabInfo)
     }
     
     //MARK: - Body

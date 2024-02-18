@@ -8,25 +8,28 @@
 import SwiftUI
 
 struct CouponView: View {
-    @EnvironmentObject private var couponViewModel: CouponViewModel
+    @ObservedObject private var couponViewModel = CouponViewModel(filterType: .date)
+    
+    let lastedTab: Int
     
     var body: some View {
         ZStack {
             Color.background.ignoresSafeArea(.all)
             VStack {
-                TitleView()
+                TitleView(lastedTab: lastedTab)
                 CouponListView()
             }
-            .environmentObject(couponViewModel)
         }
     }
     
     private struct TitleView: View {
-        @EnvironmentObject private var couponViewModel: CouponViewModel
+        @ObservedObject private var couponViewModel = CouponViewModel(filterType: .latest)
+        let lastedTab: Int
+        
         fileprivate var body: some View {
             VStack {
                 NavigationBar(isDisplayLeadingBtn: true,
-                              title: "내 쿠폰")
+                              title: "내 쿠폰",lastedSelectedTab: lastedTab)
                 
                 HStack {
                     Text("\(couponViewModel.countsOfCoupons)개")
@@ -42,7 +45,7 @@ struct CouponView: View {
     }
     
     private struct filterBtn: View {
-        @EnvironmentObject private var couponViewModel: CouponViewModel
+        @ObservedObject private var couponViewModel = CouponViewModel(filterType: .date)
 
         fileprivate var body: some View {
             Menu {
@@ -73,7 +76,7 @@ struct CouponView: View {
     }
     
     private struct CouponListView: View {
-        @EnvironmentObject private var couponViewModel: CouponViewModel
+        @ObservedObject private var couponViewModel = CouponViewModel(filterType: .date)
         @State private var showingCoupon = false
         
         fileprivate var body: some View {
@@ -110,7 +113,7 @@ struct CouponView: View {
     }
 
     private struct CouponCellView: View {
-        @EnvironmentObject private var couponViewModel: CouponViewModel
+        @ObservedObject private var couponViewModel = CouponViewModel(filterType: .date)
         @Binding var showingCoupon: Bool
         private var coupon: Coupon
         
@@ -175,9 +178,4 @@ struct CouponView: View {
         }
     }
     
-}
-
-#Preview {
-    CouponView()
-        .environmentObject(CouponViewModel(filterType: .latest))
 }

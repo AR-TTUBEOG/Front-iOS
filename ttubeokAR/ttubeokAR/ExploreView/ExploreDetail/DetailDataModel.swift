@@ -15,7 +15,7 @@ struct WalkwayDetailDataModel: Codable {
 
 struct WalwayInformation: Codable {
     var id: Int
-    var dongAreaId: Int
+    var dongAreaId: String
     var userId: Int
     var detailAddress: String
     var name: String
@@ -35,21 +35,23 @@ struct StoreDetailDataModel: Codable {
 
 struct StoreInformation: Codable {
     var storeId: Int
-    var userId: Int
-    var detailAddress: String
+    var memberId: Int
     var name: String
     var info: String
+    var dongAreaId: String
+    var detailAddress: String
     var latitude: Double
     var longitude: Double
     var image: [String]
     var stars: Float
     var type: StoreType
-    var benefit: [String]
+    var storeBenefits: [String]
     var guestbookCount: Int
-    var likeCount: Int
+    var likesCount: Int
+    var isFavorited: Bool
 }
 
 enum StoreType: String, Codable {
-    case restaurant
-    case cafe
+    case RESTAURANT
+    case CAFE
 }

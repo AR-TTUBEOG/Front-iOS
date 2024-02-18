@@ -45,7 +45,7 @@ struct PlaceRegistImagePicker: UIViewControllerRepresentable {
                 result.itemProvider.loadObject(ofClass: UIImage.self) { (object, error) in
                     if let image = object as? UIImage {
                         DispatchQueue.main.async {
-                            self.imageHandler.addImage([image])
+                            self.imageHandler.addImage(image)
                         }
                     }
                 }

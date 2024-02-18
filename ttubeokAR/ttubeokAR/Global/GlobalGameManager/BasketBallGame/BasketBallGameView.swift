@@ -30,7 +30,6 @@ struct BasketBallGameView: View {
             BasketBallGameRulesView(viewModel: viewModel)
             GameBenefitsText(text: $viewModel.benefitsText)
             GameCouponView(selectBtn: $viewModel.selectCoupon)
-            GameSettingFinishButton(viewModel: viewModel)
         })
         .frame(width: 320, height: 630)
         .background(Color(red: 0.25, green: 0.24, blue: 0.37))

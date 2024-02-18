@@ -17,8 +17,9 @@ class DetailViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
     private let likeProvider = MoyaProvider<ExploreAPITarget>()
     
     //MARK: - Model
-    var walkwayDetailDataModel: WalkwayDetailDataModel?
-    var storeDetailDataModel: StoreDetailDataModel?
+    @Published var walkwayDetailDataModel: WalkwayDetailDataModel?
+    @Published var storeDetailDataModel: StoreDetailDataModel?
+    @Published var guestBookModel: GuestBookModel?
     
     // MARK: - Property
     @Published var isFavorited: Bool = false
@@ -45,37 +46,45 @@ class DetailViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
     }
     
     private func walkWayGet(get place: ExploreDetailInfor) {
-        provider.request(.fetchWalkWayDetail(spotId: place.id)) { [weak self] result in
+        
+        guard let accessToken = KeyChainManager.stadard.getAccessToken(for: "userSession") else { return }
+        
+        provider.request(.fetchWalkWayDetail(spotId: place.placeId, token: accessToken)) { [weak self] result in
             switch result {
             case .success(let response):
                 do {
                     let decodedData = try JSONDecoder().decode(WalkwayDetailDataModel.self, from: response.data)
                     DispatchQueue.main.async {
                         self?.walkwayDetailDataModel = decodedData
+                        print("디테일 산책로 등록")
                     }
                 } catch {
-                    print("산책로 등록 디코드 에러")
+                    print("디테일산책로 등록 디코드 에러")
                 }
             case.failure(let error):
-                print("산책로 네트워크 오류 : \(error.localizedDescription)")
+                print("디테일 산책로 네트워크 오류 : \(error.localizedDescription)")
             }
         }
     }
     
     private func storeGet(get place: ExploreDetailInfor) {
-        provider.request(.fetchStoreDetail(storeId: place.id)) { [weak self] result in
+        
+        guard let accessToken = KeyChainManager.stadard.getAccessToken(for: "userSession") else { return }
+        
+        provider.request(.fetchStoreDetail(storeId: place.placeId, token: accessToken)) { [weak self] result in
             switch result {
             case .success(let response):
                 do {
                     let decodedData = try JSONDecoder().decode(StoreDetailDataModel.self, from: response.data)
                     DispatchQueue.main.async {
                         self?.storeDetailDataModel = decodedData
+                        print("디테일 매장 등록")
                     }
                 } catch {
-                    print("매장 등록 디코드 에러")
+                    print("디테일 매장 등록 디코드 에러 : \(error)")
                 }
             case .failure(let error):
-                print("매장 네트워크 오류: \(error.localizedDescription)")
+                print("디텥일 매장 네트워크 오류: \(error.localizedDescription)")
             }
         }
     }
@@ -107,7 +116,7 @@ class DetailViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
         case .spot:
             return walkwayDetailDataModel?.information.likes ?? 0
         case .store:
-            return storeDetailDataModel?.information.likeCount ?? 0
+            return storeDetailDataModel?.information.likesCount ?? 0
         }
     }
     
@@ -160,7 +169,10 @@ class DetailViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
     }
     
     private func likeWalkWay(spotId: Int) {
-        likeProvider.request(.likeWalkWay(spotId: spotId)) { result in
+        
+        guard let accessToken = KeyChainManager.stadard.getAccessToken(for: "userSession") else { return }
+        
+        likeProvider.request(.likeWalkWay(spotId: spotId, token: accessToken)) { result in
             switch result {
             case .success(let response):
                 do {
@@ -176,7 +188,10 @@ class DetailViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
     }
     
     private func likeStore(storeId: Int) {
-        likeProvider.request(.likeStoreData(storeId: storeId)) { result in
+        
+        guard let accessToken = KeyChainManager.stadard.getAccessToken(for: "userSession") else { return }
+        
+        likeProvider.request(.likeStoreData(storeId: storeId, token: accessToken)) { result in
             switch result {
             case .success(let response):
                 do {
@@ -206,11 +221,11 @@ class DetailViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
     //MARK: - 장소 혜택 처리 함수
     
     private func storeImage(benefitName: String) -> SwiftUI.Image {
-        if let storeBenefit = storeDetailDataModel?.information.benefit {
+        if let storeBenefit = storeDetailDataModel?.information.storeBenefits {
             switch benefitName {
-            case "gift":
+            case "GIFT":
                 return storeBenefit.contains("GIFT") ? Icon.checkGift.image : Icon.nonGift.image
-            case "sale":
+            case "SALE":
                 return storeBenefit.contains("SALE") ? Icon.checkCoupon.image : Icon.nonCoupon.image
             default:
                 return storeBenefit.contains("PLUS") ? Icon.onePlusOne.image : Icon.unOnePlus.image
@@ -269,7 +284,7 @@ class DetailViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
         }
     }
     
-    private func typeDistanceAndTime() {
+    public func typeDistanceAndTime() {
         switch placeType {
         case .spot:
             walWayCalculateDistanceAndTime()
@@ -278,49 +293,44 @@ class DetailViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
         }
     }
     
+    
+    //MARK: - 거리 및 시간 계산
+    
+    
     private func marketCalculateDistanceAndTime() {
-        guard let currentLocation = locationManager.location else { return }
+        
+        guard let currentLocation = BaseLocationManager.shared.currentLocation,
+              let destinationLat = storeDetailDataModel?.information.latitude,
+              let destinationLng = storeDetailDataModel?.information.longitude else {
+            return
+        }
         
         // 배열의 첫 번째 장소 정보를 사용
-        if let marketCalculateDistance = storeDetailDataModel?.information {
-            let storeLocation = CLLocation(latitude: CLLocationDegrees(marketCalculateDistance.latitude), longitude: CLLocationDegrees(marketCalculateDistance.longitude))
-            let distance = currentLocation.distance(from: storeLocation)
-            let marketSpeedPerMeterPerSecond: Double = 1.4 // 걷기 속도
-            self.estimatedTime = distance / marketSpeedPerMeterPerSecond
-        }
+        let storeLocation = CLLocation(latitude: CLLocationDegrees(destinationLat), longitude: CLLocationDegrees(destinationLng))
+        let distance = currentLocation.distance(from: storeLocation)
+        self.distance = distance
+        
+        let averageSpeed = 5.0
+        self.estimatedTime = distance / (averageSpeed * 1000) * 3600
+        self.estimatedTime = estimatedTime
     }
     
     private func walWayCalculateDistanceAndTime() {
-        guard let currentLocation = locationManager.location else { return }
+        
+        guard let currentLocation = BaseLocationManager.shared.currentLocation,
+              let destinationLat = walkwayDetailDataModel?.information.latitude,
+              let destinationLng = walkwayDetailDataModel?.information.longitude else {
+            return
+        }
         
         // 배열의 첫 번째 장소 정보를 사용
-        if let marketCalculateDistance = walkwayDetailDataModel?.information {
-            let storeLocation = CLLocation(latitude: CLLocationDegrees(marketCalculateDistance.latitude), longitude: CLLocationDegrees(marketCalculateDistance.longitude))
-            let distance = currentLocation.distance(from: storeLocation)
-            let walkingSpeedPerMeterPerSecond: Double = 1.4 // 걷기 속도
-            self.estimatedTime = distance / walkingSpeedPerMeterPerSecond
-        }
+        let walkLocation  = CLLocation(latitude: CLLocationDegrees(destinationLat), longitude: CLLocationDegrees(destinationLng))
+        let distance = currentLocation.distance(from: walkLocation)
+        self.distance = distance
+        
+        let averageSpeed = 5.0
+        self.estimatedTime = distance / (averageSpeed * 1000) * 3600
+        self.estimatedTime = estimatedTime
     }
     
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        typeDistanceAndTime()
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        if status == .authorizedWhenInUse || status == .authorizedAlways {
-            locationManager.startUpdatingLocation()
-        }
-    }
-    
-    
-    // MARK: - distance Fuction
-    
-    //위치 관리자를 설정하고 위치 업데이트를 시작
-    override init() {
-        super.init()
-        locationManager.delegate = self // 현재 클래스를 델리게이트로 설정
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest//정확도 상승
-        locationManager.requestWhenInUseAuthorization() // 위치 서비스 사용 권한 요청
-        locationManager.startUpdatingLocation() //위치 업데이트
-    }
 }

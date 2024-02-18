@@ -36,31 +36,36 @@ struct PlaceRegistrationView: View {
             ZStack(alignment: .top) {
                 backgroundView
                 blackOpacityView
+                NavigationBar(lastedSelectedTab: lastedSelectedTab)
                 VStack {
-                    NavigationBar(lastedSelectedTab: lastedSelectedTab)
-                    CustomTitleView(
-                        titleText: "1분만에 장소를 \n 등록해보세요",
-                        titleRangeColor: Color.textBlue,
-                        highlightText: ["장소"],
-                        subtitleText: "장소를 등록하면 경로와 방명록을 \n 남길 수 있어요 !",
-                        subtitleSize: 20,
-                        titleWidth: 339,
-                        titleHeight: 79,
-                        subtitleWidth: 274,
-                        subtitleHeight: 60,
-                        spacing: 30,
-                        textAlignment: .center,
-                        frameAlignment: .center
-                    )
-                    .padding(.top, 94)
+                    titleView
+                        .padding(.top, 94)
                     
                     Spacer()
                     
                     nextButton
                         .padding(.bottom, 20)
                 }
+                .frame(width: geometry.size.width, height: geometry.size.height)
             }
         }
+    }
+    
+    private var titleView: some View {
+        CustomTitleView(
+            titleText: "1분만에 장소를 \n 등록해보세요",
+            titleRangeColor: Color.textBlue,
+            highlightText: ["장소"],
+            subtitleText: "장소를 등록하면 경로와 방명록을 \n 남길 수 있어요 !",
+            subtitleSize: 20,
+            titleWidth: 339,
+            titleHeight: 79,
+            subtitleWidth: 274,
+            subtitleHeight: 60,
+            spacing: 30,
+            textAlignment: .center,
+            frameAlignment: .center
+        )
     }
     
     /// 배경 화면 설정

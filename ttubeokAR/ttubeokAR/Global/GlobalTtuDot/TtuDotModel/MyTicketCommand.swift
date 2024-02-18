@@ -6,11 +6,24 @@
 //
 
 import Foundation
+import SwiftUI
 
 class MyTicketCommand: TtuDotModel {
+    var sharedTabInfo: SharedTabInfo
     var onExecute: (() -> Void)?
     
+    init(sharedTabInfo: SharedTabInfo) {
+        self.sharedTabInfo = sharedTabInfo
+    }
+    
+    var getCurrentTab: Int {
+        return sharedTabInfo.currentTab
+    }
+    
     func execute() {
-        print("티켓 보관함 버튼입니다")
+        onExecute?()
+        let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        let newRootView = UIHostingController(rootView:  CouponView(lastedTab: getCurrentTab))
+        appDelegate?.changeRootViewController(newRootView, animated: true)
     }
 }

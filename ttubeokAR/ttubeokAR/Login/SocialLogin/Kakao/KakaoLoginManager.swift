@@ -12,7 +12,7 @@ import KakaoSDKUser
 class KakaoLoginManager: ObservableObject {
     
     //MARK: - Property
-    private let loginViewModel = LoginViewModel()
+    var loginViewModel: LoginViewModel?
     @Published var isLoggedIn = false
     
     //MARK: - KakaoLoginManagerFunction
@@ -49,7 +49,7 @@ class KakaoLoginManager: ObservableObject {
         self.login{ [weak self] result in
             switch result {
             case .success(let oauthToken):
-                self?.loginViewModel.KakaoSendToken(token: oauthToken.accessToken)
+                self?.loginViewModel?.KakaoSendToken(token: oauthToken.accessToken)
                 self?.isLoggedIn = true
             case .failure(let error):
                 print("로그인 실패: \(error.localizedDescription)")

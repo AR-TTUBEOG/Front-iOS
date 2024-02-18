@@ -21,7 +21,6 @@ class NicknameSettingViewModel: ObservableObject {
     private let provider = MoyaProvider<NicknameRedundancyService>()
     
     /// 닉네임 중복검사 API 요청
-    //TODO: - API 호출 시 토큰을 필요로 하는지 확인하기
     public func checkNicknameAvailability() {
         guard !nickname.isEmpty else {
             isNicknameAvailable = nil
@@ -29,7 +28,7 @@ class NicknameSettingViewModel: ObservableObject {
         }
         
         guard let accessToken = KeyChainManager.stadard.getAccessToken(for: "userSession") else {
-            print("accessToken")
+            print("accessToken error")
             return
         }
         
@@ -38,13 +37,40 @@ class NicknameSettingViewModel: ObservableObject {
             case .success(let response):
                 do {
                     let nicknameRedundancy = try JSONDecoder().decode(NicknameRedundancyModel.self, from: response.data)
-                    self?.isNicknameAvailable = nicknameRedundancy.information.isUsed
-                    print("중복검사 진행함")
+                    print("4 : 닉네임 체크 -> \(nicknameRedundancy.check)")
+                    self?.isNicknameAvailable = nicknameRedundancy.check
                 } catch {
-                    print("중복성 검사 반응 error : \(error.localizedDescription)")
+                    print("중복성 검사 반응 error : \(error)")
                 }
             case .failure(let error):
-                print("요청 error : \(error.localizedDescription)")
+                print("중복성 검사 요청 error : \(error)")
+                
+            }
+        }
+    }
+    
+    public func sendNickname() {
+        guard let accessToken = KeyChainManager.stadard.getAccessToken(for: "userSession") else {
+            print("accessToken")
+            return
+        }
+        
+        provider.request(.finishNickname(nickname, token: accessToken)) { result in
+            switch result {
+            case .success(let response):
+                do {
+                    let nicknameRedundancy = try JSONDecoder().decode(NicknameInformation.self, from: response.data)
+                    print("5. 닉네임 정보 전달 완료 : \(nicknameRedundancy)")
+                    
+                //TODO: - 닉네임 수정 사항
+//                    saveNickname(newNickname: nicknameRedundancy.nickname)
+                    
+                } catch {
+                    print("5-1 : 닉네임 정보 전달 후 디코드 반응 error : \(error)")
+                }
+            case .failure(let error):
+                print("5-2 : 닉네임 정보 전달 요청 error : \(error)")
+                
             }
         }
     }
@@ -53,11 +79,14 @@ class NicknameSettingViewModel: ObservableObject {
         if var session = KeyChainManager.stadard.loadSession(for: "userSession") {
             session.nickname = newNickname
             let saved = KeyChainManager.stadard.saveSession(session, for: "userSession")
+            print("6. 닉네임 키체인 저장 완료 : \(session)")
             if !saved {
                 print("닉네임 세션 실패")
             }
         }
     }
+    
+    
     
     /// 닉네임 길이 검사
     private func checkNicknameLength() {

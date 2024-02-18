@@ -30,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Create the SwiftUI view that provides the window contents.
         //MainViewControl().environmentObject(SharedTabInfo())
         //WalkwayPageContent(viewModel: WalkwayViewModel())
-        let contentView = SplashScreenView()
+        let contentView = ContentView()
         // Use a UIHostingController as window root view controller.
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.rootViewController = UIHostingController(rootView: contentView)
@@ -79,16 +79,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func changeRootSplashView(_ ViewController: UIViewController, animated: Bool = true) {
         guard let window = self.window else { return }
         
-        if animated {
-            UIView.transition(with: window, duration: 1.0, options: .transitionCrossDissolve, animations: {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.3) {
+            if animated {
+                UIView.transition(with: window, duration: 1.0, options: .transitionCrossDissolve, animations: {
+                    window.rootViewController = ViewController
+                    window.makeKeyAndVisible()
+                }, completion: nil)
+            } else {
                 window.rootViewController = ViewController
-                window.makeKeyAndVisible()
-            }, completion: nil)
-        } else {
-            window.rootViewController = ViewController
+            }
         }
     }
-
-
 }
 

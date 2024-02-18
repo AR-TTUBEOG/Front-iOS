@@ -14,9 +14,8 @@ import Photos
 struct SplashScreenView: View {
     //MARK: Property
     
-    @State private var isLocationPermissionOfGPS = false
-    @State private var isLocationPermissionOfCamera = false
-    @State private var isLocationPermissionOfLibrary = false
+    
+    @ObservedObject var permissionsVM = PermissionViewModel()
     
     @State private var showingLocationServiceDisabledAlert = false
     @State private var showingCameraAccessAlert = false
@@ -51,20 +50,13 @@ struct SplashScreenView: View {
             requestCameraPermission()
             requestPhotoLibraryPermission()
             requestLocationPermission()
-            checkUser()
         }
         
-        .onReceive(Just(isLocationPermissionOfGPS)) { _ in
-            proceedChangeView()
-        }
-        
-        .onReceive(Just(isLocationPermissionOfCamera)) { _ in
-            proceedChangeView()
-        }
-        
-        .onReceive(Just(isLocationPermissionOfLibrary)) { _ in
-            proceedChangeView()
-        }
+        .onReceive(permissionsVM.allPermissionsGranted, perform: { allGranted in
+            if allGranted {
+                checkUser()
+            }
+        })
         
         .alert(cameraAlertTitle,
                isPresented: $showingCameraAccessAlert) {
@@ -141,9 +133,16 @@ struct SplashScreenView: View {
     
     //MARK: - 유효성 검사
     private func checkUser() {
-        print("유효성 검사 시작함")
-        loginViewModel.checkLoginStatus()
-        currentState = loginViewModel.savedLoginToken ? .mainView : .login
+        print("1. 유효성 검사 시작함")
+        loginViewModel.checkLoginStatus { success in
+                DispatchQueue.main.async {
+                    self.currentState = success ? .mainView : .login
+                    print("3: 뷰 전환 시작 전 : \(success) ")
+                    DispatchQueue.main.asyncAfter(deadline: .now()+1.3) {
+                        proceedChangeView()
+                    }
+                }
+        }
     }
     
     
@@ -159,10 +158,9 @@ struct SplashScreenView: View {
                         case .notDetermined:
                             BaseLocationManager.shared.requestLocationAuthorization()
                         case .authorizedWhenInUse, .authorizedAlways:
-                            self.isLocationPermissionOfGPS = true
-                            proceedChangeView()
+                            permissionsVM.isLocationGPS = true
                         case .denied, .restricted:
-                            self.isLocationPermissionOfGPS = false
+                            permissionsVM.isLocationGPS = false
                             self.showingLocationServiceDisabledAlert = true
                         default:
                             break
@@ -183,14 +181,14 @@ struct SplashScreenView: View {
             AVCaptureDevice.requestAccess(for: .video) { granted in
                 DispatchQueue.main.async {
                     self.showingCameraAccessAlert = !granted
-                    self.isLocationPermissionOfCamera = granted
+                    self.permissionsVM.isLocationCamera = granted
                 }
             }
         case .denied, .restricted:
             self.showingCameraAccessAlert = true
-            self.isLocationPermissionOfCamera = false
+            permissionsVM.isLocationCamera = false
         case .authorized:
-            self.isLocationPermissionOfCamera = true
+            permissionsVM.isLocationCamera = true
         default:
             break
         }
@@ -202,22 +200,22 @@ struct SplashScreenView: View {
         case .notDetermined:
             PHPhotoLibrary.requestAuthorization { status in
                 DispatchQueue.main.async {
-                    self.isLocationPermissionOfLibrary = status == .authorized
+                    permissionsVM.isLocationLibrary = status == .authorized
                     self.showingPhotoLibraryAccessAlert = status != .authorized
                 }
             }
         case .denied, .restricted:
             self.showingPhotoLibraryAccessAlert = true
-            self.isLocationPermissionOfLibrary = false
+            permissionsVM.isLocationLibrary = false
         case .authorized, .limited:
-            self.isLocationPermissionOfLibrary = true
+            permissionsVM.isLocationLibrary = true
         default:
             break
         }
     }
     
     private func proceedChangeView() {
-        if isLocationPermissionOfGPS, isLocationPermissionOfCamera, isLocationPermissionOfLibrary {
+        if permissionsVM.isLocationGPS && permissionsVM.isLocationCamera && permissionsVM.isLocationLibrary {
                 self.changeToLoginView()
             }
     }

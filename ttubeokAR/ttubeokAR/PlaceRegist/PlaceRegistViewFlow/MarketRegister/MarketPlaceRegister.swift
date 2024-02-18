@@ -7,10 +7,14 @@
 
 import SwiftUI
 
+
 struct MarketPlaceRegister: View {
-    //MARK: - Property
+    
+    //MARK: - ViewModel
     @StateObject private var viewModel = MarketViewModel()
-//    @Environment(\.dismiss) var dismiss
+    
+    //MARK: - Property
+    @Environment(\.dismiss) var dismiss
     @State private var keyboardVisible = false
     
     var lastedSelectedTab: Int
@@ -25,32 +29,47 @@ struct MarketPlaceRegister: View {
             .onAppear {
                 observeKeyboard()
             }
+            .ignoresSafeArea(.keyboard)
     }
     
     //MARK: - Body
     
     private var allView: some View {
-        ZStack(alignment: .top) {
-            Color.background.ignoresSafeArea(.all)
-            VStack(alignment: .center, spacing: 35) {
+        GeometryReader { geometry in
+            ScrollView {
+                ZStack(alignment: .center) {
+                    backgroundImage
+                        .padding(.top, 100)
+                    VStack(alignment: .center, spacing: 35) {
+                        
+                        PlaceRegisterNavigation(currentPage: viewModel.currentPageIndex, totalPages: 7, lastedSelectedTab: lastedSelectedTab)
+                        
+                        MarketPageContent(viewModel: viewModel)
+                            .ignoresSafeArea(.keyboard)
+                        
+                        Spacer(minLength: 10)
+                        
+                        if !keyboardVisible {
+                            changeViewButton
+                                .padding(.bottom, 20)
+                        }
+                    }
+                }
+                .frame(height: geometry.size.height)
                 
-                PlaceRegisterNavigation(currentPage: viewModel.currentPageIndex, totalPages: 7, lastedSelectedTab: lastedSelectedTab)
-                
-                MarketPageContent(viewModel: viewModel)
-            }
-            VStack {
-                Spacer()
-                
-                if !keyboardVisible {
-                    changeViewButton
-                        .padding(.bottom, 20)
+                .onTapGesture {
+                    self.keyboardResponsive()
                 }
             }
+            .scrollIndicators(.hidden)
         }
-        
-        .onTapGesture {
-            self.keyboardResponsive()
-        }
+        .background(Color.background)
+    }
+    private var backgroundImage: some View {
+        Icon.backgroundLogo.image
+            .resizable()
+            .frame(width: 300, height: 400)
+            .aspectRatio(contentMode: .fit)
     }
     
     private var changeViewButton: some View {
@@ -61,8 +80,7 @@ struct MarketPlaceRegister: View {
                         viewModel.currentPageIndex -= 1
                     }
                     else if viewModel.currentPageIndex == 0 {
-//                        dismiss()
-                        print("hello")
+                        dismiss()
                     }
                 }
             }) {
@@ -81,6 +99,7 @@ struct MarketPlaceRegister: View {
                     withAnimation {
                         if viewModel.currentPageIndex == 6 {
                             viewModel.navigationToNextView = true
+                            viewModel.saveInfoMarket()
                         } else {
                             viewModel.currentPageIndex += 1
                         }

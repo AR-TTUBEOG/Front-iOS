@@ -34,7 +34,7 @@ extension NaverReverseGeocodingAPI: TargetType {
         case .reverseGeocode(let latitude, let longitude):
             let params: [String: Any] = [
                 "coords": "\(longitude),\(latitude)",
-                "orders": "roadaddr",
+                "orders": "legalcode",
                 "output": "json"
             ]
             return .requestParameters(parameters: params, encoding: URLEncoding.queryString)

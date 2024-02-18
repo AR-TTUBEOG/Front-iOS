@@ -13,7 +13,7 @@ import SwiftUI
 struct LoginViewCycle: View {
     
     //MARK: - Property
-    @State var currentState: AppState
+    @State var currentState: AppState = .login
     @StateObject var loginViewModel: LoginViewModel
     
     //MARK: - Body
@@ -21,12 +21,20 @@ struct LoginViewCycle: View {
         ZStack {
             switch currentState {
             case .login:
-                LoginView(transitionToNext: { currentState = .nicknameSetting})
+                LoginView(transitionToNext: {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                        withAnimation {
+                            currentState = loginViewModel.loginRegist ? .mainView : .nicknameSetting
+                        }
+                    }
+                },  viewModel: loginViewModel
+                )
+                .transition(.opacity)
             case .nicknameSetting:
                 NicknameSettingLogin(transitionToNext: { withAnimation {currentState = .mainView} }, viewModel: NicknameSettingViewModel())
                     .transition(.opacity)
             case .mainView:
-                MainViewControl().environmentObject(SharedTabInfo())
+                MainViewControl(selectedTab: 1).environmentObject(SharedTabInfo(currentTab: 1))
                     .transition(.opacity)
             }
         }

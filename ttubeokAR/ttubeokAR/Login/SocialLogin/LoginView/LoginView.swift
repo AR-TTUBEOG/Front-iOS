@@ -16,7 +16,7 @@ struct LoginView: View {
      최초 로그인에 한 해서만 작동하도록 수정!!
      */
     var transitionToNext: () -> Void
-    
+    @StateObject var viewModel: LoginViewModel
     //MARK: - Body
     
     var body: some View {
@@ -45,8 +45,8 @@ struct LoginView: View {
         VStack(alignment: .center, spacing: 15) {
             centerLine
             VStack(alignment: .center) {
-                KakaoLogin(transitionToNext: transitionToNext)
-                AppleLogin(transitionToNext: transitionToNext)
+                KakaoLogin(transitionToNext: transitionToNext, loginViewModel: viewModel)
+                AppleLogin(transitionToNext: transitionToNext, loginViewModel: viewModel)
             }
         }
     }
@@ -102,7 +102,3 @@ struct LoginView: View {
 }
 
     //MARK: - Preview
-
-#Preview {
-    LoginView(transitionToNext: {print("Hello")})
-}

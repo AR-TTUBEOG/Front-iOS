@@ -8,17 +8,20 @@
 import Foundation
 import CoreLocation
 
-class BaseLocationManager: NSObject, CLLocationManagerDelegate {
+class BaseLocationManager: NSObject, CLLocationManagerDelegate, ObservableObject {
     static let shared = BaseLocationManager()
-
+    
     private let locationManager = CLLocationManager()
-    var currentLocation: CLLocation?
     var onAuthorizationChanged: ((CLAuthorizationStatus) -> Void)?
-
+    @Published var currentLocation: CLLocation?
+    @Published var estimatedTime: TimeInterval = 0
+    @Published var distance: CLLocationDistance = 0
+    
     override init() {
         super.init()
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.startUpdatingLocation()
     }
     
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
@@ -29,11 +32,11 @@ class BaseLocationManager: NSObject, CLLocationManagerDelegate {
     func requestLocationAuthorization() {
         locationManager.requestWhenInUseAuthorization()
     }
-
+    
     func startUpdatingLocation() {
         locationManager.startUpdatingLocation()
     }
-
+    
     func stopUpdatingLocation() {
         locationManager.stopUpdatingLocation()
     }
@@ -41,11 +44,13 @@ class BaseLocationManager: NSObject, CLLocationManagerDelegate {
     func getCurrentLocation() -> CLLocation? {
         return locationManager.location
     }
-
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        currentLocation = locations.last
+        if let location = locations.last {
+            self.currentLocation = location
+        }
     }
-
+    
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("LocationManger: \(error)")
     }
