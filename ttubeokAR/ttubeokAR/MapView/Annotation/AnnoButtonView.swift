@@ -36,18 +36,8 @@ struct AnnoButtonView: View {
                     } else if place.placeType.store {
                         Image(.restaurantMap)
                     }
-//                    switch type {
-//                    case .cafe :
-//                        Image(.restaurantMap2)
-//                    case .restaurant:
-//                        Image(.restaurantMap2)
-//                    case .route:
-//                        Image(.restaurantMap2)
-//                    }
-                    
                 }
                 .scaleEffect(isSelected ? 1.5 : 1.0, anchor: .init(x: 0.5, y: 0.86))
-//                .border(Color.gray)
             }
         
     }

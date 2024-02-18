@@ -46,7 +46,6 @@ struct DetailPlaceView: View {
         }
         .frame(height: 400)
         .onAppear(perform: {
-//            print("디테일뷰 이름"\(selectedPlace?.name)")
             
             self.detailViewModel.fetchDetails(for: selectedPlace ?? .init(placeId: 1, placeType: .init(store: true, spot: false), dongName: "", memberId: 1, name: "", info: "", latitude: 0.0, longitude: 0.0, image: "", stars: 0.0, guestbookCount: 1, likesCount: 1, isFavorited: false, createdAt: "", recommendationScore: 1, distance: 0.0, hasGame: false))
         })
@@ -102,14 +101,14 @@ struct DetailPlaceView: View {
                 
                 if selectedPlace.placeType.spot {
                     let infomation = detailViewModel?.walkwayDetailDataModel?.information
-                    name = infomation?.name ?? "name 연결안됨"
-                    info = infomation?.info ?? "info 연결안됨"
+                    name = infomation?.name ?? "문래역 스타벅스"
+                    info = infomation?.info ?? "조용하게 공부하기 좋은 카페"
                     stars = infomation?.stars ?? 0.0
 //                    distance = infomation?. ?? "distance 연결안됨"
                 } else if selectedPlace.placeType.store {
                     let infomation = detailViewModel?.storeDetailDataModel?.information
-                    name = infomation?.name ?? "name 연결안됨"
-                    info = infomation?.info ?? "info 연결안됨"
+                    name = infomation?.name ?? "문래역 스타벅스"
+                    info = infomation?.info ?? "조용하게 공부하기 좋은 카페"
                     stars = infomation?.stars ?? 0.0
 //                    distance = infomation.distance ?? "distance 연결안됨"
                 }
