@@ -20,11 +20,14 @@ struct DeletePopup: View {
     
     // MARK: - Body
     var body: some View {
-        allView
+        ZStack {
+            Color.black.opacity(0.6).ignoresSafeArea(.all)
+            allView
+            
+        }
     }
     
     private var allView : some View{
-        ZStack(alignment: .top){
             VStack(spacing : 30){
                 Text("탈퇴하시겠습니까?")
                 bottomBar
@@ -34,8 +37,6 @@ struct DeletePopup: View {
             .font(.sandol(type: .bold, size: 20))
             .foregroundStyle(Color.textPink)
             .clipShape(.rect(cornerRadius: 24))
-                
-        }
         
     }
     

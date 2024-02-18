@@ -12,7 +12,7 @@ import SwiftUI
 struct DeleteAccountView: View {
     @State var isChecked: Bool = false
     @State var deletePopup: Bool = false
-//    @Environment (\.dismiss) var dismiss
+    @Environment (\.dismiss) var dismiss
     
     @StateObject var viewModel = DeleteAcountViewModel()
     
@@ -50,11 +50,12 @@ struct DeleteAccountView: View {
 //        )
 //    }
     
+    
     private func explainView(geometry: GeometryProxy) -> some View {
          VStack {
              VStack(alignment: .leading, spacing: 50){
-//                NavigationBar(isDisplayLeadingBtn: true, title: "회원 탈퇴")
-                
+                 topBar
+                     .padding(.leading,-35)
                 Text(term)
                     .frame(maxWidth: 360, maxHeight: 260)
                     .background(Color.stroke)
@@ -75,6 +76,24 @@ struct DeleteAccountView: View {
         }
         .frame(width: geometry.size.width, height: geometry.size.height)
         .background(Color.background)
+    }
+    
+    private var topBar : some View {
+        HStack{
+            Button(action : {
+                dismiss()
+            }) {
+                Icon.chevronLeft.image
+                    .resizable()
+                    .frame(maxWidth: 11, maxHeight: 18)
+            }
+            
+            Spacer()
+                .frame(maxWidth: 135)
+            Text("회원 탈퇴")
+                .font(.sandol(type: .bold, size: 25))
+                .foregroundStyle(Color.textPink)
+        }
     }
     
     

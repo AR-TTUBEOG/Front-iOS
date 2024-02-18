@@ -102,6 +102,7 @@ enum Icon: String {
     case logout = "logout"
     case deleteBtn = "deleteBtn"
     case accountBtn = "accountBtn"
+    case EmptyDataImage = "EmptyDataImage"
 
     // MARK: - Tab Button
     case ExploreTabButton = "ExploreTabButton"

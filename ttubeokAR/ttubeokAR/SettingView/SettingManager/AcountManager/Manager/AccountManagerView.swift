@@ -1,5 +1,5 @@
 //
-//  AccountSettingView.swift
+//  AccountManagerView.swift
 //  ttubeokAR
 //
 //  Created by Subeen on 1/30/24.
@@ -8,7 +8,7 @@
 /// 계정관리 뷰
 import SwiftUI
 
-struct AccountSettingView: View {
+struct AccountManagerView: View {
     // MARK: - Property
     @StateObject var viewModel = NameChangeViewModel()
     @StateObject var deleteViewModel =  DeleteAcountViewModel()
@@ -98,7 +98,7 @@ struct AccountSettingView: View {
         case .accountDelete:
             return "회원 탈퇴"
         case .socialInfo:
-            return "등록된 소셜 계정"
+            return "등록된 소셜 계정         |  카카오"
         }
     }
     
@@ -120,5 +120,5 @@ struct AccountSettingView: View {
     
 // MARK: - Preview
 #Preview {
-    AccountSettingView( lastedTab: 1)
+    AccountManagerView( lastedTab: 1)
 }
