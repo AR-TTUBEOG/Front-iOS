@@ -59,9 +59,10 @@ struct MainViewControl: View {
             if selectedTab == 1 {
                 ExploreViewControl(viewModel: exploreViewModel)
             } else if selectedTab == 2 {
-                Text("11")
+                MapView(exploreViewModel: exploreViewModel)
             }
         }
+        .ignoresSafeArea(.keyboard)
     }
     
     /// 한 번의 터치로 뷰를 전환, 길게 누르면 뚜닷 출력 버튼
@@ -105,6 +106,7 @@ struct MainViewControl: View {
                 .simultaneousGesture(longPressGesture)
             }
         }
+        .ignoresSafeArea(.keyboard)
     }
     
     /// 상단 검색 바(Map, Explore 뷰에 따라 달라진다)
