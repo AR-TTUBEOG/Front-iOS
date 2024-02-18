@@ -14,22 +14,25 @@ struct GuestBookView: View {
 
     // MARK: - Body
     var body: some View {
-        ZStack(alignment: .top){
-            VStack(alignment: .trailing, spacing: 25){
+            VStack(alignment: .center, spacing: 25){
                 topBar
-                VStack(alignment: .trailing , spacing: 25){
-                    VStack(alignment: .leading, spacing : 36){
-                        GuestBookImage
-                        textFieldView
-                    }
-                    stars
-                    bottomBar
-                }
+                centerView
             }
-        }
-        .frame(maxWidth: 321, maxHeight: 529)
+        .frame(maxWidth: 350, maxHeight: 529)
         .background(Color.black.opacity(0.70))
         .clipShape(.rect(cornerRadius: 25))
+    }
+    
+    
+    private var centerView : some View{
+        VStack(alignment: .leading , spacing: 25){
+                GuestBookImage
+                textFieldView
+                stars
+            bottomBar
+        }
+        .frame(maxWidth: 320, maxHeight: 440)
+        .padding(.all, 5)
     }
     
     
@@ -59,7 +62,7 @@ struct GuestBookView: View {
             }
             
         }
-        .frame(maxWidth: 186, maxHeight: 23, alignment: .topTrailing)
+        .frame(maxWidth: 331    , maxHeight: 23, alignment: .trailing)
         
     }
     
@@ -70,7 +73,7 @@ struct GuestBookView: View {
         }){
             if viewModel.bookMarkimages == nil {
                 RoundedRectangle(cornerRadius: 21)
-                    .frame(maxWidth: 99, maxHeight:97)
+                    .frame(maxWidth: 89, maxHeight: 83)
                     .foregroundStyle(Color(red: 0.24, green: 0.23, blue: 0.32))
                     .overlay(
                         Image("ImagePlus")
@@ -80,7 +83,7 @@ struct GuestBookView: View {
             } else if (viewModel.bookMarkimages != nil) {
                 Image(uiImage: viewModel.bookMarkimages!)
                     .resizable()
-                    .frame(maxWidth:99, maxHeight:97)
+                    .frame(maxWidth:89, maxHeight: 83)
                     .clipShape(.rect(cornerRadius: 21))
             }
         }
@@ -95,13 +98,13 @@ struct GuestBookView: View {
         ZStack(alignment: .bottomTrailing) {
             CustomTextField(text: $viewModel.contentText,
                             placeholder: "방명록을 남겨주세요.",
-                            fontSize: 14,
+                            fontSize: 16,
                             cornerSize: 25,
                             leadingHorizontalPadding: 29,
                             trailingHorizontalPadding: 29,
                             verticalPadding: 13,
-                            maxWidth: 283,
-                            maxHeight: 204,
+                            maxWidth: 260,
+                            maxHeight: 190,
                             onSearch: {},
                             alignment: .topLeading,
                             axis: .vertical,
@@ -139,7 +142,7 @@ struct GuestBookView: View {
                 }
             }
         }
-        .frame(maxWidth: 153, maxHeight: 23)
+        .frame(width: 310, height: 30, alignment: .trailing)
     }
 
     
@@ -150,6 +153,7 @@ struct GuestBookView: View {
             cancel
             recording
         }
+        .frame(width: 320, alignment: .center)
     }
     
     

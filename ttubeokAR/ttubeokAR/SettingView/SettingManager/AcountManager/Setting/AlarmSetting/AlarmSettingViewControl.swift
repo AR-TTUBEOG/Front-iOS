@@ -1,26 +1,49 @@
 //
-//  NotiSetting.swift
+//  AlarmSettingViewControl.swift
 //  ttubeokAR
 //
-//  Created by Subeen on 1/20/24.
+//  Created by 최윤아 on 2/18/24.
 //
 
+import Foundation
 import SwiftUI
 
-struct NotiSettingView: View {
+struct AlarmSettingViewControl: View {
     
     @StateObject var settingViewModel: SettingViewModel
+    @Environment (\.dismiss) var dismiss
     
     var body: some View {
         ZStack {
             Color.background.ignoresSafeArea(.all)
-            VStack {
-                NavigationBar(isDisplayLeadingBtn: true, title: "알림")
-                
+            VStack(alignment: .leading) {
+                topBar
                 buttonList(settingViewModel: settingViewModel)
+                    .padding(.top, 20)
                 Spacer()
+                    
             }
             
+        }
+        .navigationBarBackButtonHidden(true)
+    }
+    
+    private var topBar : some View {
+        HStack{
+            Button(action : {
+                dismiss()
+            }) {
+                Icon.chevronLeft.image
+                    .resizable()
+                    .frame(maxWidth: 11, maxHeight: 18)
+                    .padding(.leading,10)
+            }
+            
+            Spacer()
+                .frame(maxWidth: 170)
+            Text("알림")
+                .font(.sandol(type: .bold, size: 25))
+                .foregroundStyle(Color.textPink)
         }
     }
     
@@ -62,7 +85,6 @@ struct NotiSettingView: View {
                                 HStack(alignment: .center) {
                                         Text(option.title)
                                             .font(.sandol(type: .bold, size: 20))
-//                                            .padding(.top, 20)
                                             
                                         Spacer()
                                         Toggle("", isOn: $isOn)
@@ -96,6 +118,6 @@ struct NotiSettingView: View {
 }
 
 #Preview {
-    NotiSettingView(settingViewModel: SettingViewModel())
+    AlarmSettingViewControl(settingViewModel: SettingViewModel())
        
 }
