@@ -22,7 +22,7 @@ struct RecommendedSpaceCard: View {
     
     var body: some View {
         allView
-            .frame(width: 175, height: 190)
+            .frame(width: 160, height: 180)
             .background(Color(red: 0.25, green: 0.24, blue: 0.37))
             .clipShape(.rect(cornerRadius: 19))
             .shadow(radius: 5)
@@ -100,12 +100,14 @@ struct RecommendedSpaceCard: View {
     //    //장소 좋아요
     private var spaceLiked: some View {
         Button(action: {
-            self.isFavorited.toggle()
-            print("좋아요 상태 : \(isFavorited)")
             
-            if isFavorited {
+            if !isFavorited {
                 viewModel.sendLike()
             }
+            
+            self.isFavorited = true
+            
+            
             
         }) {
             Image(self.isFavorited ? "checkHeart" : "unCheckHeart")

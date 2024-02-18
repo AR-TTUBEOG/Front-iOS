@@ -17,7 +17,7 @@ final class AuthPlugin: PluginType {
     }
     
     func didReceive(_ result: Result<Response, MoyaError>, target: TargetType) {
-        if case .failure(let error) = result, error.response?.statusCode == 401 {
+        if case .failure(let error) = result, error.response?.statusCode == 500 {
             refreshToken { [weak self] success in
                 guard self != nil else { return }
             }

@@ -23,7 +23,7 @@ struct ExploreDetailInfor: Codable, Hashable {
     let latitude: Double?
     let longitude: Double?
     let image: String? // 옵셔널 타입으로 선언, JSON에서 null 일 수 있음
-    let stars: Double?
+    let stars: Float?
     let guestbookCount: Int?
     let likesCount: Int?
     let isFavorited: Bool?
@@ -56,10 +56,4 @@ struct StoreLikeModel: Codable {
 
 struct StoreLikeInfor: Codable {
     var message: String
-}
-
-
-
-class dataEx {
-    let data = ExploreDetailInfor(placeId: 1, placeType: PlaceType(store: true, spot: false), dongName: "흑석동", memberId: 2, name: "유하하", info: "재밌지요", latitude: 1.1, longitude: 1.1, image: "mapPlaceExample", stars: 1.0, guestbookCount: 123, likesCount: 100, isFavorited: false, createdAt: "1111", recommendationScore: 20, distance: 10, hasGame: false)
 }

@@ -14,19 +14,35 @@ struct WalkwayDetailDataModel: Codable {
 }
 
 struct WalwayInformation: Codable {
-    var id: Int
-    var dongAreaId: String
-    var userId: Int
-    var detailAddress: String
+    var spotId: Int
+    var memberId: Int
     var name: String
     var info: String
+    var dongAreaId: String
+    var detailAddress: String
     var latitude: Double
     var longitude: Double
-    var image: [String]
     var stars: Float
-    var likes: Int
-    var guestbook : Int
+    var guestbookCount: Int
+    var likesCount: Int
+    var isFavorited : Bool
+    var image: String
 }
+
+struct WalkImageModel: Codable {
+    var check: Bool
+    var information: [WalkDetailImage]
+}
+
+struct WalkDetailImage: Codable {
+    var id: Int
+    var uuid: String
+    var image: String
+    var imageType: String
+    var placeId: Int
+}
+
+//MARK: - 매장 등록
 
 struct StoreDetailDataModel: Codable {
     var check: Bool
@@ -49,6 +65,19 @@ struct StoreInformation: Codable {
     var guestbookCount: Int
     var likesCount: Int
     var isFavorited: Bool
+}
+
+struct StoreImageModel: Codable {
+    var check: Bool
+    var information: [StoreDetailImage]
+}
+
+struct StoreDetailImage: Codable {
+    var id: Int
+    var uuid: String
+    var image: String
+    var imageType: String
+    var placeId: Int
 }
 
 enum StoreType: String, Codable {

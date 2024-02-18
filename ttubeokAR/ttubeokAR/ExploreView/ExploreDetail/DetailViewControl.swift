@@ -24,6 +24,7 @@ struct DetailViewControl: View {
     }
     
     private var allView: some View {
+        
         ZStack(alignment: .top) {
             Color.background.ignoresSafeArea()
             VStack(alignment: .center, spacing: 18) {
@@ -58,17 +59,42 @@ struct DetailViewControl: View {
     //장소 사진
     private var spaceImage: some View {
         ScrollView(.horizontal, showsIndicators: false) {
-            ForEach(viewModel.images, id: \.self) { image in
-            HStack(spacing: 0) {
-                Icon.examplePlace.image
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: 410, height: 252)
+            
+            if let walkwayImages = viewModel.walkwayImageModel?.information {
+                ForEach(walkwayImages, id: \.id) { walkwayImage in
+                    loadImage(urlString: walkwayImage.image)
+                }
+            }
+            
+            if let storeImages = viewModel.storeImageModel?.information {
+                ForEach(storeImages, id: \.id) { storeImages in
+                    loadImage(urlString: storeImages.image)
                 }
             }
         }
         .frame(width: 410, height: 252)
     }
+    
+    @ViewBuilder
+    private func loadImage(urlString: String) -> some View {
+        AsyncImage(url: URL(string: urlString)) { phase in
+            switch phase {
+            case .empty:
+                ProgressView()
+            case .success(let image):
+                image.resizable()
+                    .aspectRatio(contentMode: .fill)
+                    
+            case .failure(let error):
+                Image(systemName: "photo")
+            @unknown default:
+                EmptyView()
+            }
+        }
+        .frame(width: 410, height: 252)
+    }
+    
+    
     
     private var topHStack: some View {
         HStack {
@@ -80,7 +106,7 @@ struct DetailViewControl: View {
             .padding(.top, 10)
         }
         .padding(.leading, 10)
-        .frame(maxWidth: 410)
+        .frame(width: 300)
     }
     
     private var beforView: some View {
