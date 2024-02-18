@@ -24,8 +24,8 @@ class GiftDrawingGameViewModel: ObservableObject {
     var giftModel: GifttModel?
     @Published var storeId: Int = 0
     //MARK: 농구게임 게임 룰 설정
-    @Published var timeLimit: TimeInterval = 30
-    @Published var giftCount: Int = 5
+    @Published var timeLimit: TimeInterval = 0
+    @Published var giftCount: Int = 0
     
     //MARK: - 선물뽑기 혜택 문구 텍스트 길이
     @Published var benefitsText: String = ""
@@ -41,7 +41,7 @@ class GiftDrawingGameViewModel: ObservableObject {
     }
     
     public func decreaseTime() {
-        if self.timeLimit > 15 {
+        if self.timeLimit > 0 {
             self.timeLimit -= 1
         }
     }
@@ -54,7 +54,7 @@ class GiftDrawingGameViewModel: ObservableObject {
     }
     
     public func decreaseGiftCount() {
-        if self.giftCount > 1 {
+        if self.giftCount > 0 {
             self.giftCount -= 1
         }
     }

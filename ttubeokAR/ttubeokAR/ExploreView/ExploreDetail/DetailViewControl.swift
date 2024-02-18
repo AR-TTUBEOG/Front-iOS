@@ -10,28 +10,34 @@ import SwiftUI
 struct DetailViewControl: View {
     // MARK: - Property
     @ObservedObject var viewModel: DetailViewModel
+    @ObservedObject var bookMark = BookMarkViewModel()
+    @Environment (\.dismiss) var dissmiss
+    
     
     // MARK: - Body
     var body: some View {
-        GeometryReader { geometry in
-            ZStack(alignment: .top) {
-                Color.background.ignoresSafeArea()
-                VStack(alignment: .center, spacing: 18) {
-                    topImageAndBookmarked
+        allView
+            .onReceive(BaseLocationManager.shared.$currentLocation) { _ in
+                viewModel.typeDistanceAndTime()
+            }
+            .navigationBarBackButtonHidden(true)
+    }
+    
+    private var allView: some View {
+        ZStack(alignment: .top) {
+            Color.background.ignoresSafeArea()
+            VStack(alignment: .center, spacing: 18) {
+                topImageAndBookmarked
                     VStack(alignment: .leading, spacing: 9) {
                         groupSpaceNameButton
-                        eventImage
-                        groupspaceInfor
-                        groupCount
-                        
-                    }
-                    .frame(maxWidth: geometry.size.width * 0.9, maxHeight: 140)
-                    //guestBookGrid
+                        HStack {
+                            leftVStack
+                            count
+                        }
                 }
-            }
-            .frame(maxWidth: geometry.size.width, maxHeight: geometry.size.height)
-            .onAppear{
-                viewModel.locationManager.startUpdatingLocation()
+                    .padding([.leading, .trailing], 20)
+                
+//                    guestBookGrid
             }
         }
     }
@@ -40,34 +46,53 @@ struct DetailViewControl: View {
     
     /// 장소  사진  및 찜하기 버튼
     private var topImageAndBookmarked: some View {
-        ZStack(alignment: .topTrailing) {
-//            spaceImage
-            spaceLiked
-                .padding(.vertical, 10)
-                .padding(.horizontal, 20)
+        ZStack(alignment: .topLeading) {
+            spaceImage
+            topHStack
         }
-        .frame(maxWidth: .infinity, maxHeight: 226)
+        .frame(maxWidth: .infinity, maxHeight: 250)
     }
-    
+
     
     //MARK: - 장소 사진 설정
-//    //장소 사진
-//    private var spaceImage: some View {
-//        Image(viewModel.images[viewModel.currentImageIndex])
-//            .resizable()
-//            .frame(maxWidth: .infinity, maxHeight: 252)
-//            .aspectRatio(contentMode: .fill)
-//            .gesture(
-//                DragGesture()
-//                    .onEnded{ value in
-//                        if value.translation.width < 0 {
-//                            viewModel.nextImage()
-//                        } else if value.translation.width > 0 {
-//                            viewModel.previousImage()
-//                        }
-//                    }
-//            )
-//    }
+    //장소 사진
+    private var spaceImage: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            ForEach(viewModel.images, id: \.self) { image in
+            HStack(spacing: 0) {
+                Icon.examplePlace.image
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 410, height: 252)
+                }
+            }
+        }
+        .frame(width: 410, height: 252)
+    }
+    
+    private var topHStack: some View {
+        HStack {
+            beforView
+                .padding(.bottom, 5)
+            Spacer()
+            spaceLiked
+            .padding(.horizontal, 5)
+            .padding(.top, 10)
+        }
+        .padding(.leading, 10)
+        .frame(maxWidth: 410)
+    }
+    
+    private var beforView: some View {
+        Button(action: {
+            dissmiss()
+        }, label: {
+            Icon.chevronLeft.image
+                .resizable()
+                .frame(maxWidth: 15, maxHeight: 25)
+                .aspectRatio(contentMode: .fit)
+        })
+    }
     
     //MARK: - 장소 좋아요 버튼
     private var spaceLiked: some View {
@@ -77,22 +102,24 @@ struct DetailViewControl: View {
             Image(viewModel.favoriteImageName)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(maxWidth: 40, maxHeight: 40, alignment: .bottomTrailing)
+                .frame(maxWidth: 40, maxHeight: 40)
         }
     }
+
+    
     
     
     //MARK: - 장소이름 및 방명록 버튼
     
     private var groupSpaceNameButton: some View {
-        HStack(alignment: .center, spacing: 26) {
+        HStack(alignment: .center, spacing: 25) {
             spaceName
-            HStack(alignment: .center, spacing: 4) {
+            Spacer()
+            HStack(alignment: .center, spacing: 10) {
                 guestVisitBook
                 guestBook
             }
         }
-        .frame(maxWidth: 420, alignment: .center)
     }
     
     //장소 이름
@@ -100,9 +127,10 @@ struct DetailViewControl: View {
         Text(viewModel.title)
             .foregroundStyle(Color.textPink)
             .font(.sandol(type: .bold, size: 18))
-            .multilineTextAlignment(.leading)
+            .multilineTextAlignment(.center)
             .kerning(0.9)
-            .frame(maxWidth: 280, maxHeight: 24,alignment: .leading)
+            .frame(maxHeight: 24, alignment: .center)
+            .padding(.leading, 10)
     }
     
     //TODO: 방문하기 시 등장해야 할 뷰 지정하기
@@ -140,6 +168,14 @@ struct DetailViewControl: View {
                 .clipShape(.rect(cornerRadius: 19))
         }
     }
+
+    private var leftVStack: some View {
+        VStack(alignment: .leading, spacing: 2) {
+            eventImage
+            spaceInfomation
+            groupCount
+        }
+    }
     
     //MARK: - 아이템 아이콘 정의
     
@@ -148,39 +184,35 @@ struct DetailViewControl: View {
         HStack(alignment: .center, spacing: 13) {
             viewModel.saleBenefit
                 .resizable()
-                .frame(maxWidth: 15, maxHeight: 15)
+                .frame(maxWidth: 15, maxHeight: 18)
             
             viewModel.plusBenefit
                 .resizable()
-                .frame(maxWidth: 20, maxHeight: 15)
+                .frame(maxWidth: 20, maxHeight: 16)
             
             viewModel.gitBeneft
                 .resizable()
-                .frame(maxWidth: 21, maxHeight: 15)
+                .frame(maxWidth: 21, maxHeight: 18)
         }
-        .padding(.horizontal, 10)
-        .frame(maxWidth: 100, maxHeight: 25, alignment: .center)
+        .padding(.horizontal, 2)
+        .frame(maxWidth: 100, maxHeight: 30, alignment: .center)
     }
     
     
     //MARK: - 장소 정보(설명, 시간, 거리)
     
-    private var groupspaceInfor: some View {
-        HStack(alignment: .center, spacing: 40) {
-            spaceInfomation
-            count
-        }
-        .frame(maxWidth: 370, maxHeight: 80)
-    }
-    
     /// 장소 설명 글
     private var spaceInfomation : some View{
-        Text(viewModel.spaceDescript)
-            .font(.sandol(type: .regular, size: 11))
+        
+        let name = viewModel.walkwayDetailDataModel?.information.name ?? viewModel.storeDetailDataModel?.information.name ?? "Default"
+        
+        return Text(name)
+            .font(.sandol(type: .regular, size: 12))
             .foregroundStyle(Color(red: 0.85, green: 0.85, blue: 0.85))
             .multilineTextAlignment(.leading)
             .lineSpacing(1)
             .frame(maxWidth: 320, maxHeight: 47, alignment: .leading)
+            .padding(.leading, 10)
     }
     
     private var count : some View {
@@ -206,6 +238,7 @@ struct DetailViewControl: View {
                     .font(.sandol(type: .bold, size: 11))
                     .foregroundStyle(Color(red: 133 / 255.0, green: 135 / 255.0, blue: 152 / 255.0))
                     .frame(maxWidth: 42, maxHeight: 16, alignment: .leading)
+            }
                 
                 HStack(alignment: .center, spacing: 3) {
                     Icon.unTime.image
@@ -218,10 +251,8 @@ struct DetailViewControl: View {
                         .foregroundStyle(Color(red: 133 / 255.0, green: 135 / 255.0, blue: 152 / 255.0))
                         .frame(maxWidth: 42, maxHeight: 16, alignment: .leading)
                 }
-                
             }
         }
-    }
     
     func formatDistance(_ distance: Double) -> String {
         if (distance / 1000) > 100 {
@@ -239,75 +270,74 @@ struct DetailViewControl: View {
             return "\(minutes)분"
         }
     }
-        //MARK: - 좋아요 및 방명록 수
+    //MARK: - 좋아요 및 방명록 수
     
-        private var groupCount: some View {
-            HStack(spacing: 9) {
-                likesCount
-                bookCount
+    private var groupCount: some View {
+        HStack(spacing: 9) {
+            likesCount
+            bookCount
+        }
+        .padding(.leading, 10)
+    }
+    
+    // 좋아요 수
+    private var likesCount : some View{
+        ZStack(alignment: .center) {
+            Rectangle()
+                .foregroundStyle(Color.chart)
+                .clipShape(.rect(cornerRadius: 19))
+                .frame(maxWidth: 65, maxHeight: 22)
+            HStack(spacing: 4) {
+                Icon.heartBold.image
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(maxWidth: 15, maxHeight: 15)
+                Text(viewModel.formattedCount(viewModel.likeText))
+                    .font(.sandol(type: .bold, size: 11))
+                    .foregroundStyle(Color.white)
             }
         }
+    }
     
-        // 좋아요 수
-        private var likesCount : some View{
-            ZStack(alignment: .center) {
-                Rectangle()
-                    .foregroundStyle(Color.chart)
-                    .clipShape(.rect(cornerRadius: 19))
-                    .frame(maxWidth: 65, maxHeight: 22)
-                HStack(spacing: 4) {
-                    Icon.heartBold.image
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(maxWidth: 15, maxHeight: 15)
-                    Text(viewModel.formattedCount(viewModel.likeText))
-                        .font(.sandol(type: .bold, size: 11))
-                        .foregroundStyle(Color.white)
-                }
+    // 방명록 수
+    private var bookCount : some View{
+        ZStack(alignment: .center){
+            Rectangle()
+                .foregroundStyle(Color.textBlue)
+                .clipShape(.rect(cornerRadius: 19))
+                .frame(maxWidth: 55, maxHeight: 22)
+            HStack(spacing: 4) {
+                Icon.Subtract.image
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(maxWidth: 9, maxHeight: 11)
+                Text(viewModel.formattedCount(viewModel.reviewText))
+                    .font(.sandol(type: .bold, size: 11))
+                    .foregroundStyle(Color(red: 36/255, green: 88/255, blue: 139/255))
             }
         }
+        
+    }
     
-        // 방명록 수
-        private var bookCount : some View{
-            ZStack(alignment: .center){
-                Rectangle()
-                    .foregroundStyle(Color.textBlue)
-                    .clipShape(.rect(cornerRadius: 19))
-                    .frame(maxWidth: 55, maxHeight: 22)
-                HStack(spacing: 4) {
-                    Icon.Subtract.image
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(maxWidth: 9, maxHeight: 11)
-                    Text(viewModel.formattedCount(viewModel.reviewText))
-                        .font(.sandol(type: .bold, size: 11))
-                        .foregroundStyle(Color(red: 36/255, green: 88/255, blue: 139/255))
-                }
-            }
-    
-        }
-    
-    //
-    //    //MARK: - 스크롤 방명록 보기
-    //    private var guestBookGrid: some View {
-    //        ScrollView(.vertical, showsIndicators: false) {
-    //            LazyVGrid(columns: [GridItem(.flexible(minimum: 150), spacing: 10), GridItem(.flexible(minimum: 150), spacing: 100)], spacing: 13) {
-    //                // 안전하게 옵셔널을 처리하기 위해 옵셔널 바인딩 사용
-    //                if let informationList = self.viewModel.exploreDetailData?.information {
-    //                    ForEach(informationList, id: \.storeId) { information in
-    //                        GuestBookCard(viewModel: viewModel,GuestBookModel: GuestBookModel, StoreInformation: information)
-    //                            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 200)
-    //                    }
-    //                }
-    //            }
-    //        }
-    //        .frame(maxWidth: 300, maxHeight: .infinity, alignment: .center)
-    //    }
-    //
-    //}
-    //
-    //
-    //
-    //
-    //
+//    //
+//    //    //MARK: - 스크롤 방명록 보기
+//        private var guestBookGrid: some View {
+//            ScrollView(.vertical, showsIndicators: false) {
+//                LazyVGrid(columns: [GridItem(.flexible(minimum: 150), spacing: 10), GridItem(.flexible(minimum: 150), spacing: 100)], spacing: 13) {
+//                    ForEach(viewModel.guestBookModel?.information ?? [], id: \.self) { information in
+//                        GuestBookCard(guestBookModelInfor: information)
+//                                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 200)
+//                        }
+//                    .frame(maxWidth: 300, maxHeight: .infinity, alignment: .center)
+//                    }
+//                }
+//            }
+            
+}
+
+
+struct DetailView_Preview: PreviewProvider {
+    static var previews: some View {
+        DetailViewControl(viewModel: DetailViewModel())
+    }
 }

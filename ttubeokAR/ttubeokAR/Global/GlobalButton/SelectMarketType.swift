@@ -49,7 +49,7 @@ struct SelectMarketType: View {
                 .frame(width: 14, height: 23)
                 .aspectRatio(contentMode: .fill)
             
-            Text(marketTypeName(type: marketType))
+            Text(buttonTypeName(type: marketType))
                 .font(.sandol(type: .regular, size: 16))
                 .foregroundStyle(isSelected ? Color.white : Color.primary03)
                 .frame(width: 45, height: 24, alignment: .bottom)
@@ -67,6 +67,17 @@ struct SelectMarketType: View {
             return "RESTAURANT"
         case .cafe:
             return "CAFE"
+        case .none:
+            return "X"
+        }
+    }
+    
+    private func buttonTypeName(type: MarketTypeName) -> String {
+        switch type {
+        case .restaurant:
+            return "식당"
+        case .cafe:
+            return "카페"
         case .none:
             return "X"
         }

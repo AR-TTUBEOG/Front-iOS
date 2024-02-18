@@ -37,19 +37,20 @@ struct MainViewControl: View {
     
     //MARK: Body
     var body: some View {
-        ZStack {
-            mainTabView
-            searchControl
-            tabBarButton
-        }
-        .customPopup(isPresented: $showSearchOptionButton, content: {
-            PlaceSettingView()
-        })
-        .onTapGesture {
-            keyboardResponsive()
+        NavigationStack {
+            ZStack {
+                mainTabView
+                searchControl
+                tabBarButton
+            }
+            .customPopup(isPresented: $showSearchOptionButton, content: {
+                PlaceSettingView()
+            })
+            .onTapGesture {
+                keyboardResponsive()
+            }
         }
     }
-    
     //MARK: - Tab View
     
     /// 메인뷰의 변화를 위함 :: ExploreView, MainView의 전환

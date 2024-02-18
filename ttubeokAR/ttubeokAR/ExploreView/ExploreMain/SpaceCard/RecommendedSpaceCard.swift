@@ -26,9 +26,9 @@ struct RecommendedSpaceCard: View {
             .background(Color(red: 0.25, green: 0.24, blue: 0.37))
             .clipShape(.rect(cornerRadius: 19))
             .shadow(radius: 5)
-//            .onReceive(BaseLocationManager.shared.$currentLocation) { _ in
-//                viewModel.updateDistanceAndTIme()
-//            }
+            .onReceive(BaseLocationManager.shared.$currentLocation) { _ in
+                viewModel.updateDistanceAndTIme()
+            }
     }
     
     //MARK: - ViewSetting
@@ -160,7 +160,7 @@ struct RecommendedSpaceCard: View {
     
     // 시간
     private var spaceTime: some View {
-        HStack(spacing: 5) {
+        HStack(spacing: 7) {
             Icon.checkTime.image
                 .resizable()
                 .aspectRatio(contentMode: .fit)

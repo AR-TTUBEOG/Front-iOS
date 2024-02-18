@@ -23,9 +23,9 @@ class BasketBallGameViewModel: ObservableObject {
     @Published var storeId: Int = 0
     
     //MARK: - 농구게임 게임 룰 설정
-    @Published var timeLimit: TimeInterval =  30
-    @Published var ballCount: Int = 5
-    @Published var successCount: Int = 3
+    @Published var timeLimit: TimeInterval =  0
+    @Published var ballCount: Int = 0
+    @Published var successCount: Int = 0
     
     //MARK: - 농구게임 혜택 문구 텍스트 길이
     @Published var benefitsText: String = ""
@@ -41,7 +41,7 @@ class BasketBallGameViewModel: ObservableObject {
     }
     
     public func decreaseTime() {
-        if self.timeLimit > 15 {
+        if self.timeLimit > 0 {
             self.timeLimit -= 1
         }
     }
@@ -54,7 +54,7 @@ class BasketBallGameViewModel: ObservableObject {
     }
     
     public func decreaseBallCount() {
-        if self.ballCount > 1 {
+        if self.ballCount > 0 {
             self.ballCount -= 1
         }
     }

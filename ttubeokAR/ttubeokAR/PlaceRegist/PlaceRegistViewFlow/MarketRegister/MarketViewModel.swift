@@ -159,7 +159,8 @@ class MarketViewModel: ObservableObject, ImageHandling, InputAddressProtocol, Fi
                                         detailAddress: self.detailAddress,
                                         latitude: self.locatoinManager.currentLocation?.coordinate.latitude ?? 0.0,
                                         longitude: self.locatoinManager.currentLocation?.coordinate.longitude ?? 0.0,
-                                        image: base64Images
+                                        image: ["xx"],
+                                        type: self.thirdMarketTypeName
 
         )
     }
@@ -168,7 +169,7 @@ class MarketViewModel: ObservableObject, ImageHandling, InputAddressProtocol, Fi
     private func mathStoreRegistData() {
         saveStringImage()
         self.requestStoreRegistModel = creatParameters()
-        print("장소 등록 match")
+        print(requestStoreRegistModel)
     }
     
     /// 마켓 등록 최종 버튼(게임 등록)

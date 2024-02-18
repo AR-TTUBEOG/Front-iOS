@@ -9,8 +9,8 @@ import Foundation
 import Moya
 
 enum DetailExploreAPITarget {
-    case fetchWalkWayDetail(spotId: Int)
-    case fetchStoreDetail(storeId: Int)
+    case fetchWalkWayDetail(spotId: Int, token: String)
+    case fetchStoreDetail(storeId: Int, token: String)
 }
 
 extension DetailExploreAPITarget: TargetType {
@@ -18,10 +18,10 @@ extension DetailExploreAPITarget: TargetType {
     
     var path: String{
         switch self {
-        case .fetchWalkWayDetail(let spotId):
-            return "/api/spot/\(spotId)"
-        case .fetchStoreDetail(let storeId):
-            return "/api/store/\(storeId)"
+        case .fetchWalkWayDetail(let spotId, _):
+            return "/api/v1/spot/\(spotId)"
+        case .fetchStoreDetail(let storeId, _):
+            return "/api/v1/store/\(storeId)"
         }
     }
     
@@ -44,8 +44,17 @@ extension DetailExploreAPITarget: TargetType {
     }
     
     var headers: [String : String]? {
-        return [
-            "Content-Type": "application/json"
-            ]
+        switch self {
+        case .fetchStoreDetail(_, let token):
+            return [
+                "Content-Type": "application/json",
+                "Authorization": "Bearer \(token)"
+                ]
+        case .fetchWalkWayDetail(_, let token):
+            return [
+                "Content-Type": "application/json",
+                "Authorization": "Bearer \(token)"
+                ]
+        }
     }
 }

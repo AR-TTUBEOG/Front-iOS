@@ -71,8 +71,6 @@
 		48719EBC2B7EF72A00310A1E /* ResetTokenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48719EBB2B7EF72A00310A1E /* ResetTokenModel.swift */; };
 		48719EBF2B7F52EE00310A1E /* GiftBox.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 48719EBE2B7F52EE00310A1E /* GiftBox.usdz */; };
 		48719EC42B7F55D100310A1E /* basketballstand.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 48719EC32B7F55D100310A1E /* basketballstand.usdz */; };
-		48719EC72B7F562D00310A1E /* ARGameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48719EC62B7F562D00310A1E /* ARGameViewModel.swift */; };
-		48719EC92B7F591E00310A1E /* BasketClassCoordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48719EC82B7F591E00310A1E /* BasketClassCoordinate.swift */; };
 		48719ECF2B7F635A00310A1E /* basketBall.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 48719ECE2B7F635A00310A1E /* basketBall.usdz */; };
 		487E383F2B5ADE7A0026599D /* KakaoSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 487E383E2B5ADE7A0026599D /* KakaoSDK */; };
 		487E38412B5ADE7A0026599D /* KakaoSDKAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 487E38402B5ADE7A0026599D /* KakaoSDKAuth */; };
@@ -134,6 +132,8 @@
 		48D88C2F2B5C259300A1B09E /* LoginTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D88C2E2B5C259300A1B09E /* LoginTarget.swift */; };
 		48D88C312B5C288600A1B09E /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D88C302B5C288600A1B09E /* LoginViewModel.swift */; };
 		48D88C332B5C396000A1B09E /* LoginViewCycle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D88C322B5C396000A1B09E /* LoginViewCycle.swift */; };
+		48DC69232B81A19000A83603 /* BasketBallGameAR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DC69222B81A19000A83603 /* BasketBallGameAR.swift */; };
+		48DC69252B81A32B00A83603 /* BasketBallCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DC69242B81A32B00A83603 /* BasketBallCoordinator.swift */; };
 		48E10ED32B72578E00D6EECB /* BasketBallGameRulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E10ED22B72578E00D6EECB /* BasketBallGameRulesView.swift */; };
 		48E10EDC2B725B1600D6EECB /* BasketBallGameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E10EDB2B725B1600D6EECB /* BasketBallGameViewModel.swift */; };
 		48E10EDE2B725BD000D6EECB /* GiftDrawingGameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E10EDD2B725BD000D6EECB /* GiftDrawingGameViewModel.swift */; };
@@ -253,8 +253,6 @@
 		48719EBB2B7EF72A00310A1E /* ResetTokenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetTokenModel.swift; sourceTree = "<group>"; };
 		48719EBE2B7F52EE00310A1E /* GiftBox.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = GiftBox.usdz; sourceTree = "<group>"; };
 		48719EC32B7F55D100310A1E /* basketballstand.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = basketballstand.usdz; sourceTree = "<group>"; };
-		48719EC62B7F562D00310A1E /* ARGameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARGameViewModel.swift; sourceTree = "<group>"; };
-		48719EC82B7F591E00310A1E /* BasketClassCoordinate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketClassCoordinate.swift; sourceTree = "<group>"; };
 		48719ECE2B7F635A00310A1E /* basketBall.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = basketBall.usdz; sourceTree = "<group>"; };
 		487E38482B5AE04A0026599D /* KakaoLoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoLoginManager.swift; sourceTree = "<group>"; };
 		488342FD2B7A155D007A16AD /* GiftDrawingGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiftDrawingGameView.swift; sourceTree = "<group>"; };
@@ -305,6 +303,8 @@
 		48D88C2E2B5C259300A1B09E /* LoginTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTarget.swift; sourceTree = "<group>"; };
 		48D88C302B5C288600A1B09E /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		48D88C322B5C396000A1B09E /* LoginViewCycle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewCycle.swift; sourceTree = "<group>"; };
+		48DC69222B81A19000A83603 /* BasketBallGameAR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketBallGameAR.swift; sourceTree = "<group>"; };
+		48DC69242B81A32B00A83603 /* BasketBallCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketBallCoordinator.swift; sourceTree = "<group>"; };
 		48E10ED22B72578E00D6EECB /* BasketBallGameRulesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketBallGameRulesView.swift; sourceTree = "<group>"; };
 		48E10EDB2B725B1600D6EECB /* BasketBallGameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketBallGameViewModel.swift; sourceTree = "<group>"; };
 		48E10EDD2B725BD000D6EECB /* GiftDrawingGameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiftDrawingGameViewModel.swift; sourceTree = "<group>"; };
@@ -668,8 +668,8 @@
 		48719EC52B7F55DD00310A1E /* BasketBallGame */ = {
 			isa = PBXGroup;
 			children = (
-				48719EC62B7F562D00310A1E /* ARGameViewModel.swift */,
-				48719EC82B7F591E00310A1E /* BasketClassCoordinate.swift */,
+				48DC69222B81A19000A83603 /* BasketBallGameAR.swift */,
+				48DC69242B81A32B00A83603 /* BasketBallCoordinator.swift */,
 			);
 			path = BasketBallGame;
 			sourceTree = "<group>";
@@ -1359,7 +1359,6 @@
 				48A12C202B5CF78E00E51200 /* NicknameRedundancyModel.swift in Sources */,
 				481B90A62B66940500D366A7 /* WalkwayViewModel.swift in Sources */,
 				485B30EB2B70A9E300023785 /* GameManagerView.swift in Sources */,
-				48719EC92B7F591E00310A1E /* BasketClassCoordinate.swift in Sources */,
 				48D88C2F2B5C259300A1B09E /* LoginTarget.swift in Sources */,
 				487122712B80D02900B6E2CA /* BaseImage.swift in Sources */,
 				483820EE2B4BEAFE00C3FB14 /* TtuDotShape.swift in Sources */,
@@ -1410,12 +1409,14 @@
 				481B90A02B66846D00D366A7 /* PlaceRegisterNavigation.swift in Sources */,
 				CAB9FA1E2B551B3E00F0046A /* ExploreViewModel.swift in Sources */,
 				CAFAE8332B75771D00C20502 /* CommentAPITarget.swift in Sources */,
+				48DC69252B81A32B00A83603 /* BasketBallCoordinator.swift in Sources */,
 				483820E42B4BE80700C3FB14 /* SettingsCommand.swift in Sources */,
 				CA2513092B62918A006D2EDF /* GuestBookModel.swift in Sources */,
 				48A12C222B5CF84100E51200 /* NicknameRedundancyService.swift in Sources */,
 				48A6C6B62B5F800900CFF763 /* KeyChainManager.swift in Sources */,
 				4861FF242B54E35C00DC6E2D /* CustomSlider.swift in Sources */,
 				482DB6B92B541797005538DE /* PlaceSettingsViewModel.swift in Sources */,
+				48DC69232B81A19000A83603 /* BasketBallGameAR.swift in Sources */,
 				6C7239EF2B5BB7D00082F12D /* CustomToggle.swift in Sources */,
 				48A59C162B6E1BC5009CF83E /* PlaceRegisterFinishView.swift in Sources */,
 				488365F62B6FE24200F4E397 /* ImageHandling.swift in Sources */,
@@ -1469,7 +1470,6 @@
 				6CE46B0D2B6B5A350030F323 /* PlaceViewModel.swift in Sources */,
 				CA6993C82B77AFA000CF1D33 /* ARBookMarkViewControl.swift in Sources */,
 				6CC4DE032B5688080080E7E8 /* CouponModel.swift in Sources */,
-				48719EC72B7F562D00310A1E /* ARGameViewModel.swift in Sources */,
 				CA2513052B629109006D2EDF /* DetailViewControl.swift in Sources */,
 				CAB9FA1C2B551B1500F0046A /* ExploreViewControl.swift in Sources */,
 				483CB9622B732F4A00938224 /* GameBenefitsTextField.swift in Sources */,

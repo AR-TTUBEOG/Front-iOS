@@ -10,42 +10,31 @@ import RealityKit
 import ARKit
 
 struct ContentView : View {
-    
-    @ObservedObject var viewModel = ARGameViewModel()
-    
+    @StateObject var arViewModel = ARViModel()
     
     var body: some View {
-        
-        VStack {
-            Text("Time Left: \(viewModel.timeLeft)")
-            Text("Score: \(viewModel.score)")
-            ARViewContainer(viewModel: viewModel).edgesIgnoringSafeArea(.all)
-        }
-        .onAppear {
-            viewModel.startGame()
-        }
+        ARViewContainer(arViewModel: arViewModel)
+            .ignoresSafeArea(.all)
+            .onTapGesture {
+                self.arViewModel.handleTap()
+            }
     }
 }
 
 struct ARViewContainer: UIViewRepresentable {
-    
-    var viewModel: ARGameViewModel
+    @ObservedObject var arViewModel: ARViModel
+
     
     func makeUIView(context: Context) -> ARSCNView {
-        let arView = ARSCNView()
-        arView.delegate = context.coordinator
-        if let ballNode = viewModel.ballNode, let hoopNode = viewModel.hoopNode {
-            arView.scene.rootNode.addChildNode(ballNode)
-            arView.scene.rootNode.addChildNode(hoopNode)
-        }
-        arView.session.run(ARWorldTrackingConfiguration())
-        return arView
+       let view = ARSCNView()
+        view.session.run(ARWorldTrackingConfiguration())
+        return view
     }
     
     func updateUIView(_ uiView: ARSCNView, context: Context) {}
     
-    func makeCoordinator() -> ARCoordinator {
-        ARCoordinator(self, viewModel: viewModel)
+    func makeCoordinator() -> Coordinator {
+        Coordinator() 
     }
 }
 #Preview {

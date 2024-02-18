@@ -30,10 +30,10 @@ class WheelGameViewModel: ObservableObject {
         self.authPlugin = AuthPlugin(provider: MoyaProvider<MultiTarget>())
         self.provider = MoyaProvider<GameManagerService>(plugins: [authPlugin])
         
-        wheelGameSetting = [
-            WheelGameSetting(option: "상품"),
+        wheelGameSetting = [ 
             WheelGameSetting(option: "꽝"),
-            WheelGameSetting(option: "상품"),
+            WheelGameSetting(option: "꽝"),
+            WheelGameSetting(option: "꽝"),
             WheelGameSetting(option: "꽝")
         ]
     }

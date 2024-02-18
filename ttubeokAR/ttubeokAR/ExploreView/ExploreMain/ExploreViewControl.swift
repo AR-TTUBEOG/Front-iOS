@@ -18,14 +18,12 @@ struct ExploreViewControl: View {
     
     // MARK: - Body
     var body: some View {
-        NavigationStack {
             allView
-                .onAppear {
-                    observeKeyboard()
-                    print("-------------- 7: MainViewControll 초기 호출--------------")
-                    viewModel.fetchDataSearch(viewModel.currentSearchType, page: 0)
-                }
-        }
+            .onAppear {
+                observeKeyboard()
+                print("-------------- 7: MainViewControll 초기 호출--------------")
+                viewModel.fetchDataSearch(viewModel.currentSearchType, page: 0)
+            }
     }
     
     // MARK: - Explore View
