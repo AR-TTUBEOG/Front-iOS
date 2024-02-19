@@ -48,8 +48,14 @@ struct MarketPageContent: View {
             }
             .scrollIndicators(.hidden)
         case 5:
-            sixthView
+            ScrollView {
+                sixthView
+            }
             .scrollIndicators(.hidden)
+        case 6:
+            ScrollView {
+                sevenView
+            }
         default:
             EmptyView()
         }
@@ -285,4 +291,39 @@ struct MarketPageContent: View {
         }
         .frame(width: 360)
     }
+    
+    
+    private var sevenTitle: some View {
+        CustomTitleView(titleText: "리워드를 선택해주세요",
+                        highlightText: ["리워드"],
+                        subtitleText: "방문 고객에게 게임을 통해 혜택을 주세요!",
+                        titleHeight: 45,
+                        spacing: 10,
+                        textAlignment: .leading,
+                        frameAlignment: .topLeading
+        )
+    }
+    
+    private var sevenBenefitMethod: some View {
+        VStack(alignment: .leading, spacing: 30, content: {
+            Text("헤택을 제공할 방법을 선택해주세요!")
+                .font(.sandol(type: .bold, size: 16))
+                .foregroundStyle(Color.textPink)
+                .frame(width: 300, alignment: .leading)
+            
+            GameManagerView(basketViewModel: viewModel.basketBallViewModel, giftDrawingViewModel: viewModel.giftViewModel, wheelGameViewModel: viewModel.wheelGameViewModel)
+        })
+        .frame(width: 320)
+    }
+    
+    private var sevenView: some View {
+        VStack(alignment: .leading, spacing: 35, content: {
+            sevenTitle
+            sevenBenefitMethod
+                .padding(.leading, 15)
+        })
+        .frame(maxWidth: .infinity)
+        .padding(.top, 20)
+    }
+
 }

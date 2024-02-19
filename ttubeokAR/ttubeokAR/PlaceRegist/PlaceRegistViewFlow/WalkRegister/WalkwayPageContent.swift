@@ -44,9 +44,11 @@ struct WalkwayPageContent: View {
             }
             .scrollIndicators(.hidden)
         case 4:
-            fifthView
+            ScrollView {
+                fifthView
+            }
         case 5:
-            Text("완료}")
+            Text("완료")
         default:
             EmptyView()
         }
@@ -160,7 +162,7 @@ struct WalkwayPageContent: View {
     private var fourthExampleImage: some View {
         Icon.examplePlace.image
             .resizable()
-            .frame(width: 340, height: 280)
+            .frame(width: 340, height: 240)
     }
     
     /// 네 번째 뷰
@@ -185,7 +187,7 @@ struct WalkwayPageContent: View {
                 }
             }
         }
-        .frame(width: 360, alignment: .center)
+        .frame(width: 360 , alignment: .center)
     }
     
     //MARK: - fifthView

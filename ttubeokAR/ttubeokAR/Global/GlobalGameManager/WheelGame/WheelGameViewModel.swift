@@ -37,7 +37,7 @@ class WheelGameViewModel: ObservableObject {
             WheelGameSetting(option: "상품")
         ]
         
-        texts = ["키링 당첨!!", "꽝입니다!!!", "스티커 당첨!!", "박수 당첨"]
+        texts = ["키링 당첨!!", "꽝입니다!!!", "스티커 당첨!!", "박수 당첨!!"]
     }
     
     //MARK: - API 전달

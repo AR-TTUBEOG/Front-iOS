@@ -26,6 +26,9 @@ struct MarketPlaceRegister: View {
             .navigationDestination(isPresented: $viewModel.navigationToNextView) {
                 PlaceRegisterFinishView(viewModel: viewModel, lastedSelectedTab: lastedSelectedTab)
             }
+            .sheet(isPresented: $viewModel.isPop) {
+                MarketPageContent(viewModel: viewModel)
+            }
             .onAppear {
                 observeKeyboard()
             }
@@ -94,10 +97,10 @@ struct MarketPlaceRegister: View {
             .clipShape(RoundedRectangle(cornerRadius: 19))
             .shadow(color: .black.opacity(0.15), radius: 2.5, x: 0, y: 1)
             
-            if viewModel.currentPageIndex <= 5 {
+            if viewModel.currentPageIndex <= 6 {
                 Button(action: {
                     withAnimation {
-                        if viewModel.currentPageIndex == 5 {
+                        if viewModel.currentPageIndex == 6 {
                             viewModel.navigationToNextView = true
                         } else {
                             viewModel.currentPageIndex += 1

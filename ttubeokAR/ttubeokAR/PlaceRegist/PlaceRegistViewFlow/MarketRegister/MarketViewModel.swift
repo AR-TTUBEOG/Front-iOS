@@ -45,6 +45,7 @@ class MarketViewModel: ObservableObject, ImageHandling, InputAddressProtocol, Fi
     @Published var isImagePickerPresented = false
     @Published var navigationToNextView = false
     @Published var images: [UIImage] = []
+    @State var isPop = false
     var base64Images: [String] = []
     
     
@@ -197,12 +198,13 @@ class MarketViewModel: ObservableObject, ImageHandling, InputAddressProtocol, Fi
         self.basketBallViewModel.finishSendAPI()
         self.giftViewModel.finishSendAPI()
         self.wheelGameViewModel.finishSendAPI()
+        saveInfoMarket()
     }
     
     public func saveInfoMarket() {
         mathStoreRegistData()
         sendDataMarketInfo()
-        DispatchQueue.main.asyncAfter(deadline: .now()+1) {
+        DispatchQueue.main.asyncAfter(deadline: .now()+0.5) {
             self.sendImage()
         }
     }
