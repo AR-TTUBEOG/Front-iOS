@@ -26,9 +26,9 @@ struct RecommendedSpaceCard: View {
             .background(Color(red: 0.25, green: 0.24, blue: 0.37))
             .clipShape(.rect(cornerRadius: 19))
             .shadow(radius: 5)
-//            .onReceive(BaseLocationManager.shared.$currentLocation) { _ in
-//                viewModel.updateDistanceAndTIme()
-//            }
+            .onReceive(BaseLocationManager.shared.$currentLocation) { _ in
+                viewModel.updateDistanceAndTIme()
+            }
             .onAppear {
                 
                 print("카드 온어피어")

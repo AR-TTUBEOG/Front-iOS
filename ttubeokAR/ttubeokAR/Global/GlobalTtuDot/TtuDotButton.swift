@@ -132,7 +132,7 @@ struct TtuDotButton: View {
                 previousAngle = angle
             }
             .onEnded{ _ in
-                withAnimation(.easeOut(duration: 0.6)) {
+                withAnimation(.easeOut(duration: 2)) {
                     viewModel.angle += rotationVelocity * 20
                     rotationVelocity = 0
                 }

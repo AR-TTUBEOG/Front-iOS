@@ -12,7 +12,7 @@ struct AccountSettiingView: View {
     // MARK: - Property
     @State var alarmShowingPopup: Bool = false
     @State var placeSetting: Bool = false
-    @StateObject var viewModel: PlaceViewModel
+    @StateObject var viewModel = PlaceViewModel()
     
     
     enum mySettingType {

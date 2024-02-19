@@ -6,11 +6,25 @@
 //
 
 import Foundation
+import SwiftUI
 
 class SettingsCommand: TtuDotModel {
+    var sharedTabInfo: SharedTabInfo
     var onExecute: (() -> Void)?
     
-    func execute() {
-        print("환경설정 버튼입니다!")
+    init(sharedTabInfo: SharedTabInfo) {
+        self.sharedTabInfo = sharedTabInfo
     }
+    
+    var getCurrentTab: Int {
+        return sharedTabInfo.currentTab
+    }
+    
+    func execute() {
+        onExecute?()
+        let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        let newRootView = UIHostingController(rootView: AccountSettiingView(lastedTab: getCurrentTab))
+        appDelegate?.changeRootViewController(newRootView, animated: true)
+    }
+
 }

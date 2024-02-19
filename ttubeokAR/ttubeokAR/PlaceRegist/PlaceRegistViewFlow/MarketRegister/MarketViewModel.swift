@@ -66,7 +66,7 @@ class MarketViewModel: ObservableObject, ImageHandling, InputAddressProtocol, Fi
     }
     
     public func addImage(_ newImage: UIImage) {
-        let resizedWidth: CGFloat = 300 // 원하는 너비로 설정
+        let resizedWidth: CGFloat = 720
         if let resizedImage = newImage.resized(toWidth: resizedWidth) {
             images.append(resizedImage)
         }

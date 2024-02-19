@@ -23,7 +23,7 @@ class MyTicketCommand: TtuDotModel {
     func execute() {
         onExecute?()
         let appDelegate = UIApplication.shared.delegate as? AppDelegate
-        let newRootView = UIHostingController(rootView:  CouponView(lastedTab: getCurrentTab))
+        let newRootView = UIHostingController(rootView: CouponView(lastedTab: getCurrentTab))
         appDelegate?.changeRootViewController(newRootView, animated: true)
     }
 }

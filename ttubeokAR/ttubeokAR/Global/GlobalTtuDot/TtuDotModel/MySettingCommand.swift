@@ -23,7 +23,7 @@ class MySettingCommand: TtuDotModel {
     func execute() {
         onExecute?()
         let appDelegate = UIApplication.shared.delegate as? AppDelegate
-        let newRootView = UIHostingController(rootView: AccountSettingView(lastedTab: getCurrentTab))
+        let newRootView = UIHostingController(rootView: AccountManagerView(lastedTab: getCurrentTab))
         appDelegate?.changeRootViewController(newRootView, animated: true)
     }
 

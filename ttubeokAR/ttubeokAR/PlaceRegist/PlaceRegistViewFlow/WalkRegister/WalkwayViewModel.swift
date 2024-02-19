@@ -57,7 +57,7 @@ class WalkwayViewModel: ObservableObject, ImageHandling, InputAddressProtocol, F
     /// 앨범에서 선택한 이미지 추가하기
     /// - Parameter newImages: 추가한 이미지 배열에 넣기
     public func addImage(_ newImage: UIImage) {
-        let resizedWidth: CGFloat = 300 // 원하는 너비로 설정
+        let resizedWidth: CGFloat = 720
         if let resizedImage = newImage.resized(toWidth: resizedWidth) {
             images.append(resizedImage)
         }

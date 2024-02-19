@@ -70,16 +70,12 @@ struct ContentView : View {
     }
     
     private func startRandomGmae() {
-        let selectedGame = Int.random(in: 1...3)
+        let selectedGame = Int.random(in: 1...2)
         switch selectedGame {
         case 1:
             arCoordinator.startBasketballGame()
-            print("1")
         case 2:
-            arCoordinator.dropBoxes()
-            print("1")
-        case 3:
-            self.isOnWheel = true
+            self.isOnWheel.toggle()
         default:
             break
         }
