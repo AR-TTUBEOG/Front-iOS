@@ -60,13 +60,19 @@ struct AnnoButtonView: View {
                             print("anno : present")
                         } label: {
                             Image("mapPresent")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 20, height: 20)
                         }
                         .offset(x: -15, y: -52)
                         
                         Button {
                             print("anno : coupon")
                         } label: {
-                            Image("mapMessage")
+                            Image("mapCoupon")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 20, height: 20)
                         }
                         .offset(y: -74)
                         
@@ -74,6 +80,8 @@ struct AnnoButtonView: View {
                             print("anno : game")
                         } label: {
                             Image("mapGame")
+                                .resizable()
+                                .frame(width: 20, height: 20)
                         }
                         .offset(x: 15, y: -52)
                     }                    
@@ -81,6 +89,7 @@ struct AnnoButtonView: View {
         }
     }
 }
+
 
 //#Preview {
 //    AnnoButtonView(type: .cafe, selectedId: .constant(""), isSelectedTotal: .constant(false), selectedAnno: .constant(.init(latitude: 37.256406, longitude: 127.064556, type: .cafe, image: "mapPlaceExample", isSelected: false)), isSelected: true, id: "")

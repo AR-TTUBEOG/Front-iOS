@@ -16,7 +16,7 @@ struct MapTrack: View {
     @State private var polyline = MKPolyline()
     @ObservedObject var locationManager = BaseLocationManager.shared
     
-    @StateObject private var viewModel = RoadViewModel()
+    @StateObject private var viewModel = RouteViewModel()
     
     @State private var position: MapCameraPosition = .camera(
         MapCamera(
@@ -34,11 +34,13 @@ struct MapTrack: View {
         
         Map(position: $position) {
             UserAnnotation {
-                Text("h")
+                Circle()
+                    .foregroundStyle(.primary01)
+                    .frame(width: 15, height: 15)
             }
             
-            MapPolyline(coordinates: viewModel.history ?? [])
-                .stroke(.blue, lineWidth: 10.0)
+            MapPolyline(coordinates: viewModel.history)
+                .stroke(.primary01, lineWidth: 10.0)
         }
         .onReceive(locationManager.$currentLocation) { newLocation in
             guard let location = newLocation else { return }
@@ -50,9 +52,9 @@ struct MapTrack: View {
             
             BaseLocationManager.shared.startUpdatingLocation()
                 
-            _ = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { _ in
+                let timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
                     if let currentLocation = BaseLocationManager.shared.getCurrentLocation() {
-                        viewModel.history?.append(.init(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude))
+                        viewModel.history.append(.init(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude))
                         print("\(currentLocation.coordinate.latitude), \(currentLocation.coordinate.longitude)")
                     }
             }
@@ -62,8 +64,8 @@ struct MapTrack: View {
     }
     
     private func updatePolyline(with coordinate: CLLocationCoordinate2D) {
-        viewModel.history?.append(coordinate)
-        polyline = MKPolyline(coordinates: viewModel.history ?? [], count: viewModel.history?.count ?? 0)
+        viewModel.history.append(coordinate)
+        polyline = MKPolyline(coordinates: &viewModel.history, count: viewModel.history.count)
     }
     
     private func updateRegion(to coordinate: CLLocationCoordinate2D) {

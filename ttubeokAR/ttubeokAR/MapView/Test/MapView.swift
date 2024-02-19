@@ -63,7 +63,7 @@ struct MapView: View {
     @State var newLocations: [CLLocation]?
     
     /// 검색 모드, 추가 모드
-    @State var mapType: MapType = .searchMode
+    @State var mapType: Bool
     
     /// 사용자의 실시간 흔적 저장
     @State var history: [CLLocationCoordinate2D] = []
@@ -76,8 +76,9 @@ struct MapView: View {
     
     var body: some View {
         ZStack {
-//            switch mapType {
-//            case .searchMode:
+            
+            
+            if !mapType {
                 Map(position: $position, bounds: .init(centerCoordinateBounds: .init(center: location, span: span))) {
                     if routes.isEmpty {
                         
@@ -103,7 +104,9 @@ struct MapView: View {
                     }
                     
                     UserAnnotation {
-                        Image("trailMap")
+                        Image("mylocation")
+                            .resizable()
+                            .frame(width: 15, height: 7)
                     }
                 }
                 .onMapCameraChange(frequency: .continuous) { context in
@@ -132,7 +135,24 @@ struct MapView: View {
 //                    .stroke(.blue, lineWidth: 10.0)
                 
             
-//            }
+            } else {
+                MapTrack()
+            }
+            
+            VStack {
+                Spacer()
+                HStack {
+                    Spacer()
+                    Button {
+                        mapType.toggle()
+                    } label: {
+                        Image("heart")
+                            .resizable()
+                            .frame(width: 15, height: 15)
+                    }
+                    .padding(20)
+                }
+            }
         }
 
     }
@@ -168,3 +188,4 @@ struct MapView: View {
 //#Preview {
 //    MapView(exploreViewModel: ExploreViewModel())
 //}
+

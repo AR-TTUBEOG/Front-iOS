@@ -59,7 +59,7 @@ struct MainViewControl: View {
             if selectedTab == 1 {
                 ExploreViewControl(viewModel: exploreViewModel)
             } else if selectedTab == 2 {
-                MapView(exploreViewModel: exploreViewModel)
+                MapView(exploreViewModel: exploreViewModel, mapType: false)
             }
         }
         .ignoresSafeArea(.keyboard)
