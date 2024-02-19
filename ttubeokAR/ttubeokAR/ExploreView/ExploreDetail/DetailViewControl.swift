@@ -24,6 +24,7 @@ struct DetailViewControl: View {
     }
     
     private var allView: some View {
+        
         ZStack(alignment: .top) {
             Color.background.ignoresSafeArea()
             VStack(alignment: .center, spacing: 18) {
@@ -47,28 +48,48 @@ struct DetailViewControl: View {
     /// 장소  사진  및 찜하기 버튼
     private var topImageAndBookmarked: some View {
         ZStack(alignment: .topLeading) {
-            spaceImage
+//            spaceImage
             topHStack
         }
         .frame(maxWidth: .infinity, maxHeight: 250)
     }
 
     
-    //MARK: - 장소 사진 설정
-    //장소 사진
-    private var spaceImage: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            ForEach(viewModel.images, id: \.self) { image in
-            HStack(spacing: 0) {
-                Icon.examplePlace.image
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: 410, height: 252)
-                }
+//    //MARK: - 장소 사진 설정
+//    //장소 사진
+//    private var spaceImage: some View {
+//        ScrollView(.horizontal, showsIndicators: false) {
+//            
+//            if let walkwayImages = viewModel.walkwayImageModel?.information {
+//                    loadImage(urlString: walkwayImages.image)
+//                }
+//            
+//            if let storeImages = viewModel.storeImageModel?.information {
+//                    loadImage(urlString: storeImages.image)
+//                }
+//            }
+//        .frame(width: 410, height: 252)
+//    }
+    
+    @ViewBuilder
+    private func loadImage(urlString: String) -> some View {
+        AsyncImage(url: URL(string: urlString)) { phase in
+            switch phase {
+            case .empty:
+                ProgressView()
+            case .success(let image):
+                image.resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 410, height: 252)
+            case .failure(let error):
+                Image(systemName: "photo")
+            @unknown default:
+                EmptyView()
             }
         }
-        .frame(width: 410, height: 252)
     }
+    
+    
     
     private var topHStack: some View {
         HStack {
@@ -80,7 +101,7 @@ struct DetailViewControl: View {
             .padding(.top, 10)
         }
         .padding(.leading, 10)
-        .frame(maxWidth: 410)
+        .frame(width: 300)
     }
     
     private var beforView: some View {
@@ -319,8 +340,7 @@ struct DetailViewControl: View {
         
     }
     
-//    //
-//    //    //MARK: - 스크롤 방명록 보기
+//        //MARK: - 스크롤 방명록 보기
 //        private var guestBookGrid: some View {
 //            ScrollView(.vertical, showsIndicators: false) {
 //                LazyVGrid(columns: [GridItem(.flexible(minimum: 150), spacing: 10), GridItem(.flexible(minimum: 150), spacing: 100)], spacing: 13) {
@@ -332,7 +352,7 @@ struct DetailViewControl: View {
 //                    }
 //                }
 //            }
-            
+//            
 }
 
 

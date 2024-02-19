@@ -16,16 +16,10 @@ struct GuestBookModel: Codable, Hashable {
 struct GuestBookModelInfor: Codable, Hashable {
     var id: Int
     var memberId: Int
+    var memberName: String
     var guestBookType: String
     var spotId: Int
     var storeId: Int
     var content: String
     var star : Int
-}
-
-struct MemeberCheck: Codable {
-    var id: Int
-    var name: String
-    var platform: String
-    var isChanged: Bool
 }

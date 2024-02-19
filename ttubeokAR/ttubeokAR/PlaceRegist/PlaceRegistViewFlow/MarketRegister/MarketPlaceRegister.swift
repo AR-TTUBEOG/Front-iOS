@@ -94,12 +94,11 @@ struct MarketPlaceRegister: View {
             .clipShape(RoundedRectangle(cornerRadius: 19))
             .shadow(color: .black.opacity(0.15), radius: 2.5, x: 0, y: 1)
             
-            if viewModel.currentPageIndex <= 6 {
+            if viewModel.currentPageIndex <= 5 {
                 Button(action: {
                     withAnimation {
-                        if viewModel.currentPageIndex == 6 {
+                        if viewModel.currentPageIndex == 5 {
                             viewModel.navigationToNextView = true
-                            viewModel.saveInfoMarket()
                         } else {
                             viewModel.currentPageIndex += 1
                         }

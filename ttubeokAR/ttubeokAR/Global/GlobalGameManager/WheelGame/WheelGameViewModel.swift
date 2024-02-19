@@ -31,11 +31,13 @@ class WheelGameViewModel: ObservableObject {
         self.provider = MoyaProvider<GameManagerService>(plugins: [authPlugin])
         
         wheelGameSetting = [ 
-            WheelGameSetting(option: "꽝"),
-            WheelGameSetting(option: "꽝"),
-            WheelGameSetting(option: "꽝"),
-            WheelGameSetting(option: "꽝")
+            WheelGameSetting(option: "상품"),
+            WheelGameSetting(option: "상품"),
+            WheelGameSetting(option: "상푸"),
+            WheelGameSetting(option: "상품")
         ]
+        
+        texts = ["키링 당첨!!", "꽝입니다!!!", "스티커 당첨!!", "박수 당첨"]
     }
     
     //MARK: - API 전달

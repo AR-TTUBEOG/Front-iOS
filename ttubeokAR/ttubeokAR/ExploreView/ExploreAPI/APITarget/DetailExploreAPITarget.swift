@@ -11,6 +11,8 @@ import Moya
 enum DetailExploreAPITarget {
     case fetchWalkWayDetail(spotId: Int, token: String)
     case fetchStoreDetail(storeId: Int, token: String)
+    case fetchWalkWayImage(spotId: Int, token: String)
+    case fetchStoreImage(storeId: Int, token: String)
 }
 
 extension DetailExploreAPITarget: TargetType {
@@ -22,6 +24,10 @@ extension DetailExploreAPITarget: TargetType {
             return "/api/v1/spot/\(spotId)"
         case .fetchStoreDetail(let storeId, _):
             return "/api/v1/store/\(storeId)"
+        case .fetchWalkWayImage(let spotId, _):
+            return "/api/v1/image/\(spotId)"
+        case .fetchStoreImage(let storeId, _):
+            return "/api/v1/image/\(storeId)"
         }
     }
     
@@ -31,6 +37,10 @@ extension DetailExploreAPITarget: TargetType {
             return .get
         case .fetchStoreDetail:
             return .get
+        case .fetchWalkWayImage:
+            return .get
+        case .fetchStoreImage:
+            return .get
         }
     }
     
@@ -39,6 +49,10 @@ extension DetailExploreAPITarget: TargetType {
         case .fetchWalkWayDetail:
             return .requestPlain
         case .fetchStoreDetail:
+            return .requestPlain
+        case .fetchWalkWayImage:
+            return .requestPlain
+        case .fetchStoreImage:
             return .requestPlain
         }
     }
@@ -51,6 +65,16 @@ extension DetailExploreAPITarget: TargetType {
                 "Authorization": "Bearer \(token)"
                 ]
         case .fetchWalkWayDetail(_, let token):
+            return [
+                "Content-Type": "application/json",
+                "Authorization": "Bearer \(token)"
+                ]
+        case .fetchWalkWayImage(_, let token):
+            return [
+                "Content-Type": "application/json",
+                "Authorization": "Bearer \(token)"
+                ]
+        case .fetchStoreImage(_, let token):
             return [
                 "Content-Type": "application/json",
                 "Authorization": "Bearer \(token)"

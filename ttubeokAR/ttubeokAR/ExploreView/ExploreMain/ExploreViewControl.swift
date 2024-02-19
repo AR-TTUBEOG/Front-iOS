@@ -74,7 +74,8 @@ struct ExploreViewControl: View {
             LazyVGrid(columns: [GridItem(.flexible(minimum: 150), spacing: -8), GridItem(.flexible(minimum: 150), spacing: 15)], spacing: 25) {
                 ForEach(self.viewModel.exploreData?.information ?? [], id: \.self) { place in
                     RecommendedSpaceCard(viewModel: RecommendedSpaceCardViewModel(exploreDetailInfor: place))
-                        .frame(minWidth: 0, maxWidth: 190)
+
+                        .frame(minWidth: 0, maxWidth: 180)
                     
                         .onAppear {
                             if place == self.viewModel.exploreData?.information.last {
@@ -89,11 +90,8 @@ struct ExploreViewControl: View {
                        
                 }
             }
-            
-            
             .padding()
             .frame(maxWidth: .infinity)
-            
         }
         .refreshable {
             print("--------------refresh 호출--------------")

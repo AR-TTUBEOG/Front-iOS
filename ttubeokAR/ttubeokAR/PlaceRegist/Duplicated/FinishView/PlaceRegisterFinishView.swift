@@ -10,11 +10,21 @@ import SwiftUI
 struct PlaceRegisterFinishView<ViewModel: FinishViewProtocol & ObservableObject> : View {
     
     @ObservedObject var viewModel: ViewModel
+    @State var ispopUp = false
     let lastedSelectedTab: Int
+    
     
     var body: some View {
         allView
             .navigationBarBackButtonHidden(true)
+            .onAppear{
+                if viewModel.titleText == "매장" {
+                    ispopUp = true
+                }
+            }
+            .sheet(isPresented: $ispopUp) {
+                MarketGameRegistView(viewModel: MarketViewModel())
+            }
     }
     
     private var allView: some View {

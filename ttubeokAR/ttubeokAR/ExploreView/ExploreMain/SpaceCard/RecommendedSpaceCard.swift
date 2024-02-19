@@ -22,12 +22,19 @@ struct RecommendedSpaceCard: View {
     
     var body: some View {
         allView
-            .frame(width: 175, height: 190)
+            .frame(width: 160, height: 180)
             .background(Color(red: 0.25, green: 0.24, blue: 0.37))
             .clipShape(.rect(cornerRadius: 19))
             .shadow(radius: 5)
-            .onReceive(BaseLocationManager.shared.$currentLocation) { _ in
-                viewModel.updateDistanceAndTIme()
+//            .onReceive(BaseLocationManager.shared.$currentLocation) { _ in
+//                viewModel.updateDistanceAndTIme()
+//            }
+            .onAppear {
+                
+                print("카드 온어피어")
+                if let place = viewModel.exploreDetailInfor?.placeType {
+                    place.spot ? viewModel.walkImageGet() : viewModel.storeImageGet()
+                }
             }
     }
     
@@ -81,13 +88,45 @@ struct RecommendedSpaceCard: View {
     //    // MARK: - 장소 이미지 및 이름
     //장소 이미지
     private var spaceImage : some View {
-        Image(base64String: viewModel.exploreDetailInfor?.image ?? "")
-            .resizable()
-            .aspectRatio(contentMode: .fill)
-            .frame(width: 150, height: 94)
-            .roundedCorner(19, corners: [.topLeft, .topRight])
-            .padding(.top, 5)
+        AsyncImage(url: URL(string: viewModel.exploreDetailInfor?.image ?? "")) { phase in
+            switch phase {
+            case .empty:
+                ProgressView()
+            case .success(let image):
+                image.resizable()
+                    .frame(width: 150, height: 94)
+                    .aspectRatio(contentMode: .fill)
+                    .roundedCorner(19, corners: [.topLeft, .topRight])
+                    .padding(.top, 5)
+            case .failure(_):
+                Image(systemName: "photo")
+            @unknown default:
+                EmptyView()
+            }
+        }
     }
+    
+    @ViewBuilder
+    private func loadImage(urlString: String) -> some View {
+        AsyncImage(url: URL(string: urlString)) { phase in
+            switch phase {
+            case .empty:
+                ProgressView()
+            case .success(let image):
+                image.resizable()
+                    .frame(width: 150, height: 94)
+                    .aspectRatio(contentMode: .fill)
+                    .roundedCorner(19, corners: [.topLeft, .topRight])
+                    .padding(.top, 5)
+            case .failure(let error):
+                Image(systemName: "photo")
+            @unknown default:
+                EmptyView()
+            }
+        }
+        
+    }
+    
     
     //장소 이름
     private var spaceName : some View {
@@ -100,12 +139,14 @@ struct RecommendedSpaceCard: View {
     //    //장소 좋아요
     private var spaceLiked: some View {
         Button(action: {
-            self.isFavorited.toggle()
-            print("좋아요 상태 : \(isFavorited)")
             
-            if isFavorited {
+            if !isFavorited {
                 viewModel.sendLike()
             }
+            
+            self.isFavorited = true
+            
+            
             
         }) {
             Image(self.isFavorited ? "checkHeart" : "unCheckHeart")
