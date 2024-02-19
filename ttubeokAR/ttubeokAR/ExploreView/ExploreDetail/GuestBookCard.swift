@@ -10,7 +10,7 @@
 //struct GuestBookCard : View {
 //    
 //    // MARK: - Property
-//    let guestBookModelInfor: GuestBookModelInfor?
+//    
 //    
 //    // 이미지 탭 여부 추적 변수
 //    @State private var isImageTapped = false

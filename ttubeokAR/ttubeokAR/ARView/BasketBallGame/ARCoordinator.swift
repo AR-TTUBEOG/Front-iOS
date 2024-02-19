@@ -53,7 +53,7 @@ class ARCoordinator: UIViewController, ARSCNViewDelegate, ObservableObject {
             return
         }
         
-        backboardNode.position = SCNVector3(x: 0, y: 3, z: -5)
+        backboardNode.position = SCNVector3(x: 0, y: 2, z: -7)
         
         let physicsShape = SCNPhysicsShape(node: backboardNode, options: [SCNPhysicsShape.Option.type: SCNPhysicsShape.ShapeType.concavePolyhedron])
         let physicsBody = SCNPhysicsBody(type: .static, shape: physicsShape)
@@ -86,7 +86,7 @@ class ARCoordinator: UIViewController, ARSCNViewDelegate, ObservableObject {
         
         let cameraPosition = SCNVector3Make(cameraLocation.x + cameraOrientation.x, cameraLocation.y + cameraOrientation.y, cameraLocation.z + cameraOrientation.z)
         
-        let ball = SCNSphere(radius: 0.15)
+        let ball = SCNSphere(radius: 0.23)
         let material = SCNMaterial()
         material.diffuse.contents = UIImage(named: "ball.jpg")
         ball.materials = [material]
@@ -120,45 +120,61 @@ class ARCoordinator: UIViewController, ARSCNViewDelegate, ObservableObject {
             boxNode.position = randomPosition
             sceneView.scene.rootNode.addChildNode(boxNode)
 
-            // Add physics to make the box fall
+            
             let physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
             boxNode.physicsBody = physicsBody
         }
     }
     
     func loadBoxModel() -> SCNNode? {
-        // Load the 'gift.usdz' file and return the node
         guard let boxScene = SCNScene(named: "art.scnassets/gift.usdz"),
               let boxNode = boxScene.rootNode.childNodes.first else {
             print("Failed to load the gift.usdz file")
             return nil
         }
         
+        let scale: Float = 0.3
+        boxNode.scale = SCNVector3(scale, scale, scale)
+        
         return boxNode
     }
+    
+    
     
     func getRandomPositionAboveCamera() -> SCNVector3 {
         guard let currentFrame = sceneView.session.currentFrame else {
             return SCNVector3(0, 0, 0)
         }
         
-        // Get the camera's current transform matrix
+        
         let cameraTransform = SCNMatrix4(currentFrame.camera.transform)
         let cameraPosition = SCNVector3Make(cameraTransform.m41, cameraTransform.m42, cameraTransform.m43)
+      
         
-        // Define the range for the random position
-        let randomX = Float(arc4random_uniform(100)) / 500.0 // +/- 0.1
-        let randomZ = Float(arc4random_uniform(100)) / 500.0 // +/- 0.1
-        let yOffset: Float = 0.5 // Adjust this to set how high above the camera the box should appear
+        let maxDistance: Float = 15
+            let minDistance: Float = 5
+
+            // Generate random positions within a spherical area around the camera
+            let randomX = Float(arc4random_uniform(UInt32(maxDistance * 200))) / 100.0 - maxDistance
+            let randomY = Float(arc4random_uniform(UInt32(maxDistance * 200))) / 100.0 - maxDistance
+            let randomZ = Float(arc4random_uniform(UInt32(maxDistance * 200))) / 100.0 - maxDistance
+
         
-        // Calculate the random position
-        let randomPosition = SCNVector3(
+        var randomPosition = SCNVector3(
             x: cameraPosition.x + randomX,
-            y: cameraPosition.y + yOffset,
+            y: cameraPosition.y + randomY,
             z: cameraPosition.z + randomZ
         )
         
-        return randomPosition
+        let distance = sqrt(pow(randomPosition.x - cameraPosition.x, 2) + pow(randomPosition.y - cameraPosition.y, 2) + pow(randomPosition.z - cameraPosition.z, 2))
+            if distance < minDistance {
+                let scale = minDistance / distance
+                randomPosition.x *= scale
+                randomPosition.y *= scale
+                randomPosition.z *= scale
+            }
+
+            return randomPosition
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -167,7 +183,7 @@ class ARCoordinator: UIViewController, ARSCNViewDelegate, ObservableObject {
             
             let hitTestResults = sceneView.hitTest(touchLocation, options: nil)
             if let hitTest = hitTestResults.first {
-                // Destroy the box
+            
                 hitTest.node.removeFromParentNode()
             }
         }

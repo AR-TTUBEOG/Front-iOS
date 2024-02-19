@@ -48,32 +48,28 @@ struct DetailViewControl: View {
     /// 장소  사진  및 찜하기 버튼
     private var topImageAndBookmarked: some View {
         ZStack(alignment: .topLeading) {
-            spaceImage
+//            spaceImage
             topHStack
         }
         .frame(maxWidth: .infinity, maxHeight: 250)
     }
 
     
-    //MARK: - 장소 사진 설정
-    //장소 사진
-    private var spaceImage: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            
-            if let walkwayImages = viewModel.walkwayImageModel?.information {
-                ForEach(walkwayImages, id: \.id) { walkwayImage in
-                    loadImage(urlString: walkwayImage.image)
-                }
-            }
-            
-            if let storeImages = viewModel.storeImageModel?.information {
-                ForEach(storeImages, id: \.id) { storeImages in
-                    loadImage(urlString: storeImages.image)
-                }
-            }
-        }
-        .frame(width: 410, height: 252)
-    }
+//    //MARK: - 장소 사진 설정
+//    //장소 사진
+//    private var spaceImage: some View {
+//        ScrollView(.horizontal, showsIndicators: false) {
+//            
+//            if let walkwayImages = viewModel.walkwayImageModel?.information {
+//                    loadImage(urlString: walkwayImages.image)
+//                }
+//            
+//            if let storeImages = viewModel.storeImageModel?.information {
+//                    loadImage(urlString: storeImages.image)
+//                }
+//            }
+//        .frame(width: 410, height: 252)
+//    }
     
     @ViewBuilder
     private func loadImage(urlString: String) -> some View {
@@ -84,14 +80,13 @@ struct DetailViewControl: View {
             case .success(let image):
                 image.resizable()
                     .aspectRatio(contentMode: .fill)
-                    
+                    .frame(width: 410, height: 252)
             case .failure(let error):
                 Image(systemName: "photo")
             @unknown default:
                 EmptyView()
             }
         }
-        .frame(width: 410, height: 252)
     }
     
     
@@ -345,8 +340,7 @@ struct DetailViewControl: View {
         
     }
     
-//    //
-//    //    //MARK: - 스크롤 방명록 보기
+//        //MARK: - 스크롤 방명록 보기
 //        private var guestBookGrid: some View {
 //            ScrollView(.vertical, showsIndicators: false) {
 //                LazyVGrid(columns: [GridItem(.flexible(minimum: 150), spacing: 10), GridItem(.flexible(minimum: 150), spacing: 100)], spacing: 13) {
@@ -358,7 +352,7 @@ struct DetailViewControl: View {
 //                    }
 //                }
 //            }
-            
+//            
 }
 
 

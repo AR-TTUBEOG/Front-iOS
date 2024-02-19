@@ -57,3 +57,25 @@ struct StoreLikeModel: Codable {
 struct StoreLikeInfor: Codable {
     var message: String
 }
+
+
+
+
+
+
+//MARK: - 사진 불러오기
+
+struct PlaceImageCheck: Codable {
+    var check: Bool
+    var information: [PlaceImage]
+}
+    
+struct PlaceImage: Codable {
+    var id: Int
+    var uuid: String
+    var image: String
+    var imageType: String
+    var placeId: Int
+}
+
+

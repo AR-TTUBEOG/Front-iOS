@@ -30,8 +30,7 @@ class WalkwayViewModel: ObservableObject, ImageHandling, InputAddressProtocol, F
     @Published var currentPageIndex: Int = 0
     @Published var navigationToNextView = false
     @Published var images: [UIImage] = []
-    @Published var base64Images: [String] = []
-    
+    @Published var idInt: Int? = 0
     //MARK: - saveTextInputs
     @Published var firstPlaceName: String = ""
     @Published var fourthWalkwayDescription: String = ""
@@ -57,8 +56,11 @@ class WalkwayViewModel: ObservableObject, ImageHandling, InputAddressProtocol, F
     
     /// 앨범에서 선택한 이미지 추가하기
     /// - Parameter newImages: 추가한 이미지 배열에 넣기
-    public func addImage(_ newImages: UIImage) {
-        images.append(newImages)
+    public func addImage(_ newImage: UIImage) {
+        let resizedWidth: CGFloat = 300 // 원하는 너비로 설정
+        if let resizedImage = newImage.resized(toWidth: resizedWidth) {
+            images.append(resizedImage)
+        }
     }
     
     /// 앨범 띄우기
@@ -119,6 +121,7 @@ class WalkwayViewModel: ObservableObject, ImageHandling, InputAddressProtocol, F
                 case .success(let response):
                     do {
                         let decodedData = try JSONDecoder().decode(ResponseWalkwayRegistModel.self, from: response.data)
+                        self.idInt = decodedData.information.id
                         print("산책로 등록 완료 후 해독 완료: \(decodedData)")
                     } catch {
                         print("산책로 등록 decoded 에러 : \(error)")
@@ -129,6 +132,24 @@ class WalkwayViewModel: ObservableObject, ImageHandling, InputAddressProtocol, F
             }
         }
     }
+    
+    private func sendImage() {
+        provider.request(.sendWalkwayImage(spotId: self.idInt ?? 0, token: loadAccessToken() ?? "토큰 정보 없음", images: images)) { result in
+            switch result {
+            case .success(let response ):
+                do {
+                    let decodedData = try JSONDecoder().decode(WalkImageModel.self, from: response.data)
+                    print("산책 등록 이미지 등록 완료 : \(decodedData)")
+                } catch {
+                    print("산책 등록 이미지 디코더 오류 : \(error)")
+                    print("오류 데이터 :  \(response)")
+                }
+            case.failure(let error) :
+                print("산책로 네트워크 에러 : \(error)")
+            }
+        }
+    }
+    
     //MARK: - WalkwayDataMatching
     
     private func createParameters() -> RequestWalwayRegistModel {
@@ -137,31 +158,22 @@ class WalkwayViewModel: ObservableObject, ImageHandling, InputAddressProtocol, F
                                         detailAddress: self.detailAddress,
                                         info: self.fourthWalkwayDescription,
                                         latitude: self.locationManager.currentLocation?.coordinate.latitude ?? 0.0,
-                                        longitude: self.locationManager.currentLocation?.coordinate.longitude ?? 0.0,
-                                        image: ["xxxx"]
+                                        longitude: self.locationManager.currentLocation?.coordinate.longitude ?? 0.0
         )
     }
     
-    private func saveStringImage() {
-        for image in images {
-            if let base64String = imageToBase64String(img: image) {
-                base64Images.append(base64String)
-            }
-        }
-    }
     
     private func matchWalkwayRegisterData() {
-        saveStringImage()
         self.requestWalwayRegistModel = createParameters()
-        
     }
     
     
     /// 산책로 버튼
     public func finishPlaceRegist(){
         matchWalkwayRegisterData()
-        DispatchQueue.main.asyncAfter(deadline: .now()+1){
-            self.sendDataWalkwayInfo()
+        self.sendDataWalkwayInfo()
+        DispatchQueue.main.asyncAfter(deadline: .now()+1) {
+            self.sendImage()
         }
     }
 }

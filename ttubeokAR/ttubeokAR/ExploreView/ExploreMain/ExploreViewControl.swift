@@ -77,9 +77,6 @@ struct ExploreViewControl: View {
                         .frame(minWidth: 0, maxWidth: 180)
                     
                         .onAppear {
-                            
-                            print("place 정보 : \(place)")
-                            
                             if place == self.viewModel.exploreData?.information.last {
                                 print("--------------LazyGrid 마지막 페이지 호출--------------")
                                 viewModel.fetchDataSearch(viewModel.currentSearchType, page: viewModel.curretnPage + 1)
@@ -92,11 +89,8 @@ struct ExploreViewControl: View {
                        
                 }
             }
-            
-            
             .padding()
             .frame(maxWidth: .infinity)
-            
         }
         .refreshable {
             print("--------------refresh 호출--------------")

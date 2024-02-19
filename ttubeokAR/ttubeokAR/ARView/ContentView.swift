@@ -13,6 +13,7 @@ import UIKit
 
 struct ContentView : View {
     @StateObject var arCoordinator = ARCoordinator()
+    @State var isOnWheel = false
     
     let lastedTab: Int
     
@@ -20,6 +21,14 @@ struct ContentView : View {
         ZStack(alignment: .top) {
             ARCoordinatorView(arCoordinator: arCoordinator).ignoresSafeArea(.all)
             topBtn
+            
+            if isOnWheel {
+                VStack {
+                    Spacer()
+                        .frame(maxHeight: 200)
+                    gameWheel
+                }
+            }
         }
     }
     
@@ -30,7 +39,8 @@ struct ContentView : View {
             }) {
                 Icon.closeView.image
                     .resizable()
-                    .frame(width: 15, height: 20)
+                    .frame(width: 20, height: 20)
+                    .padding(.leading, 10)
             }
             Spacer()
                 .frame(maxWidth: 160)
@@ -39,7 +49,7 @@ struct ContentView : View {
             
             Spacer()
         }
-        .padding(.leading, 5)
+        .padding(.leading, 1)
     }
     
     
@@ -63,15 +73,21 @@ struct ContentView : View {
         let selectedGame = Int.random(in: 1...3)
         switch selectedGame {
         case 1:
-//            arCoordinator.startBasketballGame()
+            arCoordinator.startBasketballGame()
             print("1")
         case 2:
             arCoordinator.dropBoxes()
             print("1")
         case 3:
-            print("!")
+            self.isOnWheel = true
         default:
             break
+        }
+    }
+    
+    private var gameWheel: some View {
+        ZStack{
+            WheelGameShapeView(viewModel: WheelGameViewModel())
         }
     }
     

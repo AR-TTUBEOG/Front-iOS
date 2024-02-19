@@ -31,16 +31,18 @@ struct WalwayInformation: Codable {
 
 struct WalkImageModel: Codable {
     var check: Bool
-    var information: [WalkDetailImage]
+    var information: WalkDetailImage
 }
 
 struct WalkDetailImage: Codable {
-    var id: Int
+    var id: Int?
     var uuid: String
     var image: String
     var imageType: String
     var placeId: Int
 }
+
+
 
 //MARK: - 매장 등록
 
