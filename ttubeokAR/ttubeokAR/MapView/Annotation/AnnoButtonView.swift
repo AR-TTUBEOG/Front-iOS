@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct AnnoButtonView: View {
-    var type: AnnoType
+    var place: ExploreDetailInfor
     @Binding var selectedId: Int?
     @Binding var isSelectedTotal: Bool
-    @Binding var selectedAnno: Anno?
+//    @Binding var selectedAnno: Anno?
     @State var isSelected: Bool
     @State var id: Int
 
@@ -31,18 +31,13 @@ struct AnnoButtonView: View {
                     }
                     
                 } label: {
-                    switch type {
-                    case .cafe :
-                        Image(.restaurantMap2)
-                    case .restaurant:
-                        Image(.restaurantMap2)
-                    case .route:
-                        Image(.restaurantMap2)
+                    if place.placeType.spot {
+                        Image(.trailMap)
+                    } else if place.placeType.store {
+                        Image(.restaurantMap)
                     }
-                    
                 }
                 .scaleEffect(isSelected ? 1.5 : 1.0, anchor: .init(x: 0.5, y: 0.86))
-                .border(Color.gray)
             }
         
     }
@@ -64,21 +59,21 @@ struct AnnoButtonView: View {
                         Button {
                             print("anno : present")
                         } label: {
-                            Image("message")
+                            Image("mapPresent")
                         }
                         .offset(x: -15, y: -52)
                         
                         Button {
                             print("anno : coupon")
                         } label: {
-                            Image("message")
+                            Image("mapMessage")
                         }
                         .offset(y: -74)
                         
                         Button {
                             print("anno : game")
                         } label: {
-                            Image("message")
+                            Image("mapGame")
                         }
                         .offset(x: 15, y: -52)
                     }                    

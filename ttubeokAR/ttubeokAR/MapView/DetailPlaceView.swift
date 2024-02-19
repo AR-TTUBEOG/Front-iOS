@@ -7,42 +7,65 @@
 
 import SwiftUI
 import PopupView
+import MapKit
 
 struct DetailPlaceView: View {
-    
-    @Binding var anno: Anno?
     // 지점에 대한 경로들
-    var routes: [String]? = ["스티브", "숩", "으찮"]
+    @StateObject var detailViewModel: DetailViewModel
+    @StateObject var roadViewModel: RoadViewModel
     
+    @State var id: Int
+    @Binding var selectedPlace: ExploreDetailInfor?
+    
+    @Binding var isSelectedTotal: Bool
+    @Binding var isCreateMode: Bool
+    @Binding var routes: [CLLocationCoordinate2D]
+
     var body: some View {
         ZStack {
             Color.background.ignoresSafeArea(.all)
             VStack {
-                infoView(selectedAnno: $anno)
+                infoView(detailViewModel: detailViewModel, selectedPlace: selectedPlace ?? .init(placeId: 1, placeType: .init(store: true, spot: false), dongName: "", memberId: 1, name: "", info: "", latitude: 0.0, longitude: 0.0, image: "", stars: 0.0, guestbookCount: 1, likesCount: 1, isFavorited: false, createdAt: "", recommendationScore: 1, distance: 0.0, hasGame: false))
                 
                 Spacer()
                     .frame(height: 50)
                 
-                if routes != nil { // 경로가 있다면
-                    routeChooseBtnView()
+                if roadViewModel.responseRoadModel?.information.count == 0 { // 경로가 있다면
+//                    routeChooseBtnView(roadListViewModel: roadListViewModel, road: road)
+                    Text("경로없음")
+
+                } else {    // 경로가 있다면
+                    Text("경로있음")
                 }
                 
                 Spacer()
                     .frame(height: 28)
                 
-                walkBtnView()
+                walkBtnView(isCreateMode: $isCreateMode, isSelectedTotal: $isSelectedTotal)
             }
         }
         .frame(height: 400)
+        .onAppear(perform: {
+            
+            self.detailViewModel.fetchDetails(for: selectedPlace ?? .init(placeId: 1, placeType: .init(store: true, spot: false), dongName: "", memberId: 1, name: "", info: "", latitude: 0.0, longitude: 0.0, image: "", stars: 0.0, guestbookCount: 1, likesCount: 1, isFavorited: false, createdAt: "", recommendationScore: 1, distance: 0.0, hasGame: false))
+        })
     }
+        
     
     private struct infoView: View {
+        @State private var detailViewModel: DetailViewModel?
+        @State private var selectedPlace: ExploreDetailInfor
         
-        @Binding var selectedAnno: Anno?
         
-//        init(selectedAnno: Anno? = nil) {
-//            self.selectedAnno = selectedAnno
-//        }
+        @State var name: String = ""
+        @State var info: String = ""
+        @State var stars: Float = 0.0
+        @State var distance: String = ""
+        
+        init(detailViewModel: DetailViewModel, selectedPlace: ExploreDetailInfor) {
+            self.detailViewModel = detailViewModel
+            self.selectedPlace = selectedPlace
+        }
         
         fileprivate var body: some View {
             VStack {
@@ -53,16 +76,19 @@ struct DetailPlaceView: View {
                     .clipShape(RoundedRectangle(cornerRadius: 16))
                 HStack {
                     VStack(alignment: .leading) {
-                        Text(selectedAnno?.name ?? "이름없음")
+                        
+                        Text(name)
                             .foregroundStyle(.white)
-                        Text("농구 게임을 통한 할인권 증정")
+                
+                            
+                        Text(info)
                             .foregroundStyle(.gray)
                     }
                              
                     Spacer()
                     HStack {
-                        Text("1.5kms")
-                        Text("4.8")
+                        Text("\(detailViewModel?.distance ?? 27)")
+                        Text("\(detailViewModel?.likeText ?? 0)")
                     }
                     .foregroundStyle(.gray)
                     
@@ -70,24 +96,71 @@ struct DetailPlaceView: View {
                 
             }
             .padding(.horizontal, 15)
+            .onAppear {
+//                self.detailViewModel.fetchDetails(for: selectedPlace)
+                
+                if selectedPlace.placeType.spot {
+                    let infomation = detailViewModel?.walkwayDetailDataModel?.information
+                    name = infomation?.name ?? "문래역 스타벅스"
+                    info = infomation?.info ?? "조용하게 공부하기 좋은 카페"
+                    stars = infomation?.stars ?? 0.0
+//                    distance = infomation?. ?? "distance 연결안됨"
+                } else if selectedPlace.placeType.store {
+                    let infomation = detailViewModel?.storeDetailDataModel?.information
+                    name = infomation?.name ?? "문래역 스타벅스"
+                    info = infomation?.info ?? "조용하게 공부하기 좋은 카페"
+                    stars = infomation?.stars ?? 0.0
+//                    distance = infomation.distance ?? "distance 연결안됨"
+                }
+            }
         }
         
     }
     
     private struct routeChooseBtnView: View {
+        
+//        @Binding var roadListViewModel: RoadListViewModel
+        @Binding var road: RoadViewModel
+
         fileprivate var body: some View {
             HStack {
+                Button {
+                    
+                } label: {
+                    Text("<")
+                }
+                
+                Spacer()
+                
                 Text("스티브의 길")
                     .foregroundStyle(.gray)
+                
+                Spacer()
+                
+                Button {
+                    
+                } label: {
+                    Text(">")
+                }
             }
+            .padding(.horizontal, 20)
         }
     }
     
     private struct walkBtnView: View {
+        
+        @Binding var isCreateMode: Bool
+        @Binding var isSelectedTotal: Bool
+        
         fileprivate var body: some View {
             HStack {
                 Button {
-    
+                    isCreateMode.toggle()
+                    
+                    if isCreateMode {
+                        isSelectedTotal = false
+                    }
+                    
                 } label: {
                     RoundedRectangle(cornerRadius: 19)
                         .frame(height: 40)
@@ -112,8 +185,9 @@ struct DetailPlaceView: View {
             }
         }
     }
+
 }
 
-#Preview {
-    DetailPlaceView(anno: .constant(.init(storeId: 1, dongareaId: 1, name: "카페", info: "분위기 좋은 카페", latitude: 37.547889, longitude: 126.915158, image: "exampleMarket", type: "cafe")))
-}
+//#Preview {
+//    DetailPlaceView(detailViewModel: .init(), roadViewModel: .init(), id: 1, selectedPlace: .init(projectedValue: .constant(.init(placeId: 1, placeType: "cafe", dongName: "", memberId: 1, name: "name", info: "info", latitude: 0.0, longitude: 0.0, image: "", stars: 0.0, guestbookCount: 1, likesCount: 1, isFavorited: false, createdAt: "", recommendationScore: i, distance: 0.0, hasGame: false))), isSelectedTotal: .constant(true), isCreateMode: .constant(false), routes: .constant([CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0)])))
+//}
