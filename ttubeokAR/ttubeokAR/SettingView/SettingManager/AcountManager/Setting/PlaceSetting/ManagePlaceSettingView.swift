@@ -106,7 +106,7 @@ struct ManagePlaceSettingView: View {
         ScrollView(.vertical) {
             LazyVGrid(columns: [GridItem(.flexible(minimum: 150), spacing: -8), GridItem(.flexible(minimum: 150), spacing: 15)], spacing: 25) {
                 ForEach(self.viewModel.placeData?.information ?? [], id: \.self) { place in
-                    RegisteredPlaceCard(viewModel: PlaceViewModel(), registeredPlaceInfor: place)
+                    RegisteredPlaceCard(viewModel: PlaceViewModel())
                         .frame(minWidth: 0, maxWidth: .infinity)
                     }
                 }

@@ -11,6 +11,7 @@ import SwiftUI
 struct RegisteredPlaceCard: View {
     
     @StateObject var viewModel: PlaceViewModel
+//    @State var registeredPlaceInfor
     
     var body: some View {
         Button {
