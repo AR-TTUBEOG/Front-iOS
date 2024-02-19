@@ -16,7 +16,6 @@ import PhotosUI
 class MarketViewModel: ObservableObject, ImageHandling, InputAddressProtocol, FinishViewProtocol {
     
     
-    
     //MARK: - API
     private let authPlugin: AuthPlugin
     private let provider: MoyaProvider<PlaceRegistService>
@@ -66,8 +65,11 @@ class MarketViewModel: ObservableObject, ImageHandling, InputAddressProtocol, Fi
         images.count
     }
     
-    public func addImage(_ newImages: UIImage) {
-        images.append(newImages)
+    public func addImage(_ newImage: UIImage) {
+        let resizedWidth: CGFloat = 300 // 원하는 너비로 설정
+        if let resizedImage = newImage.resized(toWidth: resizedWidth) {
+            images.append(resizedImage)
+        }
     }
     
     public func showImagePicker() {
@@ -131,6 +133,8 @@ class MarketViewModel: ObservableObject, ImageHandling, InputAddressProtocol, Fi
         return imageData.base64EncodedString()
     }
     
+    
+    
     private func sendDataMarketInfo() {
         
         if let requestStoreRegistModel = requestStoreRegistModel {
@@ -147,6 +151,23 @@ class MarketViewModel: ObservableObject, ImageHandling, InputAddressProtocol, Fi
                 case .failure(let error):
                     print("산책로 네트워크 error: \(error)")
                 }
+            }
+        }
+    }
+    
+    private func sendImage() {
+        provider.request(.sendStoreImage(storeId: self.storeId , token: loadAccessToken() ?? "토큰 정보 없음", images: images)) { result in
+            switch result {
+            case .success(let response ):
+                do {
+                    let decodedData = try JSONDecoder().decode(WalkImageModel.self, from: response.data)
+                    print("산책 등록 이미지 등록 완료 : \(decodedData)")
+                } catch {
+                    print("산책 등록 이미지 디코더 오류 : \(error)")
+                    print("오류 데이터 :  \(response)")
+                }
+            case.failure(let error) :
+                print("산책로 네트워크 에러 : \(error)")
             }
         }
     }
@@ -169,7 +190,6 @@ class MarketViewModel: ObservableObject, ImageHandling, InputAddressProtocol, Fi
     private func mathStoreRegistData() {
         saveStringImage()
         self.requestStoreRegistModel = creatParameters()
-        print(requestStoreRegistModel)
     }
     
     /// 마켓 등록 최종 버튼(게임 등록)
@@ -182,6 +202,9 @@ class MarketViewModel: ObservableObject, ImageHandling, InputAddressProtocol, Fi
     public func saveInfoMarket() {
         mathStoreRegistData()
         sendDataMarketInfo()
+        DispatchQueue.main.asyncAfter(deadline: .now()+1) {
+            self.sendImage()
+        }
     }
 }
 

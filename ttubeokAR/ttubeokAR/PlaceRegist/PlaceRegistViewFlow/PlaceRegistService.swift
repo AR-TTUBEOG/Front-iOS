@@ -7,10 +7,13 @@
 
 import Foundation
 import Moya
+import SwiftUI
 
 enum PlaceRegistService {
     case sendWalwayInfo(RequestWalwayRegistModel, token: String)
     case sendStoreInfo(RequestMarketRegistModel, token: String)
+    case sendWalkwayImage(spotId: Int, token: String, images: [UIImage])
+    case sendStoreImage(storeId: Int, token: String, images: [UIImage])
 }
 
 extension PlaceRegistService: TargetType {
@@ -25,6 +28,10 @@ extension PlaceRegistService: TargetType {
             return "/api/v1/spot"
         case .sendStoreInfo:
             return "/api/v1/store"
+        case .sendWalkwayImage:
+            return "/api/v1/image/spot"
+        case .sendStoreImage:
+            return "/api/v1/image/store"
         }
     }
     
@@ -33,6 +40,10 @@ extension PlaceRegistService: TargetType {
         case .sendWalwayInfo:
             return .post
         case .sendStoreInfo:
+            return .post
+        case .sendWalkwayImage:
+            return .post
+        case .sendStoreImage:
             return .post
         }
     }
@@ -43,6 +54,32 @@ extension PlaceRegistService: TargetType {
             return .requestJSONEncodable(parameters)
         case .sendStoreInfo(let parameters, _):
             return .requestJSONEncodable(parameters)
+        case .sendWalkwayImage(let spotId, _, let images):
+            var multipartData = [MultipartFormData]()
+            
+            for (index, image) in images.enumerated() {
+                print("사진 유효성 : \(image)")
+                if let imageData = image.jpegData(compressionQuality: 0.7) {
+                    multipartData.append(MultipartFormData(provider: .data(imageData),name: "fileList", fileName: "image\(index).jpg", mimeType: "image/jpeg"))
+                }
+            }
+            
+            multipartData.append(MultipartFormData(provider: .data("\(spotId)".data(using: .utf8)!), name: "spotId"))
+            
+            return .uploadMultipart(multipartData)
+            
+        case .sendStoreImage(let storeId, _, let images):
+            var multipartData = [MultipartFormData]()
+            
+            for (index, image) in images.enumerated() {
+                if let imageData = image.jpegData(compressionQuality: 0.7) {
+                    multipartData.append(MultipartFormData(provider: .data(imageData),name: "fileList", fileName: "image\(index).jpg", mimeType: "image/jpeg"))
+                }
+            }
+            
+            multipartData.append(MultipartFormData(provider: .data("\(storeId)".data(using: .utf8)!), name: "storeId"))
+            
+            return .uploadMultipart(multipartData)
         }
     }
     
@@ -56,6 +93,16 @@ extension PlaceRegistService: TargetType {
         case .sendStoreInfo(_, let token):
             return [
                 "Content-type": "application/json",
+                "Authorization": "Bearer \(token)"
+            ]
+        case .sendWalkwayImage(_, let token, _):
+            return [
+                "Content-type": "multipart/form-data",
+                "Authorization": "Bearer \(token)"
+            ]
+        case .sendStoreImage(_, let token, _):
+            return [
+                "Content-type": "multipart/form-data",
                 "Authorization": "Bearer \(token)"
             ]
         }

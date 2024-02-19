@@ -13,12 +13,22 @@ import SwiftUI
 class DetailViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
     
     //MARK: - API
-    private let provider = MoyaProvider<DetailExploreAPITarget>()
-    private let likeProvider = MoyaProvider<ExploreAPITarget>()
+    
+    private let authPlugin: AuthPlugin
+    private let provider: MoyaProvider<DetailExploreAPITarget>
+    private let likeProvider: MoyaProvider<ExploreAPITarget>
+    
+    override init() {
+        self.authPlugin = AuthPlugin(provider: MoyaProvider<MultiTarget>())
+        self.provider = MoyaProvider<DetailExploreAPITarget>(plugins: [authPlugin])
+        self.likeProvider = MoyaProvider<ExploreAPITarget>(plugins: [authPlugin])
+    }
     
     //MARK: - Model
     @Published var walkwayDetailDataModel: WalkwayDetailDataModel?
+    @Published var walkwayImageModel: WalkImageModel?
     @Published var storeDetailDataModel: StoreDetailDataModel?
+    @Published var storeImageModel : StoreImageModel?
     @Published var guestBookModel: GuestBookModel?
     
     // MARK: - Property
@@ -38,12 +48,39 @@ class DetailViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
         if place.placeType.spot {
             self.placeType = .spot
             walkWayGet(get: place)
+            walkWayImage(get: place)
         }
         else if place.placeType.store {
             self.placeType = .store
             storeGet(get: place)
+            storeGet(get: place)
         }
     }
+    
+    private func walkWayImage(get plage: ExploreDetailInfor) {
+        
+        guard let accessToken = KeyChainManager.stadard.getAccessToken(for: "userSession") else { return }
+        
+        provider.request(.fetchWalkWayImage(spotId: self.walkwayDetailDataModel?.information.spotId ?? 0, token: accessToken)) { [weak self] result in
+            switch result {
+            case .success(let response):
+                do {
+                    let decodedData = try JSONDecoder().decode(WalkImageModel.self, from: response.data)
+                    DispatchQueue.main.async {
+                        self?.walkwayImageModel = decodedData
+                        print("산책로 이미지 불러오기 완료")
+                    }
+                }
+                catch {
+                   print("산책로 이미지 디코더 오류 : \(error)")
+                }
+            case .failure(let error):
+                print("산책로 이미지 네트워크 오류 : \(error)")
+            }
+        }
+    }
+    
+    
     
     private func walkWayGet(get place: ExploreDetailInfor) {
         
@@ -66,6 +103,30 @@ class DetailViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
             }
         }
     }
+    
+    private func storeImage(get plage: ExploreDetailInfor) {
+        
+        guard let accessToken = KeyChainManager.stadard.getAccessToken(for: "userSession") else { return }
+        
+        provider.request(.fetchStoreImage(storeId: self.storeDetailDataModel?.information.storeId ?? 0, token: accessToken)) { [weak self] result in
+            switch result {
+            case .success(let response):
+                do {
+                    let decodedData = try JSONDecoder().decode(StoreImageModel.self, from: response.data)
+                    DispatchQueue.main.async {
+                        self?.storeImageModel = decodedData
+                        print("매장 이미지 불러오기 완료")
+                    }
+                }
+                catch {
+                   print("매장 이미지 디코더 오류 : \(error)")
+                }
+            case .failure(let error):
+                print("매장 이미지 네트워크 오류 : \(error)")
+            }
+        }
+    }
+    
     
     private func storeGet(get place: ExploreDetailInfor) {
         
@@ -106,7 +167,7 @@ class DetailViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
     var reviewText: Int {
         switch placeType {
         case .spot:
-            return walkwayDetailDataModel?.information.guestbook ?? 0
+            return walkwayDetailDataModel?.information.guestbookCount ?? 0
         case .store:
             return storeDetailDataModel?.information.guestbookCount ?? 0
         }
@@ -114,28 +175,9 @@ class DetailViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
     var likeText: Int {
         switch placeType {
         case .spot:
-            return walkwayDetailDataModel?.information.likes ?? 0
+            return walkwayDetailDataModel?.information.likesCount ?? 0
         case .store:
             return storeDetailDataModel?.information.likesCount ?? 0
-        }
-    }
-    
-    
-    
-    //MARK: - 사진 처리 함수
-    
-    var images: [String] {
-        switch placeType {
-        case .spot:
-            return walkwayDetailDataModel?.information.image ?? []
-        case .store:
-            return storeDetailDataModel?.information.image ?? []
-        }
-    }
-    
-    public func nextImage() {
-        if currentImageIndex < (images.count - 1) {
-            currentImageIndex += 1
         }
     }
     
@@ -162,7 +204,7 @@ class DetailViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
     private func sendLike() {
         switch placeType {
         case .spot:
-            likeWalkWay(spotId: walkwayDetailDataModel?.information.id ?? 0)
+            likeWalkWay(spotId: walkwayDetailDataModel?.information.spotId ?? 0)
         case .store:
             likeStore(storeId: storeDetailDataModel?.information.storeId ?? 0)
         }
@@ -297,6 +339,7 @@ class DetailViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
     //MARK: - 거리 및 시간 계산
     
     
+    /// 가게 등록 시간 및 거리
     private func marketCalculateDistanceAndTime() {
         
         guard let currentLocation = BaseLocationManager.shared.currentLocation,
@@ -315,6 +358,7 @@ class DetailViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
         self.estimatedTime = estimatedTime
     }
     
+    /// 산책로 등록 시간 및 거리
     private func walWayCalculateDistanceAndTime() {
         
         guard let currentLocation = BaseLocationManager.shared.currentLocation,
@@ -323,7 +367,6 @@ class DetailViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
             return
         }
         
-        // 배열의 첫 번째 장소 정보를 사용
         let walkLocation  = CLLocation(latitude: CLLocationDegrees(destinationLat), longitude: CLLocationDegrees(destinationLng))
         let distance = currentLocation.distance(from: walkLocation)
         self.distance = distance

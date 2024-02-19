@@ -12,6 +12,8 @@ enum ExploreAPITarget {
     case createBookMark(id : Int, memberId: Int, content: String, star: Float,image : String)
     case likeWalkWay(spotId: Int, token: String)
     case likeStoreData(storeId: Int, token: String)
+    case getWalkImage(spotId: Int, token: String)
+    case getStoreImage(spotId: Int, token: String)
 }
 
 //TODO: - 실제 api로 수정하기
@@ -27,6 +29,10 @@ extension ExploreAPITarget: TargetType {
             return "/api/v1/spot/\(spotId)/likes"
         case .likeStoreData(let storeId, _):
             return "/api/v1/store/\(storeId)/likes"
+        case .getWalkImage(let spotId, _):
+            return "/api/v1/image/\(spotId)"
+        case .getStoreImage(let storeId, _):
+            return "/api/v1/image/\(storeId)"
         }
     }
     
@@ -38,6 +44,10 @@ extension ExploreAPITarget: TargetType {
             return .post
         case .likeStoreData:
             return .post
+        case .getWalkImage:
+            return .get
+        case .getStoreImage:
+            return .get
         }
     }
     
@@ -49,6 +59,10 @@ extension ExploreAPITarget: TargetType {
             return .requestParameters(parameters: ["spotId": spotId], encoding: JSONEncoding.default)
         case .likeStoreData(let storeId, _):
             return .requestParameters(parameters: ["storeId": storeId], encoding: JSONEncoding.default)
+        case .getWalkImage(let spotId, _):
+            return .requestParameters(parameters: ["spotId": spotId], encoding: JSONEncoding.default)
+        case .getStoreImage(let storeId, _):
+            return .requestParameters(parameters: ["spotId": storeId], encoding: JSONEncoding.default)
         }
     }
     
@@ -70,7 +84,16 @@ extension ExploreAPITarget: TargetType {
                 "Content-Type": "application/json",
                 "Authorization": "Bearer \(token)"
             ]
-            
+        case .getWalkImage(_, let token):
+            return [
+                "Content-Type": "application/json",
+                "Authorization": "Bearer \(token)"
+            ]
+        case .getStoreImage(_, let token):
+            return [
+                "Content-Type": "application/json",
+                "Authorization": "Bearer \(token)"
+            ]
         }
         
     }
