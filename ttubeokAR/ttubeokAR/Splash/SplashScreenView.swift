@@ -12,7 +12,7 @@ import AVFoundation
 import Photos
 
 struct SplashScreenView: View {
-    //MARK: Property
+    //MARK: - Property
     
     
     @ObservedObject var permissionsVM = PermissionViewModel()
@@ -25,7 +25,7 @@ struct SplashScreenView: View {
     @State private var currentState: AppState = .login
     
     
-    //MARK: Authorization Text
+    //MARK: - Authorization Text
     
     let gpsAlertTitle: String = "위치 정보 이용"
     let gpsAlertMessage: String = "위치 서비스를 사용할 수 없습니다. \n디바이스의 '설정 > 개인정보 보호'에서 위치 서비스를 켜주세요."
@@ -36,10 +36,7 @@ struct SplashScreenView: View {
     let libraryAlertTitle: String = "앨범 접근 허용"
     let libraryAlertMessage: String = "앨범 사용할 수 없습니다. \n디바이스의 '설정 > 개인정보 보호'에서 앨범 서비스를 켜주세요."
     
-    
-    //MARK: Body
-    
-    //MARK: Body
+    //MARK: - Body
     var body: some View {
         ZStack(alignment: .center) {
             backgroundSplashImage
@@ -132,14 +129,15 @@ struct SplashScreenView: View {
     }
     
     //MARK: - 유효성 검사
+    /// 최초 접속인지, 기존 접속인지 유저 정보를 확인한다.
     private func checkUser() {
         print("1. 유효성 검사 시작함")
         loginViewModel.checkLoginStatus { success in
                 DispatchQueue.main.async {
                     self.currentState = success ? .mainView : .login
                     print("3: 뷰 전환 시작 전 : \(success) ")
-                    DispatchQueue.main.asyncAfter(deadline: .now()+1.3) {
-                        proceedChangeView()
+                    DispatchQueue.main.asyncAfter(deadline: .now()+1.5) {
+                        changeToLoginView()
                     }
                 }
         }
@@ -148,6 +146,7 @@ struct SplashScreenView: View {
     
     //MARK: - Location 설정
     
+    /// 현재 위치 허용 설정 팝업
     private func requestLocationPermission() {
         DispatchQueue.global().async {
             if CLLocationManager.locationServicesEnabled() {
@@ -212,12 +211,6 @@ struct SplashScreenView: View {
         default:
             break
         }
-    }
-    
-    private func proceedChangeView() {
-        if permissionsVM.isLocationGPS && permissionsVM.isLocationCamera && permissionsVM.isLocationLibrary {
-                self.changeToLoginView()
-            }
     }
 }
 

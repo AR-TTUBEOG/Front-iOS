@@ -15,7 +15,7 @@ class NameChangeViewModel: ObservableObject{
     
     
     public func getCurrentNickname() -> String {
-        if let name = KeyChainManager.stadard.getNickname(for: "userSession") {
+        if let name = KeyChainManager.standard.getNickname(for: "userSession") {
             return name
         } else {
             return "닉네임 정보 없음"

@@ -20,7 +20,7 @@ class PlaceViewModel : ObservableObject {
     /// 산책로 
     private func WalkwayPlace() {
         
-        guard let accessToken = KeyChainManager.stadard.getNickname(for: "userSession") else { return }
+        guard let accessToken = KeyChainManager.standard.getNickname(for: "userSession") else { return }
         
         placeProvider.request(.RegisteredPlace(token: accessToken)) { result in
             switch result {

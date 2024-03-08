@@ -63,7 +63,7 @@ class ExploreViewModel: ObservableObject {
     public func fetchExploreDataAll(page: Int) {
         print("8 :전체 선택 API 호출")
         
-        guard let accssToken = KeyChainManager.stadard.getAccessToken(for: "userSession") else {
+        guard let accssToken = KeyChainManager.standard.getAccessToken(for: "userSession") else {
             print("전체 검색 중 액세스 토큰 가져오기 오류")
             return
         }
@@ -98,7 +98,7 @@ class ExploreViewModel: ObservableObject {
     public func fetchExploreDataLatest(page: Int) {
         print("최신순 선택 API 호출")
         
-        guard let accssToken = KeyChainManager.stadard.getAccessToken(for: "userSession") else {
+        guard let accssToken = KeyChainManager.standard.getAccessToken(for: "userSession") else {
             print("최신순 중 액세스 토큰 가져오기 오류")
             return
         }
@@ -130,7 +130,7 @@ class ExploreViewModel: ObservableObject {
     public func fetchExploreDataDistance(page: Int) {
         print("거리순 선택 API 호출")
         
-        guard let accssToken = KeyChainManager.stadard.getAccessToken(for: "userSession"), let location = BaseLocationManager.shared.currentLocation?.coordinate else {
+        guard let accssToken = KeyChainManager.standard.getAccessToken(for: "userSession"), let location = BaseLocationManager.shared.currentLocation?.coordinate else {
             print("거리순 중 액세스 토큰 가져오기 오류")
             return
         }
@@ -162,7 +162,7 @@ class ExploreViewModel: ObservableObject {
     public func fetchExploreDataRecommend(page: Int) {
         print("추천순 선택 API 호출")
         
-        guard let accssToken = KeyChainManager.stadard.getAccessToken(for: "userSession") else {
+        guard let accssToken = KeyChainManager.standard.getAccessToken(for: "userSession") else {
             print("추천순 중 액세스 토큰 가져오기 오류")
             return
         }

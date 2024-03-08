@@ -59,7 +59,7 @@ class DetailViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
     
     private func walkWayImage(get plage: ExploreDetailInfor) {
         
-        guard let accessToken = KeyChainManager.stadard.getAccessToken(for: "userSession") else { return }
+        guard let accessToken = KeyChainManager.standard.getAccessToken(for: "userSession") else { return }
         
         provider.request(.fetchWalkWayImage(spotId: self.walkwayDetailDataModel?.information.spotId ?? 0, token: accessToken)) { [weak self] result in
             switch result {
@@ -84,7 +84,7 @@ class DetailViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
     
     private func walkWayGet(get place: ExploreDetailInfor) {
         
-        guard let accessToken = KeyChainManager.stadard.getAccessToken(for: "userSession") else { return }
+        guard let accessToken = KeyChainManager.standard.getAccessToken(for: "userSession") else { return }
         
         provider.request(.fetchWalkWayDetail(spotId: place.placeId, token: accessToken)) { [weak self] result in
             switch result {
@@ -106,7 +106,7 @@ class DetailViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
     
     private func storeImage(get plage: ExploreDetailInfor) {
         
-        guard let accessToken = KeyChainManager.stadard.getAccessToken(for: "userSession") else { return }
+        guard let accessToken = KeyChainManager.standard.getAccessToken(for: "userSession") else { return }
         
         provider.request(.fetchStoreImage(storeId: self.storeDetailDataModel?.information.storeId ?? 0, token: accessToken)) { [weak self] result in
             switch result {
@@ -130,7 +130,7 @@ class DetailViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
     
     private func storeGet(get place: ExploreDetailInfor) {
         
-        guard let accessToken = KeyChainManager.stadard.getAccessToken(for: "userSession") else { return }
+        guard let accessToken = KeyChainManager.standard.getAccessToken(for: "userSession") else { return }
         
         provider.request(.fetchStoreDetail(storeId: place.placeId, token: accessToken)) { [weak self] result in
             switch result {
@@ -212,7 +212,7 @@ class DetailViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
     
     private func likeWalkWay(spotId: Int) {
         
-        guard let accessToken = KeyChainManager.stadard.getAccessToken(for: "userSession") else { return }
+        guard let accessToken = KeyChainManager.standard.getAccessToken(for: "userSession") else { return }
         
         likeProvider.request(.likeWalkWay(spotId: spotId, token: accessToken)) { result in
             switch result {
@@ -231,7 +231,7 @@ class DetailViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
     
     private func likeStore(storeId: Int) {
         
-        guard let accessToken = KeyChainManager.stadard.getAccessToken(for: "userSession") else { return }
+        guard let accessToken = KeyChainManager.standard.getAccessToken(for: "userSession") else { return }
         
         likeProvider.request(.likeStoreData(storeId: storeId, token: accessToken)) { result in
             switch result {

@@ -53,6 +53,7 @@ class ARCoordinator: UIViewController, ARSCNViewDelegate, ObservableObject {
             return
         }
         
+        backboardNode.name = "backboard"
         backboardNode.position = SCNVector3(x: 0, y: 2, z: -7)
         
         let physicsShape = SCNPhysicsShape(node: backboardNode, options: [SCNPhysicsShape.Option.type: SCNPhysicsShape.ShapeType.concavePolyhedron])
@@ -119,7 +120,7 @@ class ARCoordinator: UIViewController, ARSCNViewDelegate, ObservableObject {
             let randomPosition = getRandomPositionAboveCamera()
             boxNode.position = randomPosition
             sceneView.scene.rootNode.addChildNode(boxNode)
-
+            
             
             let physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
             boxNode.physicsBody = physicsBody
@@ -149,16 +150,16 @@ class ARCoordinator: UIViewController, ARSCNViewDelegate, ObservableObject {
         
         let cameraTransform = SCNMatrix4(currentFrame.camera.transform)
         let cameraPosition = SCNVector3Make(cameraTransform.m41, cameraTransform.m42, cameraTransform.m43)
-      
+        
         
         let maxDistance: Float = 15
-            let minDistance: Float = 5
-
-            // Generate random positions within a spherical area around the camera
-            let randomX = Float(arc4random_uniform(UInt32(maxDistance * 200))) / 100.0 - maxDistance
-            let randomY = Float(arc4random_uniform(UInt32(maxDistance * 200))) / 100.0 - maxDistance
-            let randomZ = Float(arc4random_uniform(UInt32(maxDistance * 200))) / 100.0 - maxDistance
-
+        let minDistance: Float = 5
+        
+        // Generate random positions within a spherical area around the camera
+        let randomX = Float(arc4random_uniform(UInt32(maxDistance * 200))) / 100.0 - maxDistance
+        let randomY = Float(arc4random_uniform(UInt32(maxDistance * 200))) / 100.0 - maxDistance
+        let randomZ = Float(arc4random_uniform(UInt32(maxDistance * 200))) / 100.0 - maxDistance
+        
         
         var randomPosition = SCNVector3(
             x: cameraPosition.x + randomX,
@@ -167,14 +168,14 @@ class ARCoordinator: UIViewController, ARSCNViewDelegate, ObservableObject {
         )
         
         let distance = sqrt(pow(randomPosition.x - cameraPosition.x, 2) + pow(randomPosition.y - cameraPosition.y, 2) + pow(randomPosition.z - cameraPosition.z, 2))
-            if distance < minDistance {
-                let scale = minDistance / distance
-                randomPosition.x *= scale
-                randomPosition.y *= scale
-                randomPosition.z *= scale
-            }
-
-            return randomPosition
+        if distance < minDistance {
+            let scale = minDistance / distance
+            randomPosition.x *= scale
+            randomPosition.y *= scale
+            randomPosition.z *= scale
+        }
+        
+        return randomPosition
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -183,8 +184,10 @@ class ARCoordinator: UIViewController, ARSCNViewDelegate, ObservableObject {
             
             let hitTestResults = sceneView.hitTest(touchLocation, options: nil)
             if let hitTest = hitTestResults.first {
-            
-                hitTest.node.removeFromParentNode()
+                
+                if hitTest.node.name != "backboard" {
+                    hitTest.node.removeFromParentNode()
+                }
             }
         }
     }

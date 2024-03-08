@@ -60,7 +60,7 @@ class WheelGameViewModel: ObservableObject {
     }
     
     private func sendData() {
-        guard let accessToken = KeyChainManager.stadard.getAccessToken(for: "userSession") else {
+        guard let accessToken = KeyChainManager.standard.getAccessToken(for: "userSession") else {
             print("accessToken")
             return
         }

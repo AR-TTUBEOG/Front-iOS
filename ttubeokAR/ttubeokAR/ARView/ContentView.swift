@@ -73,6 +73,7 @@ struct ContentView : View {
         let selectedGame = Int.random(in: 1...2)
         switch selectedGame {
         case 1:
+            self.isOnWheel = false
             arCoordinator.startBasketballGame()
         case 2:
             self.isOnWheel.toggle()

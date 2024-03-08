@@ -36,7 +36,7 @@ class RoadViewModel: ObservableObject {
     /// 액세스 토큰 불러오기
     /// - Returns: 햔재 액세스 토큰
     private func loadAccessToken() -> String? {
-        guard let accessToken = KeyChainManager.stadard.getAccessToken(for: "userSession") else {
+        guard let accessToken = KeyChainManager.standard.getAccessToken(for: "userSession") else {
             return "토큰 정보 에러"
         }
         
@@ -45,7 +45,7 @@ class RoadViewModel: ObservableObject {
     
     /// post 산책로 등록
     public func createRoad(requestRoadModel: RequestRoadModel) {
-        guard let accessToken = KeyChainManager.stadard.getAccessToken(for: "userSession") else {
+        guard let accessToken = KeyChainManager.standard.getAccessToken(for: "userSession") else {
             print("create road 중 액세스 토큰 가져오기 오류")
             return
         }
@@ -70,7 +70,7 @@ class RoadViewModel: ObservableObject {
     
     /// get
     public func findRoadByStoreId(storeId: Int, pageNum: Int, token: String) {
-        guard let accssToken = KeyChainManager.stadard.getAccessToken(for: "userSession") else {
+        guard let accssToken = KeyChainManager.standard.getAccessToken(for: "userSession") else {
             print("find road by store id 중 액세스 토큰 가져오기 오류")
             return
         }
@@ -103,7 +103,7 @@ class RoadViewModel: ObservableObject {
     
     /// get
     public func findRoadBySpotId(spotId: Int, pageNum: Int, token: String) {
-        guard let accssToken = KeyChainManager.stadard.getAccessToken(for: "userSession") else {
+        guard let accssToken = KeyChainManager.standard.getAccessToken(for: "userSession") else {
             print("find road by store id 중 액세스 토큰 가져오기 오류")
             return
         }

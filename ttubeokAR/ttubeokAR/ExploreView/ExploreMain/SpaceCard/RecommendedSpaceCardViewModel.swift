@@ -41,7 +41,7 @@ class RecommendedSpaceCardViewModel: NSObject, ObservableObject, CLLocationManag
     
     public func likeWalkWay(spotId: Int) {
         
-        guard let accessToken = KeyChainManager.stadard.getAccessToken(for: "userSession") else { return }
+        guard let accessToken = KeyChainManager.standard.getAccessToken(for: "userSession") else { return }
         
         provider.request(.likeWalkWay(spotId: spotId, token: accessToken)) { result in
             switch result {
@@ -60,7 +60,7 @@ class RecommendedSpaceCardViewModel: NSObject, ObservableObject, CLLocationManag
     
     public func likeStore(storeId: Int) {
         
-        guard let accessToken = KeyChainManager.stadard.getAccessToken(for: "userSession") else { return }
+        guard let accessToken = KeyChainManager.standard.getAccessToken(for: "userSession") else { return }
         
         provider.request(.likeStoreData(storeId: storeId, token: accessToken)) { result in
             switch result {
@@ -104,7 +104,7 @@ class RecommendedSpaceCardViewModel: NSObject, ObservableObject, CLLocationManag
     
     
     public func walkImageGet() {
-        guard let accessToken = KeyChainManager.stadard.getAccessToken(for: "userSession") else { return }
+        guard let accessToken = KeyChainManager.standard.getAccessToken(for: "userSession") else { return }
         
         print("스팟 아이디 : \(exploreDetailInfor?.placeId)")
         
@@ -126,7 +126,7 @@ class RecommendedSpaceCardViewModel: NSObject, ObservableObject, CLLocationManag
     
     
     public func storeImageGet() {
-        guard let accessToken = KeyChainManager.stadard.getAccessToken(for: "userSession") else { return }
+        guard let accessToken = KeyChainManager.standard.getAccessToken(for: "userSession") else { return }
         
         provider.request(.getStoreImage(spotId: self.exploreDetailInfor?.placeId ?? 0, token: accessToken)) { result in
             switch result {

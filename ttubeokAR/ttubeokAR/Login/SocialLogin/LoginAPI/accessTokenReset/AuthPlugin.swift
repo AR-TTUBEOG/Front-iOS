@@ -25,7 +25,7 @@ final class AuthPlugin: PluginType {
     }
     
     private func refreshToken(completion: @escaping (Bool) -> Void) {
-        guard let refreshToken = KeyChainManager.stadard.getRefreshToken(for: "userSession") else {
+        guard let refreshToken = KeyChainManager.standard.getRefreshToken(for: "userSession") else {
             completion(false)
             return
         }
@@ -37,9 +37,9 @@ final class AuthPlugin: PluginType {
                 do {
                     print("** - 중간 리프레시 토큰 초기화 작업 수행 완료 - ")
                     let tokenResponse = try response.map(TokenResponse.self)
-                    if var session = KeyChainManager.stadard.loadSession(for: "userSession") {
+                    if var session = KeyChainManager.standard.loadSession(for: "userSession") {
                         session.accessToken = tokenResponse.information.accessToken ?? ""
-                        if KeyChainManager.stadard.saveSession(session, for: "userSession") {
+                        if KeyChainManager.standard.saveSession(session, for: "userSession") {
                             completion(true)
                         }
                     }

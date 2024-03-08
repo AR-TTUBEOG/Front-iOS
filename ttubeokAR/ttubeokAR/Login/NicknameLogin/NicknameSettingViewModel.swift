@@ -27,7 +27,7 @@ class NicknameSettingViewModel: ObservableObject {
             return
         }
         
-        guard let accessToken = KeyChainManager.stadard.getAccessToken(for: "userSession") else {
+        guard let accessToken = KeyChainManager.standard.getAccessToken(for: "userSession") else {
             print("accessToken error")
             return
         }
@@ -50,7 +50,7 @@ class NicknameSettingViewModel: ObservableObject {
     }
     
     public func sendNickname() {
-        guard let accessToken = KeyChainManager.stadard.getAccessToken(for: "userSession") else {
+        guard let accessToken = KeyChainManager.standard.getAccessToken(for: "userSession") else {
             print("accessToken")
             return
         }
@@ -76,9 +76,9 @@ class NicknameSettingViewModel: ObservableObject {
     }
     
     public func saveNickname(newNickname: String) {
-        if var session = KeyChainManager.stadard.loadSession(for: "userSession") {
+        if var session = KeyChainManager.standard.loadSession(for: "userSession") {
             session.nickname = newNickname
-            let saved = KeyChainManager.stadard.saveSession(session, for: "userSession")
+            let saved = KeyChainManager.standard.saveSession(session, for: "userSession")
             print("6. 닉네임 키체인 저장 완료 : \(session)")
             if !saved {
                 print("닉네임 세션 실패")

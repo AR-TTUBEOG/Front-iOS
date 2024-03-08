@@ -109,7 +109,7 @@ class MarketViewModel: ObservableObject, ImageHandling, InputAddressProtocol, Fi
     /// 액세스 토큰 불러오기
     /// - Returns: 햔재 액세스 토큰
     private func loadAccessToken() -> String? {
-        guard let accessToken = KeyChainManager.stadard.getAccessToken(for: "userSession") else {
+        guard let accessToken = KeyChainManager.standard.getAccessToken(for: "userSession") else {
             return "토큰 정보 에러"
         }
         

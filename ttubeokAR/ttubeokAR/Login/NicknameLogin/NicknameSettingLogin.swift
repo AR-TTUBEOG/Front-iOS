@@ -12,7 +12,7 @@ struct NicknameSettingLogin: View {
     //MARK: - Property
     var transitionToNext: () -> Void
     @ObservedObject var viewModel: NicknameSettingViewModel
-    private let keyChainManager = KeyChainManager.stadard
+    private let keyChainManager = KeyChainManager.standard
     
     //MARK: - Body
     var body: some View {

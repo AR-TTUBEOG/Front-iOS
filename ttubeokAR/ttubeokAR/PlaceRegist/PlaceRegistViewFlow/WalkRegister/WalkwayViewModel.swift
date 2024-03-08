@@ -105,7 +105,7 @@ class WalkwayViewModel: ObservableObject, ImageHandling, InputAddressProtocol, F
     /// 토큰 불러오기
     /// - Returns: 저장된 토큰 불러온다.
     private func loadAccessToken() -> String? {
-        guard let accessToken = KeyChainManager.stadard.getAccessToken(for: "userSession") else {
+        guard let accessToken = KeyChainManager.standard.getAccessToken(for: "userSession") else {
             return "토큰정보 에러"
         }
         
