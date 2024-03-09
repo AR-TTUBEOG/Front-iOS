@@ -18,18 +18,18 @@ struct ExploreViewControl: View {
     
     // MARK: - Body
     var body: some View {
-            allView
+        allView
             .onAppear {
                 observeKeyboard()
-                print("-------------- 7: MainViewControll 초기 호출--------------")
                 viewModel.fetchDataSearch(viewModel.currentSearchType, page: 0)
             }
     }
     
     // MARK: - Explore View
     
+    /// 모든 뷰
     private var allView: some View {
-        ZStack(alignment:.top){
+        ZStack(alignment: .top){
             GeometryReader { geometry in
                 Color.background.ignoresSafeArea()
                 VStack(spacing:20){
@@ -43,6 +43,9 @@ struct ExploreViewControl: View {
         }
     }
     
+    /// 불러온 장소 없을 시 배경 이미지 보이기
+    /// - Parameter geometry: 사용하고 있는 디바이스에 맞추어 이미지 크기 조절
+    /// - Returns: 이미지 리턴
     private func imgBackground(geometry: GeometryProxy) -> some View {
         Icon.backgroundLogo.image
             .fixedSize()
@@ -61,20 +64,24 @@ struct ExploreViewControl: View {
     }
     
     
+    /// 데이터 불러오기 성공했을 경우, 장소를 보이지만 아닌 경우 빈 장소 이미지를 불러온다.
+    /// - Parameter geometry: 사용하고 있는 디바이스에 맞추어 이미지 크기 조절
+    /// - Returns: 이미지 리턴
     private func centerView(geometry: GeometryProxy) -> some View {
         if let information = viewModel.exploreData?.information, !information.isEmpty {
-            return AnyView(recommendedSpacesGrid)
+            return AnyView(wholeSpacesGrid)
         } else {
             return AnyView(imgBackground(geometry: geometry))
         }
     }
     
-    private var recommendedSpacesGrid: some View {
+    /// 전체 스페이스 카드를 가져온다.
+    private var wholeSpacesGrid: some View {
         ScrollView(.vertical) {
             LazyVGrid(columns: [GridItem(.flexible(minimum: 150), spacing: -8), GridItem(.flexible(minimum: 150), spacing: 15)], spacing: 25) {
                 ForEach(self.viewModel.exploreData?.information ?? [], id: \.self) { place in
-                    RecommendedSpaceCard(viewModel: RecommendedSpaceCardViewModel(exploreDetailInfor: place))
-
+                    IndividualSpaceCard(viewModel: IndividualSpaceCardViewModel(exploreDetailInfor: place))
+                    
                         .frame(minWidth: 0, maxWidth: 180)
                     
                         .onAppear {
@@ -87,36 +94,41 @@ struct ExploreViewControl: View {
                             self.detailViewModel.fetchDetails(for: place)
                             showDetail = true
                         }
-                       
                 }
             }
-            .padding()
             .frame(maxWidth: .infinity)
         }
+        
+        .frame(maxHeight: .infinity)
+        
         .refreshable {
-            print("--------------refresh 호출--------------")
-            viewModel.fetchDataSearch(viewModel.currentSearchType, page: 0)
+            print("--------------refresh 새로고침 진행--------------")
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                viewModel.fetchDataSearch(viewModel.currentSearchType, page: 0)
+            }
         }
+        
         .navigationDestination(isPresented: $showDetail) {
             DetailViewControl(viewModel: detailViewModel)
         }
         
         
     }
-
-private func observeKeyboard() {
-    NotificationCenter.default.addObserver(
-        forName: UIResponder.keyboardWillShowNotification,
-        object: nil, queue: .main
-    ) { _ in
-        keyboardVisible = true
-    }
     
-    NotificationCenter.default.addObserver(
-        forName: UIResponder.keyboardWillHideNotification,
-        object: nil, queue: .main
-    ) { _ in
-        keyboardVisible = false
+    private func observeKeyboard(){
+        NotificationCenter.default.addObserver(
+            forName: UIResponder.keyboardWillShowNotification,
+            object: nil, queue: .main
+        ) { _ in
+            keyboardVisible = true
+            
+        }
+        
+        NotificationCenter.default.addObserver(
+            forName: UIResponder.keyboardWillHideNotification,
+            object: nil, queue: .main
+        ) { _ in
+            keyboardVisible = false
+        }
     }
-}
 }

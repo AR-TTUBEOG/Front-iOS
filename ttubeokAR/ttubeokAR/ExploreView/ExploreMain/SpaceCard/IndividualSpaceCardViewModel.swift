@@ -10,10 +10,7 @@ import CoreLocation
 import Moya
 import SwiftUI
 
-class RecommendedSpaceCardViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
-    
-    
-    
+class IndividualSpaceCardViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     //MARK: - API
     private let authPlugin: AuthPlugin
     private let provider: MoyaProvider<ExploreAPITarget>

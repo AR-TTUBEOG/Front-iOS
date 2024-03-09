@@ -7,13 +7,13 @@
 
 import SwiftUI
 
-struct RecommendedSpaceCard: View {
+struct IndividualSpaceCard: View {
     // MARK: - Property
     @State private var isFavorited = false
     @State var placeTypeColor: Color?
     @State var baseImage: Image?
     @State var placeTypeText: Text?
-    @StateObject var viewModel: RecommendedSpaceCardViewModel
+    @StateObject var viewModel: IndividualSpaceCardViewModel
     
     
     // 장소 타입 저장할 변수 필요
