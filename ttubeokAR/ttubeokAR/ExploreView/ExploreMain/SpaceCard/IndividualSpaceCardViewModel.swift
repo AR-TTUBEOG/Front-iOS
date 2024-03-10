@@ -103,8 +103,6 @@ class IndividualSpaceCardViewModel: NSObject, ObservableObject, CLLocationManage
     public func walkImageGet() {
         guard let accessToken = KeyChainManager.standard.getAccessToken(for: "userSession") else { return }
         
-        print("스팟 아이디 : \(exploreDetailInfor?.placeId)")
-        
         provider.request(.getWalkImage(spotId: self.exploreDetailInfor?.placeId ?? 0, token: accessToken)) { result in
             switch result {
             case .success(let response):

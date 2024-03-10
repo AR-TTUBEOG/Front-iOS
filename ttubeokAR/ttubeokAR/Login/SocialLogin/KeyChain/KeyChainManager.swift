@@ -107,8 +107,8 @@ class KeyChainManager {
         session.refreshToken = refreshToken
         
         let saved = KeyChainManager.standard.saveSession(session, for: key)
-        if !saved {
-            print("리프레쉬 토큰 재발급 후 유저 정보 저장 실패")
+        if saved {
+            print(KeyChainManager.standard.loadSession(for: "userSession"))
         }
     }
 }
