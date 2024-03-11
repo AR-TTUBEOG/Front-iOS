@@ -78,11 +78,9 @@ struct ExploreViewControl: View {
     /// 전체 스페이스 카드를 가져온다.
     private var wholeSpacesGrid: some View {
         ScrollView(.vertical) {
-            LazyVGrid(columns: [GridItem(.flexible(minimum: 150), spacing: -8), GridItem(.flexible(minimum: 150), spacing: 15)], spacing: 25) {
+            LazyVGrid(columns: [GridItem(.flexible(minimum: 150), spacing: -8), GridItem(.flexible(minimum: 150), spacing: 15)], spacing: 20) {
                 ForEach(self.viewModel.exploreData?.information ?? [], id: \.self) { place in
                     IndividualSpaceCard(viewModel: IndividualSpaceCardViewModel(exploreDetailInfor: place))
-                    
-                        .frame(minWidth: 0, maxWidth: 180)
                     
                         .onAppear {
                             if place == self.viewModel.exploreData?.information.last {
@@ -96,10 +94,8 @@ struct ExploreViewControl: View {
                         }
                 }
             }
-            .frame(maxWidth: .infinity)
         }
-        
-        .frame(maxHeight: .infinity)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
         
         .refreshable {
             print("--------------refresh 새로고침 진행--------------")
@@ -130,5 +126,11 @@ struct ExploreViewControl: View {
         ) { _ in
             keyboardVisible = false
         }
+    }
+}
+
+struct ExploreViewControl_Preview: PreviewProvider {
+    static var previews: some View {
+        ExploreViewControl(viewModel: ExploreViewModel())
     }
 }
