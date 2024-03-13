@@ -79,9 +79,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func changeRootSplashView(_ ViewController: UIViewController, animated: Bool = true) {
         guard let window = self.window else { return }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.3) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
             if animated {
-                UIView.transition(with: window, duration: 1.0, options: .transitionCrossDissolve, animations: {
+                UIView.transition(with: window, duration: 0.7, options: .transitionCrossDissolve, animations: {
                     window.rootViewController = ViewController
                     window.makeKeyAndVisible()
                 }, completion: nil)

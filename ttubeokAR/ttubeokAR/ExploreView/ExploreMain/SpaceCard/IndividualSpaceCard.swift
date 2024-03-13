@@ -26,14 +26,14 @@ struct IndividualSpaceCard: View {
             .background(Color(red: 0.25, green: 0.24, blue: 0.37))
             .clipShape(.rect(cornerRadius: 19))
             .shadow(radius: 5)
-            .onReceive(BaseLocationManager.shared.$currentLocation) { _ in
-                viewModel.updateDistanceAndTIme()
-            }
-            .onAppear {
-                if let place = viewModel.exploreDetailInfor?.placeType {
-                    place.spot ? viewModel.walkImageGet() : viewModel.storeImageGet()
-                }
-            }
+//            .onReceive(BaseLocationManager.shared.$currentLocation) { _ in
+//                viewModel.updateDistanceAndTIme()
+//            }
+//            .onAppear {
+//                if let place = viewModel.exploreDetailInfor?.placeType {
+//                    place.spot ? viewModel.walkImageGet() : viewModel.storeImageGet()
+//                }
+//            }
     }
     
     //MARK: - ViewSetting
@@ -58,7 +58,7 @@ struct IndividualSpaceCard: View {
     
     private var topInfor: some View {
         ZStack(alignment: .topTrailing){
-            spaceImage
+            //spaceImage
             spaceLiked
                 .padding(.top, 9)
                 .padding(.trailing, 10)

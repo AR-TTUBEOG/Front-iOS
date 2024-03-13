@@ -99,16 +99,18 @@ struct ExploreViewControl: View {
         
         .refreshable {
             print("--------------refresh 새로고침 진행--------------")
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 viewModel.fetchDataSearch(viewModel.currentSearchType, page: 0)
             }
+        }
+        .onAppear {
+            UIRefreshControl.appearance().tintColor = UIColor.white
+            UIRefreshControl.appearance().attributedTitle = try? NSAttributedString(markdown: "** 최신 정보를 불러옵니다...! **")
         }
         
         .navigationDestination(isPresented: $showDetail) {
             DetailViewControl(viewModel: detailViewModel)
         }
-        
-        
     }
     
     private func observeKeyboard(){
