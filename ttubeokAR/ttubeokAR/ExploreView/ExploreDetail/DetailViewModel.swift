@@ -48,20 +48,20 @@ class DetailViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
         if place.placeType.spot {
             self.placeType = .spot
             walkWayGet(get: place)
-            walkWayImage(get: place)
         }
         else if place.placeType.store {
             self.placeType = .store
             storeGet(get: place)
-            storeGet(get: place)
         }
     }
     
-    private func walkWayImage(get plage: ExploreDetailInfor) {
+    /// 산책로의 이미지들을 얻어와 이미지 데이터 모델을 채운다.
+    /// - Parameter place: 선택한 장소의 정보 전달
+    private func walkWayImage(get walkWayId: Int) {
         
         guard let accessToken = KeyChainManager.standard.getAccessToken(for: "userSession") else { return }
         
-        provider.request(.fetchWalkWayImage(spotId: self.walkwayDetailDataModel?.information.spotId ?? 0, token: accessToken)) { [weak self] result in
+        provider.request(.fetchWalkWayImage(spotId: walkWayId, token: accessToken)) { [weak self] result in
             switch result {
             case .success(let response):
                 do {
@@ -81,7 +81,8 @@ class DetailViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
     }
     
     
-    
+    /// 선택한 산책로 데이터를 가져온다.
+    /// - Parameter place: 선택한 산책로 정보
     private func walkWayGet(get place: ExploreDetailInfor) {
         
         guard let accessToken = KeyChainManager.standard.getAccessToken(for: "userSession") else { return }
@@ -93,6 +94,7 @@ class DetailViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
                     let decodedData = try JSONDecoder().decode(WalkwayDetailDataModel.self, from: response.data)
                     DispatchQueue.main.async {
                         self?.walkwayDetailDataModel = decodedData
+                        self?.walkWayImage(get: self?.walkwayDetailDataModel?.information.spotId ?? 0)
                         print("디테일 산책로 등록")
                     }
                 } catch {
@@ -104,7 +106,7 @@ class DetailViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
         }
     }
     
-    private func storeImage(get plage: ExploreDetailInfor) {
+    private func storeImage(get place: ExploreDetailInfor) {
         
         guard let accessToken = KeyChainManager.standard.getAccessToken(for: "userSession") else { return }
         

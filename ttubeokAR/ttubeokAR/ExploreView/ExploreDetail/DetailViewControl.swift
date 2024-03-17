@@ -48,30 +48,34 @@ struct DetailViewControl: View {
     /// 장소  사진  및 찜하기 버튼
     private var topImageAndBookmarked: some View {
         ZStack(alignment: .topLeading) {
-//            spaceImage
+            spaceImage
             topHStack
         }
         .frame(maxWidth: .infinity, maxHeight: 250)
     }
 
     
-//    //MARK: - 장소 사진 설정
-//    //장소 사진
-//    private var spaceImage: some View {
-//        ScrollView(.horizontal, showsIndicators: false) {
-//            
-//            if let walkwayImages = viewModel.walkwayImageModel?.information {
-//                    loadImage(urlString: walkwayImages.image)
-//                }
-//            
-//            if let storeImages = viewModel.storeImageModel?.information {
-//                    loadImage(urlString: storeImages.image)
-//                }
-//            }
-//        .frame(width: 410, height: 252)
-//    }
+    //MARK: - 장소 사진 설정
+    //장소 사진
+    private var spaceImage: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            
+            if let walkwayImages = viewModel.walkwayImageModel?.information {
+                    loadImage(urlString: walkwayImages.image)
+                }
+            
+            if let storeImages = viewModel.storeImageModel?.information {
+                    loadImage(urlString: storeImages.image)
+                }
+            }
+        .frame(maxWidth: 410, maxHeight: 252)
+    }
+    
     
     @ViewBuilder
+    /// 이미지 사진을 불러온다.
+    /// - Parameter urlString: api를 통해 받아온 이미지 링크 값
+    /// - Returns: 이미지 리턴
     private func loadImage(urlString: String) -> some View {
         AsyncImage(url: URL(string: urlString)) { phase in
             switch phase {
@@ -79,8 +83,8 @@ struct DetailViewControl: View {
                 ProgressView()
             case .success(let image):
                 image.resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: 410, height: 252)
+                    .aspectRatio(contentMode: .fit)
+                    .frame(maxWidth: 410,maxHeight: 252)
             case .failure(let error):
                 Image(systemName: "photo")
             @unknown default:
@@ -88,8 +92,6 @@ struct DetailViewControl: View {
             }
         }
     }
-    
-    
     
     private var topHStack: some View {
         HStack {

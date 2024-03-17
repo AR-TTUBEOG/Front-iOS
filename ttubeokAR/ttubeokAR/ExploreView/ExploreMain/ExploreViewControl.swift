@@ -88,6 +88,7 @@ struct ExploreViewControl: View {
                                 viewModel.fetchDataSearch(viewModel.currentSearchType, page: viewModel.curretnPage + 1)
                             }
                         }
+                    
                         .onTapGesture {
                             self.detailViewModel.fetchDetails(for: place)
                             showDetail = true
@@ -103,9 +104,9 @@ struct ExploreViewControl: View {
                 viewModel.fetchDataSearch(viewModel.currentSearchType, page: 0)
             }
         }
+        
         .onAppear {
             UIRefreshControl.appearance().tintColor = UIColor.white
-            UIRefreshControl.appearance().attributedTitle = try? NSAttributedString(markdown: "** 최신 정보를 불러옵니다...! **")
         }
         
         .navigationDestination(isPresented: $showDetail) {
