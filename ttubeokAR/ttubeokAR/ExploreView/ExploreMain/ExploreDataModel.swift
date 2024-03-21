@@ -58,11 +58,6 @@ struct StoreLikeInfor: Codable {
     var message: String
 }
 
-
-
-
-
-
 //MARK: - 사진 불러오기
 
 struct PlaceImageCheck: Codable {

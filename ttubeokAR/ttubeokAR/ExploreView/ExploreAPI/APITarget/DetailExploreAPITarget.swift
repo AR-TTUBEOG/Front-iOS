@@ -59,12 +59,12 @@ extension DetailExploreAPITarget: TargetType {
     
     var headers: [String : String]? {
         switch self {
-        case .fetchStoreDetail(_, let token):
+        case .fetchWalkWayDetail(_, let token):
             return [
                 "Content-Type": "application/json",
                 "Authorization": "Bearer \(token)"
                 ]
-        case .fetchWalkWayDetail(_, let token):
+        case .fetchStoreDetail(_, let token):
             return [
                 "Content-Type": "application/json",
                 "Authorization": "Bearer \(token)"

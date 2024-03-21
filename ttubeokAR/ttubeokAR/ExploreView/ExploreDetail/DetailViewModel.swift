@@ -80,7 +80,7 @@ class DetailViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
         }
     }
     
-    
+    //TODO: - 산책로 엔드포인트 주소 오류 서버 수정 필요
     /// 선택한 산책로 데이터를 가져온다.
     /// - Parameter place: 선택한 산책로 정보
     private func walkWayGet(get place: ExploreDetailInfor) {
@@ -90,15 +90,19 @@ class DetailViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
         provider.request(.fetchWalkWayDetail(spotId: place.placeId, token: accessToken)) { [weak self] result in
             switch result {
             case .success(let response):
+                
+                let dataString = String(data: response.data, encoding: .utf8) ?? "Invalid data"
+                print("서버 응답 데이터: \(dataString)")
+                
                 do {
                     let decodedData = try JSONDecoder().decode(WalkwayDetailDataModel.self, from: response.data)
                     DispatchQueue.main.async {
                         self?.walkwayDetailDataModel = decodedData
-                        self?.walkWayImage(get: self?.walkwayDetailDataModel?.information.spotId ?? 0)
-                        print("디테일 산책로 등록")
+                        //self?.walkWayImage(get: self?.walkwayDetailDataModel?.information.spotId ?? 0)
+                        //TODO: 데이터 값 확인
                     }
                 } catch {
-                    print("디테일산책로 등록 디코드 에러")
+                    print("디테일산책로 등록 디코드 에러: \(error)")
                 }
             case.failure(let error):
                 print("디테일 산책로 네트워크 오류 : \(error.localizedDescription)")
@@ -153,6 +157,9 @@ class DetailViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
     }
     
     // MARK: - 방문하기 버튼
+    
+    //TODO: - 방문하기 버튼 클릭 시 액션 값 넣기
+    /// 방문하기 버튼 클릭시 행동
     public func GuestVisitAction() {
         print("방문하기를 눌렀습니다.")
     }
@@ -162,10 +169,15 @@ class DetailViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
     }
     
     // MARK: - 방명록 및 좋아요 수
+    
+    /// 좋아요 및 방명록 수 999개 까지
+    /// - Parameter count: int 값
+    /// - Returns: 갯수 출력
     public func formattedCount(_ count: Int) -> String {
         return count > 999 ? "999+" : "\(count)"
     }
     
+    /// 저장된 데이터 모델에 맞춰 카운트 출력
     var reviewText: Int {
         switch placeType {
         case .spot:
@@ -174,6 +186,8 @@ class DetailViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
             return storeDetailDataModel?.information.guestbookCount ?? 0
         }
     }
+    
+    /// 저장된 데이터 모델에 맞춰 좋아요 수 출력
     var likeText: Int {
         switch placeType {
         case .spot:
@@ -183,14 +197,9 @@ class DetailViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
         }
     }
     
-    public func previousImage() {
-        if currentImageIndex > 0 {
-            currentImageIndex -= 1
-        }
-    }
-    
     //MARK: - 좋아요 버튼
     
+    /// 좋아요 버튼 이미지
     var favoriteImageName: String {
         return isFavorited ? "pressedheart" : "unpressedheart"
     }
@@ -203,6 +212,7 @@ class DetailViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
         }
     }
     
+    /// 좋아요 API 전송 버튼,
     private func sendLike() {
         switch placeType {
         case .spot:
@@ -212,6 +222,8 @@ class DetailViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
         }
     }
     
+    /// 좋아요 버튼 클릭
+    /// - Parameter spotId: 해당 장소의 id
     private func likeWalkWay(spotId: Int) {
         
         guard let accessToken = KeyChainManager.standard.getAccessToken(for: "userSession") else { return }
@@ -221,7 +233,7 @@ class DetailViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
             case .success(let response):
                 do {
                     let decodedResponse = try JSONDecoder().decode(WalkWayLikeModel.self, from: response.data)
-                    print(decodedResponse)
+                    print("좋아요 버튼 클릭 후 호출 : \(decodedResponse)")
                 } catch {
                     print("산책로 error")
                 }
@@ -231,6 +243,8 @@ class DetailViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
         }
     }
     
+    /// 매장 좋아요 버튼 클릭
+    /// - Parameter storeId: 해당 장소의 id
     private func likeStore(storeId: Int) {
         
         guard let accessToken = KeyChainManager.standard.getAccessToken(for: "userSession") else { return }

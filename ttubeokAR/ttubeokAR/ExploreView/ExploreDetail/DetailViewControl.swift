@@ -61,7 +61,7 @@ struct DetailViewControl: View {
         ScrollView(.horizontal, showsIndicators: false) {
             
             if let walkwayImages = viewModel.walkwayImageModel?.information {
-                    loadImage(urlString: walkwayImages.image)
+                loadImage(urlString: walkwayImages.image)
                 }
             
             if let storeImages = viewModel.storeImageModel?.information {

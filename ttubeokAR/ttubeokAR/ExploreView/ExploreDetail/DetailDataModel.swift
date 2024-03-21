@@ -7,7 +7,8 @@
 
 import Foundation
 
-//매장 세부사항 조회 api
+//MARK: - 산책로 세부사항 조회 모델
+/// 산책로 세부사항 조회 api
 struct WalkwayDetailDataModel: Codable {
     var check: Bool
     var information: WalwayInformation
@@ -26,9 +27,9 @@ struct WalwayInformation: Codable {
     var guestbookCount: Int
     var likesCount: Int
     var isFavorited : Bool
-    var image: String
 }
 
+//MARK: - 산책로 세부사항 이미지 조회 모델
 struct WalkImageModel: Codable {
     var check: Bool
     var information: WalkDetailImage
@@ -44,7 +45,7 @@ struct WalkDetailImage: Codable {
 
 
 
-//MARK: - 매장 등록
+//MARK: - 매장 세부사항 조회 모델
 
 struct StoreDetailDataModel: Codable {
     var check: Bool
@@ -60,7 +61,6 @@ struct StoreInformation: Codable {
     var detailAddress: String
     var latitude: Double
     var longitude: Double
-    var image: [String]
     var stars: Float
     var type: StoreType
     var storeBenefits: [String]
@@ -69,9 +69,10 @@ struct StoreInformation: Codable {
     var isFavorited: Bool
 }
 
+//MARK: - 매장 세부사항 이미지 조회 모델
 struct StoreImageModel: Codable {
     var check: Bool
-    var information: [StoreDetailImage]
+    var information: StoreDetailImage
 }
 
 struct StoreDetailImage: Codable {
@@ -82,6 +83,7 @@ struct StoreDetailImage: Codable {
     var placeId: Int
 }
 
+//MARK: - 매장 타입
 enum StoreType: String, Codable {
     case RESTAURANT
     case CAFE
