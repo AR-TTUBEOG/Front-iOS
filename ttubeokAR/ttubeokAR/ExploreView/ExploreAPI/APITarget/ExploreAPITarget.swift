@@ -9,7 +9,7 @@ import Foundation
 import Moya
 
 enum ExploreAPITarget {
-    case createBookMark(id : Int, memberId: Int, content: String, star: Float,image : String)
+    case createBookMark(id : Int, memberId: Int, content: String, star: Float, image : String)
     case likeWalkWay(spotId: Int, token: String)
     case likeStoreData(storeId: Int, token: String)
 }

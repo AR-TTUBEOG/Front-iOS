@@ -30,12 +30,12 @@ struct WalwayInformation: Codable {
 }
 
 //MARK: - 산책로 세부사항 이미지 조회 모델
-struct WalkImageModel: Codable {
+struct WalkImageModel: Codable, Hashable {
     var check: Bool
-    var information: WalkDetailImage
+    var information: [WalkDetailImage]
 }
 
-struct WalkDetailImage: Codable {
+struct WalkDetailImage: Codable, Hashable {
     var id: Int?
     var uuid: String
     var image: String
@@ -70,12 +70,12 @@ struct StoreInformation: Codable {
 }
 
 //MARK: - 매장 세부사항 이미지 조회 모델
-struct StoreImageModel: Codable {
+struct StoreImageModel: Codable, Hashable {
     var check: Bool
-    var information: StoreDetailImage
+    var information: [StoreDetailImage]
 }
 
-struct StoreDetailImage: Codable {
+struct StoreDetailImage: Codable, Hashable {
     var id: Int
     var uuid: String
     var image: String

@@ -77,7 +77,6 @@ class LoginViewModel: ObservableObject {
     /// 토큰 저장되어 있는지 체크하기
     public func checkLoginStatus(completion: @escaping (Bool) -> Void) {
         print("2.토큰 저장 체크")
-
         if let session = keyChainManger.loadSession(for: "userSession"),
            let nickname = session.nickname, !nickname.isEmpty {
             print("2-0: 현재 사용자 정보 : \(session)")

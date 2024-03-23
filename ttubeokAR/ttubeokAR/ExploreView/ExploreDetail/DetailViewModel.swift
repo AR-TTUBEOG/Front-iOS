@@ -44,6 +44,8 @@ class DetailViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
     }
     
     //MARK: - API Fetch 함수
+    /// 장소 타입에 맞춰 API 호출
+    /// - Parameter place: 전달 받은 장소 타입
     public func fetchDetails(for place: ExploreDetailInfor) {
         if place.placeType.spot {
             self.placeType = .spot
@@ -52,6 +54,33 @@ class DetailViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
         else if place.placeType.store {
             self.placeType = .store
             storeGet(get: place)
+        }
+    }
+    
+    //MARK: - 산책로 상세 조회 처리
+    
+    /// 선택한 산책로 데이터를 가져온다.
+    /// - Parameter place: 선택한 산책로 정보
+    private func walkWayGet(get place: ExploreDetailInfor) {
+        
+        guard let accessToken = KeyChainManager.standard.getAccessToken(for: "userSession") else { return }
+        
+        provider.request(.fetchWalkWayDetail(spotId: place.placeId, token: accessToken)) { [weak self] result in
+            switch result {
+            case .success(let response):
+                do {
+                    let decodedData = try JSONDecoder().decode(WalkwayDetailDataModel.self, from: response.data)
+                    DispatchQueue.main.async {
+                        self?.walkwayDetailDataModel = decodedData
+                        self?.walkWayImage(get: self?.walkwayDetailDataModel?.information.spotId ?? 0)
+                        print("디테일 산책로 조회 완료")
+                    }
+                } catch {
+                    print("디테일 산책로 등록 디코드 에러: \(error)")
+                }
+            case.failure(let error):
+                print("디테일 산책로 네트워크 오류 : \(error.localizedDescription)")
+            }
         }
     }
     
@@ -80,41 +109,38 @@ class DetailViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
         }
     }
     
-    //TODO: - 산책로 엔드포인트 주소 오류 서버 수정 필요
-    /// 선택한 산책로 데이터를 가져온다.
-    /// - Parameter place: 선택한 산책로 정보
-    private func walkWayGet(get place: ExploreDetailInfor) {
+    //MARK: - 매장 상세 조회 처리
+    
+    /// 매장 상세 데이터 조회
+    /// - Parameter place: 장소 타입
+    private func storeGet(get place: ExploreDetailInfor) {
         
         guard let accessToken = KeyChainManager.standard.getAccessToken(for: "userSession") else { return }
         
-        provider.request(.fetchWalkWayDetail(spotId: place.placeId, token: accessToken)) { [weak self] result in
+        provider.request(.fetchStoreDetail(storeId: place.placeId, token: accessToken)) { [weak self] result in
             switch result {
             case .success(let response):
-                
-                let dataString = String(data: response.data, encoding: .utf8) ?? "Invalid data"
-                print("서버 응답 데이터: \(dataString)")
-                
                 do {
-                    let decodedData = try JSONDecoder().decode(WalkwayDetailDataModel.self, from: response.data)
+                    let decodedData = try JSONDecoder().decode(StoreDetailDataModel.self, from: response.data)
                     DispatchQueue.main.async {
-                        self?.walkwayDetailDataModel = decodedData
-                        //self?.walkWayImage(get: self?.walkwayDetailDataModel?.information.spotId ?? 0)
-                        //TODO: 데이터 값 확인
+                        self?.storeDetailDataModel = decodedData
+                        self?.storeImage(get: self?.storeDetailDataModel?.information.storeId ?? 0)
+                        print("디테일 매장 등록")
                     }
                 } catch {
-                    print("디테일산책로 등록 디코드 에러: \(error)")
+                    print("디테일 매장 등록 디코드 에러 : \(error)")
                 }
-            case.failure(let error):
-                print("디테일 산책로 네트워크 오류 : \(error.localizedDescription)")
+            case .failure(let error):
+                print("디텥일 매장 네트워크 오류: \(error.localizedDescription)")
             }
         }
     }
     
-    private func storeImage(get place: ExploreDetailInfor) {
+    private func storeImage(get place: Int) {
         
         guard let accessToken = KeyChainManager.standard.getAccessToken(for: "userSession") else { return }
         
-        provider.request(.fetchStoreImage(storeId: self.storeDetailDataModel?.information.storeId ?? 0, token: accessToken)) { [weak self] result in
+        provider.request(.fetchStoreImage(storeId: place, token: accessToken)) { [weak self] result in
             switch result {
             case .success(let response):
                 do {
@@ -129,29 +155,6 @@ class DetailViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
                 }
             case .failure(let error):
                 print("매장 이미지 네트워크 오류 : \(error)")
-            }
-        }
-    }
-    
-    
-    private func storeGet(get place: ExploreDetailInfor) {
-        
-        guard let accessToken = KeyChainManager.standard.getAccessToken(for: "userSession") else { return }
-        
-        provider.request(.fetchStoreDetail(storeId: place.placeId, token: accessToken)) { [weak self] result in
-            switch result {
-            case .success(let response):
-                do {
-                    let decodedData = try JSONDecoder().decode(StoreDetailDataModel.self, from: response.data)
-                    DispatchQueue.main.async {
-                        self?.storeDetailDataModel = decodedData
-                        print("디테일 매장 등록")
-                    }
-                } catch {
-                    print("디테일 매장 등록 디코드 에러 : \(error)")
-                }
-            case .failure(let error):
-                print("디텥일 매장 네트워크 오류: \(error.localizedDescription)")
             }
         }
     }

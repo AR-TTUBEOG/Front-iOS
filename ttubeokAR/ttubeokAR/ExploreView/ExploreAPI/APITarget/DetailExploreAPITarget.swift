@@ -25,9 +25,9 @@ extension DetailExploreAPITarget: TargetType {
         case .fetchStoreDetail(let storeId, _):
             return "/api/v1/store/\(storeId)"
         case .fetchWalkWayImage(let spotId, _):
-            return "/api/v1/image/\(spotId)"
+            return "/api/v1/image/spot/\(spotId)"
         case .fetchStoreImage(let storeId, _):
-            return "/api/v1/image/\(storeId)"
+            return "/api/v1/image/store/\(storeId)"
         }
     }
     
