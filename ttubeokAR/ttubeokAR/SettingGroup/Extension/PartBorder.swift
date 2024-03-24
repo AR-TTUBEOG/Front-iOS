@@ -8,24 +8,24 @@
 import Foundation
 import SwiftUI
 
-extension View {
-    func border(width: CGFloat, edges: [Edge], color: Color) -> some View {
-        EdgeBorder(width: width, edges: edges).foregroundStyle(color)
+struct BottomBorder: Shape {
+    func path(in rect: CGRect) -> Path {
+        var path = Path()
+        
+        path.move(to: CGPoint(x: rect.minX, y: rect.maxY))
+        path.addLine(to: CGPoint(x: rect.maxX, y: rect.maxY))
+        
+        return path
     }
 }
 
-struct EdgeBorder: Shape {
-    var width: CGFloat
-    var edges: [Edge]
-    
+struct TopBorder: Shape {
     func path(in rect: CGRect) -> Path {
-        edges.map { edge -> Path in
-            switch edge {
-            case .top: return Path(.init(x: rect.minX, y: rect.minY, width: rect.width, height: width))
-            case .bottom: return Path(.init(x: rect.minX, y: rect.maxY - width, width: rect.width, height: width))
-            case .leading: return Path(.init(x: rect.minX, y: rect.minY, width: width, height: rect.height))
-            case .trailing: return Path(.init(x: rect.maxX - width, y: rect.minY, width: width, height: rect.height))
-            }
-        }.reduce(into: Path()) { $0.addPath($1)}
+        var path = Path()
+        
+        path.move(to: CGPoint(x: rect.minX, y: rect.minY))
+        path.addLine(to: CGPoint(x: rect.maxX, y: rect.minY))
+        
+        return path
     }
 }
