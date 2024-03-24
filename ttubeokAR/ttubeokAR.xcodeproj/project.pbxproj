@@ -23,6 +23,7 @@
 		481EA2712B6F280200BAD5E0 /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481EA2702B6F280200BAD5E0 /* SplashScreenView.swift */; };
 		481EA2722B6F339700BAD5E0 /* CustomTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483BFD192B649CD000C2AD5B /* CustomTitleView.swift */; };
 		481EA2732B6F339C00BAD5E0 /* WalkPlaceRegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48CC6BCA2B6526420032A5E2 /* WalkPlaceRegisterView.swift */; };
+		4821F4A02BAFF2CF00980578 /* PartBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4821F49F2BAFF2CF00980578 /* PartBorder.swift */; };
 		48249D932B7527AC002849B3 /* ExploreDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB9FA1F2B55443700F0046A /* ExploreDataModel.swift */; };
 		48249D942B7527AF002849B3 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		48249D962B7527B5002849B3 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C7239EC2B5BA9090082F12D /* SettingViewModel.swift */; };
@@ -225,6 +226,7 @@
 		481CD1EF2B7E49F000477DDF /* GameManagerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManagerModel.swift; sourceTree = "<group>"; };
 		481E74C22B78A36900A50846 /* WheelGameShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WheelGameShape.swift; sourceTree = "<group>"; };
 		481EA2702B6F280200BAD5E0 /* SplashScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenView.swift; sourceTree = "<group>"; };
+		4821F49F2BAFF2CF00980578 /* PartBorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartBorder.swift; sourceTree = "<group>"; };
 		482DB6B62B5416FF005538DE /* PlaceSettingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceSettingModel.swift; sourceTree = "<group>"; };
 		482DB6B82B541797005538DE /* PlaceSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceSettingsViewModel.swift; sourceTree = "<group>"; };
 		482DB6BA2B541E7E005538DE /* PlaceSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceSettingView.swift; sourceTree = "<group>"; };
@@ -490,7 +492,6 @@
 		483513802B5A5FF80072ADFE /* SocialLogin */ = {
 			isa = PBXGroup;
 			children = (
-				48A6C6B42B5F7F0800CFF763 /* KeyChain */,
 				48D61C6F2B5CC934009EF2BF /* LoginView */,
 				48D88C2D2B5C255400A1B09E /* LoginAPI */,
 				483513822B5A60060072ADFE /* Kakao */,
@@ -649,6 +650,7 @@
 		486C2FE82B592A3100C88B04 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				48A6C6B42B5F7F0800CFF763 /* KeyChain */,
 				483513802B5A5FF80072ADFE /* SocialLogin */,
 				486C2FE92B592A3800C88B04 /* NicknameLogin */,
 			);
@@ -836,6 +838,7 @@
 				488E25452B4D4E1C005D8D52 /* FontExtension.swift */,
 				48B57FC72B7602AF005965FD /* BundleExtension.swift */,
 				48D192E52B71C68300A5EBE8 /* RoundedCorner.swift */,
+				4821F49F2BAFF2CF00980578 /* PartBorder.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1605,6 +1608,7 @@
 				483699E82B78C8340046A2E8 /* WheelGameShapeView.swift in Sources */,
 				48D88C2C2B5C24A400A1B09E /* LoginServerResponse.swift in Sources */,
 				48B57FBB2B75CB62005965FD /* InputAddressView.swift in Sources */,
+				4821F4A02BAFF2CF00980578 /* PartBorder.swift in Sources */,
 				482DB6BB2B541E7E005538DE /* PlaceSettingView.swift in Sources */,
 				4831BEC02B742866006E184C /* SearchAPITarget.swift in Sources */,
 				483BFD202B64A2A200C2AD5B /* PlaceSelect.swift in Sources */,

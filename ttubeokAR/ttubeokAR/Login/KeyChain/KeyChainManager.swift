@@ -25,7 +25,8 @@ class KeyChainManager {
         let query: [CFString: Any] = [
             kSecClass: kSecClassGenericPassword,
             kSecAttrAccount: key,
-            kSecValueData: data
+            kSecValueData: data,
+            kSecAttrAccessible: kSecAttrAccessibleWhenUnlocked
         ]
         
         SecItemDelete(query as CFDictionary)
@@ -63,6 +64,7 @@ class KeyChainManager {
         
         SecItemDelete(query as CFDictionary)
     }
+    //MARK: - 세션 설정
     
     public func saveSession(_ session: UserSession, for key: String) -> Bool {
         guard let data = try? JSONEncoder().encode(session) else { return false }
@@ -79,6 +81,7 @@ class KeyChainManager {
         delete(key: key)
     }
     
+    //MARK: - 세션 사용하여 값 얻기
     public func getAccessToken(for key: String) -> String? {
         guard let session = loadSession(for: key) else { return nil }
         return session.accessToken
@@ -108,7 +111,7 @@ class KeyChainManager {
         
         let saved = KeyChainManager.standard.saveSession(session, for: key)
         if saved {
-            print(KeyChainManager.standard.loadSession(for: "userSession"))
+            print("세션이 초기화되어 저장되었습니다.")
         }
     }
 }

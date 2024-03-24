@@ -23,8 +23,8 @@ struct DetailViewControl: View {
             .navigationBarBackButtonHidden(true)
     }
     
+    /// 전체 뷰 모음
     private var allView: some View {
-        
         ZStack(alignment: .top) {
             Color.background.ignoresSafeArea()
             VStack(alignment: .center, spacing: 18) {
@@ -75,7 +75,7 @@ struct DetailViewControl: View {
             }
         }
         .frame(maxWidth: .infinity, maxHeight: 252)
-        .border(.red)
+        //TODO: - border 값 넣기
     }
     
     
@@ -89,10 +89,10 @@ struct DetailViewControl: View {
             case .empty:
                 EmptyText
             case .success(let image):
-                image.resizable()
+                image
+                    .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(maxWidth: .infinity, maxHeight: 252)
-                    .border(.lightGreen2)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
             case .failure(let error):
                 failureImage(get: error)
             @unknown default:
@@ -104,16 +104,17 @@ struct DetailViewControl: View {
     /// 이미지 비워져있는 상태로 받았을 경우
     private var EmptyText: some View {
         Text("이미지가 비워져있어요!")
-            .frame(maxWidth: 120)
-            .font(.sandol(type: .bold, size: 30))
+            .frame(maxWidth: .infinity, alignment: .center)
+            .font(.sandol(type: .bold, size: 22))
             .foregroundStyle(Color.white)
     }
     
+    
     private func failureImage(get error: Error) -> some View {
         print("이미지 로드 실패 에러 : \(error)")
-        return Text("이미지 로드 실패!")
-            .frame(maxWidth: 120)
-            .font(.sandol(type: .bold, size: 30))
+        return Text("이미지 로딩 중..")
+            .frame(maxWidth: .infinity, alignment: .center)
+            .font(.sandol(type: .bold, size: 22))
             .foregroundStyle(Color.white)
     }
     
