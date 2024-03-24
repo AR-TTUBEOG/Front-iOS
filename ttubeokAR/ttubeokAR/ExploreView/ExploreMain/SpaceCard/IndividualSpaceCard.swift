@@ -96,6 +96,7 @@ struct IndividualSpaceCard: View {
                     .padding(.top, 5)
             case .failure(_):
                 Image(systemName: "photo")
+                
             @unknown default:
                 EmptyView()
             }

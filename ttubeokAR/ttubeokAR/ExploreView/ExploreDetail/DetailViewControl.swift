@@ -23,8 +23,8 @@ struct DetailViewControl: View {
             .navigationBarBackButtonHidden(true)
     }
     
+    /// 전체 뷰 모음
     private var allView: some View {
-        
         ZStack(alignment: .top) {
             Color.background.ignoresSafeArea()
             VStack(alignment: .center, spacing: 18) {
@@ -56,27 +56,34 @@ struct DetailViewControl: View {
 
     
     //MARK: - 장소 사진 설정
-    //장소 사진
+    
+    /// 선택된 장소에 등록된 사진 불러오기, 여러장을 불러오기 때문에 스크롤뷰로 불러온다.
     private var spaceImage: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack {
-                
-                if let walkwayImages = viewModel.walkwayImageModel?.information {
-                    ForEach(walkwayImages, id: \.self) { walkwayImage in
-                        loadImage(urlString: walkwayImage.image)
+        GeometryReader { geometry in
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack {
+                        
+                        if let walkwayImages = viewModel.walkwayImageModel?.information {
+                            ForEach(walkwayImages, id: \.self) { walkwayImage in
+                                loadImage(urlString: walkwayImage.image)
+                            }
+                        }
+                        
+                        if let storeImages = viewModel.storeImageModel?.information {
+                            ForEach(storeImages, id: \.self) { storeImages in
+                                loadImage(urlString: storeImages.image)
+                            }
+                        }
                     }
+                    .frame(width: geometry.size.width)
                 }
-                
-                if let storeImages = viewModel.storeImageModel?.information {
-                    ForEach(storeImages, id: \.self) { storeImages in
-                        loadImage(urlString: storeImages.image)
-                    }
-                }
-            }
+                .frame(maxWidth: .infinity, maxHeight: 250, alignment: .center)
+            
+                .overlay(TopBorder().stroke(Color(red: 0.95, green: 0.95, blue: 0.9).opacity(0.3), lineWidth: 0.6))
+                .overlay(BottomBorder().stroke(Color(red: 0.95, green: 0.95, blue: 0.9).opacity(0.3), lineWidth: 0.6))
         }
-        .frame(maxWidth: .infinity, maxHeight: 252)
-        .border(.red)
     }
+            
     
     
     @ViewBuilder
@@ -89,10 +96,10 @@ struct DetailViewControl: View {
             case .empty:
                 EmptyText
             case .success(let image):
-                image.resizable()
+                image
+                    .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(maxWidth: .infinity, maxHeight: 252)
-                    .border(.lightGreen2)
+                    .frame(maxHeight: .infinity)
             case .failure(let error):
                 failureImage(get: error)
             @unknown default:
@@ -104,16 +111,17 @@ struct DetailViewControl: View {
     /// 이미지 비워져있는 상태로 받았을 경우
     private var EmptyText: some View {
         Text("이미지가 비워져있어요!")
-            .frame(maxWidth: 120)
-            .font(.sandol(type: .bold, size: 30))
+            .frame(maxWidth: .infinity, alignment: .center)
+            .font(.sandol(type: .bold, size: 22))
             .foregroundStyle(Color.white)
     }
     
+    
     private func failureImage(get error: Error) -> some View {
         print("이미지 로드 실패 에러 : \(error)")
-        return Text("이미지 로드 실패!")
-            .frame(maxWidth: 120)
-            .font(.sandol(type: .bold, size: 30))
+        return Text("이미지 로딩 중..")
+            .frame(maxWidth: .infinity, alignment: .center)
+            .font(.sandol(type: .bold, size: 22))
             .foregroundStyle(Color.white)
     }
     
@@ -125,11 +133,11 @@ struct DetailViewControl: View {
                 .padding(.bottom, 5)
             Spacer()
             spaceLiked
-            .padding(.horizontal, 5)
             .padding(.top, 10)
         }
-        .padding(.leading, 10)
-        .frame(maxWidth: 300)
+        .padding(.horizontal, 13)
+        .padding(.vertical, 6)
+        .frame(maxWidth: .infinity)
     }
     
     /// 이전으로 넘어가는 버튼
@@ -139,7 +147,7 @@ struct DetailViewControl: View {
         }, label: {
             Icon.chevronLeft.image
                 .resizable()
-                .frame(maxWidth: 15, maxHeight: 25)
+                .frame(maxWidth: 12, maxHeight: 22)
                 .aspectRatio(contentMode: .fit)
         })
     }
@@ -152,7 +160,7 @@ struct DetailViewControl: View {
             Image(viewModel.favoriteImageName)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(maxWidth: 40, maxHeight: 40)
+                .frame(maxWidth: 35, maxHeight: 35)
         }
     }
 
