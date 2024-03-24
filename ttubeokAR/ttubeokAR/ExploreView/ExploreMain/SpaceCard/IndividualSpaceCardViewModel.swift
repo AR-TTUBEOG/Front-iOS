@@ -97,47 +97,4 @@ class IndividualSpaceCardViewModel: NSObject, ObservableObject, CLLocationManage
         
         print("현재 거리 차이 : \(distance)")
     }
-    
-    
-    
-    public func walkImageGet() {
-        guard let accessToken = KeyChainManager.standard.getAccessToken(for: "userSession") else { return }
-        
-        provider.request(.getWalkImage(spotId: self.exploreDetailInfor?.placeId ?? 0, token: accessToken)) { result in
-            switch result {
-            case .success(let response):
-                do {
-                    let decodedData = try JSONDecoder().decode(PlaceImageCheck.self, from: response.data)
-                    self.placeImage = decodedData.information[0].image
-                    print("산책 스팟 사진 불러오기 완료")
-                } catch {
-                    print("사진 스팟 사진 디코더 에러 : \(error)")
-                }
-            case .failure(let error):
-                print("산책스팟 에러: \(error)")
-            }
-        }
-    }
-    
-    
-    public func storeImageGet() {
-        guard let accessToken = KeyChainManager.standard.getAccessToken(for: "userSession") else { return }
-        
-        provider.request(.getStoreImage(spotId: self.exploreDetailInfor?.placeId ?? 0, token: accessToken)) { result in
-            switch result {
-            case .success(let response):
-                do {
-                    let decodedData = try JSONDecoder().decode(PlaceImageCheck.self, from: response.data)
-                    self.placeImage = decodedData.information[0].image
-                    print("매장 사진 불러오기 완료")
-                } catch {
-                    print("매장 사진 디코더 에러 : \(error)")
-                }
-            case .failure(let error):
-                print("매장 에러: \(error)")
-            }
-        }
-    }
-    
-    
 }

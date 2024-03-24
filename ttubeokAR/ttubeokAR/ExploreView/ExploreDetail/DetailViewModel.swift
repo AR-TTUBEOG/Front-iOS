@@ -44,24 +44,53 @@ class DetailViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
     }
     
     //MARK: - API Fetch 함수
+    /// 장소 타입에 맞춰 API 호출
+    /// - Parameter place: 전달 받은 장소 타입
     public func fetchDetails(for place: ExploreDetailInfor) {
         if place.placeType.spot {
             self.placeType = .spot
             walkWayGet(get: place)
-            walkWayImage(get: place)
         }
         else if place.placeType.store {
             self.placeType = .store
             storeGet(get: place)
-            storeGet(get: place)
         }
     }
     
-    private func walkWayImage(get plage: ExploreDetailInfor) {
+    //MARK: - 산책로 상세 조회 처리
+    
+    /// 선택한 산책로 데이터를 가져온다.
+    /// - Parameter place: 선택한 산책로 정보
+    private func walkWayGet(get place: ExploreDetailInfor) {
         
         guard let accessToken = KeyChainManager.standard.getAccessToken(for: "userSession") else { return }
         
-        provider.request(.fetchWalkWayImage(spotId: self.walkwayDetailDataModel?.information.spotId ?? 0, token: accessToken)) { [weak self] result in
+        provider.request(.fetchWalkWayDetail(spotId: place.placeId, token: accessToken)) { [weak self] result in
+            switch result {
+            case .success(let response):
+                do {
+                    let decodedData = try JSONDecoder().decode(WalkwayDetailDataModel.self, from: response.data)
+                    DispatchQueue.main.async {
+                        self?.walkwayDetailDataModel = decodedData
+                        self?.walkWayImage(get: self?.walkwayDetailDataModel?.information.spotId ?? 0)
+                        print("디테일 산책로 조회 완료")
+                    }
+                } catch {
+                    print("디테일 산책로 등록 디코드 에러: \(error)")
+                }
+            case.failure(let error):
+                print("디테일 산책로 네트워크 오류 : \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    /// 산책로의 이미지들을 얻어와 이미지 데이터 모델을 채운다.
+    /// - Parameter place: 선택한 장소의 정보 전달
+    private func walkWayImage(get walkWayId: Int) {
+        
+        guard let accessToken = KeyChainManager.standard.getAccessToken(for: "userSession") else { return }
+        
+        provider.request(.fetchWalkWayImage(spotId: walkWayId, token: accessToken)) { [weak self] result in
             switch result {
             case .success(let response):
                 do {
@@ -80,35 +109,38 @@ class DetailViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
         }
     }
     
+    //MARK: - 매장 상세 조회 처리
     
-    
-    private func walkWayGet(get place: ExploreDetailInfor) {
+    /// 매장 상세 데이터 조회
+    /// - Parameter place: 장소 타입
+    private func storeGet(get place: ExploreDetailInfor) {
         
         guard let accessToken = KeyChainManager.standard.getAccessToken(for: "userSession") else { return }
         
-        provider.request(.fetchWalkWayDetail(spotId: place.placeId, token: accessToken)) { [weak self] result in
+        provider.request(.fetchStoreDetail(storeId: place.placeId, token: accessToken)) { [weak self] result in
             switch result {
             case .success(let response):
                 do {
-                    let decodedData = try JSONDecoder().decode(WalkwayDetailDataModel.self, from: response.data)
+                    let decodedData = try JSONDecoder().decode(StoreDetailDataModel.self, from: response.data)
                     DispatchQueue.main.async {
-                        self?.walkwayDetailDataModel = decodedData
-                        print("디테일 산책로 등록")
+                        self?.storeDetailDataModel = decodedData
+                        self?.storeImage(get: self?.storeDetailDataModel?.information.storeId ?? 0)
+                        print("디테일 매장 등록")
                     }
                 } catch {
-                    print("디테일산책로 등록 디코드 에러")
+                    print("디테일 매장 등록 디코드 에러 : \(error)")
                 }
-            case.failure(let error):
-                print("디테일 산책로 네트워크 오류 : \(error.localizedDescription)")
+            case .failure(let error):
+                print("디텥일 매장 네트워크 오류: \(error.localizedDescription)")
             }
         }
     }
     
-    private func storeImage(get plage: ExploreDetailInfor) {
+    private func storeImage(get place: Int) {
         
         guard let accessToken = KeyChainManager.standard.getAccessToken(for: "userSession") else { return }
         
-        provider.request(.fetchStoreImage(storeId: self.storeDetailDataModel?.information.storeId ?? 0, token: accessToken)) { [weak self] result in
+        provider.request(.fetchStoreImage(storeId: place, token: accessToken)) { [weak self] result in
             switch result {
             case .success(let response):
                 do {
@@ -127,30 +159,10 @@ class DetailViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
         }
     }
     
-    
-    private func storeGet(get place: ExploreDetailInfor) {
-        
-        guard let accessToken = KeyChainManager.standard.getAccessToken(for: "userSession") else { return }
-        
-        provider.request(.fetchStoreDetail(storeId: place.placeId, token: accessToken)) { [weak self] result in
-            switch result {
-            case .success(let response):
-                do {
-                    let decodedData = try JSONDecoder().decode(StoreDetailDataModel.self, from: response.data)
-                    DispatchQueue.main.async {
-                        self?.storeDetailDataModel = decodedData
-                        print("디테일 매장 등록")
-                    }
-                } catch {
-                    print("디테일 매장 등록 디코드 에러 : \(error)")
-                }
-            case .failure(let error):
-                print("디텥일 매장 네트워크 오류: \(error.localizedDescription)")
-            }
-        }
-    }
-    
     // MARK: - 방문하기 버튼
+    
+    //TODO: - 방문하기 버튼 클릭 시 액션 값 넣기
+    /// 방문하기 버튼 클릭시 행동
     public func GuestVisitAction() {
         print("방문하기를 눌렀습니다.")
     }
@@ -160,10 +172,15 @@ class DetailViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
     }
     
     // MARK: - 방명록 및 좋아요 수
+    
+    /// 좋아요 및 방명록 수 999개 까지
+    /// - Parameter count: int 값
+    /// - Returns: 갯수 출력
     public func formattedCount(_ count: Int) -> String {
         return count > 999 ? "999+" : "\(count)"
     }
     
+    /// 저장된 데이터 모델에 맞춰 카운트 출력
     var reviewText: Int {
         switch placeType {
         case .spot:
@@ -172,6 +189,8 @@ class DetailViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
             return storeDetailDataModel?.information.guestbookCount ?? 0
         }
     }
+    
+    /// 저장된 데이터 모델에 맞춰 좋아요 수 출력
     var likeText: Int {
         switch placeType {
         case .spot:
@@ -181,14 +200,9 @@ class DetailViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
         }
     }
     
-    public func previousImage() {
-        if currentImageIndex > 0 {
-            currentImageIndex -= 1
-        }
-    }
-    
     //MARK: - 좋아요 버튼
     
+    /// 좋아요 버튼 이미지
     var favoriteImageName: String {
         return isFavorited ? "pressedheart" : "unpressedheart"
     }
@@ -201,6 +215,7 @@ class DetailViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
         }
     }
     
+    /// 좋아요 API 전송 버튼,
     private func sendLike() {
         switch placeType {
         case .spot:
@@ -210,6 +225,8 @@ class DetailViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
         }
     }
     
+    /// 좋아요 버튼 클릭
+    /// - Parameter spotId: 해당 장소의 id
     private func likeWalkWay(spotId: Int) {
         
         guard let accessToken = KeyChainManager.standard.getAccessToken(for: "userSession") else { return }
@@ -219,7 +236,7 @@ class DetailViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
             case .success(let response):
                 do {
                     let decodedResponse = try JSONDecoder().decode(WalkWayLikeModel.self, from: response.data)
-                    print(decodedResponse)
+                    print("좋아요 버튼 클릭 후 호출 : \(decodedResponse)")
                 } catch {
                     print("산책로 error")
                 }
@@ -229,6 +246,8 @@ class DetailViewModel: NSObject, ObservableObject,CLLocationManagerDelegate {
         }
     }
     
+    /// 매장 좋아요 버튼 클릭
+    /// - Parameter storeId: 해당 장소의 id
     private func likeStore(storeId: Int) {
         
         guard let accessToken = KeyChainManager.standard.getAccessToken(for: "userSession") else { return }

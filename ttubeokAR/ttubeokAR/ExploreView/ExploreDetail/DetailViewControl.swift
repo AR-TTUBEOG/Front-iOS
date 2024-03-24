@@ -48,49 +48,77 @@ struct DetailViewControl: View {
     /// 장소  사진  및 찜하기 버튼
     private var topImageAndBookmarked: some View {
         ZStack(alignment: .topLeading) {
-//            spaceImage
+            spaceImage
             topHStack
         }
-        .frame(maxWidth: .infinity, maxHeight: 250)
+        .frame(maxWidth: .infinity, maxHeight: 250).ignoresSafeArea(edges: .horizontal)
     }
 
     
-//    //MARK: - 장소 사진 설정
-//    //장소 사진
-//    private var spaceImage: some View {
-//        ScrollView(.horizontal, showsIndicators: false) {
-//            
-//            if let walkwayImages = viewModel.walkwayImageModel?.information {
-//                    loadImage(urlString: walkwayImages.image)
-//                }
-//            
-//            if let storeImages = viewModel.storeImageModel?.information {
-//                    loadImage(urlString: storeImages.image)
-//                }
-//            }
-//        .frame(width: 410, height: 252)
-//    }
+    //MARK: - 장소 사진 설정
+    //장소 사진
+    private var spaceImage: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack {
+                
+                if let walkwayImages = viewModel.walkwayImageModel?.information {
+                    ForEach(walkwayImages, id: \.self) { walkwayImage in
+                        loadImage(urlString: walkwayImage.image)
+                    }
+                }
+                
+                if let storeImages = viewModel.storeImageModel?.information {
+                    ForEach(storeImages, id: \.self) { storeImages in
+                        loadImage(urlString: storeImages.image)
+                    }
+                }
+            }
+        }
+        .frame(maxWidth: .infinity, maxHeight: 252)
+        .border(.red)
+    }
+    
     
     @ViewBuilder
+    /// 이미지 사진을 불러온다.
+    /// - Parameter urlString: api를 통해 받아온 이미지 링크 값
+    /// - Returns: 이미지 리턴
     private func loadImage(urlString: String) -> some View {
         AsyncImage(url: URL(string: urlString)) { phase in
             switch phase {
             case .empty:
-                ProgressView()
+                EmptyText
             case .success(let image):
                 image.resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: 410, height: 252)
+                    .aspectRatio(contentMode: .fit)
+                    .frame(maxWidth: .infinity, maxHeight: 252)
+                    .border(.lightGreen2)
             case .failure(let error):
-                Image(systemName: "photo")
+                failureImage(get: error)
             @unknown default:
                 EmptyView()
             }
         }
     }
     
+    /// 이미지 비워져있는 상태로 받았을 경우
+    private var EmptyText: some View {
+        Text("이미지가 비워져있어요!")
+            .frame(maxWidth: 120)
+            .font(.sandol(type: .bold, size: 30))
+            .foregroundStyle(Color.white)
+    }
+    
+    private func failureImage(get error: Error) -> some View {
+        print("이미지 로드 실패 에러 : \(error)")
+        return Text("이미지 로드 실패!")
+            .frame(maxWidth: 120)
+            .font(.sandol(type: .bold, size: 30))
+            .foregroundStyle(Color.white)
+    }
     
     
+    /// 뷰 상단 인터페이스 버튼 배치
     private var topHStack: some View {
         HStack {
             beforView
@@ -101,9 +129,10 @@ struct DetailViewControl: View {
             .padding(.top, 10)
         }
         .padding(.leading, 10)
-        .frame(width: 300)
+        .frame(maxWidth: 300)
     }
     
+    /// 이전으로 넘어가는 버튼
     private var beforView: some View {
         Button(action: {
             dissmiss()

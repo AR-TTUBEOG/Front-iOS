@@ -98,6 +98,8 @@ class LoginViewModel: ObservableObject {
     
     //MARK: -  Token Initial
     
+    /// 로그인 시 리프레시 토큰 갱신
+    /// - Parameter completion: 리프레쉬 토큰 초기화를 통해 재발급한다.
     private func refreshToken(completion: @escaping (Bool) -> Void) {
         guard let refreshToken = keyChainManger.getRefreshToken(for: "userSession") else {
             completion(false)

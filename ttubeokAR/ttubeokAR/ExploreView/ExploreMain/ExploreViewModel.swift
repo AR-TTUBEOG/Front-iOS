@@ -23,6 +23,7 @@ class ExploreViewModel: ObservableObject {
     
     @Published var exploreData: ExploreDataModel?
     @Published var currentSearchType: SearchType = .all
+    
     var curretnPage = 0
   
     // MARK: - 페이징
