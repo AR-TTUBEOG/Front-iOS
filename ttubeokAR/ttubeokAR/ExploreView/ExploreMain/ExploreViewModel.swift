@@ -10,7 +10,7 @@ import Moya
 import Combine
 
 class ExploreViewModel: ObservableObject {
-    //MARK: - API
+    // MARK: - API
     
     private let authPlugin: AuthPlugin
     private let searchProvider: MoyaProvider<SearchAPITarget>

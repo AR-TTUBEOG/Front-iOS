@@ -24,12 +24,15 @@ struct GuestBookView: View {
     }
     
     
+    /// 메인 컨텐츠 그룹
     private var centerView : some View{
         VStack(alignment: .leading , spacing: 25){
+            Group {
                 GuestBookImage
                 textFieldView
                 stars
-            bottomBar
+                bottomBar
+            }
         }
         .frame(maxWidth: 320, maxHeight: 440)
         .padding(.all, 5)
@@ -38,8 +41,12 @@ struct GuestBookView: View {
     
     
     // MARK: - 상단바 : 방명록 아이콘, 방명록 텍스트, 취소 버튼
+    
     private var topBar : some View {
-        HStack(spacing: 68){
+        HStack(spacing: 20){
+            
+            Spacer()
+            
             HStack(spacing:4){
                 Icon.notepad.image
                     .frame(maxWidth: 23, maxHeight: 23)
@@ -51,19 +58,23 @@ struct GuestBookView: View {
                     .foregroundColor(.white)
                     .padding(.all, 1)
             }
-            .frame(maxWidth: 150, maxHeight: 23)
+            .frame(maxWidth: 110, maxHeight: 23, alignment: .trailing)
+            
+            Spacer()
+            
             //close 버튼
             Button(action: {
                 //TODO: - 닫힘 버튼 눌렸을 시 구현
                 print("닫힘 버튼이 눌렸습니다.")
             }){
                 Icon.closeIcon.image
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
                     .frame(maxWidth: 20, maxHeight:20)
             }
             
         }
-        .frame(maxWidth: 331    , maxHeight: 23, alignment: .trailing)
-        
+        .frame(maxWidth: 300, maxHeight: 23, alignment: .trailing)
     }
     
     ///플러스 버튼 선택시 이미지 설정

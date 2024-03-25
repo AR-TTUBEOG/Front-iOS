@@ -8,3 +8,32 @@
 import Foundation
 
 
+struct BookMarkInputData: Codable {
+    var guestBookType: SpaceType
+    var spotId: Int?
+    var storeId: Int?
+    var content: String?
+    var star: Float?
+}
+
+enum SpaceType: String, Codable {
+    case SPOT
+    case STORE
+}
+
+// MARK: - API 데이터 받아오기
+
+struct BookMarkDataModel: Codable {
+    var check: Bool
+    var information: BookMarkData
+}
+
+struct BookMarkData: Codable {
+    var id: Int
+    var memberId: Int
+    var guestBookType: SpaceType
+    var spotId: Int?
+    var storeId: Int?
+    var content: String?
+    var star: Int
+}

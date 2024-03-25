@@ -29,6 +29,7 @@
 		482DB6B72B5416FF005538DE /* PlaceSettingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482DB6B62B5416FF005538DE /* PlaceSettingModel.swift */; };
 		482DB6B92B541797005538DE /* PlaceSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482DB6B82B541797005538DE /* PlaceSettingsViewModel.swift */; };
 		482DB6BB2B541E7E005538DE /* PlaceSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482DB6BA2B541E7E005538DE /* PlaceSettingView.swift */; };
+		482F26D72BB178AA00EC738E /* BookMarkAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482F26D62BB178AA00EC738E /* BookMarkAPI.swift */; };
 		483137372B81DA920005E8B8 /* ball.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 483137362B81DA920005E8B8 /* ball.jpg */; };
 		483137392B81E3FB0005E8B8 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 483137382B81E3FB0005E8B8 /* art.scnassets */; };
 		4831373D2B82530A0005E8B8 /* GuestBookCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4831373C2B82530A0005E8B8 /* GuestBookCardViewModel.swift */; };
@@ -228,6 +229,7 @@
 		482DB6B62B5416FF005538DE /* PlaceSettingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceSettingModel.swift; sourceTree = "<group>"; };
 		482DB6B82B541797005538DE /* PlaceSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceSettingsViewModel.swift; sourceTree = "<group>"; };
 		482DB6BA2B541E7E005538DE /* PlaceSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceSettingView.swift; sourceTree = "<group>"; };
+		482F26D62BB178AA00EC738E /* BookMarkAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookMarkAPI.swift; sourceTree = "<group>"; };
 		483137362B81DA920005E8B8 /* ball.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ball.jpg; sourceTree = "<group>"; };
 		483137382B81E3FB0005E8B8 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 		4831373C2B82530A0005E8B8 /* GuestBookCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestBookCardViewModel.swift; sourceTree = "<group>"; };
@@ -1279,6 +1281,7 @@
 				CA82A9872B72705B004E7683 /* BookMarkDataModel.swift */,
 				CAFAE81E2B750A4800C20502 /* BookMarkImageAdd.swift */,
 				CAFAE8262B750CF100C20502 /* BookMarkImgProtocol.swift */,
+				482F26D62BB178AA00EC738E /* BookMarkAPI.swift */,
 			);
 			path = BookMark;
 			sourceTree = "<group>";
@@ -1530,6 +1533,7 @@
 				4835138A2B5A605F0072ADFE /* AppleLoginManager.swift in Sources */,
 				482DB6B72B5416FF005538DE /* PlaceSettingModel.swift in Sources */,
 				CA3051DE2B81E6B900E58E48 /* PlaceDataModel.swift in Sources */,
+				482F26D72BB178AA00EC738E /* BookMarkAPI.swift in Sources */,
 				48FD30962B6F684F00FB7E60 /* SelectMarketType.swift in Sources */,
 				48CF8CF62B830530005EA993 /* MapView.swift in Sources */,
 				483BFD172B64996400C2AD5B /* WhichSelectPlaceView.swift in Sources */,
