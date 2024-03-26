@@ -20,6 +20,7 @@ final class AuthPlugin: PluginType {
         if case .failure(let error) = result, error.response?.statusCode == 500 {
             refreshToken { [weak self] success in
                 guard self != nil else { return }
+                print("토큰 초기화 결과 : \(success)")
             }
         }
     }
@@ -40,11 +41,13 @@ final class AuthPlugin: PluginType {
                     if var session = KeyChainManager.standard.loadSession(for: "userSession") {
                         session.accessToken = tokenResponse.information.accessToken ?? ""
                         if KeyChainManager.standard.saveSession(session, for: "userSession") {
-                            completion(true)
+                            print(" 토큰 초기화 저장 완료")
                         }
+                        completion(true)
+                    } else {
+                        completion(false)
+                        print("** - 중간 리프레시 토큰 초기화 작업 중단 (토큰 존재 x) - ")
                     }
-                    completion(false)
-                    print("** - 중간 리프레시 토큰 초기화 작업 중단 (토큰 존재 x) - ")
                 } catch {
                     completion(false)
                     print("** - 중간 리프레시 토큰 초기화 작업 해독 오류 - ")

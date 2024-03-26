@@ -58,9 +58,8 @@ extension PlaceRegistService: TargetType {
             var multipartData = [MultipartFormData]()
             
             for (index, image) in images.enumerated() {
-                print("사진 유효성 : \(image)")
-                if let imageData = image.jpegData(compressionQuality: 0.7) {
-                    multipartData.append(MultipartFormData(provider: .data(imageData),name: "fileList", fileName: "image\(index).jpg", mimeType: "image/jpeg"))
+                if let imageData = image.jpegData(compressionQuality: 1.0) {
+                    multipartData.append(MultipartFormData(provider: .data(imageData),name: "fileList", fileName: "image\(index).jpg", mimeType: "image/jpg"))
                 }
             }
             
@@ -72,8 +71,8 @@ extension PlaceRegistService: TargetType {
             var multipartData = [MultipartFormData]()
             
             for (index, image) in images.enumerated() {
-                if let imageData = image.jpegData(compressionQuality: 0.7) {
-                    multipartData.append(MultipartFormData(provider: .data(imageData),name: "fileList", fileName: "image\(index).jpg", mimeType: "image/jpeg"))
+                if let imageData = image.jpegData(compressionQuality: 1.0) {
+                    multipartData.append(MultipartFormData(provider: .data(imageData),name: "fileList", fileName: "image\(index).jpg", mimeType: "image/jpg"))
                 }
             }
             

@@ -7,7 +7,7 @@
 
 import Foundation
 
-
+// MARK: - 방명록 데이터 저장 모델
 struct BookMarkInputData: Codable {
     var guestBookType: SpaceType
     var spotId: Int?

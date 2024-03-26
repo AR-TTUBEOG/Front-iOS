@@ -13,7 +13,7 @@ import Moya
 class BookMarkViewModel: ObservableObject, BookMarkImgProtocol {
     
     // MARK: - Property
-    @Published var bookMarkimages: UIImage? = nil //임시 방명록 이미지 값
+    @Published var bookMarkimages: [UIImage]? = nil //임시 방명록 이미지 값
     @Published var contentText: String = "" //임시 방명록 텍스트 필드 값
     @Published var filledStarCount: Int = 0 // 별점 넘기기
     var isImagePickerPresented: Bool = false
@@ -21,19 +21,17 @@ class BookMarkViewModel: ObservableObject, BookMarkImgProtocol {
     // MARK: - API
     
     private let authPlugin: AuthPlugin
-    private let bookMarkProvider: MoyaProvider<ExploreAPITarget>
+    private let bookMarkProvider: MoyaProvider<BookMarkAPI>
     
     init()  {
         self.authPlugin = AuthPlugin(provider: MoyaProvider<MultiTarget>())
-        self.bookMarkProvider = MoyaProvider<ExploreAPITarget>(plugins: [authPlugin])
+        self.bookMarkProvider = MoyaProvider<BookMarkAPI>(plugins: [authPlugin])
     }
-    
-    
-    //TODO: - 상세뷰에서 모델을 넘겨야함!
     
     // MARK: - Function
     func setImage(_ image: UIImage) {
-        self.bookMarkimages = image
+        self.bookMarkimages?.append(image)
+        print("방명록에 추가된 이미지 수 : \(self.bookMarkimages?.count ?? 0)")
     }
     
     func showImagePicker() {
